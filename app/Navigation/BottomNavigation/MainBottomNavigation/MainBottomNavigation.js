@@ -6,13 +6,16 @@ import HomeStack from "../../StackNavigation/HomeStack";
 import FavoriteStack from "../../StackNavigation/FavoriteStack";
 import MessagesStack from "../../StackNavigation/MessagesStack";
 import ProfileStack from "../../StackNavigation/ProfileStack";
-
+import {COLORS} from '../../../GlobalStyle'
 
 export default function MainBottomNavigation() {
   const Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: COLORS.primary,
+      }}>
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Favorite" component={FavoriteStack} />
         <Tab.Screen name="Messages" component={MessagesStack} />
