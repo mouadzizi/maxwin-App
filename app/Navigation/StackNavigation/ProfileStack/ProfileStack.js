@@ -1,15 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeView from "../../../View/HomeView";
+import ProfileView from "../../../View/ProfileView";
 
-export default function HomeStack() {
+export default function ProfileStack() {
   const StackHome = createStackNavigator();
   return (
     <StackHome.Navigator>
       <StackHome.Screen
-        name="HomeView"
-        component={HomeView}
-        options={{ title: "Home" }}
+        name="ProfileView"
+        component={ProfileView}
+        options={{ title: "Profile" }}
       />
     </StackHome.Navigator>
   );

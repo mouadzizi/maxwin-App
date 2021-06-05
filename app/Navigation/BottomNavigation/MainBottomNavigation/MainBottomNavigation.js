@@ -1,22 +1,22 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import sytles from './MainBottomNavigation.style' 
-import HomeView from "../../../View/HomeView";
-import ProfileView from "../../../View/ProfileView";
-import FavoriteView from "../../../View/FavoriteView";
-import MessagesView from "../../../View/MessagesView";
+
+import HomeStack from "../../StackNavigation/HomeStack";
+import FavoriteStack from "../../StackNavigation/FavoriteStack";
+import MessagesStack from "../../StackNavigation/MessagesStack";
+import ProfileStack from "../../StackNavigation/ProfileStack";
+
 
 export default function MainBottomNavigation() {
   const Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
-      <Tab.Navigator
-      initialRouteName="Home">
-        <Tab.Screen name="Home" component={HomeView} />
-        <Tab.Screen name="Favorite" component={FavoriteView} />
-        <Tab.Screen name="Messages" component={MessagesView} />
-        <Tab.Screen name="Profile" component={ProfileView} />
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Favorite" component={FavoriteStack} />
+        <Tab.Screen name="Messages" component={MessagesStack} />
+        <Tab.Screen name="Profile" component={ProfileStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
