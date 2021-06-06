@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { MaterialCommunityIcons, Ionicons } from "react-native-vector-icons";
+import { MaterialCommunityIcons, Ionicons, SimpleLineIcons } from "react-native-vector-icons";
 
 import HomeStack from "../../StackNavigation/HomeStack";
 import FavoriteStack from "../../StackNavigation/FavoriteStack";
@@ -38,7 +38,14 @@ export default function MainBottomNavigation() {
           name="Home"
           component={HomeStack}
           options={{
-            tabBarIcon: () => (
+            tabBarIcon: ({focused}) => (
+              focused ? 
+              <MaterialCommunityIcons
+                name="home"
+                color={COLORS.primary}
+                size={50}
+              />
+              :
               <MaterialCommunityIcons
                 name="home"
                 color={COLORS.primary}
@@ -51,12 +58,20 @@ export default function MainBottomNavigation() {
           name="Favorite"
           component={FavoriteStack}
           options={{
-            tabBarIcon: () => (
+            tabBarIcon: ({focused}) => (
+              focused ? 
+              <Ionicons
+                name="heart"
+                color={COLORS.primary}
+                size={50}
+              />
+              :
               <Ionicons
                 name="heart"
                 color={COLORS.primary}
                 size={30}
               />
+              
             ),
           }}
         />
@@ -68,7 +83,7 @@ export default function MainBottomNavigation() {
               <Ionicons
                 name="add-circle"
                 color={COLORS.secondary}
-                size={90}
+                size={80}
                 style={{top: -15}}
               />
             ),
@@ -78,7 +93,14 @@ export default function MainBottomNavigation() {
           name="Messages"
           component={MessagesStack}
           options={{
-            tabBarIcon: () => (
+            tabBarIcon: ({focused}) => (
+              focused ? 
+              <Ionicons
+                name="chatbubbles"
+                color={COLORS.primary}
+                size={50}
+              />
+              :
               <Ionicons
                 name="chatbubbles"
                 color={COLORS.primary}
@@ -91,7 +113,14 @@ export default function MainBottomNavigation() {
           name="Profile"
           component={ProfileStack}
           options={{
-            tabBarIcon: () => (
+            tabBarIcon: ({focused}) => (
+              focused?
+              <Ionicons
+                name="person"
+                color={COLORS.primary}
+                size={50}
+              />
+              :
               <Ionicons
                 name="person"
                 color={COLORS.primary}
