@@ -39,7 +39,7 @@ const COLORS = {
   },
   primary: "#597AFF",
   secondary: "#FF6642",
-  text: "#232553",
+  text: "#000",
 };
 
 export { GlobalStyle, COLORS };
