@@ -37,9 +37,9 @@ const COLORS = {
   light: {
     100: "#FFFFFF",
   },
-  primary: "#597AFF",
+  primary: "#4898D3",
   secondary: "#FF6642",
-  text: "#232553",
+  text: "#000",
 };
 
 export { GlobalStyle, COLORS };
