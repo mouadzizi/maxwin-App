@@ -128,7 +128,7 @@ export default function AddProductView() {
             <ImagesView onPress={openImagesModal} />
             <Modalize adjustToContentHeight ref={imgModRef}>
                 <ImageBrowser
-                    max={4}
+                   
                 />
             </Modalize>
         </View>
