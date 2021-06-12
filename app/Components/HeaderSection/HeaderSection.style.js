@@ -3,7 +3,6 @@ import { COLORS } from '../../GlobalStyle';
 export default StyleSheet.create({
     container: {
         height: 50,
-        paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 10,
@@ -15,8 +14,10 @@ export default StyleSheet.create({
     container2:{
         flex: 1,
         alignItems: 'flex-end',
+        paddingEnd: 10,
     },
     title:{
+        paddingLeft: 20,
         fontSize: 20,
         color: COLORS.secondary,
         fontWeight: 'bold'

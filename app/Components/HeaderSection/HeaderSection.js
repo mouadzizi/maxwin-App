@@ -12,7 +12,7 @@ export default function headerSection({
             </View>
 
             <View style={styles.container2}>
-            <HeaderButton/>
+            <HeaderButton titleButton="Voir tout"/>
             </View>
 
             

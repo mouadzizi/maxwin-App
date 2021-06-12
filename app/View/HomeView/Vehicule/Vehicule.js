@@ -2,7 +2,8 @@ import React from "react";
 import { FlatList, Alert} from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from '../../../Components/HeaderSection'
-export default function Sections() {
+export default function Vehicule({navigation}) {
+
   const ImageTest = require("../../../../assets/ProductTest/Product1.jpeg");
   const DATA = [
     {
