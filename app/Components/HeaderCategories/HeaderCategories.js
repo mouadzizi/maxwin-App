@@ -3,30 +3,30 @@ import { Alert, FlatList } from "react-native";
 import {Feather} from "react-native-vector-icons"
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import styles from './HeaderCategories.style'
-import Category from "../Button/Category";
+import Category from "../Button/CategoryButton";
 import { COLORS } from "../../GlobalStyle";
 
 export default function HeaderCategories() {
   const DATA = [
     {
-      id: "SDSDgf2984",
+      id: "SDSDgf25677984",
       categoryName: "Voiture",
       iconName: "Car",
     },
     {
-      id: "SDSDgf2984",
+      id: "SDSDgf2933R84",
       categoryName: "Appartement",
       iconName: "Apartment",
     },
 
     {
-      id: "SDSDgf2984",
+      id: "SDSDgf6782984",
       categoryName: "Decoration",
       iconName: "Lamp",
     },
 
     {
-      id: "SDSDgf2984",
+      id: "SDSDgfss2984",
       categoryName: "Villa",
       iconName: "Villa",
     },
@@ -37,7 +37,7 @@ export default function HeaderCategories() {
       iconName: "Tv",
     },
     {
-      id: "SDSDgf26984",
+      id: "SDSDgf2fff6984",
       categoryName: "Vêtements Homme",
       iconName: "MenClothes",
     },

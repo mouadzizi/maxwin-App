@@ -2,13 +2,12 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
 export default StyleSheet.create({
   container: {
-    height: 220,
-    width: 269,
+    width: 265,
     margin: 10,
     flexDirection: "column",
   },
   containerImage: {
-    height: 175,
+    height: 200,
     borderTopEndRadius: 15,
     borderTopStartRadius: 15,
   },

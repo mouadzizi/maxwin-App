@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './Category.style'
+import styles from './CategoryButton.style'
 
 import Car from '../../../icons/Car'
 import Apartment from '../../../icons/Apartment'
@@ -11,7 +11,7 @@ import MenClothes from '../../../icons/MenClothes'
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default function Category({
+export default function CategoryButton({
     iconName,
     onClick,
 }) {
