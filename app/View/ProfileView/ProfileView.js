@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Alert } from "react-native";
 import styles from "./ProfileView.style";
-import ProfileSection from "../../Components/ProfileSection";
+import ProfileSection from "./ProfileSection";
 export default function ProfileView() {
   return (
     <View style={styles.container}>
