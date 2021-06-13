@@ -8,16 +8,19 @@ import HomeView from "../../../View/HomeView";
 export default function HomeStack() {
   const HeaderTitle = () => {
     return (
-      <Image
-        style={{ alignSelf: "center", height: 40, width: 120 }}
-        source={require("../../../../assets/headerIcon.png")}
-        resizeMode="contain"
-      />
+      <>
+      </>
     );
   };
 
   const HeaderLeft = () => {
-    return <></>;
+    return (
+      <Image
+        style={{ alignSelf: "center", height: 40, width: 120, marginLeft: 20}}
+        source={require("../../../../assets/headerIcon.png")}
+        resizeMode="contain"
+      />
+    );
   };
 
   const HeaderRight = () => {

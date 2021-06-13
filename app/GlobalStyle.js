@@ -1,10 +1,26 @@
-import { StyleSheet, Dimensions} from "react-native";
+import { StyleSheet, Dimensions, Text } from "react-native";
 
-const GlobalStyle = StyleSheet.create({});
+const GlobalStyle = StyleSheet.create({
+  H1: {
+    fontSize: 25,
+    color: "black",
+  },
+  H2: {
+    fontSize: 22,
+    color: "black",
+  },
+  H3: {
+    fontSize: 19,
+    color: "black",
+  },
+  H4: {
+    fontSize: 16,
+    color: "black",
+  },
+});
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
- 
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const COLORS = {
   red: {
@@ -48,9 +64,12 @@ const COLORS = {
   light: {
     100: "#FFFFFF",
   },
-  primary: "#4898D3",
+  primary: "#232553",
   secondary: "#FF6642",
+  third: '#43A147',
   text: "#000",
 };
 
-export { GlobalStyle, COLORS, windowWidth, windowHeight};
+
+
+export { GlobalStyle, COLORS, windowWidth, windowHeight };

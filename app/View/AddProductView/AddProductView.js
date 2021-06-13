@@ -1,136 +1,44 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { Modalize } from 'react-native-modalize';
-import styles from './AddProductView.style'
-import Categorie from './Blocks/ChooseCategorie/Categorie'
-import ImagesView from './Blocks/Images/Images';
-import { ImageBrowser } from 'expo-image-picker-multiple'
+import React, { useRef } from "react";
+import { View, TouchableOpacity, Text } from "react-native";
+import styles from "./AddProductView.style";
+import ImageStep from "./ImageStep";
+import CategoryStep from "./CategoryStep";
+import InformationStep from "./InformationStep";
 
-
+import { Modalize } from "react-native-modalize";
+import {GlobalStyle} from '../../GlobalStyle'
 export default function AddProductView() {
-    const [item, setItem] = useState({
-        categorie: ''
-    })
-    const catModRef = React.createRef()
-    const imgModRef = React.createRef()
-    const DATA = [
-        {
-            title: 'VEHICULES',
-            data: [
-                'Voitures',
-                'Location de Voiture',
-                'Motos & vélos',
-                'Véhicules professionnels'
-            ]
-        },
+  const ModalRef = useRef();
 
-        {
-            title: 'IMMOBILIER',
-            data: [
-                'Appartements',
-                'Maisons & Villas',
-                'Terrains',
-                'Commerces & Bureaux',
-                'Location courte durée (vacances)',
-                'Location long durée',
-            ]
-        },
+  const openModal = () => {
+    ModalRef.current.open();
+  };
 
-        {
-            title: 'MAISON & DECO',
-            data: ['Electroménagers', 'Meubles et déco']
-        },
 
-        {
-            title: 'INFORMATIQUE ET ELECTRONIQUE',
-            data: [
-                'Téléphones',
-                'Tablettes',
-                'Ordinateurs',
-                'Jeux vidéo & Consoles',
-                'Télévisions',
-                'Appareils photo',
-                'Accessoires informatique',
-                'Accessoires H-TECH',
-            ]
-        },
+  return (
+    <View style={styles.container}>
+        <Text style={GlobalStyle.H3 }> veuillez sélectionner des images </Text>
 
-        {
-            title: 'ESPACE HOMMES',
-            data: [
-                'Vêtements Hommes',
-                'Chaussures Hommes',
-                'Montres et accessoires',
-                'Produits de bien être',
-            ]
-        },
+      <TouchableOpacity 
+      style={{backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10}}
+      onPress={openModal}>
+        <Text>choisir des images</Text>
+      </TouchableOpacity>
 
-        {
-            title: 'ESPACE FEMMES',
-            data: [
-                'Vêtements Femmes',
-                'Chaussures Femmes',
-                'Montres, Bijoux et accessoires',
-                'Maquillage et produits de bien être',
-            ]
-        },
+      <Text style={[GlobalStyle.H3, {marginTop: 25}]}> veuillez sélectionner votre Categorie</Text>
 
-        {
-            title: 'ESPACE BEBES ET ENFANTS',
-            data: [
-                'Vêtements bébés & enfants',
-                'Equipments bébés & enfants',
-            ]
-        },
+      <TouchableOpacity 
+      style={{backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10}}
+      onPress={openModal}>
+        <Text>Categories</Text>
+      </TouchableOpacity>
 
-        {
-            title: 'MATERIELS ET SERVICES',
-            data: [
-                'Matériels professionnels',
-                'Services et travaux professionnels',
-                'Formations & autres'
-            ]
-        }
-    ];
+      <Modalize ref={ModalRef}  >
+        <ImageStep/> 
+      </Modalize>
 
-    const openModal = () => {
-        catModRef.current.open()
-    }
-    const openImagesModal = () => {
-        imgModRef.current.open()
-    }
-
-    const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => {
-            setItem({ categorie: item })
-            catModRef.current.close()
-        }} style={styles.item} >
-            <Text >{item}</Text>
-        </TouchableOpacity>
-    );
-    const renderSectionHeader = ({ section }) => (
-        <View style={styles.header}>
-            <Text style={styles.header__name}>{section.title.toUpperCase()}</Text>
-        </View>
-    );
-
-    return (
-        <View style={styles.container}>
-            <Categorie categorie={item.categorie} onPress={openModal} />
-            <Modalize ref={catModRef}
-                sectionListProps={{
-                    sections: DATA,
-                    renderItem: renderItem,
-                    renderSectionHeader: renderSectionHeader,
-                    keyExtractor: (item, index) => `${item.title}-${index}`,
-                }}
-            />
-            <ImagesView onPress={openImagesModal} />
-            <Modalize adjustToContentHeight ref={imgModRef}>
-                <ImageBrowser
-                   
-                />
-            </Modalize>
-        </View>
-    )
+      <InformationStep />
+      
+    </View>
+  );
 }

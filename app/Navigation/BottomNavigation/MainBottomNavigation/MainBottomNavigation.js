@@ -7,7 +7,7 @@ import HomeStack from "../../StackNavigation/HomeStack";
 import FavoriteStack from "../../StackNavigation/FavoriteStack";
 import MessagesStack from "../../StackNavigation/MessagesStack";
 import ProfileStack from "../../StackNavigation/ProfileStack";
-import AddProductView from "../../../View/AddProductView";
+import AddProductStack from "../../StackNavigation/AddProductStack";
 
 import { COLORS } from "../../../GlobalStyle";
 
@@ -77,7 +77,7 @@ export default function MainBottomNavigation() {
         />
         <Tab.Screen
           name="Add Product"
-          component={AddProductView}
+          component={AddProductStack}
           options={{
             tabBarIcon: () => (
               <Ionicons
