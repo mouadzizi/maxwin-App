@@ -18,8 +18,7 @@ export default StyleSheet.create({
     },
     title:{
         paddingLeft: 20,
-        fontSize: 20,
         color: COLORS.secondary,
-        fontWeight: 'bold'
+        
     }
 });

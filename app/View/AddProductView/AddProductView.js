@@ -6,8 +6,11 @@ import CategoryStep from "./CategoryStep";
 import InformationStep from "./InformationStep";
 
 import { Modalize } from "react-native-modalize";
-import {GlobalStyle} from '../../GlobalStyle'
+import { GlobalStyle } from '../../GlobalStyle'
+import TextView from '../../Components/TextView/TextView'
+
 export default function AddProductView() {
+
   const ModalRef = useRef();
 
   const openModal = () => {
@@ -17,28 +20,28 @@ export default function AddProductView() {
 
   return (
     <View style={styles.container}>
-        <Text style={GlobalStyle.H3 }> veuillez sélectionner des images </Text>
+      <TextView style={GlobalStyle.H3}> veuillez sélectionner des images </TextView>
 
-      <TouchableOpacity 
-      style={{backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10}}
-      onPress={openModal}>
-        <Text>choisir des images</Text>
+      <TouchableOpacity
+        style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
+        onPress={openModal}>
+        <Text >choisir des images</Text>
       </TouchableOpacity>
 
-      <Text style={[GlobalStyle.H3, {marginTop: 25}]}> veuillez sélectionner votre Categorie</Text>
+      <TextView style={[GlobalStyle.H3, { marginTop: 25 }]}> veuillez sélectionner votre Categorie</TextView>
 
-      <TouchableOpacity 
-      style={{backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10}}
-      onPress={openModal}>
-        <Text>Categories</Text>
+      <TouchableOpacity
+        style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
+        onPress={openModal}>
+        <Text style={{fontFamily:'KoHo-SemiBold'}} >Categories</Text>
       </TouchableOpacity>
 
       <Modalize ref={ModalRef}  >
-        <ImageStep/> 
+        <ImageStep />
       </Modalize>
 
       <InformationStep />
-      
+
     </View>
   );
 }

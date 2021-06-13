@@ -25,7 +25,8 @@ export default StyleSheet.create({
   },
   containerPrice: {
     flex: 1,
-    alignItems: "flex-end",
+    justifyContent:'flex-end',
+    flexDirection:'row',
   },
   image: {
     height: "100%",
@@ -34,15 +35,12 @@ export default StyleSheet.create({
     borderTopRightRadius: 10,
   },
   price: {
-    fontSize: 15,
-    lineHeight: 16.5,
     color: COLORS.secondary,
+    marginRight:'-8%'
   },
   title: {
-    marginLeft: 10,
-    fontSize: 14,
-    lineHeight: 16.5,
-    fontWeight: "bold",
+    marginLeft: 5,
+    letterSpacing:1, 
   },
   strong: {
     fontWeight: "bold",

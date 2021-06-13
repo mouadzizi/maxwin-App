@@ -12,7 +12,6 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     title:{
-        fontSize: 15,
         color: COLORS.primary,
     }
 });

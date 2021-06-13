@@ -9,7 +9,7 @@ export default function Decorations() {
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: 'Machine à laver Philips Automatic',
-      price: "5.600",
+      price: "5600",
       imageCover: require("../../../../assets/ProductTest/product12.png")
     },
     {
