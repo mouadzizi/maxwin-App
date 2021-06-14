@@ -33,7 +33,7 @@ export default function AddProductView() {
       <TouchableOpacity
         style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
         onPress={openModal}>
-        <Text style={{fontFamily:'KoHo-SemiBold'}} >Categories</Text>
+        <Text>Categories</Text>
       </TouchableOpacity>
 
       <Modalize ref={ModalRef}  >

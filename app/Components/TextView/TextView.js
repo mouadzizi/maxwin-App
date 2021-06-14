@@ -7,7 +7,7 @@ export default function TextView(props) {
 
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
-    loadFonts().then(() => setLoaded(true)).catch(() => console.warn('font loaded '))
+    loadFonts().then(() => setLoaded(true)).catch((err) => console.warn(err.message))
 
   }, [])
 
