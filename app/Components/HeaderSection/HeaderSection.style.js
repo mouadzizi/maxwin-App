@@ -17,7 +17,7 @@ export default StyleSheet.create({
         paddingEnd: 10,
     },
     title:{
-        paddingLeft: 20,
+        paddingLeft: 15,
         color: COLORS.secondary,
         
     }

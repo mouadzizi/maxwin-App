@@ -1,47 +1,51 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
-import * as Font from 'expo-font';
-
+import React, { useState, useEffect } from "react";
+import { Text, View } from "react-native";
+import * as Font from "expo-font";
 
 export default function TextView(props) {
-
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    loadFonts().then(() => setLoaded(true)).catch((err) => console.warn(err.message))
-
-  }, [])
+    loadFonts()
+      .then(() => setLoaded(true))
+      .catch((err) => console.log(err.message));
+  }, []);
 
   const loadFonts = async () => {
     await Font.loadAsync({
-      // Any string can be used as the fontFamily name. Here we use an object to provide more control
-      'Gilroy-Bold': {
-        uri: require('../../../assets/Fonts/Gilroy-ExtraBold.otf'),
+      "Nova-Regular": {
+        uri: require("../../../assets/Fonts/NovaSlim-Regular.ttf"),
         display: Font.FontDisplay.FALLBACK,
       },
-      'Gilroy': {
-        uri: require('../../../assets/Fonts/Gilroy-Light.otf'),
+      "Source-Regular": {
+        uri: require("../../../assets/Fonts/SourceSansPro-Regular.ttf"),
         display: Font.FontDisplay.FALLBACK,
-      }
+      },
     });
-  }
+  };
 
   return (
     <View>
-      {
-        loaded ? <Text style={[
-          {fontFamily:'Gilroy'},
-          props.h1 && { fontSize: 20 },
-          props.h2 && { fontSize: 18 },
-          props.h3 && { fontSize: 16 },
-          props.p && { fontSize: 14 },
-          props.bold && { fontFamily: 'Gilroy-Bold'},
-          props.s 
-        ]}>{props.children}</Text> :
-          <ActivityIndicator size='small' color='black' animating={true} />
-      }
+      {loaded ? (
+        props.fontFamily == "Source-Regular" ? (
+          <Text
+            style={[
+              { fontFamily: "Source-Regular", fontSize : props.fontSize},
+              props.style,
+            ]}
+          >
+            {props.children}
+          </Text>
+        ) : (
+          <Text
+          style={[
+            { fontFamily: "Nova-Regular", fontSize : props.fontSize},
+            props.style,
+          ]}
+        >
+          {props.children}
+        </Text>
+        )
+      ) : null}
     </View>
-
-  )
+  );
 }
-
-

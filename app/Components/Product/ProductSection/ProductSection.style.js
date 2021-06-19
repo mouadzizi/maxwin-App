@@ -35,14 +35,10 @@ export default StyleSheet.create({
     borderTopRightRadius: 10,
   },
   price: {
-    color: COLORS.secondary,
-    marginRight:'-8%'
+    color: COLORS.text,
   },
   title: {
     marginLeft: 5,
     letterSpacing:1, 
-  },
-  strong: {
-    fontWeight: "bold",
   },
 });

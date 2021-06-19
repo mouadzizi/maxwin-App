@@ -65,7 +65,7 @@ const COLORS = {
     100: "#FFFFFF",
   },
   primary: "#232553",
-  secondary: "#FF6642",
+  secondary: "#43A147",
   third: '#43A147',
   text: "#000",
 };

@@ -11,7 +11,7 @@ export default function HeaderButton({
 }) {
     return (
         <TouchableOpacity style={styles.container}>
-            <TextView h3 s={styles.title}>{titleButton}</TextView>
+            <TextView fontSize={15} style={styles.title}>{titleButton}</TextView>
             <Ionicons name="arrow-forward" color={COLORS.primary} size={19} style={{marginLeft : 5}}/>
         </TouchableOpacity>
     )
