@@ -1,18 +1,22 @@
 import React, { useRef, useState } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text,ScrollView } from "react-native";
 import { useFocusEffect } from '@react-navigation/native'
 import styles from "./AddProductView.style";
 import InformationStep from "./InformationStep";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { GlobalStyle } from '../../GlobalStyle'
 import TextView from '../../Components/TextView/TextView';
 import ImageModal from './Modals/ImageModal'
+import AddProductStep from '../../Components/AddProductStep';
+import { Modalize } from "react-native-modalize";
+import CategoryStep from "./CategoryStep";
 
 export default function AddProductView({ navigation, route }) {
   const [imagesArr, setImages] = useState([])
-  const  MyComponent = React.forwardRef((props, ref) => <ImageModal ref={ref} {...props}/>);
+  const  ModalImage = React.forwardRef((props, ref) => <ImageModal ref={ref} {...props}/>);
 
-  let modal = React.createRef()
+  const ModalCategoryRef = useRef();
+  let ModalImageRef  = React.createRef()
+
   React.useEffect(() => {
   }, [])
 
@@ -31,26 +35,26 @@ export default function AddProductView({ navigation, route }) {
     }
   }, []))
 
+  const openModalCategory = () => {
+    ModalCategoryRef.current.open();
+  };
+
 
   return (
     <View style={styles.container}>
-      <TextView style={GlobalStyle.H3}> veuillez sélectionner des images </TextView>
-      <TouchableOpacity
-        style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
-        onPress={()=>modal.openModal()}
-        >
-        <Text >choisir des images</Text>
-      </TouchableOpacity>
+      <TextView fontFamily="Source-Regular" fontSize={15} style={styles.title}> veuillez sélectionner des images </TextView>
+      <AddProductStep nbImages={imagesArr? imagesArr.length : 0 } onclick={()=>ModalImageRef.openModal()}  title="Choisir des images" iconName="camera"/>
+      <TextView fontFamily="Source-Regular" fontSize={15} style={styles.title}>veuillez sélectionner votre Categorie </TextView>
+      <AddProductStep onclick={openModalCategory} title="Choisir votre Categorie" iconName="list"/>
+      <TextView fontFamily="Source-Regular" fontSize={15} style={styles.title}>pouvez-vous saisir des informations les informations de votre produit</TextView>
 
-      <TextView style={[GlobalStyle.H3, { marginTop: 25 }]}> veuillez sélectionner votre Categorie</TextView>
+      <InformationStep/>
+      <ModalImage ref={el=>ModalImageRef=el} data={imagesArr} onClick={()=>navigation.navigate('ImageBrowser')} />
 
-      <TouchableOpacity
-        style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
-        >
-        <Text>Categories</Text>
-      </TouchableOpacity>
-      <InformationStep />
-      <MyComponent data={imagesArr} onClick={()=>navigation.navigate('ImageBrowser')} ref={el=>modal=el} />
+      <Modalize ref={ModalCategoryRef}  >
+        <CategoryStep/>
+      </Modalize>
+
 
     </View>
   );

@@ -4,7 +4,6 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from '../../../Components/HeaderSection'
 export default function Vehicule({navigation}) {
 
-  const ImageTest = require("../../../../assets/ProductTest/Product1.jpeg");
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -44,7 +43,7 @@ export default function Vehicule({navigation}) {
   return (
     
     <>
-    <HeaderSection title="VEHICULE"/>
+    <HeaderSection title="VEHICULE" navigation={navigation}/>
       <FlatList 
       data={DATA}
       keyExtractor={item => item.id}

@@ -4,19 +4,17 @@ import { COLORS } from "../../../GlobalStyle";
 import { Ionicons } from "react-native-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeView from "../../../View/HomeView";
+import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
 export default function HomeStack() {
   const HeaderTitle = () => {
-    return (
-      <>
-      </>
-    );
+    return <></>;
   };
 
   const HeaderLeft = () => {
     return (
       <Image
-        style={{ alignSelf: "center", height: 40, width: 120, marginLeft: 20}}
+        style={{ alignSelf: "center", height: 40, width: 120, marginLeft: 20 }}
         source={require("../../../../assets/headerIcon.png")}
         resizeMode="contain"
       />
@@ -26,26 +24,23 @@ export default function HomeStack() {
   const HeaderRight = () => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback
-        onPress={()=> alert('Search')}>
-        <Ionicons
-          name="search"
-          size={36}
-          color="#fff"
-          style={{ marginRight: 20 }}
-        />
+        <TouchableWithoutFeedback onPress={() => alert("Search")}>
+          <Ionicons
+            name="search"
+            size={36}
+            color="#fff"
+            style={{ marginRight: 20 }}
+          />
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback
-        onPress={()=> alert('Filter')}>
-        <Ionicons
-          name="options"
-          size={36}
-          color="#fff"
-          style={{ marginRight: 20 }}
-        />
+        <TouchableWithoutFeedback onPress={() => alert("Filter")}>
+          <Ionicons
+            name="options"
+            size={36}
+            color="#fff"
+            style={{ marginRight: 20 }}
+          />
         </TouchableWithoutFeedback>
-        
       </View>
     );
   };
@@ -67,6 +62,12 @@ export default function HomeStack() {
       <StackHome.Screen
         name="HomeView"
         component={HomeView}
+        options={{ title: "Maxwin" }}
+      />
+
+      <StackHome.Screen
+        name="HomeSectionProductView"
+        component={HomeSectionProductView}
         options={{ title: "Maxwin" }}
       />
     </StackHome.Navigator>
