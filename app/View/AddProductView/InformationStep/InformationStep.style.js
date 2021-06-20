@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../../GlobalStyle';
+import { COLORS, windowHeight, windowWidth } from '../../../GlobalStyle';
 export default StyleSheet.create({
     container:{
-        marginTop: 15,
-        marginBottom: 30,
+        paddingTop: 15,
+        paddingHorizontal: 20,
+    },
+    containerHeight:{
+        height: windowHeight*0.84,
     },
     pickerView:{
         borderBottomWidth: 1,
@@ -20,5 +23,10 @@ export default StyleSheet.create({
         fontSize: 16,
         marginLeft: 10,
         fontWeight: 'bold'
+    },
+    title:{
+        marginTop: 20,
+        paddingLeft: 10,
+        color: COLORS.primary
     }
 })

@@ -36,9 +36,17 @@ export default StyleSheet.create({
   },
   price: {
     color: COLORS.text,
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  DHS:{
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: 'black',
+    paddingEnd: 10
   },
   title: {
-    marginLeft: 5,
+    paddingStart: 10,
     letterSpacing:1, 
   },
 });

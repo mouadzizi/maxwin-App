@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { Modalize } from "react-native-modalize";
 import ImagePicker from '../../../Components/ImagePicker/ImagePicker'
 

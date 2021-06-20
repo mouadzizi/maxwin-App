@@ -29,13 +29,13 @@ export default function AddProductStep({ nbImages, onclick, title, iconName, cat
       </View>
 
       <View style={styles.infoContainer}>
-        <TextView fontSize={10}>{title}</TextView>
+        <TextView fontSize={14} fontFamily="Source-Regular">{title}</TextView>
         {iconName == "camera" ? (
-          <TextView fontSize={10} style={styles.subtext}>
+          <TextView fontSize={12} style={styles.subtext} fontFamily="Source-Regular">
             Vous aver choisi: {numberImages} images.
           </TextView>
         ) : (
-          <TextView fontSize={10} style={styles.subtext}>
+          <TextView fontSize={12} style={styles.subtext} fontFamily="Source-Regular">
             Vous aver choisi: {category}
           </TextView>
         )}

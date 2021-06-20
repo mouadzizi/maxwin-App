@@ -27,8 +27,8 @@ export default function ProductSection({
           <TextView fontFamily="Source-Regular" fontSize={17} style={styles.title}>{title.substring(0, 15)}</TextView>
         </View>
         <View style={styles.containerPrice}>
-        <TextView fontFamily="Source-Regular" fontSize={17} style={styles.price}>{price}</TextView>
-        <TextView fontFamily="Source-Regular" fontSize={17} style={styles.price}>  DHS  </TextView>
+          <Text style={styles.price}>{price}</Text>
+          <Text style={styles.DHS}> DHS </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

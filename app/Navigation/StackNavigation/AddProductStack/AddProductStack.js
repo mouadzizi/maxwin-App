@@ -2,6 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { COLORS } from '../../../GlobalStyle'
 import AddProduct from "../../../View/AddProductView";
+import InformationStep from "../../../View/AddProductView/InformationStep";
+
 import ImageBrowser from '../../../View/ImageBrowser/ImageBrowserScreen'
 
 export default function AddProductStack() {
@@ -28,6 +30,11 @@ export default function AddProductStack() {
         name="ImageBrowser"
         component={ImageBrowser}
         options={{ title: "Ajouter Produit" }}
+      />
+      <StackHome.Screen
+        name="InformationStep"
+        component={InformationStep}
+        options={{ title: "Ajouter Details" }}
       />
     </StackHome.Navigator>
   );
