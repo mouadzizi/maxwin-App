@@ -8,8 +8,8 @@ export default StyleSheet.create({
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 10,
-        marginVertical: 10,
+        marginHorizontal:5,
+        marginVertical: 5,
     },
     image:{
         height: 170,

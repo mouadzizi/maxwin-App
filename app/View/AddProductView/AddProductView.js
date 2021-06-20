@@ -1,30 +1,44 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
+import { useFocusEffect } from '@react-navigation/native'
 import styles from "./AddProductView.style";
-import ImageStep from "./ImageStep";
-import CategoryStep from "./CategoryStep";
 import InformationStep from "./InformationStep";
-
-import { Modalize } from "react-native-modalize";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { GlobalStyle } from '../../GlobalStyle'
-import TextView from '../../Components/TextView/TextView'
+import TextView from '../../Components/TextView/TextView';
+import ImageModal from './Modals/ImageModal'
 
-export default function AddProductView() {
+export default function AddProductView({ navigation, route }) {
+  const [imagesArr, setImages] = useState([])
+  const  MyComponent = React.forwardRef((props, ref) => <ImageModal ref={ref} {...props}/>);
 
-  const ModalRef = useRef();
+  let modal = React.createRef()
+  React.useEffect(() => {
+  }, [])
 
-  const openModal = () => {
-    ModalRef.current.open();
+  const getPhotos = async () => {
+    return await AsyncStorage.getItem('selectedImage');
   };
+
+  useFocusEffect(React.useCallback(() => {
+    getPhotos().then(items => {
+      const imgs = JSON.parse(items)
+      setImages(imgs)
+    })
+    return () => {
+      AsyncStorage.clear()
+      setImages([])
+    }
+  }, []))
 
 
   return (
     <View style={styles.container}>
       <TextView style={GlobalStyle.H3}> veuillez sélectionner des images </TextView>
-
       <TouchableOpacity
         style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
-        onPress={openModal}>
+        onPress={()=>modal.openModal()}
+        >
         <Text >choisir des images</Text>
       </TouchableOpacity>
 
@@ -32,15 +46,11 @@ export default function AddProductView() {
 
       <TouchableOpacity
         style={{ backgroundColor: "#CCC", height: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginTop: 10 }}
-        onPress={openModal}>
+        >
         <Text>Categories</Text>
       </TouchableOpacity>
-
-      <Modalize ref={ModalRef}  >
-        <ImageStep />
-      </Modalize>
-
       <InformationStep />
+      <MyComponent data={imagesArr} onClick={()=>navigation.navigate('ImageBrowser')} ref={el=>modal=el} />
 
     </View>
   );
