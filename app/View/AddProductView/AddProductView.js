@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, TouchableOpacity, Text,ScrollView } from "react-native";
+import { View, TouchableOpacity, Text,ScrollView,SafeAreaView } from "react-native";
 import { useFocusEffect } from '@react-navigation/native'
 import styles from "./AddProductView.style";
 import InformationStep from "./InformationStep";
@@ -10,7 +10,7 @@ import AddProductStep from '../../Components/AddProductStep';
 import { Modalize } from "react-native-modalize";
 import CategoryStep from "./CategoryStep";
 
-export default function AddProductView({ navigation, route }) {
+export default function AddProductView({ navigation }) {
   const [imagesArr, setImages] = useState([])
   const  ModalImage = React.forwardRef((props, ref) => <ImageModal ref={ref} {...props}/>);
 
