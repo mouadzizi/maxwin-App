@@ -24,11 +24,11 @@ export default function ProductSection({
       </View>
       <View style={styles.containerInfo}>
         <View style={styles.containerTitle}>
-          <TextView h3 s={styles.title}>{title}</TextView>
+          <TextView fontFamily="Source-Regular" fontSize={17} style={styles.title}>{title.substring(0, 15)}</TextView>
         </View>
         <View style={styles.containerPrice}>
-          <TextView h2 bold s={styles.price}>{price}  </TextView>
-          <TextView  h2 bold> DHS </TextView>
+        <TextView fontFamily="Source-Regular" fontSize={17} style={styles.price}>{price}</TextView>
+        <TextView fontFamily="Source-Regular" fontSize={17} style={styles.price}>  DHS  </TextView>
         </View>
       </View>
     </TouchableWithoutFeedback>

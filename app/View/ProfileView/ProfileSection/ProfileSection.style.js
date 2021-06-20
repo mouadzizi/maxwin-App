@@ -23,15 +23,10 @@ export default StyleSheet.create({
     },
 
     title:{
-        fontSize: 17,
-        fontWeight: 'bold',
         color: '#444',
         lineHeight: 23,
     },
     subTitle:{
-        fontSize: 13,
-        lineHeight: 23,
         color: '#ccc',
-        fontStyle: 'italic'
     }
 });

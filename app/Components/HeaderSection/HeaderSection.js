@@ -9,7 +9,7 @@ export default function headerSection({
     return (
         <View style={styles.container}>
             <View style={styles.container1}>
-            <TextView h1 bold s={styles.title}>{title}</TextView>
+            <TextView fontSize={19} style={styles.title}>{title}</TextView>
             </View>
 
             <View style={styles.container2}>
