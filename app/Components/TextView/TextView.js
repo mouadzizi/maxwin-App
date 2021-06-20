@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View } from "react-native";
 import * as Font from "expo-font";
+import { COLORS } from "../../GlobalStyle";
 
 export default function TextView(props) {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +30,7 @@ export default function TextView(props) {
         props.fontFamily == "Source-Regular" ? (
           <Text
             style={[
-              { fontFamily: "Source-Regular", fontSize : props.fontSize},
+              { fontFamily: "Source-Regular", fontSize : props.fontSize, color: COLORS.text},
               props.style,
             ]}
           >

@@ -10,23 +10,20 @@ import Vehicule from "./Vehicule";
 import Electronics from "./Electronics";
 import Decorations from "./Decorations";
 import Mens from "./Mens";
-import HeaderCategories from '../../Components/HeaderCategories'
+import HeaderCategories from "../../Components/HeaderCategories";
 
-export default function HomeView({navigation}) {
-  
+export default function HomeView({ navigation }) {
   return (
     <View style={styles.container}>
-      
-    <ScrollView
-    style={styles.ScrollContainer}>
-      <StatusBar backgroundColor={COLORS.primary} />
-      <HeaderCategories />
-      <Vehicule navigation={navigation}/>
-      <Immobilier navigation={navigation}/>
-      <Electronics navigation={navigation}/>
-      <Decorations navigation={navigation}/>
-      <Mens navigation={navigation}/>
-    </ScrollView>
+      <ScrollView style={styles.ScrollContainer}>
+        <StatusBar backgroundColor={COLORS.primary} />
+        <HeaderCategories />
+        <Vehicule navigation={navigation} />
+        <Immobilier navigation={navigation} />
+        <Electronics navigation={navigation} />
+        <Decorations navigation={navigation} />
+        <Mens navigation={navigation} />
+      </ScrollView>
     </View>
   );
 }
