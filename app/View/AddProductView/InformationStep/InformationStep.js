@@ -1,18 +1,21 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
 import ButtonFill from "../../../Components/Button/ButtonFill";
-
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
+import {addProduct,uploadImages} from '../../../API/APIFunctions'
+import {useNavigation} from '@react-navigation/native'
+import {auth} from '../../../API/Firebase'
 
 export default function InformationStep({ navigation, route }) {
-  const CategoryName = route.params?.CategoryName;
-
+  const prevProduct = route.params?.product;
+  const [product, setProduct] = useState(prevProduct)
+  const user = auth.currentUser
   const RenderCategoryInfo = () => {
-    switch (CategoryName) {
+    switch (product.category) {
       case "Voitures" || "Location de Voiture":
         return (
           <View style={{ marginTop: 30 }}>
@@ -193,11 +196,14 @@ export default function InformationStep({ navigation, route }) {
                 style={styles.pickerInput}
                 mode="dropdown"
                 dropdownIconColor={COLORS.primary}
+                onValueChange={(itemValue) => setProduct({...product,state:itemValue})}
+                selectedValue={product.state}
               >
                 <Picker.Item
                   label="Choisissez l'état de produit"
                   value=""
-                  color={COLORS.Grey[400]}
+                  color={COLORS.Grey[400]
+                  }
                 />
                 <Picker.Item label="Neuf" value="Neuf" />
                 <Picker.Item label="Utilisé" value="Utilisé" />
@@ -210,12 +216,28 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               numberOfLines={5}
               labelStyle={{ color: COLORS.primary }}
+              onChangeText={(input)=>setProduct({...product,description:input})}
             />
           </>
         );
     }
   };
 
+  useEffect(() => {
+    console.log('this is information step');
+    console.log(product.images);
+    return () => {
+      
+    }
+  }, [])
+  const submit = ()=>{
+      addProduct(product).then(docRef=> {
+        uploadImages(product.images,docRef.id,user.uid).then(links=>{
+          docRef.update({images:links}).then(()=>navigation.navigate('Home')
+          )
+        })
+      }).catch(({message})=>alert(message))
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.containerHeight}>
@@ -233,7 +255,7 @@ export default function InformationStep({ navigation, route }) {
 
           <RenderCategoryInfo />
 
-          <ButtonFill title="Valider" style={{ marginBottom: 40 }} />
+          <ButtonFill onClick={submit} title="Valider" style={{ marginBottom: 40 }} />
         </ScrollView>
       </View>
     </SafeAreaView>

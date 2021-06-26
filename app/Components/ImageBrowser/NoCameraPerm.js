@@ -4,7 +4,7 @@ import TextView from '../TextView/TextView'
 
 export default function NoCameraPerm() {
     return (
-        <View  >
+        <View style={styles.container} >
             <TextView>No Camera Permission</TextView>
         </View>
     )

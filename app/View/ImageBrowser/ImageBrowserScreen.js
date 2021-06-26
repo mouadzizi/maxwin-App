@@ -8,50 +8,51 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 export default function ImageBrowserScreen({ navigation }) {
-    React.useEffect(() => {
 
-    }, [])
     const updateHandler = (count, onSubmit) => {
-        if (count ===0 ) {
+        if (count === 0) {
             navigation.setOptions({
-                headerRight: () =>null
+                headerRight: () => null
             });
         }
-         else {
+        else {
             navigation.setOptions({
                 headerRight: () => <DoneBtn onPress={onSubmit} />
             });
-         }
+        }
 
     }
     const CallBack = (callback) => {
-        callback.then(photos=>{
+        callback.then(photos => {
             const cPhotos = []
-            photos.map(p=>{
+            photos.map(p => {
                 cPhotos.push({
-                    uri:p.uri,
-                    name:p.filename,
-                    id:p.creationTime
+                    uri: p.uri,
+                    name: p.filename,
+                    id: p.creationTime
                 })
             })
-           storePhotos(cPhotos).then(()=> navigation.goBack())
+            storePhotos(cPhotos).then(() => navigation.goBack())
         })
 
     }
     const storePhotos = async (value) => {
         try {
-          const jsonValue = JSON.stringify(value)
-          await AsyncStorage.setItem('selectedImage', jsonValue)
+            const jsonValue = JSON.stringify(value)
+            await AsyncStorage.setItem('selectedImage', jsonValue)
         } catch (e) {
-          console.error(e.message)
+            console.error(e.message)
         }
-      }
+    }
+
+    const selectedComponent = React.useCallback((n)=> <SelectedItem number={n} />,[])
+    const noCameraPermission = React.useCallback(()=> <NoCameraPerm/>,[])
     return (
         <View style={{ flex: 1 }} >
             <ImageBrowser
                 max={6}
-                noCameraPermissionComponent={NoCameraPerm}
-                renderSelectedComponent={(n) => <SelectedItem number={n} />}
+                noCameraPermission={noCameraPermission}
+                renderSelectedComponent={selectedComponent}
                 onChange={updateHandler}
                 callback={CallBack}
             />

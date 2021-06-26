@@ -3,10 +3,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../../GlobalStyle";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
-
 import { ScrollView, SafeAreaView, View, Text } from "react-native";
-import { Modalize } from "react-native-modalize";
-
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TextView from "../../Components/TextView/TextView";
@@ -14,11 +11,14 @@ import ImageModal from "./Modals/ImageModal";
 import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "./Modals/CategoryModal";
+import {anonymouslySignIn,signOut} from '../../API/APIFunctions'
+import {auth} from '../../API/Firebase'
+
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
-  const [imagesArr, setImages] = useState([]);
-
+  
+  const user = auth.currentUser
   let Modals = [];
 
 
@@ -30,15 +30,26 @@ export default function AddProductView({ navigation }) {
     useCallback(() => {
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
-        setImages(imgs);
+        if (imgs) {
+          setProduct({...product,images:imgs});
+        }
+        
       });
       return () => {
-        AsyncStorage.clear();
-        setImages([]);
         setProduct({})
+        AsyncStorage.clear();
       };
     }, [])
+
+
   );
+
+  useEffect(() => {
+    if (!user) {
+      anonymouslySignIn().then(user=> alert('Welcome your are an anonymous user, your id is :'+user.uid))
+    }
+    
+  }, [])
 
   const openModalCategory = () => {
     Modals[1].openModal();
@@ -51,7 +62,7 @@ export default function AddProductView({ navigation }) {
 
   const NextHandler = () => {
     navigation.navigate("InformationStep", {
-      CategoryName: product.category,
+      product: product
     });
   };
   return (
@@ -70,7 +81,7 @@ export default function AddProductView({ navigation }) {
           </TextView>
 
           <AddProductStep
-            nbImages={imagesArr ? imagesArr.length : 0}
+            nbImages={product.images ? product.images.length : 0}
             onclick={() => Modals[0].openModal()}
             title="Choisir des images"
             iconName="camera"
@@ -106,12 +117,15 @@ export default function AddProductView({ navigation }) {
             style={{ fontSize: 15 }}
             errorMessage="this is an error"
             labelStyle={{ color: COLORS.primary }}
+            onChangeText={(input)=>setProduct({...product,title:input})}
           />
           <Input
             label="Prix *"
+            keyboardType='numeric'
             placeholder="Merci d'entrer le prix de votre article"
             style={{ fontSize: 15 }}
             labelStyle={{ color: COLORS.primary, fontSize: 15 }}
+            onChangeText={(input)=>setProduct({...product,price:Number.parseFloat(input)})}
           />
 
           {/* Picker for city */}
@@ -148,7 +162,7 @@ export default function AddProductView({ navigation }) {
 
       <ImageModal
         ref={(el) => (Modals[0] = el)}
-        data={imagesArr}
+        data={product.images}
         onClick={() => navigation.navigate("ImageBrowser")}
       />
       <CategoryModal
