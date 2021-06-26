@@ -9,4 +9,11 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    containerDisable:{
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: COLORS.Grey[400],
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
