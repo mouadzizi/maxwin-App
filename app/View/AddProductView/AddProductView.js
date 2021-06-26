@@ -5,7 +5,6 @@ import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 
 import { ScrollView, SafeAreaView, View, Text } from "react-native";
-import { Modalize } from "react-native-modalize";
 
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,7 +20,6 @@ export default function AddProductView({ navigation }) {
 
   let Modals = [];
 
-
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
   };
@@ -35,7 +33,7 @@ export default function AddProductView({ navigation }) {
       return () => {
         AsyncStorage.clear();
         setImages([]);
-        setProduct({})
+        setProduct({});
       };
     }, [])
   );
@@ -45,9 +43,9 @@ export default function AddProductView({ navigation }) {
   };
 
   const chooseCategory = (category) => {
-    setProduct({ ...product, category: category })
+    setProduct({ ...product, category: category });
     Modals[1].closeModal();
-  }
+  };
 
   const NextHandler = () => {
     navigation.navigate("InformationStep", {
@@ -104,7 +102,6 @@ export default function AddProductView({ navigation }) {
             placeholder="Merci d'entrer le Nom exact de votre article"
             containerStyle={{ marginTop: 20 }}
             style={{ fontSize: 15 }}
-            errorMessage="this is an error"
             labelStyle={{ color: COLORS.primary }}
           />
           <Input
@@ -122,18 +119,26 @@ export default function AddProductView({ navigation }) {
               mode="dialog"
               dropdownIconColor={COLORS.primary}
               selectedValue={product.city}
-              onValueChange={(itemValue) => setProduct({...product,city:itemValue})}
+              onValueChange={(itemValue) =>
+                setProduct({ ...product, city: itemValue })
+              }
             >
               <Picker.Item
                 label="Choisissez une Ville"
                 value=""
                 color={COLORS.Grey[400]}
               />
-              <Picker.Item label="Tanger" value="Tanger" />
               <Picker.Item label="Agadir" value="Agadir" />
-              <Picker.Item label="Merakech" value="Merakech" />
               <Picker.Item label="Casablanca" value="Casablanca" />
+              <Picker.Item label="Dakhla" value="Dakhla" />
+              <Picker.Item label="Fès" value="Fès" />
+              <Picker.Item label="Kénitra" value="Kénitra" />
+              <Picker.Item label="Marrakech" value="Marrakech" />
+              <Picker.Item label="Meknès" value="Meknès" />
+              <Picker.Item label="Nador" value="Nador" />
+              <Picker.Item label="Ouajda" value="Ouajda" />
               <Picker.Item label="Rabat" value="Rabat" />
+              <Picker.Item label="Tanger" value="Tanger" />
               <Picker.Item label="Tetouan" value="Tetouan" />
             </Picker>
           </View>

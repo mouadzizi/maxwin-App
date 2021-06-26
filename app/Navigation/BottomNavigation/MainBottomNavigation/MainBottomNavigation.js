@@ -21,7 +21,6 @@ export default function MainBottomNavigation() {
         lazy={false} // this will load all the stacks from the first render
         tabBarOptions={{
           showLabel: false, //hide the text
-          keyboardHidesTabBar: true, // hide the Tab menu when keyboard is open
           activeTintColor: COLORS.primary,
           style:{
             position: 'absolute',
