@@ -35,7 +35,7 @@ export default function AddProductStep({ nbImages, onclick, title, iconName, cat
             Vous aver choisi: {numberImages} images.
           </TextView>
         ) : (
-          <TextView fontSize={12} style={styles.subtext} fontFamily="Source-Regular">
+          <TextView fontSize={12} style={[styles.subtext]} fontFamily="Source-Regular">
             Vous aver choisi: {category}
           </TextView>
         )}

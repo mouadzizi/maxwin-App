@@ -1,7 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import {Modalize} from 'react-native-modalize';
 
 export default function CategoryStep() {
+
+    const modalRef= React.useRef()
 
     const DATA = [
         {
@@ -98,8 +101,16 @@ export default function CategoryStep() {
     );
 
     return (
-        <View>
-            <Text>Categories</Text>
-        </View>
+        <Modalize
+        snapPoint={350}
+        ref={modalRef}
+        sectionListProps={{
+          sections: DATA,
+          renderItem: renderItem,
+          renderSectionHeader: renderSectionHeader,
+          keyExtractor: (item, index) => `${item.title}-${index}`,
+          showsVerticalScrollIndicator: false,
+        }}
+      />
     )
 }

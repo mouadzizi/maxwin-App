@@ -4,7 +4,7 @@ import { Modalize } from "react-native-modalize";
 import ImagePicker from '../../../Components/ImagePicker/ImagePicker'
 
 
-export default class ImageModal extends React.Component {
+class ImageModal extends React.Component {
     ModalRef = React.createRef();
 
     openModal = () => {
@@ -13,17 +13,18 @@ export default class ImageModal extends React.Component {
           }
         
     };
- ItemRender = ({ item }) => {
-        return (
+ ItemRender = ({ item }) => 
+       (
             <ImagePicker
                 uri={item.uri}
                 onClick={this.props.onClick}
             />
         )
-    }
+    
         render(){
             return (
                 <Modalize ref={this.ModalRef}
+                snapPoint={400}
                     flatListProps={{
                         data: this.props.data,
                         renderItem: this.ItemRender,
@@ -32,10 +33,14 @@ export default class ImageModal extends React.Component {
                         ListFooterComponent: <ImagePicker uri={null} onClick={this.props.onClick} />,
                         numColumns: 2
         
-                    }} />
+                    }} 
+                    />
+                        
             )
         }
 
 }
 
-const styles = StyleSheet.create({})
+export default React.forwardRef((props, ref) => (
+    <ImageModal ref={ref} {...props} />
+  ));

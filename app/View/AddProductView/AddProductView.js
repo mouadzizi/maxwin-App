@@ -9,24 +9,18 @@ import { Modalize } from "react-native-modalize";
 
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import TextView from "../../Components/TextView/TextView";
 import ImageModal from "./Modals/ImageModal";
 import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
-
-import CategoryStep from "./CategoryStep";
+import CategoryModal from "./Modals/CategoryModal";
 
 export default function AddProductView({ navigation }) {
-  const [city, setCity] = useState();
+  const [product, setProduct] = useState({});
   const [imagesArr, setImages] = useState([]);
 
-  const ModalImage = React.forwardRef((props, ref) => (
-    <ImageModal ref={ref} {...props} />
-  ));
+  let Modals = [];
 
-  const ModalCategoryRef = useRef();
-  let ModalImageRef = React.createRef();
 
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
@@ -41,17 +35,23 @@ export default function AddProductView({ navigation }) {
       return () => {
         AsyncStorage.clear();
         setImages([]);
+        setProduct({})
       };
     }, [])
   );
 
   const openModalCategory = () => {
-    ModalCategoryRef.current.open();
+    Modals[1].openModal();
   };
+
+  const chooseCategory = (category) => {
+    setProduct({ ...product, category: category })
+    Modals[1].closeModal();
+  }
 
   const NextHandler = () => {
     navigation.navigate("InformationStep", {
-      CategoryName: "Voiture",
+      CategoryName: product.category,
     });
   };
   return (
@@ -71,7 +71,7 @@ export default function AddProductView({ navigation }) {
 
           <AddProductStep
             nbImages={imagesArr ? imagesArr.length : 0}
-            onclick={() => ModalImageRef.openModal()}
+            onclick={() => Modals[0].openModal()}
             title="Choisir des images"
             iconName="camera"
           />
@@ -85,6 +85,7 @@ export default function AddProductView({ navigation }) {
           </TextView>
 
           <AddProductStep
+            categorySelected={product.category}
             onclick={openModalCategory}
             title="Choisir votre Categorie"
             iconName="list"
@@ -120,8 +121,8 @@ export default function AddProductView({ navigation }) {
               style={styles.pickerInput}
               mode="dialog"
               dropdownIconColor={COLORS.primary}
-              selectedValue={city}
-              onValueChange={(itemValue) => setCity(itemValue)}
+              selectedValue={product.city}
+              onValueChange={(itemValue) => setProduct({...product,city:itemValue})}
             >
               <Picker.Item
                 label="Choisissez une Ville"
@@ -145,14 +146,15 @@ export default function AddProductView({ navigation }) {
         </ScrollView>
       </View>
 
-      <ModalImage
-        ref={(el) => (ModalImageRef = el)}
+      <ImageModal
+        ref={(el) => (Modals[0] = el)}
         data={imagesArr}
         onClick={() => navigation.navigate("ImageBrowser")}
       />
-      <Modalize ref={ModalCategoryRef}>
-        <CategoryStep />
-      </Modalize>
+      <CategoryModal
+        ref={(el) => (Modals[1] = el)}
+        onClick={(item) => chooseCategory(item)}
+      />
     </SafeAreaView>
   );
 }

@@ -12,6 +12,10 @@ export default function InformationStep({ navigation, route }) {
   const CategoryName = route.params?.CategoryName;
   const ProductUid = route.params?.ProductUid;
 
+  React.useEffect(()=>{
+    alert(CategoryName)
+  },[])
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.containerHeight}>

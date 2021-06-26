@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { fonts } from "react-native-elements/dist/config";
 import { COLORS } from "../../GlobalStyle";
 
 export default StyleSheet.create({
@@ -28,6 +29,8 @@ export default StyleSheet.create({
   },
   subtext:{
       marginTop : 5,
-      color: COLORS.primary
+      color: COLORS.primary,
+    
+      
   }
 });
