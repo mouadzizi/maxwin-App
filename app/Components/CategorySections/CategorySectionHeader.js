@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import TextView from '../TextView/TextView'
 import styles from './CategorySectionHeader.style'
 
-export default function CategorySectionHeader({section}) {
+function CategorySectionHeader({section}) {
     return (
         <View style={styles.header}>
             <TextView style={styles.text} fontSize={20}>{section.title.toUpperCase()}</TextView>
@@ -11,4 +11,5 @@ export default function CategorySectionHeader({section}) {
     )
 }
 
+export default React.memo(CategorySectionHeader)
 

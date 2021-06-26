@@ -86,6 +86,8 @@ export default function MainBottomNavigation() {
                 style={{top: -15}}
               />
             ),
+            tabBarVisible:false
+            
           }}
         />
         <Tab.Screen

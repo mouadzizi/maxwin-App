@@ -3,12 +3,14 @@ import { TouchableOpacity, Text } from "react-native";
 import styles from "./CategoryItem.style";
 import TextView from "../../Components/TextView/TextView";
 
-export default function CategoryItem({ onClick, item }) {
+function CategoryItem({ onClick, item }) {
   return (
-    <TouchableOpacity onPress={onClick} style={styles.item}>
+    <TouchableOpacity delayPressOut={0} onPress={onClick} style={styles.item}>
       <TextView fontFamily="Source-Regular" fontSize={20}>
         {item}{" "}
       </TextView>
     </TouchableOpacity>
   );
 }
+
+export default React.memo(CategoryItem)

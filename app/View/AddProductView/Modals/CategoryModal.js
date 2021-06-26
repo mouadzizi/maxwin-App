@@ -4,7 +4,7 @@ import { categoryData } from "../../../API/Data";
 import SectionHeader from "../../../Components/CategorySections/CategorySectionHeader";
 import SectionItem from "../../../Components/CategorySections/CategoryItem";
 
-class CategoryModal extends Component {
+class CategoryModal extends React.PureComponent {
   ModalRef = React.createRef();
 
   get sections() {
@@ -20,21 +20,30 @@ class CategoryModal extends Component {
       this.ModalRef.current.close();
     }
   };
+  renderItem = ({item})=> (
+    <SectionItem item={item} onClick={()=>this.props.onClick(item)} />
+  )
+
+  renderSectionheader = ({section})=>(
+    <SectionHeader section={section} />
+  )
+  keyExtractor = (item, index) => `${item.title}-${index}`
 
   render() {
     return (
       <Modalize
+      modalStyle={{
+        padding:10
+      }}
         ref={this.ModalRef}
-        snapPoint={400}
+        snapPoint={350}
         sectionListProps={{
-          keyExtractor: (item, index) => `${item.title}-${index}`,
+          maxToRenderPerBatch:2,
+          initialNumToRender:1,
+          keyExtractor: this.keyExtractor.bind(this),
           sections: this.sections,
-          renderItem: ({ item }) => (
-            <SectionItem item={item} onClick={() => this.props.onClick(item)} />
-          ),
-          renderSectionHeader: ({ section }) => (
-            <SectionHeader section={section} />
-          ),
+          renderItem: this.renderItem.bind(this),
+          renderSectionHeader: this.renderSectionheader.bind(this),
           showsVerticalScrollIndicator: false,
         }}
       />
