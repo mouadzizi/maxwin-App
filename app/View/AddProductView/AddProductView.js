@@ -55,7 +55,7 @@ export default function AddProductView({ navigation }) {
   };
 
   return (
-    <View>
+    <View style={{marginBottom: 70}}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <TextView
           fontFamily="Source-Regular"

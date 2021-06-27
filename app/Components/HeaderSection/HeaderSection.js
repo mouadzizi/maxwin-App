@@ -7,7 +7,10 @@ export default function headerSection({ title, navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
-        <TextView fontSize={19} style={styles.title}>
+        <TextView 
+        fontSize={22}
+        fontFamily= "Source-Regular"
+        style={styles.title}>
           {title}
         </TextView>
       </View>

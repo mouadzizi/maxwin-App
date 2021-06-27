@@ -3,15 +3,11 @@ import { COLORS, windowHeight, windowWidth} from "../../GlobalStyle";
 export default StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    width: windowWidth,
   },
   title: {
     color: COLORS.text,
     marginTop: 15,
     marginLeft: 10,
-  },
-  containerHeight:{
-    height : windowHeight*0.87,
   },
   pickerView:{
     borderBottomWidth: 1,

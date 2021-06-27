@@ -22,8 +22,10 @@ export default function Product({
         <>
           <TextView
             fontColor={COLORS.primary}
-            fontSize={14}
+            fontSize={16}
             style={styles.location}
+
+            fontFamily="Source-Regular"
           >
             {location}
           </TextView>
@@ -104,8 +106,8 @@ export default function Product({
         <View style={styles.informationContainerSection1}>
           <TextView
             fontColor={COLORS.primary}
-            fontSize={14}
-            fontFamily="Nova-Regular"
+            fontSize={16}
+            fontFamily="Source-Regular"
           >
             {title}
           </TextView>

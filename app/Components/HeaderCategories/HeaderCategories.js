@@ -57,7 +57,6 @@ export default function HeaderCategories() {
   return (
     <>
       <FlatList
-        style={{ marginTop: 10 }}
         data={DATA}
         showsHorizontalScrollIndicator={false}
         horizontal={true}

@@ -5,7 +5,7 @@ export default StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 10,
+  
     },
     container1:{
         flex: 1,
