@@ -14,7 +14,6 @@ import { COLORS } from "../../../GlobalStyle";
 export default function MainBottomNavigation() {
   const Tab = createBottomTabNavigator();
   return (
-    <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
         backBehavior="initialRoute" //back button will back to initial route
@@ -86,8 +85,6 @@ export default function MainBottomNavigation() {
                 style={{top: -15}}
               />
             ),
-            tabBarVisible:false
-            
           }}
         />
         <Tab.Screen
@@ -131,6 +128,5 @@ export default function MainBottomNavigation() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }

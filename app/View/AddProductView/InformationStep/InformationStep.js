@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
@@ -6,18 +6,43 @@ import TextView from "../../../Components/TextView";
 import ButtonFill from "../../../Components/Button/ButtonFill";
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
-import {addProduct,uploadImages} from '../../../API/APIFunctions'
-import {useNavigation} from '@react-navigation/native'
-import {auth} from '../../../API/Firebase'
+import { addProduct, uploadImages } from "../../../API/APIFunctions";
+import { auth } from "../../../API/Firebase";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
-  const [product, setProduct] = useState(prevProduct)
-  const user = auth.currentUser
-  const RenderCategoryInfo = () => {
-    switch (product.category) {
-      case "Voitures" || "Location de Voiture":
-        return (
+
+  const [product, setProduct] = useState(prevProduct);
+
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    console.log("this is information step");
+    console.log(product);
+    return () => {};
+  }, []);
+  const submit = () => {
+    addProduct(product)
+      .then((docRef) => {
+        uploadImages(product.images, docRef.id, user.uid).then((links) => {
+          docRef
+            .update({ images: links })
+            .then(() => navigation.navigate("Home"));
+        });
+      })
+      .catch(({ message }) => alert(message));
+  };
+  return (
+    <View>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <TextView
+          fontFamily="Source-Regular"
+          fontSize={16}
+          style={styles.title}
+        >
+          Merci d'entrer le max d'information possible de votre produit
+        </TextView>
+        {product.category === ("Voitures" || "Location de Voiture") ? (
           <View style={{ marginTop: 30 }}>
             {/* Picker for State */}
             <View style={styles.pickerView}>
@@ -26,6 +51,10 @@ export default function InformationStep({ navigation, route }) {
                 style={styles.pickerInput}
                 mode="dropdown"
                 dropdownIconColor={COLORS.primary}
+                selectedValue={product.etat}
+                onValueChange={(itemValue) =>
+                  setProduct({ ...product, etat: itemValue })
+                }
               >
                 <Picker.Item
                   label="Choisissez l'état de produit"
@@ -44,6 +73,10 @@ export default function InformationStep({ navigation, route }) {
                 style={styles.pickerInput}
                 mode="dialog"
                 dropdownIconColor={COLORS.primary}
+                selectedValue={product.marqueVoiture}
+                onValueChange={(itemValue) =>
+                  setProduct({ ...product, marqueVoiture: itemValue })
+                }
               >
                 <Picker.Item
                   label="Choisissez une marque"
@@ -59,10 +92,16 @@ export default function InformationStep({ navigation, route }) {
             <Input
               label="Kilométrage"
               placeholder="Kilométrage"
+              keyboardType="number-pad"
+              maxLength={6}
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
-              keyboardType="number-pad"
-              maxLength={8}
+              onChangeText={(input) =>
+                setProduct({
+                  ...product,
+                  kilometrage: input,
+                })
+              }
             />
 
             <Input
@@ -71,6 +110,12 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
+              onChangeText={(input) =>
+                setProduct({
+                  ...product,
+                  anneeFabrication: input,
+                })
+              }
               maxLength={4}
             />
 
@@ -81,6 +126,10 @@ export default function InformationStep({ navigation, route }) {
                 style={styles.pickerInput}
                 mode="dropdown"
                 dropdownIconColor={COLORS.primary}
+                selectedValue={product.carburant}
+                onValueChange={(itemValue) =>
+                  setProduct({ ...product, carburant: itemValue })
+                }
               >
                 <Picker.Item
                   label="Choisissez le carburant"
@@ -98,6 +147,9 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
+              onChangeText={(input) =>
+                setProduct({ ...product, puissanceFiscale: input })
+              }
               maxLength={8}
             />
 
@@ -108,6 +160,10 @@ export default function InformationStep({ navigation, route }) {
                 style={styles.pickerInput}
                 mode="dropdown"
                 dropdownIconColor={COLORS.primary}
+                selectedValue={product.transaction}
+                onValueChange={(itemValue) =>
+                  setProduct({ ...product, transaction: itemValue })
+                }
               >
                 <Picker.Item
                   label="Choisissez le carburant"
@@ -118,19 +174,15 @@ export default function InformationStep({ navigation, route }) {
                 <Picker.Item label="Essence" value="Essence" />
               </Picker>
             </View>
-
-            <Input
-              label="Description"
-              placeholder="écrire quelques lignes pour décrire le produit"
-              style={{ fontSize: 15 }}
-              numberOfLines={5}
-              labelStyle={{ color: COLORS.primary }}
-            />
           </View>
-        );
+        ) : null}
 
-      case "Appartements" || "Maisons & Villas" || "Location long durée" || "Location courte durée (vacances)":
-        return (
+        {product.category ===
+        ("Appartements" ||
+          "Maisons & Villas" ||
+          "Location long durée" ||
+          "Location courte durée (vacances)" ||
+          "Commerces & Bureaux") ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="Superficie"
@@ -138,126 +190,104 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
-              maxLength={5}
+              onChangeText={(input) =>
+                setProduct({ ...product, superficie: input })
+              }
+              maxLength={6}
             />
+
             <Input
-              label="Nombre de piéces"
-              placeholder="personnes"
+              label="nbPiece"
+              placeholder="Nombre de piece"
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
-              maxLength={2}
-            />
-
-            <Input
-              label="Description"
-              placeholder="écrire quelques lignes pour décrire le produit"
-              style={{ fontSize: 15 }}
-              numberOfLines={5}
-              labelStyle={{ color: COLORS.primary }}
+              onChangeText={(input) =>
+                setProduct({ ...product, nbPiece: input })
+              }
+              maxLength={3}
             />
           </View>
-        );
+        ) : null}
 
-        case "Appartements" || "Maisons & Villas" || "Location long durée" || "Location courte durée (vacances)":
-        return (
+        {product.category === ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
           <View style={{ marginTop: 30 }}>
             <Input
-              label="Superficie"
-              placeholder="m²"
+              label="RAM"
+              placeholder="Gb"
               style={{ fontSize: 15 }}
+              numberOfLines={2}
               labelStyle={{ color: COLORS.primary }}
-              keyboardType="number-pad"
-              maxLength={5}
+              onChangeText={(input) =>
+                setProduct({ ...product, RamTelephone: input })
+              }
             />
+
             <Input
-              label="Nombre de piéces"
-              placeholder="personnes"
+              label="ROM"
+              placeholder="Gb"
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
-              keyboardType="number-pad"
-              maxLength={2}
-            />
-            <Input
-              label="Description"
-              placeholder="écrire quelques lignes pour décrire le produit"
-              style={{ fontSize: 15 }}
-              numberOfLines={5}
-              labelStyle={{ color: COLORS.primary }}
+              onChangeText={(input) =>
+                setProduct({ ...product, RomTelephone: input })
+              }
             />
           </View>
-        );
-      default:
-        return (
-          <>
-          <View style={styles.pickerView}>
+        ) : null}
+
+        {product.category !==
+        ("Appartements" ||
+          "Maisons & Villas" ||
+          "Terrains" ||
+          "Commerces & Bureaux" ||
+          "Location courte durée (vacances)" ||
+          "Location long durée" ||
+          "Maquillage et produits de bien être" ||
+          "Matériels professionnels" ||
+          "Services et travaux professionnels" ||
+          "Formations & autres") ? (
+          <View style={{ marginTop: 10 }}>
+            <View style={styles.pickerView}>
               <Text style={styles.label}>État</Text>
               <Picker
                 style={styles.pickerInput}
                 mode="dropdown"
                 dropdownIconColor={COLORS.primary}
-                onValueChange={(itemValue) => setProduct({...product,state:itemValue})}
-                selectedValue={product.state}
+                selectedValue={product.etat}
+                onValueChange={(itemValue) =>
+                  setProduct({ ...product, etat: itemValue })
+                }
               >
                 <Picker.Item
                   label="Choisissez l'état de produit"
                   value=""
-                  color={COLORS.Grey[400]
-                  }
+                  color={COLORS.Grey[400]}
                 />
                 <Picker.Item label="Neuf" value="Neuf" />
                 <Picker.Item label="Utilisé" value="Utilisé" />
               </Picker>
             </View>
+          </View>
+        ) : null}
 
-            <Input
-              label="Description"
-              placeholder="écrire quelques lignes pour décrire le produit"
-              style={{ fontSize: 15 }}
-              numberOfLines={5}
-              labelStyle={{ color: COLORS.primary }}
-              onChangeText={(input)=>setProduct({...product,description:input})}
-            />
-          </>
-        );
-    }
-  };
-
-  useEffect(() => {
-    console.log('this is information step');
-    console.log(product.images);
-    return () => {
-      
-    }
-  }, [])
-  const submit = ()=>{
-      addProduct(product).then(docRef=> {
-        uploadImages(product.images,docRef.id,user.uid).then(links=>{
-          docRef.update({images:links}).then(()=>navigation.navigate('Home')
-          )
-        })
-      }).catch(({message})=>alert(message))
-  }
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.containerHeight}>
-        <ScrollView
-          style={styles.container}
-          showsVerticalScrollIndicator={false}
-        >
-          <TextView
-            fontFamily="Source-Regular"
-            fontSize={16}
-            style={styles.title}
-          >
-            Merci d'entrer le max d'information possible sur votre produit
-          </TextView>
-
-          <RenderCategoryInfo />
-
-          <ButtonFill onClick={submit} title="Valider" style={{ marginBottom: 40 }} />
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+        <Input
+          label="Description"
+          placeholder="écrire quelques lignes pour décrire le produit"
+          style={{ fontSize: 15 }}
+          containerStyle={{ marginTop: 20 }}
+          numberOfLines={5}
+          multiline={true}
+          labelStyle={{ color: COLORS.primary }}
+          onChangeText={(input) =>
+            setProduct({ ...product, Description: input })
+          }
+        />
+        <ButtonFill
+          onClick={submit}
+          title="Valider"
+          style={{ marginBottom: 40 }}
+        />
+      </ScrollView>
+    </View>
   );
 }

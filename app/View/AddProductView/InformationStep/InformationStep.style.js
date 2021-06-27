@@ -5,9 +5,7 @@ export default StyleSheet.create({
         paddingTop: 15,
         paddingHorizontal: 20,
     },
-    containerHeight:{
-        height: windowHeight*0.84,
-    },
+
     pickerView:{
         borderBottomWidth: 1,
         marginBottom: 20,

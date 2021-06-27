@@ -1,9 +1,7 @@
 import React from "react";
-import { View, Text, Alert, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import styles from "./ImageStep.style";
 import ImagePickerHolder from "../../../Components/ImagePicker";
-import { GlobalStyle } from '../../../GlobalStyle';
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 export default function ImageStep({ onClick, data }) {
