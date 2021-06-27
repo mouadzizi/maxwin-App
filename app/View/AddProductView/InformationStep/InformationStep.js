@@ -110,6 +110,7 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
+              errorMessage={(product.anneeFabrication > 2021 || product.anneeFabrication < 1900) ? "veuillez choisir une année valide" : null}
               onChangeText={(input) =>
                 setProduct({
                   ...product,
@@ -147,6 +148,7 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
+              errorMessage={product.puissanceFiscale > 50  ? "veuillez choisir une Puissance fiscale valide" : null}
               onChangeText={(input) =>
                 setProduct({ ...product, puissanceFiscale: input })
               }

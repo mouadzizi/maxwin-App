@@ -4,7 +4,6 @@ import { COLORS } from "../../../GlobalStyle";
 import { Ionicons } from "react-native-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeView from "../../../View/HomeView";
-import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
 export default function HomeStack() {
   const HeaderTitle = () => {
@@ -65,11 +64,7 @@ export default function HomeStack() {
         options={{ title: "Maxwin" }}
       />
 
-      <StackHome.Screen
-        name="HomeSectionProductView"
-        component={HomeSectionProductView}
-        options={{ title: "Maxwin" }}
-      />
+      
     </StackHome.Navigator>
   );
 }

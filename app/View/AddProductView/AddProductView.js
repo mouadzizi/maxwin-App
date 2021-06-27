@@ -23,6 +23,7 @@ export default function AddProductView({ navigation }) {
     return await AsyncStorage.getItem("selectedImage");
   };
 
+
   useFocusEffect(
     useCallback(() => {
       getPhotos().then((items) => {
