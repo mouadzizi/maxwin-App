@@ -10,10 +10,10 @@ export default function HomeSectionProductView() {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <HeaderCategories />
 
-        <Product />
-        <Product />
-        <Product />
-        <Product />
+        <Product numberImages={3} location="Tanger, Val Fleuri" nbLikes={55} title="Hundai i30" price={10000} />
+        <Product numberImages={1} location="Casablanca, El bernousi" nbLikes={10} title="Apparetement par jour" price={400}/>
+        <Product numberImages={2} location="Merakech, Gulize" nbLikes={0} title="Iphone 13 new lbi3" price={5708}/>
+        <Product numberImages={5} location="Agadir, Hay saada" nbLikes={2} title="Plombie Agadir safae" price={4000}/>
       </ScrollView>
     </View>
   );

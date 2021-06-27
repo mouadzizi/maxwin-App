@@ -2,28 +2,54 @@ import {StyleSheet} from 'react-native';
 import {COLORS, windowWidth, windowHeight} from '../../../GlobalStyle';
 
 export default StyleSheet.create({
-    container: {
-        height: 320,
+    containerGlobal: {
+        height: 340,
         backgroundColor: COLORS.Grey[100],
-        marginHorizontal: 10,
-        marginVertical: 20,
+        marginVertical: 10,
         borderColor: COLORS.Grey[200],
-        borderRadius: 10
     },
-    titleContainer:{
-        height: 30,
+    containerSection1:{
+        height: 40,
+        paddingLeft: 10,
+        flexDirection: 'row',
+        paddingHorizontal: 5,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    containerLikes: {
+        paddingEnd: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     imageContainer:{
-        height: 240,
+        height: 250,
         flexDirection: 'row',
     },
     informationContainer:{
         height: 50,
         flexDirection: 'row'
     },
-    title:{
-        color: COLORS.primary,
+    informationContainerSection1:{
+        height: 50,
+        paddingLeft: 20,
+        flex: 3,
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    informationContainerSection2:{
+        height: 50,
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    priceText:{
         fontWeight: 'bold',
-        padding: 5
-    }
+        color: COLORS.primary,
+        fontSize: 16,
+    },
+    likeNumber:{
+        padding: 10,
+        fontWeight: 'bold',
+        color: 'black'
+    },
 });
