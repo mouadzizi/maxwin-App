@@ -1,6 +1,7 @@
 import React from "react";
 import { Modalize } from "react-native-modalize";
 import ImagePicker from "../../../Components/ImagePicker/ImagePicker";
+import { View } from 'react-native'
 
 class ImageModal extends React.PureComponent {
   ModalRef = React.createRef();
@@ -21,9 +22,9 @@ class ImageModal extends React.PureComponent {
       <Modalize
         ref={this.ModalRef}
         modalStyle={{
-
-          alignItems: 'center'
+          alignItems: 'center',
         }}
+
         snapPoint={500}
         flatListProps={{
           data: this.props.data,
@@ -32,6 +33,7 @@ class ImageModal extends React.PureComponent {
           showsVerticalScrollIndicator: false,
           ListFooterComponent: this.footerComponent,
           numColumns: 2,
+          style: { flexGrow: 0 }
         }}
       />
     );

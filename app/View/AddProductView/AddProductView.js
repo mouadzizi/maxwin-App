@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../../GlobalStyle";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 
-import { ScrollView, View, Text, KeyboardAvoidingView } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,14 +18,13 @@ import CategoryModal from "./Modals/CategoryModal";
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
   let Modals = [];
-
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
   };
 
-
   useFocusEffect(
     useCallback(() => {
+      console.log(product);
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
         if (imgs) {
@@ -55,7 +54,7 @@ export default function AddProductView({ navigation }) {
   };
 
   return (
-    <View style={{marginBottom: 70}}>
+    <View style={{ marginBottom: 70 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <TextView
           fontFamily="Source-Regular"
@@ -102,6 +101,8 @@ export default function AddProductView({ navigation }) {
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary }}
           onChangeText={(input) => setProduct({ ...product, title: input })}
+          value={product.title}
+          onSubmitEditing={()=>inputs.current.focus()}
         />
         <Input
           label="Prix *"
@@ -110,8 +111,9 @@ export default function AddProductView({ navigation }) {
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary, fontSize: 15 }}
           onChangeText={(input) =>
-            setProduct({ ...product, price: Number.parseFloat(input) })
+            setProduct({ ...product, price: input })
           }
+          value={product.price}
         />
 
         {/* Picker for city */}
@@ -145,6 +147,7 @@ export default function AddProductView({ navigation }) {
           title="Suivant"
           style={{ marginBottom: 40 }}
           onClick={NextHandler}
+          loading={false}
         />
       </ScrollView>
 

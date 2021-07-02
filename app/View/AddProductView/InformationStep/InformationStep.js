@@ -11,26 +11,31 @@ import { auth } from "../../../API/Firebase";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
-
   const [product, setProduct] = useState(prevProduct);
+  const [loading, setLoading] = useState(false)
 
   const user = auth.currentUser;
 
   useEffect(() => {
-    console.log("this is information step");
     console.log(product);
     return () => {};
   }, []);
   const submit = () => {
+    setLoading(true)
     addProduct(product)
       .then((docRef) => {
-        uploadImages(product.images, docRef.id, user.uid).then((links) => {
+        uploadImages(product.images, docRef.id, 'user.uid').then((links) => {
           docRef
             .update({ images: links })
-            .then(() => navigation.navigate("Home"));
+            .then(() => {
+              setLoading(false)
+              navigation.navigate("Home")});
         });
       })
-      .catch(({ message }) => alert(message));
+      .catch(({ message }) => {
+        setLoading(false)
+        alert(message)
+      });
   };
   return (
     <View>
@@ -285,6 +290,7 @@ export default function InformationStep({ navigation, route }) {
           }
         />
         <ButtonFill
+          loading={loading}
           onClick={submit}
           title="Valider"
           style={{ marginBottom: 40 }}
