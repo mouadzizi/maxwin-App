@@ -5,6 +5,7 @@ import SelectedItem from '../../Components/ImageBrowser/SelectedItem';
 import NoCameraPerm from '../../Components/ImageBrowser/NoCameraPerm';
 import DoneBtn from '../../Components/ImageBrowser/DoneButton';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as ImageManipulator from 'expo-image-manipulator'
 
 
 export default function ImageBrowserScreen({ navigation }) {
@@ -25,11 +26,12 @@ export default function ImageBrowserScreen({ navigation }) {
     const CallBack = (callback) => {
         callback.then(photos => {
             const cPhotos = []
-            photos.map(p => {
+            photos.map(async (p) => {
+                const pressedPic = await _processImageAsync(p.localUri)
                 cPhotos.push({
-                    uri: p.uri,
-                    name: p.filename,
-                    id: p.creationTime
+                    uri: pressedPic.uri,
+                    name: pressedPic.filename,
+                    id: pressedPic.creationTime
                 })
             })
             storePhotos(cPhotos).then(() => navigation.goBack())
@@ -44,9 +46,16 @@ export default function ImageBrowserScreen({ navigation }) {
             console.error(e.message)
         }
     }
-
-    const selectedComponent = React.useCallback((n)=> <SelectedItem number={n} />,[])
-    const noCameraPermission = React.useCallback(()=> <NoCameraPerm/>,[])
+    const _processImageAsync = async (uri) => {
+        const file = await ImageManipulator.manipulateAsync(
+            uri,
+            [],
+            { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
+        )
+        return file;
+    }
+    const selectedComponent = React.useCallback((n) => <SelectedItem number={n} />, [])
+    const noCameraPermission = React.useCallback(() => <NoCameraPerm />, [])
     return (
         <View style={{ flex: 1 }} >
             <ImageBrowser
