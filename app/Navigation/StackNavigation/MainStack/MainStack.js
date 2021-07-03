@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Image, TouchableWithoutFeedback} from 'react-native'
+import { View, Image, TouchableWithoutFeedback } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -8,14 +8,12 @@ import InformationStep from "../../../View/AddProductView/InformationStep";
 import ImageBrowser from "../../../View/ImageBrowser/ImageBrowserScreen";
 import ProductDetails from "../../../View/ProductDetails";
 
-
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
-
 
 import { COLORS } from "../../../GlobalStyle";
 import { Ionicons } from "react-native-vector-icons";
 
-export default function MainStack() {
+export default function MainStack({navigation}) {
   const Stack = createStackNavigator();
 
   const HeaderTitle = () => {
@@ -24,11 +22,19 @@ export default function MainStack() {
 
   const HeaderLeft = () => {
     return (
-      <Image
-        style={{ alignSelf: "center", height: 40, width: 120, marginLeft: 20 }}
-        source={require("../../../../assets/headerIcon.png")}
-        resizeMode="contain"
-      />
+      <TouchableWithoutFeedback
+      onPress={()=> navigation.goBack()}>
+        <Image
+          style={{
+            alignSelf: "center",
+            height: 40,
+            width: 120,
+            marginLeft: 20,
+          }}
+          source={require("../../../../assets/headerIcon.png")}
+          resizeMode="contain"
+        />
+      </TouchableWithoutFeedback>
     );
   };
 
@@ -117,7 +123,6 @@ export default function MainStack() {
             },
           }}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
