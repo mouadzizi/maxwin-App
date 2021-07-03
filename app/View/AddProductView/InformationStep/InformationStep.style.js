@@ -5,12 +5,19 @@ export default StyleSheet.create({
         paddingTop: 15,
         paddingHorizontal: 20,
     },
-
+    chipContainer:{
+        flexDirection: 'column',
+        marginVertical: 20
+    },
     pickerView:{
         borderBottomWidth: 1,
         marginBottom: 20,
         width: '100%',
         borderColor: COLORS.Grey[300],
+    },
+    chipRow:{
+        flexDirection: 'row',
+        marginVertical: 10
     },
     pickerInput:{
         height: 50,

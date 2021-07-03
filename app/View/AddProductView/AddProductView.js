@@ -100,7 +100,7 @@ export default function AddProductView({ navigation }) {
           containerStyle={{ marginTop: 20 }}
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary }}
-          onChangeText={(input) => setProduct({ ...product, title: input })}
+          onChangeText={(value) => setProduct({ ...product, title: value })}
           value={product.title}
           onSubmitEditing={()=>inputs.current.focus()}
         />
@@ -110,9 +110,7 @@ export default function AddProductView({ navigation }) {
           placeholder="Merci d'entrer le prix de votre article"
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary, fontSize: 15 }}
-          onChangeText={(input) =>
-            setProduct({ ...product, price: input })
-          }
+          onChangeText={(value) => setProduct({ ...product, price: value })}
           value={product.price}
         />
 
@@ -124,8 +122,8 @@ export default function AddProductView({ navigation }) {
             mode="dialog"
             dropdownIconColor={COLORS.primary}
             selectedValue={product.city}
-            onValueChange={(itemValue) =>
-              setProduct({ ...product, city: itemValue })
+            onValueChange={(value) =>
+              setProduct({ ...product, city: value })
             }
           >
             <Picker.Item
@@ -133,11 +131,17 @@ export default function AddProductView({ navigation }) {
               value=""
               color={COLORS.Grey[400]}
             />
-            <Picker.Item label="Tanger" value="Tanger" />
+            <Picker.Item label="AL Hoceima" value="ALHoceima" />
             <Picker.Item label="Agadir" value="Agadir" />
-            <Picker.Item label="Merakech" value="Merakech" />
             <Picker.Item label="Casablanca" value="Casablanca" />
+            <Picker.Item label="Dakhla" value="Dakhla" />
+            <Picker.Item label="Fès" value="Fès" />
+            <Picker.Item label="Kénitra" value="Kénitra" />
+            <Picker.Item label="Marrakech" value="Marrakech" />
+            <Picker.Item label="Meknès" value="Meknès" />
+            <Picker.Item label="Ouajda" value="Ouajda" />
             <Picker.Item label="Rabat" value="Rabat" />
+            <Picker.Item label="Tanger" value="Tanger" />
             <Picker.Item label="Tetouan" value="Tetouan" />
           </Picker>
         </View>
