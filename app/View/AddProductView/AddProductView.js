@@ -42,8 +42,9 @@ export default function AddProductView({ navigation }) {
     Modals[1].openModal();
   };
 
-  const chooseCategory = (category) => {
-    setProduct({ ...product, category: category });
+  const chooseCategory = (category,{title}) => {
+  
+    setProduct({ ...product, category: [title,category]});
     Modals[1].closeModal();
   };
 
@@ -80,7 +81,7 @@ export default function AddProductView({ navigation }) {
         </TextView>
 
         <AddProductStep
-          categorySelected={product.category}
+          categorySelected={product.category? product.category[1] : null }
           onclick={openModalCategory}
           title="Choisir votre Categorie"
           iconName="list"
@@ -102,7 +103,6 @@ export default function AddProductView({ navigation }) {
           labelStyle={{ color: COLORS.primary }}
           onChangeText={(input) => setProduct({ ...product, title: input })}
           value={product.title}
-          onSubmitEditing={()=>inputs.current.focus()}
         />
         <Input
           label="Prix *"

@@ -20,8 +20,8 @@ class CategoryModal extends React.PureComponent {
       this.ModalRef.current.close();
     }
   };
-  renderItem = ({item})=> (
-    <SectionItem item={item} onClick={()=>this.props.onClick(item)} />
+  renderItem = ({item,section})=> (
+    <SectionItem item={item} onClick={()=>this.props.onClick(item,section)} />
   )
 
   renderSectionheader = ({section})=>(

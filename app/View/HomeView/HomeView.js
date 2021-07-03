@@ -11,8 +11,10 @@ import Electronics from "./Electronics";
 import Decorations from "./Decorations";
 import Mens from "./Mens";
 import HeaderCategories from "../../Components/HeaderCategories";
+import {db} from '../../API/Firebase'
 
 export default function HomeView({ navigation }) {
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.ScrollContainer}>

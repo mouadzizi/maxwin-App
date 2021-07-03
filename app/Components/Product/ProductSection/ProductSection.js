@@ -10,12 +10,13 @@ export default function ProductSection({
   title,
   price,
   imageCover,
+  uri
 }) {
   return (
     <TouchableWithoutFeedback style={styles.container} onPress={onClick}>
       <View style={styles.containerImage}>
         <Image
-          source={imageCover}
+          source={{uri:uri}}
           resizeMode='cover'
           style={styles.image}
           PlaceholderContent={<ActivityIndicator color="white" size="large" />}

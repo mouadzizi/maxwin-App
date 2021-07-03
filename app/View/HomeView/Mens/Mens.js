@@ -2,8 +2,14 @@ import React from "react";
 import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
+import { getItemsByCollection } from '../../../API/APIFunctions'
 
 export default function Mens() {
+  const collection = 'ESPACE HOMMES'
+  const [products, setProducts] = React.useState([])
+  React.useEffect(() => {
+    getItemsByCollection(collection, 10).then(items => setProducts(items))
+  }, [])
   const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -25,21 +31,21 @@ export default function Mens() {
     },
   ];
 
-  const ItemRender = ({ item }) => (
+  const ItemRender = React.useCallback(({ item }) => (
     <ProductSection
       onClick={() => Alert.alert(item.title)}
       title={item.title}
       price={item.price}
-      imageCover={item.imageCover}
+      uri={item.images[0]}
     />
-  );
-
+  ), [])
+  const keyExtractor = React.useCallback((item) => item.id, [])
   return (
     <>
-      <HeaderSection title="VEHICULE" />
+      <HeaderSection title={collection} />
       <FlatList
-        data={DATA}
-        keyExtractor={(item) => item.id}
+        data={products}
+        keyExtractor={keyExtractor}
         renderItem={ItemRender}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

@@ -38,3 +38,12 @@ export const uploadImages = async (images, docID, userID) => {
    }
    return Promise.all(imagesLinks)
 }
+
+export const getItemsByCollection = async(collection,limit)=>{
+   let items =[]
+   const snap = await db.collection('products').where('category1','==',collection).orderBy('title','desc').limit(limit).get()
+   snap.forEach(doc=>{
+      items.push({...doc.data(),id:doc.id})
+   })
+   return items
+} 

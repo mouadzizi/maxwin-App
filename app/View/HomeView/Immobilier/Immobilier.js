@@ -1,8 +1,15 @@
-import React from "react";
-import { FlatList, Alert} from "react-native";
+import React, { useState } from "react";
+import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from '../../../Components/HeaderSection'
-export default function Immobilier({navigation}) {
+import { getItemsByCollection } from '../../../API/APIFunctions'
+export default function Immobilier({ navigation }) {
+  const collection = 'IMMOBILIER'
+  const [products, setProducts] = useState([])
+  React.useEffect(() => {
+    getItemsByCollection(collection, 10).then(items => setProducts(items))
+  }, [])
+  
   const ImageTest = require("../../../../assets/ProductTest/Product1.jpeg");
   const DATA = [
     {
@@ -25,25 +32,27 @@ export default function Immobilier({navigation}) {
     },
   ];
 
-  const ItemRender = ({ item }) => (
+  const ItemRender = React.useCallback(({ item }) => (
     <ProductSection
-        onClick={()=> Alert.alert(item.title)}
-        title={item.title}
-        price={item.price}
-        imageCover={item.imageCover}
-      />
-  );
+      onClick={() => Alert.alert(item.title)}
+      title={item.title}
+      price={item.price}
+      uri={item.images[0]}
+    />
+  ), [])
 
+  const keyExtractor = React.useCallback(item => item.id, [])
   return (
-    
+
     <>
-    <HeaderSection title="IMMOBILIER"/>
-      <FlatList 
-      data={DATA}
-      keyExtractor={item => item.id}
-      renderItem={ItemRender}
-      horizontal={true}
-      showsHorizontalScrollIndicator={false}/>
+      <HeaderSection title={collection} />
+      <FlatList
+        initialNumToRender={3}
+        data={products}
+        keyExtractor={keyExtractor}
+        renderItem={ItemRender}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false} />
     </>
   );
 }
