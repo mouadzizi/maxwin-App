@@ -6,6 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import BottomNavigation from "../../BottomNavigation/MainBottomNavigation";
 import InformationStep from "../../../View/AddProductView/InformationStep";
 import ImageBrowser from "../../../View/ImageBrowser/ImageBrowserScreen";
+import ProductDetails from "../../../View/ProductDetails";
+
 
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
@@ -103,6 +105,19 @@ export default function MainStack() {
             },
           }}
         />
+
+        <Stack.Screen
+          name="ProductDetails"
+          component={ProductDetails}
+          options={{
+            headerTitle: (props) => <HeaderTitle {...props} />,
+            headerLeft: () => <HeaderLeft />,
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+          }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

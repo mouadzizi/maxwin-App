@@ -7,8 +7,10 @@ import ButtonOutlined from "../../../Components/Button/ButtonOutlined";
 
 import { COLORS } from "../../../GlobalStyle";
 import { AntDesign } from "react-native-vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Product({
+  navigation,
   numberImages,
   images,
   title,
@@ -17,7 +19,10 @@ export default function Product({
   price,
 }) {
   return (
-    <View style={styles.containerGlobal}>
+    <TouchableOpacity 
+    style={styles.containerGlobal}
+    onPress={()=> navigation.navigate('ProductDetails')}
+    >
       <View style={styles.containerSection1}>
         <>
           <TextView
@@ -119,10 +124,10 @@ export default function Product({
           <ButtonOutlined
             style={{ width: 100 }}
             title="Voir details"
-            onClick={() => alert("page details")}
+            onClick={()=> console.log('hey')}
           />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

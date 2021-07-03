@@ -4,6 +4,7 @@ import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
 import ButtonFill from "../../../Components/Button/ButtonFill";
+import Chip from "../../../Components/Chip";
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages } from "../../../API/APIFunctions";
@@ -12,7 +13,7 @@ import { auth } from "../../../API/Firebase";
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const user = auth.currentUser;
 
@@ -21,20 +22,19 @@ export default function InformationStep({ navigation, route }) {
     return () => {};
   }, []);
   const submit = () => {
-    setLoading(true)
+    setLoading(true);
     addProduct(product)
       .then((docRef) => {
-        uploadImages(product.images, docRef.id, 'user.uid').then((links) => {
-          docRef
-            .update({ images: links })
-            .then(() => {
-              setLoading(false)
-              navigation.navigate("Home")});
+        uploadImages(product.images, docRef.id, "user.uid").then((links) => {
+          docRef.update({ images: links }).then(() => {
+            setLoading(false);
+            navigation.navigate("Home");
+          });
         });
       })
       .catch(({ message }) => {
-        setLoading(false)
-        alert(message)
+        setLoading(false);
+        alert(message);
       });
   };
   return (
@@ -115,7 +115,12 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
-              errorMessage={(product.anneeFabrication > 2021 || product.anneeFabrication < 1900) ? "veuillez choisir une année valide" : null}
+              errorMessage={
+                product.anneeFabrication > 2021 ||
+                product.anneeFabrication < 1900
+                  ? "veuillez choisir une année valide"
+                  : null
+              }
               onChangeText={(input) =>
                 setProduct({
                   ...product,
@@ -153,7 +158,11 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
-              errorMessage={product.puissanceFiscale > 50  ? "veuillez choisir une Puissance fiscale valide" : null}
+              errorMessage={
+                product.puissanceFiscale > 50
+                  ? "veuillez choisir une Puissance fiscale valide"
+                  : null
+              }
               onChangeText={(input) =>
                 setProduct({ ...product, puissanceFiscale: input })
               }
@@ -289,6 +298,124 @@ export default function InformationStep({ navigation, route }) {
             setProduct({ ...product, Description: input })
           }
         />
+        
+        {product.category === ("Voitures" || "Location de Voiture") ?
+        <View style={styles.chipContainer}>
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={16}
+            style={{ marginBottom: 20 }}
+          >
+            Merci d'entrer les info suplémentaire de votre voiture
+          </TextView>
+
+          <View style={styles.chipRow}>
+            <Chip
+              title="Airbag"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="airbag"
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-seat-heater"
+              style={{ marginLeft: 20 }}
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-windshield-outline"
+              style={{ marginLeft: 20 }}
+            />
+          </View>
+
+          <View style={styles.chipRow}>
+            <Chip
+              title="Airbag"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-wash"
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="card-account-mail-outline"
+              style={{ marginLeft: 20 }}
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-seat-heater"
+              style={{ marginLeft: 20 }}
+            />
+          </View>
+
+          <View style={styles.chipRow}>
+            <Chip
+              title="Airbag"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="expansion-card"
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-traction-control"
+              style={{ marginLeft: 20 }}
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-turbocharger"
+              style={{ marginLeft: 20 }}
+            />
+          </View>
+
+          <View style={styles.chipRow}>
+            <Chip
+              title="Airbag"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-seat-cooler"
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-esp"
+              style={{ marginLeft: 20 }}
+            />
+            <Chip
+              title="Clima"
+              onClick={() => {
+                alert("Airbag");
+              }}
+              iconName="car-brake-parking"
+              style={{ marginLeft: 20 }}
+            />
+          </View>
+        </View>
+
+        : null }
+
         <ButtonFill
           loading={loading}
           onClick={submit}
