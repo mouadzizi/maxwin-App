@@ -32,8 +32,17 @@ export default function Product({
           </TextView>
         </>
         <View style={styles.containerLikes}>
-          <AntDesign name="like1" color={COLORS.primary} size={25} />
-          <Text style={styles.likeNumber}>{nbLikes}</Text>
+          {nbLikes !== 0 ? (
+            <>
+              <AntDesign name="like1" color={COLORS.primary} size={25} />
+              <Text style={styles.likeNumber}>{nbLikes}</Text>
+            </>
+          ) : (
+            <>
+              <AntDesign name="like2" color={COLORS.primary} size={25} />
+              <Text style={styles.likeNumber}>{nbLikes}</Text>
+            </>
+          )}
         </View>
       </View>
 
@@ -41,7 +50,7 @@ export default function Product({
         <View style={styles.imageContainer}>
           <View style={{ flex: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product8.jpeg")}
+              source={require("../../../../assets/ProductTest/product11.jpeg")}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -53,7 +62,7 @@ export default function Product({
         <View style={styles.imageContainer}>
           <View style={{ flex: 1, margin: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product9.jpeg")}
+              source={require("../../../../assets/ProductTest/product3.jpeg")}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -71,9 +80,9 @@ export default function Product({
 
       {numberImages > 2 ? (
         <View style={styles.imageContainer}>
-          <View style={{ flex: 1, margin: 1 }}>
+          <View style={{ flex: 2, margin: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product4.jpeg")}
+              source={require("../../../../assets/ProductTest/product11.jpeg")}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -84,7 +93,7 @@ export default function Product({
               <Image
                 source={require("../../../../assets/ProductTest/product6.jpeg")}
                 style={{ height: "100%", width: "100%" }}
-                resizeMode="stretch"
+                resizeMode="cover"
               />
             </View>
 
@@ -92,7 +101,7 @@ export default function Product({
               <Image
                 source={require("../../../../assets/ProductTest/Product1.jpeg")}
                 style={{ height: "100%", width: "100%" }}
-                resizeMode="stretch"
+                resizeMode="cover"
               />
             </View>
           </View>

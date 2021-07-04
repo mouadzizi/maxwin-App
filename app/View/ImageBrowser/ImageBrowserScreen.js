@@ -24,8 +24,9 @@ export default function ImageBrowserScreen({ navigation }) {
                     <DoneBtn onPress={onSubmit} />
             });
         }
-
     }
+
+    
     const CallBack = (callback) => {
         navigation.setOptions({
             headerRight: () => _getHeaderLoader()

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from '../../../Components/HeaderSection'
@@ -17,15 +17,15 @@ export default function Vehicule({navigation}) {
 
   const ItemRender = ({ item }) => (
     <ProductSection
-        onClick={()=> Alert.alert(item.title)}
-        title={item.title}
-        price={item.price}
-        uri={item.images[0]}
-      />
+      onClick={() => Alert.alert(item.title)}
+      title={item.title}
+      price={item.price}
+      uri={item.images[0]}
+    />
   );
 
-  const keyExtractor = React.useCallback(item=>item.id
-   ,[])
+  const keyExtractor = useCallback((item) => item.id, []);
+
   return (
     <>
     <HeaderSection title={collection} navigation={navigation} />
