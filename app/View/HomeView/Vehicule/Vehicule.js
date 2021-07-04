@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Alert} from "react-native";
+import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from '../../../Components/HeaderSection'
 import {getItemsByCollection} from '../../../API/APIFunctions'
@@ -27,7 +27,6 @@ export default function Vehicule({navigation}) {
   const keyExtractor = React.useCallback(item=>item.id
    ,[])
   return (
-    
     <>
     <HeaderSection title={collection} navigation={navigation} />
       <FlatList 

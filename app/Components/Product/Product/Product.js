@@ -10,38 +10,30 @@ import { AntDesign } from "react-native-vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Product({
-  navigation,
   numberImages,
   images,
   title,
   location,
   nbLikes,
   price,
+  onClick,
 }) {
   return (
-    <TouchableOpacity 
-    style={styles.containerGlobal}
-    onPress={()=> navigation.navigate('ProductDetails')}
-    >
+    <TouchableOpacity style={styles.containerGlobal} onPress={onClick}>
       <View style={styles.containerSection1}>
         <>
           <TextView
             fontColor={COLORS.primary}
             fontSize={16}
             style={styles.location}
-
             fontFamily="Source-Regular"
           >
             {location}
           </TextView>
         </>
         <View style={styles.containerLikes}>
-          {nbLikes > 0 && (
-            <>
-              <AntDesign name="like1" color={COLORS.primary} size={25} />
-              <Text style={styles.likeNumber}>{nbLikes}</Text>
-            </>
-          )}
+          <AntDesign name="like1" color={COLORS.primary} size={25} />
+          <Text style={styles.likeNumber}>{nbLikes}</Text>
         </View>
       </View>
 
@@ -124,7 +116,7 @@ export default function Product({
           <ButtonOutlined
             style={{ width: 100 }}
             title="Voir details"
-            onClick={()=> console.log('hey')}
+            onClick={() => console.log("hey")}
           />
         </View>
       </View>

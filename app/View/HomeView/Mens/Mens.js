@@ -33,7 +33,7 @@ export default function Mens() {
 
   const ItemRender = React.useCallback(({ item }) => (
     <ProductSection
-      onClick={() => Alert.alert(item.title)}
+      onClick={() => navigation.navigate("ProductDetails")}
       title={item.title}
       price={item.price}
       uri={item.images[0]}

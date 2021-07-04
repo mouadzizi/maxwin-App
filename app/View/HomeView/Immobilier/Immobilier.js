@@ -13,22 +13,22 @@ export default function Immobilier({ navigation }) {
   const ImageTest = require("../../../../assets/ProductTest/Product1.jpeg");
   const DATA = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'Villa SAFAE',
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      title: "Villa SAFAE",
       price: "5.000.000",
-      imageCover: require("../../../../assets/ProductTest/product5.jpeg")
+      imageCover: require("../../../../assets/ProductTest/product5.jpeg"),
     },
     {
-      id: '3ac68afc-c60e8d3-a4f8-fbd91aa97f63',
-      title: 'Appartement Bouznika',
+      id: "3ac68afc-c60e8d3-a4f8-fbd91aa97f63",
+      title: "Appartement Bouznika",
       price: "1.200.000",
-      imageCover: require("../../../../assets/ProductTest/product6.jpeg")
+      imageCover: require("../../../../assets/ProductTest/product6.jpeg"),
     },
     {
-      id: '3ac68afc-c605-48dsa4f8-fbd91aa97f63',
-      title: 'Terrain Settat',
+      id: "3ac68afc-c605-48dsa4f8-fbd91aa97f63",
+      title: "Terrain Settat",
       price: "2.000.000",
-      imageCover: require("../../../../assets/ProductTest/product7.jpeg")
+      imageCover: require("../../../../assets/ProductTest/product7.jpeg"),
     },
   ];
 

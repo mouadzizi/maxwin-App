@@ -40,8 +40,8 @@ export default function Electronics() {
 
   const ItemRender =  React.useCallback(({ item }) => (
     <ProductSection
-      onClick={() => Alert.alert(item.title)}
-      title={item.title}
+    onClick={() => navigation.navigate('ProductDetails')}
+    title={item.title}
       price={item.price}
       uri={item.images[0]}
     />
