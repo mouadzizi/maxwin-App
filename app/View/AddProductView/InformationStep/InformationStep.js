@@ -47,7 +47,7 @@ export default function InformationStep({ navigation, route }) {
         >
           Merci d'entrer le max d'information possible de votre produit
         </TextView>
-        {product.category === ("Voitures" || "Location de Voiture") ? (
+        {product.category[1] === ("Voitures" || "Location de Voiture") ? (
           <View style={{ marginTop: 30 }}>
             {/* Picker for State */}
             <View style={styles.pickerView}>
@@ -226,7 +226,7 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category === ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
+        {product.category[1] === ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="RAM"
@@ -251,7 +251,7 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category !==
+        {product.category[1] !==
         ("Appartements" ||
           "Maisons & Villas" ||
           "Terrains" ||
@@ -299,7 +299,7 @@ export default function InformationStep({ navigation, route }) {
           }
         />
         
-        {product.category === ("Voitures" || "Location de Voiture") ?
+        {product.category[1] === ("Voitures" || "Location de Voiture") ?
         <View style={styles.chipContainer}>
           <TextView
             fontFamily="Source-Regular"
