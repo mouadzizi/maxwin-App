@@ -1,7 +1,6 @@
 import React from "react";
 import { Modalize } from "react-native-modalize";
 import ImagePicker from "../../../Components/ImagePicker/ImagePicker";
-import { View } from 'react-native'
 
 class ImageModal extends React.PureComponent {
   ModalRef = React.createRef();

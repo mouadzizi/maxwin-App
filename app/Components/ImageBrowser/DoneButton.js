@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet,  TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/Fontisto';
 import {COLORS} from '../../GlobalStyle'
 import {styles} from './DoneButton.style'

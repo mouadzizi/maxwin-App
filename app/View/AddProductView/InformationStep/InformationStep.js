@@ -8,19 +8,12 @@ import Chip from "../../../Components/Chip";
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages } from "../../../API/APIFunctions";
-import { auth } from "../../../API/Firebase";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
   const [loading, setLoading] = useState(false);
 
-  const user = auth.currentUser;
-
-  useEffect(() => {
-    console.log(product);
-    return () => {};
-  }, []);
   const submit = () => {
     setLoading(true);
     addProduct(product)
@@ -47,30 +40,8 @@ export default function InformationStep({ navigation, route }) {
         >
           Merci d'entrer le max d'information possible de votre produit
         </TextView>
-        {product.category === ("Voitures" || "Location de Voiture") ? (
+        {product.category[1] === ("Voitures" || "Location de Voiture") ? (
           <View style={{ marginTop: 30 }}>
-            {/* Picker for State */}
-            <View style={styles.pickerView}>
-              <Text style={styles.label}>État</Text>
-              <Picker
-                style={styles.pickerInput}
-                mode="dropdown"
-                dropdownIconColor={COLORS.primary}
-                selectedValue={product.etat}
-                onValueChange={(itemValue) =>
-                  setProduct({ ...product, etat: itemValue })
-                }
-              >
-                <Picker.Item
-                  label="Choisissez l'état de produit"
-                  value=""
-                  color={COLORS.Grey[400]}
-                />
-                <Picker.Item label="Neuf" value="Neuf" />
-                <Picker.Item label="Utilisé" value="Utilisé" />
-              </Picker>
-            </View>
-
             {/* Picker for brand */}
             <View style={styles.pickerView}>
               <Text style={styles.label}>Marque</Text>
@@ -193,7 +164,7 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category ===
+        {product.category[1] ===
         ("Appartements" ||
           "Maisons & Villas" ||
           "Location long durée" ||
@@ -226,7 +197,7 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category === ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
+        {product.category[1] === ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="RAM"
@@ -251,7 +222,7 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category !==
+        {product.category[1]  !==
         ("Appartements" ||
           "Maisons & Villas" ||
           "Terrains" ||
@@ -299,7 +270,7 @@ export default function InformationStep({ navigation, route }) {
           }
         />
         
-        {product.category === ("Voitures" || "Location de Voiture") ?
+        {product.category[1]  === ("Voitures" || "Location de Voiture") ?
         <View style={styles.chipContainer}>
           <TextView
             fontFamily="Source-Regular"
@@ -422,6 +393,7 @@ export default function InformationStep({ navigation, route }) {
           title="Valider"
           style={{ marginBottom: 40 }}
         />
+
       </ScrollView>
     </View>
   );
