@@ -24,7 +24,6 @@ export default function AddProductView({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      console.log(product);
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
         if (imgs) {

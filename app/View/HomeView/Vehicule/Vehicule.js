@@ -3,13 +3,12 @@ import { FlatList, Alert} from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from '../../../Components/HeaderSection'
 import {getItemsByCollection} from '../../../API/APIFunctions'
-export default function Vehicule({navigation}) {
 
+export default function Vehicule({navigation}) {
   const [products, setProducts] = React.useState([])
   const collection = 'VEHICULES'
   React.useEffect(() => {
       getItemsByCollection(collection,10).then(items=> {
-        console.log(items[0]);
          setProducts(items)
       })
     return () => {
@@ -30,7 +29,7 @@ export default function Vehicule({navigation}) {
   return (
     
     <>
-    <HeaderSection title={collection} navigation={navigation}/>
+    <HeaderSection title={collection} navigation={navigation} />
       <FlatList 
       initialNumToRender={1}
       data={products}

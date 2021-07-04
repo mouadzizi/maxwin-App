@@ -45,7 +45,7 @@ export default function Immobilier({ navigation }) {
   return (
 
     <>
-      <HeaderSection title={collection} />
+      <HeaderSection title={collection}  navigation={navigation}/>
       <FlatList
         initialNumToRender={3}
         data={products}

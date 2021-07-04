@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, ActivityIndicator, View } from 'react-native'
 import { ImageBrowser } from 'expo-image-picker-multiple'
 import SelectedItem from '../../Components/ImageBrowser/SelectedItem';
 import NoCameraPerm from '../../Components/ImageBrowser/NoCameraPerm';
@@ -7,8 +7,10 @@ import DoneBtn from '../../Components/ImageBrowser/DoneButton';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as ImageManipulator from 'expo-image-manipulator'
 
-
 export default function ImageBrowserScreen({ navigation }) {
+    const _getHeaderLoader = () => (
+        <ActivityIndicator size='large' color={'white'} style={{ position: 'absolute', right: 15 }} />
+    );
 
     const updateHandler = (count, onSubmit) => {
         if (count === 0) {
@@ -18,22 +20,26 @@ export default function ImageBrowserScreen({ navigation }) {
         }
         else {
             navigation.setOptions({
-                headerRight: () => <DoneBtn onPress={onSubmit} />
+                headerRight: () =>
+                    <DoneBtn onPress={onSubmit} />
             });
         }
 
     }
     const CallBack = (callback) => {
-        callback.then(photos => {
+        navigation.setOptions({
+            headerRight: () => _getHeaderLoader()
+        });
+        callback.then(async photos => {
             const cPhotos = []
-            photos.map(async (p) => {
-                const pressedPic = await _processImageAsync(p.localUri)
+            for (const p of photos) {
+                const pressedPic = await _processImageAsync(p.uri)
                 cPhotos.push({
                     uri: pressedPic.uri,
-                    name: pressedPic.filename,
-                    id: pressedPic.creationTime
+                    name: p.filename,
+                    id: p.creationTime
                 })
-            })
+            }
             storePhotos(cPhotos).then(() => navigation.goBack())
         })
 
@@ -50,7 +56,7 @@ export default function ImageBrowserScreen({ navigation }) {
         const file = await ImageManipulator.manipulateAsync(
             uri,
             [],
-            { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
+            { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG }
         )
         return file;
     }
