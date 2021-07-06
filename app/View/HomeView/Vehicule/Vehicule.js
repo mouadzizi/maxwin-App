@@ -10,7 +10,6 @@ export default function Vehicule({navigation}) {
   React.useEffect(() => {
       getItemsByCollection(collection,10).then(items=> {
          setProducts(items)
-         console.log(items);
       })
     return () => {
     }
