@@ -1,4 +1,5 @@
 import { auth, db, st } from './Firebase'
+import firebase from 'firebase';
 export const signIn = async (email, password) => {
    const user = await auth.signInWithEmailAndPassword(email, password)
    return user.user
@@ -14,7 +15,7 @@ export const anonymouslySignIn = async () => {
 }
 
 export const addProduct = async (product) => {
-   const docRef = await db.collection('products').add(product)
+   const docRef = await db.collection('products').add({...product,createdDate:firebase.firestore.FieldValue.serverTimestamp()})
    return docRef;
 }
 
@@ -41,7 +42,7 @@ export const uploadImages = async (images, docID, userID) => {
 
 export const getItemsByCollection = async(collection,limit)=>{
    let items =[]
-   const snap = await db.collection('products').where('category1','==',collection).orderBy('title','desc').limit(limit).get()
+   const snap = await db.collection('products').where('category','array-contains',collection).orderBy('createdDate','desc').limit(limit).get()
    snap.forEach(doc=>{
       items.push({...doc.data(),id:doc.id})
    })

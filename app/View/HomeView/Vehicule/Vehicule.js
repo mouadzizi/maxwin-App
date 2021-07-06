@@ -6,10 +6,11 @@ import {getItemsByCollection} from '../../../API/APIFunctions'
 
 export default function Vehicule({navigation}) {
   const [products, setProducts] = React.useState([])
-  const collection = 'VEHICULES'
+  const collection = "VEHICULES"
   React.useEffect(() => {
       getItemsByCollection(collection,10).then(items=> {
          setProducts(items)
+         console.log(items);
       })
     return () => {
     }
