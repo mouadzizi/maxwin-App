@@ -14,6 +14,14 @@ export default function InformationStep({ navigation, route }) {
   const [product, setProduct] = useState(prevProduct);
   const [loading, setLoading] = useState(false);
 
+let selectedChips= []  
+
+  useEffect(() => {
+    console.log(selectedChips);
+    return () => {
+      
+    }
+  }, [selectedChips])
   const submit = () => {
     setLoading(true);
     addProduct(product)
@@ -30,6 +38,17 @@ export default function InformationStep({ navigation, route }) {
         alert(message);
       });
   };
+  const addChip=(title,active)=>{
+   
+    if (active) {
+      selectedChips.push(title)
+    }
+    
+    else {
+      index = selectedChips.indexOf(title)
+      selectedChips.slice(index,1)
+    }
+  }
   return (
     <View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -283,24 +302,18 @@ export default function InformationStep({ navigation, route }) {
           <View style={styles.chipRow}>
             <Chip
               title="Airbag"
-              onClick={() => {
-                alert("Airbag");
-              }}
+              onClick={addChip}
               iconName="airbag"
             />
             <Chip
               title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
+              onClick={addChip}
               iconName="car-seat-heater"
               style={{ marginLeft: 20 }}
             />
             <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
+              title="Vitesse"
+              onClick={addChip}
               iconName="car-windshield-outline"
               style={{ marginLeft: 20 }}
             />
@@ -389,7 +402,7 @@ export default function InformationStep({ navigation, route }) {
 
         <ButtonFill
           loading={loading}
-          onClick={submit}
+          onClick={()=>{}}
           title="Valider"
           style={{ marginBottom: 40 }}
         />
