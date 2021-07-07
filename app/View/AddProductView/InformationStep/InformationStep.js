@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView, FlatList } from "react-native";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
@@ -8,15 +8,18 @@ import Chip from "../../../Components/Chip";
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages } from "../../../API/APIFunctions";
+import { chipsData } from "../../../API/Data";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
   const [loading, setLoading] = useState(false);
 
+let selectedChips= []  
+
   const submit = () => {
     setLoading(true);
-    addProduct(product)
+    addProduct({...product,chips:selectedChips})
       .then((docRef) => {
         uploadImages(product.images, docRef.id, "user.uid").then((links) => {
           docRef.update({ images: links }).then(() => {
@@ -30,6 +33,18 @@ export default function InformationStep({ navigation, route }) {
         alert(message);
       });
   };
+
+  const addChip=(title,active)=>{
+    if (active) {
+      selectedChips.push(title)
+    }
+    else {
+     const index = selectedChips.indexOf(title)
+      selectedChips.splice(index,1)
+    }
+    selectedChips = [...new Set(selectedChips)]
+  }
+
   return (
     <View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -279,110 +294,13 @@ export default function InformationStep({ navigation, route }) {
           >
             Merci d'entrer les info suplémentaire de votre voiture
           </TextView>
+          <FlatList 
+          data={chipsData}
+          keyExtractor ={(item,index)=> index}
+          renderItem={({item})=><Chip title={item.title} iconName={item.iconName} onClick={addChip} />}
+          numColumns={3}
 
-          <View style={styles.chipRow}>
-            <Chip
-              title="Airbag"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="airbag"
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-seat-heater"
-              style={{ marginLeft: 20 }}
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-windshield-outline"
-              style={{ marginLeft: 20 }}
-            />
-          </View>
-
-          <View style={styles.chipRow}>
-            <Chip
-              title="Airbag"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-wash"
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="card-account-mail-outline"
-              style={{ marginLeft: 20 }}
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-seat-heater"
-              style={{ marginLeft: 20 }}
-            />
-          </View>
-
-          <View style={styles.chipRow}>
-            <Chip
-              title="Airbag"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="expansion-card"
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-traction-control"
-              style={{ marginLeft: 20 }}
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-turbocharger"
-              style={{ marginLeft: 20 }}
-            />
-          </View>
-
-          <View style={styles.chipRow}>
-            <Chip
-              title="Airbag"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-seat-cooler"
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-esp"
-              style={{ marginLeft: 20 }}
-            />
-            <Chip
-              title="Clima"
-              onClick={() => {
-                alert("Airbag");
-              }}
-              iconName="car-brake-parking"
-              style={{ marginLeft: 20 }}
-            />
-          </View>
+          />
         </View>
 
         : null }

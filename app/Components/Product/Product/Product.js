@@ -18,6 +18,7 @@ export default function Product({
   price,
   onClick,
 }) {
+
   return (
     <TouchableOpacity style={styles.containerGlobal} onPress={onClick}>
       <View style={styles.containerSection1}>
@@ -50,7 +51,7 @@ export default function Product({
         <View style={styles.imageContainer}>
           <View style={{ flex: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product11.jpeg")}
+              source={{ uri: images[0] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -62,7 +63,7 @@ export default function Product({
         <View style={styles.imageContainer}>
           <View style={{ flex: 1, margin: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product3.jpeg")}
+              source={{ uri: images[0] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -70,7 +71,7 @@ export default function Product({
 
           <View style={{ flex: 1, margin: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product11.jpeg")}
+              source={{ uri: images[1] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="stretch"
             />
@@ -82,7 +83,7 @@ export default function Product({
         <View style={styles.imageContainer}>
           <View style={{ flex: 2, margin: 1 }}>
             <Image
-              source={require("../../../../assets/ProductTest/product11.jpeg")}
+              source={{uri:images[0]}}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -91,7 +92,7 @@ export default function Product({
           <View style={{ flex: 1, margin: 1 }}>
             <View style={{ flex: 1, margin: 1 }}>
               <Image
-                source={require("../../../../assets/ProductTest/product6.jpeg")}
+                source={{uri:images[1]}}
                 style={{ height: "100%", width: "100%" }}
                 resizeMode="cover"
               />
@@ -99,7 +100,7 @@ export default function Product({
 
             <View style={{ flex: 1, margin: 1 }}>
               <Image
-                source={require("../../../../assets/ProductTest/Product1.jpeg")}
+                source={{uri:images[2]}}
                 style={{ height: "100%", width: "100%" }}
                 resizeMode="cover"
               />

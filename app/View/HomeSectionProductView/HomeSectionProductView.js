@@ -1,20 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView } from "react-native";
-import { View, Text } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+
+import { View, ScrollView, FlatList } from "react-native";
 import Product from "../../Components/Product/Product";
 import styles from "./HomeSectionProductView.style";
-import HeaderCategories from '../../Components/HeaderCategories'
-export default function HomeSectionProductView({navigation}) {
-  return (
-    <View>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <HeaderCategories />
+import HeaderCategories from '../../Components/HeaderCategories';
+import { getItemsByCollection } from '../../API/APIFunctions'
+export default function HomeSectionProductView({ navigation, route }) {
+  const [products, setProducts] = useState([])
 
-        <Product numberImages={3} location="Tanger, Val Fleuri" nbLikes={55} title="Hundai i30" price={10000} onClick={()=> navigation.navigate('ProductDetails')}/>
-        <Product numberImages={1} location="Casablanca, El bernousi" nbLikes={10} title="Apparetement par jour" price={400} onClick={()=> navigation.navigate('ProductDetails')} />
-        <Product numberImages={2} location="Merakech, Gulize" nbLikes={0} title="Iphone 13 new lbi3" price={5708} onClick={()=> navigation.navigate('ProductDetails')}/>
-        <Product numberImages={5} location="Agadir, Hay saada" nbLikes={2} title="Plombie Agadir safae" price={4000} onClick={()=> navigation.navigate('ProductDetails')} />
-      </ScrollView>
+  useEffect(() => {
+    const { collection } = route.params
+    console.log(collection);
+    getItemsByCollection(collection, 10)
+      .then(items => {
+        
+        setProducts(items)})
+      .catch(({ message }) => console.log(message))
+    return () => {
+
+    }
+  }, [])
+  const renderItem = useCallback(
+    ({item}) => <Product
+      numberImages={item.images.length} 
+      images={item.images} 
+      location={item.city} 
+      nbLikes={55} 
+      title={item.title}
+      price={item.price} 
+      onClick={() => navigation.navigate('ProductDetails')} />,
+    [],
+  )
+  const renderHeader = ()=> <HeaderCategories />
+  const keyExtractor = useCallback(
+    (item) => item.id,
+    [],
+  )
+  return (
+    <View style={styles.container}>
+      <FlatList 
+      data={products}
+      keyExtractor={keyExtractor}
+      ListHeaderComponent = {renderHeader}
+      renderItem={renderItem}
+      />
     </View>
   );
 }

@@ -34,7 +34,7 @@ export default function Immobilier({ navigation }) {
     <>
       <HeaderSection title={collection}  navigation={navigation}/>
       <FlatList
-        initialNumToRender={3}
+        
         data={products}
         keyExtractor={keyExtractor}
         renderItem={ItemRender}
