@@ -1,16 +1,36 @@
 import React from "react";
-import { View, Text } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TouchableWithoutFeedback,
+  Image,
+  View,
+} from "react-native";
 import Swiper from "react-native-swiper";
+import styles from "./ProductDetails.style";
 
 export default function ProductDetails() {
   return (
-    <View>
-      <Swiper activeDotColor="#FF6347">
-        <Text>hey 1</Text>
-        <Text>hey 2</Text>
-        <Text>hey 3</Text>
-        <Text>hey 4</Text>
-      </Swiper>
-    </View>
+    <ScrollView>
+        <Swiper 
+        activeDotColor="#FF6347"
+        style={styles.imageContainer} >
+        <TouchableWithoutFeedback>
+            <Image
+              source={require("../../../assets/ProductTest/product4.jpeg")}
+              resizeMode="cover"
+              style={styles.imageSlider}
+            />
+      </TouchableWithoutFeedback>
+
+      <TouchableWithoutFeedback>
+            <Image
+              source={require("../../../assets/ProductTest/product6.jpeg")}
+              resizeMode="cover"
+              style={styles.imageSlider}
+            />
+      </TouchableWithoutFeedback>
+        </Swiper>
+    </ScrollView>
   );
 }

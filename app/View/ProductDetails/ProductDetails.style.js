@@ -1,8 +1,15 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
+import { COLORS, windowHeight, windowWidth } from "../../GlobalStyle";
+
 export default StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+  imageContainer: {
+    backgroundColor: COLORS.primary,
+    height: windowHeight * 0.57,
+  },
+  imageSlider: {
+    height: "100%",
+    width: "100%",
+    alignSelf: "center",
+    borderRadius: 8,
+  },
 });
