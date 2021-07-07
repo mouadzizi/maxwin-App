@@ -16,6 +16,7 @@ export default function Chip({ title, onClick, iconName, style }) {
 			onPress={callBack}
 			style={active ? [ styles.containerFill, style ] : [ styles.containerOutlined, style ]}
 		>
+			{console.log('chip'+title)}
 			<MaterialCommunityIcons name={iconName} color={active ? 'white' : COLORS.primary} size={25} />
 			<TextView
 				fontFamily="Source-Regular"

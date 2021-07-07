@@ -10,7 +10,7 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',
-		margin: 1
+		margin: 6
 	},
 	containerFill: {
 		padding: 10,
@@ -20,6 +20,6 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',
-		margin: 1
+		margin: 5
 	}
 });
