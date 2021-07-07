@@ -116,11 +116,7 @@ export default function MainStack({navigation}) {
           name="ProductDetails"
           component={ProductDetails}
           options={{
-            headerTitle: (props) => <HeaderTitle {...props} />,
-            headerLeft: () => <HeaderLeft />,
-            headerStyle: {
-              backgroundColor: COLORS.primary,
-            },
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

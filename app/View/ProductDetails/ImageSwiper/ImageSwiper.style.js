@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { COLORS, windowHeight, windowWidth } from "../../GlobalStyle";
+import { COLORS, windowHeight } from "../../../GlobalStyle";
 
 export default StyleSheet.create({
   imageContainer: {
     backgroundColor: COLORS.primary,
-    height: windowHeight * 0.57,
+    height: windowHeight*0.57,
   },
   imageSlider: {
     height: "100%",
