@@ -1,10 +1,26 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { TouchableWithoutFeedback, Image } from "react-native";
+import Swiper from "react-native-swiper";
+import styles from "./ImageSwiper.style";
+export default function ImageSwiper({images}) {
+  return (
+    <Swiper activeDotColor="#FF6347" style={styles.imageContainer}>
+      <TouchableWithoutFeedback>
+        <Image
+          source={images[0].url}
+          resizeMode="cover"
+          style={styles.imageSlider}
+        />
+      </TouchableWithoutFeedback>
 
-export default function ImageSwiper() {
-    return (
-        <View>
-            <Text></Text>
-        </View>
-    )
+      <TouchableWithoutFeedback>
+        <Image
+          source={images[1].url}
+          resizeMode="cover"
+          style={styles.imageSlider}
+        />
+      </TouchableWithoutFeedback>
+
+    </Swiper>
+  );
 }

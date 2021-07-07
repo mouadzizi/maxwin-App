@@ -1,36 +1,17 @@
 import React from "react";
-import {
-  ScrollView,
-  Text,
-  TouchableWithoutFeedback,
-  Image,
-  View,
-} from "react-native";
-import Swiper from "react-native-swiper";
-import styles from "./ProductDetails.style";
+import { ScrollView } from "react-native";
+import ImageSwiper from "./ImageSwiper";
+import ProductInformation from "./ProductInformation";
 
+const IMAGES = [
+  { url: require("../../../assets/ProductTest/product4.jpeg") },
+  { url: require("../../../assets/ProductTest/product11.jpeg") },
+];
 export default function ProductDetails() {
   return (
     <ScrollView>
-        <Swiper 
-        activeDotColor="#FF6347"
-        style={styles.imageContainer} >
-        <TouchableWithoutFeedback>
-            <Image
-              source={require("../../../assets/ProductTest/product4.jpeg")}
-              resizeMode="cover"
-              style={styles.imageSlider}
-            />
-      </TouchableWithoutFeedback>
-
-      <TouchableWithoutFeedback>
-            <Image
-              source={require("../../../assets/ProductTest/product6.jpeg")}
-              resizeMode="cover"
-              style={styles.imageSlider}
-            />
-      </TouchableWithoutFeedback>
-        </Swiper>
+      <ImageSwiper images={IMAGES}/>
+      <ProductInformation/>
     </ScrollView>
   );
 }
