@@ -12,7 +12,6 @@ export default function Immobilier({ navigation }) {
     getItemsByCollection(collection, 10).then((items) => {
       setProducts(items);
     });
-    console.log(products[0]);
     return () => {};
   }, []);
 

@@ -1,16 +1,17 @@
 import React from "react";
-import { View, Text } from "react-native";
-import Swiper from "react-native-swiper";
+import { ScrollView } from "react-native";
+import ImageSwiper from "./ImageSwiper";
+import ProductInformation from "./ProductInformation";
 
+const IMAGES = [
+  { url: require("../../../assets/ProductTest/product4.jpeg") },
+  { url: require("../../../assets/ProductTest/product11.jpeg") },
+];
 export default function ProductDetails() {
   return (
-    <View>
-      <Swiper activeDotColor="#FF6347">
-        <Text>hey 1</Text>
-        <Text>hey 2</Text>
-        <Text>hey 3</Text>
-        <Text>hey 4</Text>
-      </Swiper>
-    </View>
+    <ScrollView>
+      <ImageSwiper images={IMAGES}/>
+      <ProductInformation/>
+    </ScrollView>
   );
 }

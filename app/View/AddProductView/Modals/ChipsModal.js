@@ -25,8 +25,8 @@ import Chip from '../../../Components/Chip/Chip'
             snapPoint={300}
             flatListProps={{
                 data:this.data,
-                keyExtractor:this.keyExtractor.bind(this),//,
-                renderItem:this.renderItem.bind(this),//
+                keyExtractor:this.keyExtractor.bind(this),
+                renderItem:this.renderItem.bind(this),
                 numColumns:3,
                 style:{flex:1,padding:10}
 
