@@ -13,7 +13,7 @@ export default function Vehicule({ navigation }) {
     });
     return () => {};
   }, []);
-
+ 
   const ItemRender = ({ item }) => (
     <ProductSection
       onClick={() => navigation.navigate("ProductDetails")}
