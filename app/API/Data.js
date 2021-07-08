@@ -74,3 +74,49 @@ export const categoryData = [
     ],
   },
 ];
+export const chipsData = [
+	{
+		title: 'Airbag',
+		iconName: 'airbag'
+	},
+	{
+		title: 'Clima',
+		iconName: 'car-seat-heater'
+	},
+	{
+		title: 'Vitesse',
+		iconName: 'car-windshield-outline'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'card-account-mail-outline'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'car-seat-heater'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'expansion-card'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'car-traction-control'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'car-turbocharger'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'car-seat-cooler'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'car-esp'
+	},
+	{
+		title: 'Airbag',
+		iconName: 'car-brake-parking'
+	}
+];

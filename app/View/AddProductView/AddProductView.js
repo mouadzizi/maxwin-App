@@ -146,7 +146,7 @@ export default function AddProductView({ navigation }) {
         </View>
 
         <ButtonFill
-          disable={!product.title || !product.price || !product.city || !product.category}
+          // disable={!product.title || !product.price || !product.city || !product.category}
           title="Suivant"
           style={{ marginBottom: 40 }}
           onClick={NextHandler}

@@ -29,7 +29,7 @@ export default function Vehicule({ navigation }) {
     <>
       <HeaderSection title={collection} navigation={navigation} />
       <FlatList
-        initialNumToRender={1}
+        
         data={products}
         keyExtractor={keyExtractor}
         renderItem={ItemRender}

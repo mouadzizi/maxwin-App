@@ -4,22 +4,23 @@ import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
 import ButtonFill from "../../../Components/Button/ButtonFill";
-import Chip from "../../../Components/Chip";
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages } from "../../../API/APIFunctions";
-import { chipsData } from "../../../API/Data";
+import ChipModal from '../Modals/ChipsModal'
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
   const [loading, setLoading] = useState(false);
 
-let selectedChips= []  
+  let modalRef;
+
+  let selectedChips = []
 
   const submit = () => {
     setLoading(true);
-    addProduct({...product,chips:selectedChips})
+    addProduct({ ...product, chips: selectedChips })
       .then((docRef) => {
         uploadImages(product.images, docRef.id, "user.uid").then((links) => {
           docRef.update({ images: links }).then(() => {
@@ -34,13 +35,13 @@ let selectedChips= []
       });
   };
 
-  const addChip=(title,active)=>{
+  const addChip = (title, active) => {
     if (active) {
       selectedChips.push(title)
     }
     else {
-     const index = selectedChips.indexOf(title)
-      selectedChips.splice(index,1)
+      const index = selectedChips.indexOf(title)
+      selectedChips.splice(index, 1)
     }
     selectedChips = [...new Set(selectedChips)]
   }
@@ -103,7 +104,7 @@ let selectedChips= []
               keyboardType="number-pad"
               errorMessage={
                 product.anneeFabrication > 2021 ||
-                product.anneeFabrication < 1900
+                  product.anneeFabrication < 1900
                   ? "veuillez choisir une année valide"
                   : null
               }
@@ -180,11 +181,11 @@ let selectedChips= []
         ) : null}
 
         {product.category[1] ===
-        ("Appartements" ||
-          "Maisons & Villas" ||
-          "Location long durée" ||
-          "Location courte durée (vacances)" ||
-          "Commerces & Bureaux") ? (
+          ("Appartements" ||
+            "Maisons & Villas" ||
+            "Location long durée" ||
+            "Location courte durée (vacances)" ||
+            "Commerces & Bureaux") ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="Superficie"
@@ -237,17 +238,17 @@ let selectedChips= []
           </View>
         ) : null}
 
-        {product.category[1]  !==
-        ("Appartements" ||
-          "Maisons & Villas" ||
-          "Terrains" ||
-          "Commerces & Bureaux" ||
-          "Location courte durée (vacances)" ||
-          "Location long durée" ||
-          "Maquillage et produits de bien être" ||
-          "Matériels professionnels" ||
-          "Services et travaux professionnels" ||
-          "Formations & autres") ? (
+        {product.category[1] !==
+          ("Appartements" ||
+            "Maisons & Villas" ||
+            "Terrains" ||
+            "Commerces & Bureaux" ||
+            "Location courte durée (vacances)" ||
+            "Location long durée" ||
+            "Maquillage et produits de bien être" ||
+            "Matériels professionnels" ||
+            "Services et travaux professionnels" ||
+            "Formations & autres") ? (
           <View style={{ marginTop: 10 }}>
             <View style={styles.pickerView}>
               <Text style={styles.label}>État</Text>
@@ -284,26 +285,25 @@ let selectedChips= []
             setProduct({ ...product, Description: input })
           }
         />
-        
-        {product.category[1]  === ("Voitures" || "Location de Voiture") ?
-        <View style={styles.chipContainer}>
-          <TextView
-            fontFamily="Source-Regular"
-            fontSize={16}
-            style={{ marginBottom: 20 }}
-          >
-            Merci d'entrer les info suplémentaire de votre voiture
+
+        {product.category[1] === ("Voitures" || "Location de Voiture") ?
+          <View style={styles.chipContainer}>
+            <TextView
+              fontFamily="Source-Regular"
+              fontSize={16}
+              style={{ marginBottom: 20 }}
+            >
+              Merci d'entrer les info suplémentaire de votre voiture
           </TextView>
-          <FlatList 
-          data={chipsData}
-          keyExtractor ={(item,index)=> index}
-          renderItem={({item})=><Chip title={item.title} iconName={item.iconName} onClick={addChip} />}
-          numColumns={3}
+            <ButtonFill
+              loading={false}
+              onClick={() => modalRef.openModal()}
+              title="Choisir Ici"
+              style={{ marginBottom: 40 }}
+            />
+          </View>
 
-          />
-        </View>
-
-        : null }
+          : null}
 
         <ButtonFill
           loading={loading}
@@ -313,6 +313,10 @@ let selectedChips= []
         />
 
       </ScrollView>
+      <ChipModal
+        ref={(curRef) => (modalRef = curRef)}
+        onClick={addChip}
+      />
     </View>
   );
 }
