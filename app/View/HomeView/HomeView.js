@@ -10,6 +10,10 @@ import Vehicule from './Vehicule';
 import Electronics from './Electronics';
 import Decorations from './Decorations';
 import Mens from './Mens';
+import Female from './Female';
+import Services from './Services';
+
+
 import HeaderCategories from '../../Components/HeaderCategories';
 
 export default function HomeView({ navigation }) {
@@ -23,6 +27,10 @@ export default function HomeView({ navigation }) {
 				<Electronics navigation={navigation} />
 				<Decorations navigation={navigation} />
 				<Mens navigation={navigation} />
+				<Female navigation={navigation} />
+				<Services navigation={navigation} />
+
+				
 			</ScrollView>
 		</View>
 	);
