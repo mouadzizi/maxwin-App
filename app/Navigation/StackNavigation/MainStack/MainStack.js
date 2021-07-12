@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, TouchableWithoutFeedback } from "react-native";
+import { View, Image, TouchableWithoutFeedback, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -7,13 +7,16 @@ import BottomNavigation from "../../BottomNavigation/MainBottomNavigation";
 import InformationStep from "../../../View/AddProductView/InformationStep";
 import ImageBrowser from "../../../View/ImageBrowser/ImageBrowserScreen";
 import ProductDetails from "../../../View/ProductDetails";
+import ResultView from "../../../View/ResultView";
+import ImagePreview from "../../../View/ImagePreview";
+import FilterView from "../../../View/FilterView";
 
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
 import { COLORS } from "../../../GlobalStyle";
 import { Ionicons } from "react-native-vector-icons";
 
-export default function MainStack({navigation}) {
+export default function MainStack({ navigation }) {
   const Stack = createStackNavigator();
 
   const HeaderTitle = () => {
@@ -22,8 +25,7 @@ export default function MainStack({navigation}) {
 
   const HeaderLeft = () => {
     return (
-      <TouchableWithoutFeedback
-      onPress={()=> navigation.goBack()}>
+      <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
         <Image
           style={{
             alignSelf: "center",
@@ -50,7 +52,9 @@ export default function MainStack({navigation}) {
           />
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback onPress={() => alert("Filter")}>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate("ResultView")}
+        >
           <Ionicons
             name="options"
             size={36}
@@ -117,6 +121,40 @@ export default function MainStack({navigation}) {
           component={ProductDetails}
           options={{
             headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="ImagePreview"
+          component={ImagePreview}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="ResultView"
+          component={ResultView}
+          options={{
+            headerRight: () => <HeaderRight />,
+            title: "Resultat",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          name="FilterView"
+          component={FilterView}
+          options={{
+            headerRight: () => <HeaderRight />,
+            title: "Filter",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
           }}
         />
       </Stack.Navigator>

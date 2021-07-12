@@ -1,12 +1,12 @@
 import React from "react";
 import { Alert, FlatList } from "react-native";
-import {Feather} from "react-native-vector-icons"
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import styles from './HeaderCategories.style'
+import { Feather } from "react-native-vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import styles from "./HeaderCategories.style";
 import Category from "../Button/CategoryButton";
 import { COLORS } from "../../GlobalStyle";
 
-export default function HeaderCategories() {
+export default function HeaderCategories({ navigation }) {
   const DATA = [
     {
       id: "SDSDgf25677984",
@@ -43,16 +43,16 @@ export default function HeaderCategories() {
     },
   ];
 
-  const Footer = ()  => {
-      return(
-        <TouchableOpacity 
+  const Footer = () => {
+    return (
+      <TouchableOpacity
         style={styles.footer}
-        onPress={() => Alert.alert('Filter')}>
-            <Feather name="more-vertical" size={30} color= {COLORS.primary}/>
-        </TouchableOpacity>
-      
-      )
-  }
+        onPress={() => navigation.navigate("FilterView")}
+      >
+        <Feather name="more-vertical" size={30} color={COLORS.primary} />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <>
@@ -63,10 +63,10 @@ export default function HeaderCategories() {
         renderItem={({ item }) => (
           <Category
             iconName={item.iconName}
-            onClick={() => Alert.alert(item.categoryName)}
+            onClick={() => navigation.navigate("ResultView", {category : item.categoryName})}
           />
         )}
-        ListFooterComponent={<Footer/>}
+        ListFooterComponent={<Footer />}
       />
     </>
   );

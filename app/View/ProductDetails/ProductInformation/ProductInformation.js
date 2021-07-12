@@ -8,20 +8,12 @@ import RowAccessory from "./accessoryRow";
 import styles from "./ProductInformation.style";
 import { COLORS } from "../../../GlobalStyle";
 import { Entypo, AntDesign } from "react-native-vector-icons";
-export default function ProductInformation({
-  title,
-  price,
-  negotiable,
-  goodState,
-  description,
-  category,
-  product,
-}) {
+export default function ProductInformation({ negotiable, goodState, product }) {
   return (
     <>
       <View style={styles.container}>
         <TextView fontFamily="Source-Regular" fontSize={23}>
-          {title}Honda Jazz 2015
+          {product.title}
         </TextView>
         <Divider width="95%" />
         <TextView
@@ -29,7 +21,7 @@ export default function ProductInformation({
           fontSize={23}
           style={styles.headerSt}
         >
-          {price}13.000 DHS
+          {product.price} DH
         </TextView>
       </View>
 
@@ -86,13 +78,7 @@ export default function ProductInformation({
           fontSize={15}
           style={styles.textSt}
         >
-          {description}
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially
+          {product.description}
         </TextView>
       </View>
 
@@ -105,20 +91,30 @@ export default function ProductInformation({
           Description
         </TextView>
         <Divider width="95%" />
-        <Row detail="Section" value="VIHUCULE" />
-        <Row detail="Catégorie" value="Voiture" />
-        <Row detail="Ville" value="Tanger" />
-        <Row detail="Etat de produit" value="Neuf" />
-        <Row detail="Marque de Voiture" value="Ford" />
-        <Row detail="Année de fabrication" value="2018" />
-        <Row detail="Kilométrage" value="210.000 Km" />
-        <Row detail="Boîte de vitesse" value="210.000 Km" />
-        <Row detail="Kilométrage" value="Automatic" />
-        <Row detail="Puissance Fiscale" value="11 CH" />
-        <Row detail="Ram" value="4 Gb" />
-        <Row detail="Rom" value="128 Gb" />
-        <Row detail="Superficiel" value="120 m" />
-        <Row detail="nombre de piece" value="4 personnes" />
+        <Row detail="Section" value={product.category[0]} />
+        <Row detail="Catégorie" value={product.category[1]} />
+        <Row detail="Ville" value={product.city} />
+        {product.etat && <Row detail="Etat de produit" value={product.etat} />}
+
+        {product.marqueVoiture && (
+          <Row detail="Marque de Voiture" value={product.marqueVoiture} />
+        )}
+
+        {product.anneeFabrication && (
+          <Row detail="Marque de Voiture" value={product.anneeFabrication} />
+        )}
+
+        {product.kilometrage && (
+          <Row detail="Marque de Voiture" value={product.kilometrage + " Km"} />
+        )}
+        {product.transaction && (
+          <Row detail="Marque de Voiture" value={product.transaction} />
+        )}
+
+        {product.puissanceFiscale && (
+          <Row detail="Marque de Voiture" value={product.puissanceFiscale} />
+        )}
+
       </View>
 
       <View style={styles.container}>
@@ -129,9 +125,8 @@ export default function ProductInformation({
         >
           accessory
         </TextView>
-        <Divider width="95%"/>
+        <Divider width="95%" />
         <RowAccessory value="test" />
-
       </View>
     </>
   );

@@ -7,8 +7,9 @@ import ButtonFill from "../../../Components/Button/ButtonFill";
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages } from "../../../API/APIFunctions";
-import ChipModal from '../Modals/ChipsModal'
+import ChipModal from "../Modals/ChipsModal";
 
+import Chips from '../../../Components/Chip'
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
@@ -16,7 +17,7 @@ export default function InformationStep({ navigation, route }) {
 
   let modalRef;
 
-  let selectedChips = []
+  let selectedChips = [];
 
   const submit = () => {
     setLoading(true);
@@ -37,14 +38,13 @@ export default function InformationStep({ navigation, route }) {
 
   const addChip = (title, active) => {
     if (active) {
-      selectedChips.push(title)
+      selectedChips.push(title);
+    } else {
+      const index = selectedChips.indexOf(title);
+      selectedChips.splice(index, 1);
     }
-    else {
-      const index = selectedChips.indexOf(title)
-      selectedChips.splice(index, 1)
-    }
-    selectedChips = [...new Set(selectedChips)]
-  }
+    selectedChips = [...new Set(selectedChips)];
+  };
 
   return (
     <View>
@@ -104,7 +104,7 @@ export default function InformationStep({ navigation, route }) {
               keyboardType="number-pad"
               errorMessage={
                 product.anneeFabrication > 2021 ||
-                  product.anneeFabrication < 1900
+                product.anneeFabrication < 1900
                   ? "veuillez choisir une année valide"
                   : null
               }
@@ -181,11 +181,11 @@ export default function InformationStep({ navigation, route }) {
         ) : null}
 
         {product.category[1] ===
-          ("Appartements" ||
-            "Maisons & Villas" ||
-            "Location long durée" ||
-            "Location courte durée (vacances)" ||
-            "Commerces & Bureaux") ? (
+        ("Appartements" ||
+          "Maisons & Villas" ||
+          "Location long durée" ||
+          "Location courte durée (vacances)" ||
+          "Commerces & Bureaux") ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="Superficie"
@@ -213,7 +213,8 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category[1] === ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
+        {product.category[1] ===
+        ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="RAM"
@@ -239,16 +240,16 @@ export default function InformationStep({ navigation, route }) {
         ) : null}
 
         {product.category[1] !==
-          ("Appartements" ||
-            "Maisons & Villas" ||
-            "Terrains" ||
-            "Commerces & Bureaux" ||
-            "Location courte durée (vacances)" ||
-            "Location long durée" ||
-            "Maquillage et produits de bien être" ||
-            "Matériels professionnels" ||
-            "Services et travaux professionnels" ||
-            "Formations & autres") ? (
+        ("Appartements" ||
+          "Maisons & Villas" ||
+          "Terrains" ||
+          "Commerces & Bureaux" ||
+          "Location courte durée (vacances)" ||
+          "Location long durée" ||
+          "Maquillage et produits de bien être" ||
+          "Matériels professionnels" ||
+          "Services et travaux professionnels" ||
+          "Formations & autres") ? (
           <View style={{ marginTop: 10 }}>
             <View style={styles.pickerView}>
               <Text style={styles.label}>État</Text>
@@ -286,7 +287,7 @@ export default function InformationStep({ navigation, route }) {
           }
         />
 
-        {product.category[1] === ("Voitures" || "Location de Voiture") ?
+        {product.category[1] === ("Voitures" || "Location de Voiture") ? (
           <View style={styles.chipContainer}>
             <TextView
               fontFamily="Source-Regular"
@@ -294,7 +295,7 @@ export default function InformationStep({ navigation, route }) {
               style={{ marginBottom: 20 }}
             >
               Merci d'entrer les info suplémentaire de votre voiture
-          </TextView>
+            </TextView>
             <ButtonFill
               loading={false}
               onClick={() => modalRef.openModal()}
@@ -302,21 +303,19 @@ export default function InformationStep({ navigation, route }) {
               style={{ marginBottom: 40 }}
             />
           </View>
-
-          : null}
-
+        ) : null}
+          <Chips title="Laivraison possible" />
+          <Chips title="En bonne etat" />
+          <Chips title="Prix negociable" />
+          <Chips title="Laivraison possible" />
         <ButtonFill
           loading={loading}
           onClick={submit}
           title="Valider"
           style={{ marginBottom: 40 }}
         />
-
       </ScrollView>
-      <ChipModal
-        ref={(curRef) => (modalRef = curRef)}
-        onClick={addChip}
-      />
+      <ChipModal ref={(curRef) => (modalRef = curRef)} onClick={addChip} />
     </View>
   );
 }

@@ -28,7 +28,7 @@ export default function HomeSectionProductView({ navigation, route }) {
       nbLikes={55} 
       title={item.title}
       price={item.price} 
-      onClick={() => navigation.navigate('ProductDetails')} />,
+      onClick={() => navigation.navigate('ProductDetails',{product:item})} />,
     [],
   )
   const renderHeader = ()=> <HeaderCategories />

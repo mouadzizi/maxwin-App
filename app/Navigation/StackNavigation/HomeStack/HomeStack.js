@@ -5,7 +5,7 @@ import { Ionicons } from "react-native-vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeView from "../../../View/HomeView";
 
-export default function HomeStack() {
+export default function HomeStack({navigation}) {
   const HeaderTitle = () => {
     return <></>;
   };
@@ -23,7 +23,7 @@ export default function HomeStack() {
   const HeaderRight = () => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback onPress={() => alert("Search")}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('ResultView')}>
           <Ionicons
             name="search"
             size={36}
@@ -32,7 +32,7 @@ export default function HomeStack() {
           />
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback onPress={() => alert("Filter")}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('FilterView')}>
           <Ionicons
             name="options"
             size={36}

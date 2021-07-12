@@ -18,7 +18,7 @@ export default function Immobilier({ navigation }) {
   const ItemRender = useCallback(
     ({ item }) => (
       <ProductSection
-        onClick={() => navigation.navigate('ProductDetails')}
+        onClick={() => navigation.navigate('ProductDetails',{product:item})}
         title={item.title}
         price={item.price}
         uri={item.images[0]}

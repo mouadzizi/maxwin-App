@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView } from "react-native";
 import ImageSwiper from "./ImageSwiper";
 import ProductInformation from "./ProductInformation";
 
-const IMAGES = [
-  { url: require("../../../assets/ProductTest/product4.jpeg") },
-  { url: require("../../../assets/ProductTest/product11.jpeg") },
-];
-export default function ProductDetails() {
+export default function ProductDetails({ route, navigation }) {
+  const { product } = route.params;
   return (
     <ScrollView>
-      <ImageSwiper images={IMAGES}/>
-      <ProductInformation/>
+      <ImageSwiper
+        images={product.images}
+        onClick={() =>
+          navigation.navigate("ImagePreview", {
+            images: product.images,
+          })
+        }
+      />
+      <ProductInformation product={product} />
     </ScrollView>
   );
 }

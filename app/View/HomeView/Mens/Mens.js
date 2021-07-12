@@ -14,13 +14,13 @@ export default function Mens({navigation}) {
 
   const ItemRender = useCallback(({ item }) => (
     <ProductSection
-      onClick={() => navigation.navigate("ProductDetails")}
+      onClick={() => navigation.navigate("ProductDetails" , { product: item })}
       title={item.title}
       price={item.price}
       uri={item.images[0]}
     />
   ), [])
-  const keyExtractor = React.useCallback((item) => item.id, [])
+  const keyExtractor = useCallback((item) => item.id, [])
   return (
     <>
       <HeaderSection title={collection} navigation={navigation}/>
