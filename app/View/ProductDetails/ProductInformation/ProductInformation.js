@@ -1,13 +1,14 @@
 import React from "react";
 import { View } from "react-native";
+import { COLORS } from "../../../GlobalStyle";
+import { Entypo, AntDesign } from "react-native-vector-icons";
+
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
 import Row from "./InfoRow";
 import RowAccessory from "./accessoryRow";
-
 import styles from "./ProductInformation.style";
-import { COLORS } from "../../../GlobalStyle";
-import { Entypo, AntDesign } from "react-native-vector-icons";
+
 export default function ProductInformation({ negotiable, goodState, product }) {
   return (
     <>
@@ -62,25 +63,25 @@ export default function ProductInformation({ negotiable, goodState, product }) {
             </View>
           ))}
       </View>
-
-      <View style={styles.container}>
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={20}
-          style={styles.headerSt}
-        >
-          Description
-        </TextView>
-        <Divider width="95%" />
-
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={15}
-          style={styles.textSt}
-        >
-          {product.description}
-        </TextView>
-      </View>
+      {product.description && (
+        <View style={styles.container}>
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={20}
+            style={styles.headerSt}
+          >
+            Description
+          </TextView>
+          <Divider width="95%" />
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={15}
+            style={styles.textSt}
+          >
+            {product.description}
+          </TextView>
+        </View>
+      )}
 
       <View style={styles.container}>
         <TextView
@@ -117,17 +118,20 @@ export default function ProductInformation({ negotiable, goodState, product }) {
 
       </View>
 
-      <View style={styles.container}>
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={20}
-          style={styles.headerSt}
-        >
-          accessory
-        </TextView>
-        <Divider width="95%" />
-        <RowAccessory value="test" />
-      </View>
+      {product.chips[0] && (
+        <View style={styles.container}>
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={20}
+            style={styles.headerSt}
+          >
+            Accessory
+          </TextView>
+          <Divider width="95%" />
+          <RowAccessory value={product.chips} />
+        </View>
+      )}
+      
     </>
   );
 }

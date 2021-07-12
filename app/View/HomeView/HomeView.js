@@ -11,6 +11,7 @@ import Decorations from "./Decorations";
 import Mens from "./Mens";
 import Female from "./Female";
 import Services from "./Services";
+import Babe from "./Babe";
 import HeaderCategories from "../../Components/HeaderCategories";
 
 export default function HomeView({ navigation }) {
@@ -22,9 +23,10 @@ export default function HomeView({ navigation }) {
         <Vehicule navigation={navigation} />
         <Immobilier navigation={navigation} />
         <Electronics navigation={navigation} />
-        <Decorations navigation={navigation} />
         <Mens navigation={navigation} />
         <Female navigation={navigation} />
+        <Babe navigation={navigation}/>
+        <Decorations navigation={navigation} />
         <Services navigation={navigation} />
       </ScrollView>
     </View>

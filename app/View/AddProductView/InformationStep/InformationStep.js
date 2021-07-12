@@ -304,10 +304,10 @@ export default function InformationStep({ navigation, route }) {
             />
           </View>
         ) : null}
-          <Chips title="Laivraison possible" />
-          <Chips title="En bonne etat" />
-          <Chips title="Prix negociable" />
-          <Chips title="Laivraison possible" />
+          <Chips title="Laivraison possible" iconName="thumb-up"/>
+          <Chips title="En bonne etat" iconName="thumb-up"/>
+          <Chips title="Prix negociable" iconName="thumb-up"/>
+          <Chips title="Laivraison possible" iconName="thumb-up"/>
         <ButtonFill
           loading={loading}
           onClick={submit}

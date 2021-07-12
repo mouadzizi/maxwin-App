@@ -18,7 +18,7 @@ export default function headerSection({ title, navigation }) {
       <View style={styles.container2}>
         <HeaderButton
           titleButton="Voir tout"
-          onClick={() => navigation.navigate("HomeSectionProductView",{collection:title})}
+          onClick={() => navigation.navigate("HomeSectionProductView",{collection: title})}
         />
       </View>
     </View>
