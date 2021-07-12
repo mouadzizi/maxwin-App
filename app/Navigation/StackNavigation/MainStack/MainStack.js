@@ -136,7 +136,6 @@ export default function MainStack({ navigation }) {
           name="ResultView"
           component={ResultView}
           options={{
-            headerRight: () => <HeaderRight />,
             title: "Resultat",
             headerStyle: {
               backgroundColor: COLORS.primary,
@@ -149,7 +148,6 @@ export default function MainStack({ navigation }) {
           name="FilterView"
           component={FilterView}
           options={{
-            headerRight: () => <HeaderRight />,
             title: "Filter",
             headerStyle: {
               backgroundColor: COLORS.primary,

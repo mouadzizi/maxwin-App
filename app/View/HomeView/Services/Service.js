@@ -27,7 +27,11 @@ export default function Service({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={"Services"} navigation={navigation} collection={collection}/>
+      <HeaderSection
+        title={"Services"}
+        navigation={navigation}
+        collection={collection}
+      />
       <FlatList
         data={products}
         keyExtractor={keyExtractor}
