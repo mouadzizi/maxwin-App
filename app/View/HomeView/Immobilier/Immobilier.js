@@ -31,7 +31,7 @@ export default function Immobilier({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={collection}  navigation={navigation}/>
+      <HeaderSection title={collection} navigation={navigation} collection={collection}/>
       <FlatList
         
         data={products}

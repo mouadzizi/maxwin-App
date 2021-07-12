@@ -23,7 +23,8 @@ export default function Mens({navigation}) {
   const keyExtractor = useCallback((item) => item.id, [])
   return (
     <>
-      <HeaderSection title={collection} navigation={navigation}/>
+      <HeaderSection title={collection} navigation={navigation} collection={collection}/>
+
       <FlatList
         data={products}
         keyExtractor={keyExtractor}

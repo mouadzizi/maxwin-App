@@ -13,10 +13,10 @@ export default function Vehicule({ navigation }) {
     });
     return () => {};
   }, []);
- 
+
   const ItemRender = ({ item }) => (
     <ProductSection
-      onClick={() => navigation.navigate("ProductDetails",{product:item})}
+      onClick={() => navigation.navigate("ProductDetails", { product: item })}
       title={item.title}
       price={item.price}
       uri={item.images[0]}
@@ -27,9 +27,13 @@ export default function Vehicule({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={collection} navigation={navigation} />
+      <HeaderSection
+        title={collection}
+        navigation={navigation}
+        collection={collection}
+      />
+
       <FlatList
-        
         data={products}
         keyExtractor={keyExtractor}
         renderItem={ItemRender}

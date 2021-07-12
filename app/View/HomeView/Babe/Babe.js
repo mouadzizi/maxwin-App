@@ -27,7 +27,7 @@ export default function Babe({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={"ESPACE ENFANTS"} navigation={navigation} />
+      <HeaderSection title={"ESPACE ENFANTS"} navigation={navigation} collection={collection}/>
       <FlatList
         data={products}
         keyExtractor={keyExtractor}

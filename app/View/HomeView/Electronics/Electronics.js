@@ -4,7 +4,7 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 export default function Electronics({ navigation }) {
-  const collection = "ELECTRONICS";
+  const collection = "INFORMATIQUE ET ELECTRONIQUE";
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getItemsByCollection("INFORMATIQUE ET ELECTRONIQUE", 10).then((items) =>
@@ -26,7 +26,7 @@ export default function Electronics({ navigation }) {
   const keyExtractor = useCallback((item) => item.id, []);
   return (
     <>
-      <HeaderSection title={collection} navigation={navigation} />
+      <HeaderSection title="ELECTRONIQUE" collection={collection} navigation={navigation} />
       <FlatList
         data={products}
         keyExtractor={keyExtractor}

@@ -27,7 +27,7 @@ export default function Vehicule({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={"ESPACE FEMMES"} navigation={navigation} />
+      <HeaderSection title={"ESPACE FEMMES"} navigation={navigation} collection={collection}/>
       <FlatList
         data={products}
         keyExtractor={keyExtractor}
