@@ -14,6 +14,11 @@ export default function HeaderCategories({ navigation }) {
       iconName: "Car",
     },
     {
+      id: "SDSDgfss2984",
+      categoryName: "Villa",
+      iconName: "Villa",
+    },
+    {
       id: "SDSDgf2933R84",
       categoryName: "Appartement",
       iconName: "Apartment",
@@ -24,13 +29,16 @@ export default function HeaderCategories({ navigation }) {
       categoryName: "Decoration",
       iconName: "Lamp",
     },
-
     {
-      id: "SDSDgfss2984",
-      categoryName: "Villa",
-      iconName: "Villa",
+      id: "SDSDgf2fqFFdDA6984",
+      categoryName: "Téléphones",
+      iconName: "Phone",
     },
-
+    {
+      id: "SDSDgf2asCC6984",
+      categoryName: "Ordinateurs",
+      iconName: "Laptop",
+    },
     {
       id: "SDSDgf26984",
       categoryName: "Télévisions",
@@ -63,7 +71,9 @@ export default function HeaderCategories({ navigation }) {
         renderItem={({ item }) => (
           <Category
             iconName={item.iconName}
-            onClick={() => navigation.navigate("ResultView", {category : item.categoryName})}
+            onClick={() =>
+              navigation.navigate("ResultView", { category: item.categoryName })
+            }
           />
         )}
         ListFooterComponent={<Footer />}
