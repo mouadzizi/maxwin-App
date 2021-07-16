@@ -10,7 +10,7 @@ export default function ImageSwiper({ images, onClick }) {
   const [isFavorite, setIsFavorite] = useState(false);
   return (
     <>
-      <Swiper activeDotColor="#FF6347" style={styles.imageContainer}>
+      <Swiper activeDotColor={COLORS.secondary} style={styles.imageContainer}>
         {images.map((item, index) => (
           <TouchableWithoutFeedback key={index} onPress={onClick}>
             <Image
@@ -26,12 +26,13 @@ export default function ImageSwiper({ images, onClick }) {
         style={{ top: 250, right: 20, position: "absolute" }}
         color={COLORS.primary}
         icon={<FontAwesome name="whatsapp" size={28} color="white" />}
-        onPress={() => alert("hey")}
+        onPress={() => alert("Whats app")}
       />
       <FAB
         icon={<AntDesign name="sharealt" size={25} color="white" />}
         color={COLORS.primary}
         style={{ top: 310, right: 20, position: "absolute" }}
+        onPress={() => alert("Partagé")}
       />
       <FAB
         icon={

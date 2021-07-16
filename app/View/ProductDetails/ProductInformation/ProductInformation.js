@@ -1,11 +1,16 @@
 import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
-import { Entypo, AntDesign, Feather, FontAwesome5 } from "react-native-vector-icons";
+import { AntDesign, Feather } from "react-native-vector-icons";
 
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
+import CashOnDelivery from "../../../icons/CashOnDelivery"
+import PriceTag from "../../../icons/PriceTag"
 import Row from "./InfoRow";
+import ButtonFill from "../../../Components/Button/ButtonFill";
+import ButtonOutlined from "../../../Components/Button/ButtonOutlined";
+
 import Equipement from "./Equipement";
 
 import styles from "./ProductInformation.style";
@@ -39,13 +44,12 @@ export default function ProductInformation({ negotiable, goodState, product }) {
         {negotiable ||
           (true && (
             <View style={styles.row}>
-              <Entypo name="price-ribbon" color={COLORS.primary} size={35} />
+              <PriceTag />
               <TextView
                 fontFamily="Source-Regular"
                 fontSize={20}
                 style={[styles.textSt, { marginLeft: 5 }]}
-              >
-                Prix négociable
+              >  Prix négociable
               </TextView>
             </View>
           ))}
@@ -81,7 +85,7 @@ export default function ProductInformation({ negotiable, goodState, product }) {
         {goodState ||
           (true && (
             <View style={styles.row}>
-              <FontAwesome5 name="handshake" color={COLORS.primary} size={25} />
+              <CashOnDelivery />
               <TextView
                 fontFamily="Source-Regular"
                 fontSize={20}
@@ -146,8 +150,15 @@ export default function ProductInformation({ negotiable, goodState, product }) {
         )}
       </View>
 
-
       <Equipement />
+      
+      <View
+      style={styles.container}>
+      <ButtonFill title="Apple vendeur " loading={false} style={{marginVertical : 10}}/>
+      <ButtonOutlined title="Messagerie" style={{marginVertical : 10}}/>
+
+      </View>
+
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../../../GlobalStyle";
 
 export default StyleSheet.create({
   container: {
@@ -11,9 +12,11 @@ export default StyleSheet.create({
   row:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10,
   },
   textInfo:{
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    color: COLORS.primary
   }
 });

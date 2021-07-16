@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import * as Font from 'expo-font';
-import { COLORS } from '../../GlobalStyle';
 
 export default function TextView(props) {
 	const [ loaded, setLoaded ] = useState(false);
