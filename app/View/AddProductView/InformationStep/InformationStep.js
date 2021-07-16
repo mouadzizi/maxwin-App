@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, SafeAreaView, FlatList } from "react-native";
-import { Input } from "react-native-elements";
+import { Input, CheckBox } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
 import ButtonFill from "../../../Components/Button/ButtonFill";
+import ButtonOutlined from "../../../Components/Button/ButtonOutlined";
+
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages } from "../../../API/APIFunctions";
 import ChipModal from "../Modals/ChipsModal";
 
-import Chips from '../../../Components/Chip'
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
-  const [product, setProduct] = useState(prevProduct);
+  const [product, setProduct] = useState({...prevProduct, goodState, negotiable, delivery, cashOnDelivery});
   const [loading, setLoading] = useState(false);
+
+  const [goodState, setGoodState] = useState(false);
+  const [negotiable, setNegotiable] = useState(false);
+  const [delivery, setDelivery] = useState(false);
+  const [cashOnDelivery, setCashOnDelivery] = useState(false);
 
   let modalRef;
 
@@ -56,7 +62,8 @@ export default function InformationStep({ navigation, route }) {
         >
           Merci d'entrer le max d'information possible de votre produit
         </TextView>
-        {product.category[1] === ("Voitures" || "Location de Voiture") ? (
+        {product.category[1] === "Voitures" ||
+        product.category[1] === "Location de Voiture" ? (
           <View style={{ marginTop: 30 }}>
             {/* Picker for brand */}
             <View style={styles.pickerView}>
@@ -169,23 +176,22 @@ export default function InformationStep({ navigation, route }) {
                 }
               >
                 <Picker.Item
-                  label="Choisissez le carburant"
+                  label="Choisissez la Puissance Fiscale"
                   value=""
                   color={COLORS.Grey[400]}
                 />
-                <Picker.Item label="Diesel" value="Diesel" />
-                <Picker.Item label="Essence" value="Essence" />
+                <Picker.Item label="Manuelle" value="Manuelle" />
+                <Picker.Item label="Automatique" value="Automatique" />
               </Picker>
             </View>
           </View>
         ) : null}
 
-        {product.category[1] ===
-        ("Appartements" ||
-          "Maisons & Villas" ||
-          "Location long durée" ||
-          "Location courte durée (vacances)" ||
-          "Commerces & Bureaux") ? (
+        {product.category[1] === "Appartements" ||
+        product.category[1] === "Maisons & Villas" ||
+        product.category[1] === "Location long durée" ||
+        product.category[1] === "Location courte durée (vacances)" ||
+        product.category[1] === "Commerces & Bureaux" ? (
           <View style={{ marginTop: 30 }}>
             <Input
               label="Superficie"
@@ -200,7 +206,7 @@ export default function InformationStep({ navigation, route }) {
             />
 
             <Input
-              label="nbPiece"
+              label="Nombre de piece"
               placeholder="Nombre de piece"
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
@@ -214,7 +220,9 @@ export default function InformationStep({ navigation, route }) {
         ) : null}
 
         {product.category[1] ===
-        ("Téléphones" || "Tablettes" || "Ordinateurs") ? (
+          (product.category[1] === "Tablettes" ||
+            product.category[1] === "Téléphones" ||
+            product.category[1] === "Ordinateurs") && (
           <View style={{ marginTop: 30 }}>
             <Input
               label="RAM"
@@ -237,7 +245,7 @@ export default function InformationStep({ navigation, route }) {
               }
             />
           </View>
-        ) : null}
+        )}
 
         {product.category[1] !==
         ("Appartements" ||
@@ -287,32 +295,107 @@ export default function InformationStep({ navigation, route }) {
           }
         />
 
-        {product.category[1] === ("Voitures" || "Location de Voiture") ? (
+        {(product.category[1] === "Voitures" ||
+          product.category[1] === "Location de Voiture") && (
           <View style={styles.chipContainer}>
             <TextView
               fontFamily="Source-Regular"
               fontSize={16}
               style={{ marginBottom: 20 }}
             >
-              Merci d'entrer les info suplémentaire de votre voiture
+              Merci d'entrer les equipements de votre Vehicule
             </TextView>
-            <ButtonFill
+            <ButtonOutlined
               loading={false}
               onClick={() => modalRef.openModal()}
-              title="Choisir Ici"
+              title="Equipements"
               style={{ marginBottom: 40 }}
             />
           </View>
-        ) : null}
-          <Chips title="Laivraison possible" iconName="thumb-up"/>
-          <Chips title="En bonne etat" iconName="thumb-up"/>
-          <Chips title="Prix negociable" iconName="thumb-up"/>
-          <Chips title="Laivraison possible" iconName="thumb-up"/>
+        )}
+
+        {product.category[1] === "Télévisions" && (
+          <View style={{ marginTop: 10 }}>
+            <View style={styles.pickerView}>
+              <Text style={styles.label}>Pouces</Text>
+              <Picker
+                style={styles.pickerInput}
+                mode="dropdown"
+                dropdownIconColor={COLORS.primary}
+                selectedValue={product.pouces}
+                onValueChange={(itemValue) =>
+                  setProduct({ ...product, Pouces: itemValue })
+                }
+              >
+                <Picker.Item
+                  label="Choisissez Pouces de Television"
+                  value=""
+                  color={COLORS.Grey[400]}
+                />
+                <Picker.Item label="23" value="23" />
+                <Picker.Item label="32" value="32" />
+                <Picker.Item label="40" value="40" />
+                <Picker.Item label="42" value="42" />
+              </Picker>
+            </View>
+          </View>
+        )}
+
+        <View style={{ flexDirection: "row" }}>
+          <CheckBox
+            containerStyle={{ width: "50%" }}
+            title="En bonne état    "
+            iconRight
+            checkedColor={COLORS.secondary}
+            checked={goodState}
+            onPress={() => setGoodState(!goodState)}
+          />
+
+          <CheckBox
+            containerStyle={{ width: "50%" }}
+            title="Negociable"
+            iconRight
+            checkedColor={COLORS.secondary}
+            checked={negotiable}
+            onPress={() => setNegotiable(!negotiable)}
+          />
+        </View>
+
+        <View style={{ flexDirection: "row" }}>
+          <CheckBox
+            containerStyle={{ width: "50%" }}
+            title="Cash on delevry"
+            iconRight
+            checkedColor={COLORS.secondary}
+            checked={cashOnDelivery}
+            onPress={() => setCashOnDelivery(!cashOnDelivery)}
+          />
+
+          <CheckBox
+            containerStyle={{ width: "50%" }}
+            title="Laivraison  "
+            iconRight
+            checkedColor={COLORS.secondary}
+            checked={delivery}
+            onPress={() => setDelivery(!delivery)}
+          />
+        </View>
+
+        <Input
+          containerStyle={{ marginTop: 20 }}
+          value=""
+          onChangeText={(value) =>
+            setProduct({ ...product, phoneNumber: value })
+          }
+          placeholder="Numéro de télephone"
+          rightIcon={{ type: "Feather", name: "phone", color: COLORS.primary }}
+        />
+
         <ButtonFill
           loading={loading}
           onClick={submit}
           title="Valider"
-          style={{ marginBottom: 40 }}
+          style={{ marginBottom: 40, marginTop: 20 }}
         />
       </ScrollView>
       <ChipModal ref={(curRef) => (modalRef = curRef)} onClick={addChip} />

@@ -3,7 +3,7 @@ import { COLORS } from '../../../GlobalStyle';
 
 export default StyleSheet.create({
     container: {
-        height: 30,
+        height: 50,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.primary,

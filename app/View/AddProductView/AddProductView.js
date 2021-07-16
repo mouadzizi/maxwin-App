@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../../GlobalStyle";
 import { Input } from "react-native-elements";
@@ -13,7 +13,6 @@ import ImageModal from "./Modals/ImageModal";
 import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "./Modals/CategoryModal";
-
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
@@ -41,9 +40,8 @@ export default function AddProductView({ navigation }) {
     Modals[1].openModal();
   };
 
-  const chooseCategory = (category,{title}) => {
-  
-    setProduct({ ...product, category: [title,category]});
+  const chooseCategory = (category, { title }) => {
+    setProduct({ ...product, category: [title, category] });
     Modals[1].closeModal();
   };
 
@@ -80,7 +78,7 @@ export default function AddProductView({ navigation }) {
         </TextView>
 
         <AddProductStep
-          categorySelected={product.category? product.category[1] : null }
+          categorySelected={product.category ? product.category[1] : null}
           onclick={openModalCategory}
           title="Choisir votre Categorie"
           iconName="list"
@@ -103,6 +101,7 @@ export default function AddProductView({ navigation }) {
           onChangeText={(value) => setProduct({ ...product, title: value })}
           value={product.title}
         />
+
         <Input
           label="Prix *"
           keyboardType="numeric"
@@ -121,9 +120,7 @@ export default function AddProductView({ navigation }) {
             mode="dialog"
             dropdownIconColor={COLORS.primary}
             selectedValue={product.city}
-            onValueChange={(value) =>
-              setProduct({ ...product, city: value })
-            }
+            onValueChange={(value) => setProduct({ ...product, city: value })}
           >
             <Picker.Item
               label="Choisissez une Ville"
@@ -146,7 +143,12 @@ export default function AddProductView({ navigation }) {
         </View>
 
         <ButtonFill
-          disable={!product.title || !product.price || !product.city || !product.category}
+          // disable={
+          //   !product.title ||
+          //   !product.price ||
+          //   !product.city ||
+          //   !product.category
+          // }
           title="Suivant"
           style={{ marginBottom: 40 }}
           onClick={NextHandler}

@@ -27,8 +27,8 @@ import Chip from '../../../Components/Chip/Chip'
                 data:this.data,
                 keyExtractor:this.keyExtractor.bind(this),
                 renderItem:this.renderItem.bind(this),
-                numColumns:3,
-                style:{flex:1,padding:10}
+                numColumns:2,
+                style:{flex:1,padding:5}
 
             }}
             />

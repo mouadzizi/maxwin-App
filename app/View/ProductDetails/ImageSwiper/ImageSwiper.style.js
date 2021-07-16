@@ -5,6 +5,7 @@ export default StyleSheet.create({
   imageContainer: {
     backgroundColor: COLORS.primary,
     height: windowHeight*0.57,
+    zIndex: 0,
   },
   imageSlider: {
     height: "100%",

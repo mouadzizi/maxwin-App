@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
-import { Entypo, AntDesign } from "react-native-vector-icons";
+import { Entypo, AntDesign, Feather, FontAwesome5 } from "react-native-vector-icons";
 
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
@@ -62,7 +62,35 @@ export default function ProductInformation({ negotiable, goodState, product }) {
               </TextView>
             </View>
           ))}
+
+        {goodState ||
+          (true && (
+            <View style={styles.row}>
+              <Feather name="truck" color={COLORS.primary} size={30} />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={20}
+                style={[styles.textSt, { marginLeft: 10 }]}
+              >
+                Livraison
+              </TextView>
+            </View>
+          ))}
+
+        {goodState ||
+          (true && (
+            <View style={styles.row}>
+              <FontAwesome5 name="handshake" color={COLORS.primary} size={25} />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={20}
+                style={[styles.textSt, { marginLeft: 10 }]}
+              >Paiement en livraison
+              </TextView>
+            </View>
+          ))}
       </View>
+
       {product.description && (
         <View style={styles.container}>
           <TextView
@@ -102,20 +130,19 @@ export default function ProductInformation({ negotiable, goodState, product }) {
         )}
 
         {product.anneeFabrication && (
-          <Row detail="Marque de Voiture" value={product.anneeFabrication} />
+          <Row detail="Année de Fabrication" value={product.anneeFabrication} />
         )}
 
         {product.kilometrage && (
-          <Row detail="Marque de Voiture" value={product.kilometrage + " Km"} />
+          <Row detail="Kilometrage" value={product.kilometrage + " Km"} />
         )}
         {product.transaction && (
-          <Row detail="Marque de Voiture" value={product.transaction} />
+          <Row detail="Transaction" value={product.transaction} />
         )}
 
         {product.puissanceFiscale && (
-          <Row detail="Marque de Voiture" value={product.puissanceFiscale} />
+          <Row detail="Puissance Fiscale" value={product.puissanceFiscale} />
         )}
-
       </View>
 
       {product.chips[0] && (
@@ -131,7 +158,6 @@ export default function ProductInformation({ negotiable, goodState, product }) {
           <RowAccessory value={product.chips} />
         </View>
       )}
-      
     </>
   );
 }

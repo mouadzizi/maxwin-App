@@ -4,22 +4,26 @@ import { COLORS } from '../../GlobalStyle';
 export default StyleSheet.create({
 	containerOutlined: {
 		padding: 10,
+		width: 170,
 		borderWidth: 1,
 		borderColor: COLORS.primary,
 		borderRadius: 10,
-		justifyContent: 'center',
+		justifyContent: 'space-between',
 		alignItems: 'center',
 		flexDirection: 'row',
-		margin: 6
+		margin: 2,
+		marginLeft: 8
 	},
 	containerFill: {
 		padding: 10,
 		backgroundColor: COLORS.primary,
 		borderRadius: 10,
-		width: 105,
-		justifyContent: 'center',
+		width: 170,
+		justifyContent: 'space-between',
 		alignItems: 'center',
 		flexDirection: 'row',
-		margin: 5
+		margin: 2,
+		marginLeft: 8
+
 	}
 });

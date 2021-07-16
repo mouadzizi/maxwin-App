@@ -3,6 +3,7 @@ import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
+import Skeleton from "../Skeletone";
 
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = React.useState([]);
@@ -16,7 +17,7 @@ export default function Vehicule({ navigation }) {
 
   const ItemRender = ({ item }) => (
     <ProductSection
-      onClick={() => navigation.navigate("ProductDetails" , { product: item })}
+      onClick={() => navigation.navigate("ProductDetails", { product: item })}
       title={item.title}
       price={item.price}
       uri={item.images[0]}
@@ -27,14 +28,23 @@ export default function Vehicule({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={"ESPACE FEMMES"} navigation={navigation} collection={collection}/>
-      <FlatList
-        data={products}
-        keyExtractor={keyExtractor}
-        renderItem={ItemRender}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+      <HeaderSection
+        title={"ESPACE FEMMES"}
+        navigation={navigation}
+        collection={collection}
       />
+
+      {products.length < 1 ? (
+        <Skeleton />
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={keyExtractor}
+          renderItem={ItemRender}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </>
   );
 }

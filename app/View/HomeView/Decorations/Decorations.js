@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
+import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 export default function Decorations({ navigation }) {
   const collection = "MAISON & DECO";
@@ -24,14 +25,22 @@ export default function Decorations({ navigation }) {
   const keyExtractor = useCallback((item) => item.id, []);
   return (
     <>
-      <HeaderSection title={collection} navigation={navigation} collection={collection}/>
-      <FlatList
-        data={products}
-        keyExtractor={keyExtractor}
-        renderItem={ItemRender}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+      <HeaderSection
+        title={collection}
+        navigation={navigation}
+        collection={collection}
       />
+      {products.length < 1 ? (
+        <Skeleton />
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={keyExtractor}
+          renderItem={ItemRender}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </>
   );
 }

@@ -16,7 +16,7 @@ export default function Service({ navigation }) {
 
   const ItemRender = ({ item }) => (
     <ProductSection
-      onClick={() => navigation.navigate("ProductDetails", { product: item })}
+      onClick={() => navigation.navigate("ProductDetails")}
       title={item.title}
       price={item.price}
       uri={item.images[0]}

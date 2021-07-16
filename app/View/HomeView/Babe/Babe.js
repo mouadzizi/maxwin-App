@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
+import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 
 export default function Babe({ navigation }) {
@@ -27,14 +28,22 @@ export default function Babe({ navigation }) {
 
   return (
     <>
-      <HeaderSection title={"ESPACE ENFANTS"} navigation={navigation} collection={collection}/>
-      <FlatList
-        data={products}
-        keyExtractor={keyExtractor}
-        renderItem={ItemRender}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+      <HeaderSection
+        title={"ESPACE ENFANTS"}
+        navigation={navigation}
+        collection={collection}
       />
+      {products.length < 1 ? (
+        <Skeleton />
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={keyExtractor}
+          renderItem={ItemRender}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </>
   );
 }

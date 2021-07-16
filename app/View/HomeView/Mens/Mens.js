@@ -1,37 +1,49 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { getItemsByCollection } from '../../../API/APIFunctions'
+import Skeleton from "../Skeletone";
+import { getItemsByCollection } from "../../../API/APIFunctions";
 
-export default function Mens({navigation}) {
-  const collection = 'ESPACE HOMMES'
-  
-  const [products, setProducts] = useState([])
+export default function Mens({ navigation }) {
+  const collection = "ESPACE HOMMES";
+
+  const [products, setProducts] = useState([]);
   useEffect(() => {
-    getItemsByCollection(collection, 10).then(items => setProducts(items))
-  }, [])
+    getItemsByCollection(collection, 10).then((items) => setProducts(items));
+  }, []);
 
-  const ItemRender = useCallback(({ item }) => (
-    <ProductSection
-      onClick={() => navigation.navigate("ProductDetails" , { product: item })}
-      title={item.title}
-      price={item.price}
-      uri={item.images[0]}
-    />
-  ), [])
-  const keyExtractor = useCallback((item) => item.id, [])
+  const ItemRender = useCallback(
+    ({ item }) => (
+      <ProductSection
+        onClick={() => navigation.navigate("ProductDetails", { product: item })}
+        title={item.title}
+        price={item.price}
+        uri={item.images[0]}
+      />
+    ),
+    []
+  );
+  const keyExtractor = useCallback((item) => item.id, []);
   return (
     <>
-      <HeaderSection title={collection} navigation={navigation} collection={collection}/>
-
-      <FlatList
-        data={products}
-        keyExtractor={keyExtractor}
-        renderItem={ItemRender}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+      <HeaderSection
+        title={collection}
+        navigation={navigation}
+        collection={collection}
       />
+
+      {products.length < 1 ? (
+        <Skeleton />
+      ) : (
+        <FlatList
+          data={products}
+          keyExtractor={keyExtractor}
+          renderItem={ItemRender}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </>
   );
 }

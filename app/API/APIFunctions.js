@@ -47,5 +47,4 @@ export const getItemsByCollection = async(collection,limit)=>{
       items.push({...doc.data(),id:doc.id})
    })
    return items
-} 
-
+}

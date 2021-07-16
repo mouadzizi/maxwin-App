@@ -62,7 +62,7 @@ export default function HeaderCategories({ navigation }) {
     );
   };
 
-  return (
+  return ( 
     <>
       <FlatList
         data={DATA}
@@ -72,7 +72,7 @@ export default function HeaderCategories({ navigation }) {
           <Category
             iconName={item.iconName}
             onClick={() =>
-              navigation.navigate("ResultView", { category: item.categoryName })
+              navigation.navigate("ResultView", { collection: item.categoryName })
             }
           />
         )}

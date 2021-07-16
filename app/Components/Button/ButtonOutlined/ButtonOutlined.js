@@ -14,7 +14,7 @@ export default function ButtonFill({onClick, title, style, disable}) {
         <TouchableOpacity 
         style={disable ? [styles.containerDisable, style] : [styles.container, style]}
         onPress={handlerClick}>
-            <TextView fontFamily="Source-Regular"  fontSize={14} style={{color : COLORS.primary}}>{title}</TextView>
+            <TextView fontFamily="Source-Regular"  fontSize={18} style={{color : COLORS.primary}}>{title}</TextView>
         </TouchableOpacity>
     )
 }
