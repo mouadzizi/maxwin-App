@@ -10,7 +10,6 @@ import Electronics from "./Electronics";
 import Decorations from "./Decorations";
 import Mens from "./Mens";
 import Female from "./Female";
-import Services from "./Services";
 import Babe from "./Babe";
 import HeaderCategories from "../../Components/HeaderCategories";
 

@@ -15,7 +15,7 @@ export const anonymouslySignIn = async () => {
 }
 
 export const addProduct = async (product) => {
-   const docRef = await db.collection('products').add({...product,createdDate:firebase.firestore.FieldValue.serverTimestamp()})
+   const docRef = await db.collection('products').add({ ...product, createdDate: firebase.firestore.FieldValue.serverTimestamp() })
    return docRef;
 }
 
@@ -33,18 +33,27 @@ export const uploadImages = async (images, docID, userID) => {
          .child(userID)
          .child(docID)
          .child(image.name);
-      const snapShot = await ref.put(blob)  
+      const snapShot = await ref.put(blob)
       const link = await snapShot.ref.getDownloadURL()
       imagesLinks.push(link)
    }
    return Promise.all(imagesLinks)
 }
 
-export const getItemsByCollection = async(collection,limit)=>{
-   let items =[]
-   const snap = await db.collection('products').where('category','array-contains',collection).orderBy('createdDate','desc').limit(limit).get()
-   snap.forEach(doc=>{
-      items.push({...doc.data(),id:doc.id})
+export const getItemsByCollection = async (collection, limit) => {
+   let items = []
+   const snap = await db.collection('products').where('category', 'array-contains', collection).orderBy('createdDate', 'desc').limit(limit).get()
+   snap.forEach(doc => {
+      items.push({ ...doc.data(), id: doc.id })
+   })
+   return items
+}
+
+export const getItemsByCategory = async (category, limit) => {
+   let items = []
+   const snap = await db.collection('products').where('category', 'array-contains', category).orderBy('createdDate', 'desc').limit(limit).get()
+   snap.forEach(doc => {
+      items.push({ ...doc.data(), id: doc.id })
    })
    return items
 }

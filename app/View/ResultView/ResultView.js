@@ -9,12 +9,13 @@ export default function ResultView({ route }) {
 
   useEffect(() => {
     const { collection } = route.params;
+    console.log(collection);
     getItemsByCollection(collection, 10)
       .then((items) => {
         setProducts(items);
       })
       .catch(({ message }) => console.warn(message));
-    return () => {};
+    return () => { };
   }, []);
 
   const renderItem = useCallback(

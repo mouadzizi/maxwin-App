@@ -10,23 +10,23 @@ export default function HeaderCategories({ navigation }) {
   const DATA = [
     {
       id: "SDSDgf25677984",
-      categoryName: "Voiture",
+      categoryName: "Voitures",
       iconName: "Car",
     },
     {
       id: "SDSDgfss2984",
-      categoryName: "Villa",
+      categoryName: "Maisons & Villas",
       iconName: "Villa",
     },
     {
       id: "SDSDgf2933R84",
-      categoryName: "Appartement",
+      categoryName: "Appartements",
       iconName: "Apartment",
     },
 
     {
       id: "SDSDgf6782984",
-      categoryName: "Decoration",
+      categoryName: "Meubles et déco",
       iconName: "Lamp",
     },
     {
@@ -46,7 +46,7 @@ export default function HeaderCategories({ navigation }) {
     },
     {
       id: "SDSDgf2fff6984",
-      categoryName: "Vêtements Homme",
+      categoryName: "Vêtements Hommes",
       iconName: "MenClothes",
     },
   ];
