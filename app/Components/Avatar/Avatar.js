@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import styles from './Avatar.style'
 import {FontAwesome, Feather} from 'react-native-vector-icons'
 export default function Avatar({iconName}) {

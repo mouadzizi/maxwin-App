@@ -8,6 +8,8 @@ import { COLORS } from "../../../GlobalStyle";
 
 export default function ImageSwiper({ images, onClick }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
     <>
       <Swiper activeDotColor={COLORS.secondary} style={styles.imageContainer}>
@@ -22,6 +24,19 @@ export default function ImageSwiper({ images, onClick }) {
           </TouchableWithoutFeedback>
         ))}
       </Swiper>
+      <FAB
+      title="Like"
+        icon={
+          isLiked ? (
+            <AntDesign name="like1" size={23} color={COLORS.secondary} />
+          ) : (
+            <AntDesign name="like2" size={23} color="white" />
+          )
+        }
+        color={COLORS.primary}
+        style={{ top: 470, right: 20, zIndex: 1 ,position: "absolute" }}
+        onPress={() => setIsLiked(!isLiked)}
+      />
       <FAB
         style={{ top: 250, right: 20, position: "absolute" }}
         color={COLORS.primary}

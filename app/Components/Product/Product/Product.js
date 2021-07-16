@@ -18,7 +18,6 @@ export default function Product({
   price,
   onClick,
 }) {
-
   return (
     <TouchableOpacity style={styles.containerGlobal} onPress={onClick}>
       <View style={styles.containerSection1}>
@@ -29,7 +28,7 @@ export default function Product({
             style={styles.location}
             fontFamily="Source-Regular"
           >
-            {location}
+            MOAD ZIZI, Ville : {location}
           </TextView>
         </>
         <View style={styles.containerLikes}>
@@ -83,7 +82,7 @@ export default function Product({
         <View style={styles.imageContainer}>
           <View style={{ flex: 2, margin: 1 }}>
             <Image
-              source={{uri:images[0]}}
+              source={{ uri: images[0] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
             />
@@ -92,7 +91,7 @@ export default function Product({
           <View style={{ flex: 1, margin: 1 }}>
             <View style={{ flex: 1, margin: 1 }}>
               <Image
-                source={{uri:images[1]}}
+                source={{ uri: images[1] }}
                 style={{ height: "100%", width: "100%" }}
                 resizeMode="cover"
               />
@@ -100,7 +99,7 @@ export default function Product({
 
             <View style={{ flex: 1, margin: 1 }}>
               <Image
-                source={{uri:images[2]}}
+                source={{ uri: images[2] }}
                 style={{ height: "100%", width: "100%" }}
                 resizeMode="cover"
               />
@@ -124,7 +123,8 @@ export default function Product({
 
         <View style={styles.informationContainerSection2}>
           <ButtonOutlined
-            style={{ width: 100 }}
+            fontSize={14}
+            style={{ width: 100, height: 30 }}
             title="Voir details"
             onClick={() => console.log("hey")}
           />

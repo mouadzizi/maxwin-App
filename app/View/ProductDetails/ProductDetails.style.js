@@ -2,14 +2,11 @@ import { StyleSheet } from "react-native";
 import { COLORS, windowHeight, windowWidth } from "../../GlobalStyle";
 
 export default StyleSheet.create({
-  imageContainer: {
-    backgroundColor: COLORS.primary,
-    height: windowHeight * 0.57,
-  },
-  imageSlider: {
-    height: "100%",
-    width: "100%",
-    alignSelf: "center",
-    borderRadius: 8,
+  container: {
+    marginVertical: 7,
+    marginHorizontal: 10,
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 15,
   },
 });

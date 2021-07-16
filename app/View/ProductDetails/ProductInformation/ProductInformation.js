@@ -2,14 +2,11 @@ import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
 import { AntDesign, Feather } from "react-native-vector-icons";
-
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
 import CashOnDelivery from "../../../icons/CashOnDelivery"
 import PriceTag from "../../../icons/PriceTag"
 import Row from "./InfoRow";
-import ButtonFill from "../../../Components/Button/ButtonFill";
-import ButtonOutlined from "../../../Components/Button/ButtonOutlined";
 
 import Equipement from "./Equipement";
 
@@ -152,12 +149,6 @@ export default function ProductInformation({ negotiable, goodState, product }) {
 
       <Equipement />
       
-      <View
-      style={styles.container}>
-      <ButtonFill title="Apple vendeur " loading={false} style={{marginVertical : 10}}/>
-      <ButtonOutlined title="Messagerie" style={{marginVertical : 10}}/>
-
-      </View>
 
     </>
   );
