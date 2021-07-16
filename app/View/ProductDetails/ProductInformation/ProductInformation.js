@@ -6,7 +6,8 @@ import { Entypo, AntDesign, Feather, FontAwesome5 } from "react-native-vector-ic
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
 import Row from "./InfoRow";
-import RowAccessory from "./accessoryRow";
+import Equipement from "./Equipement";
+
 import styles from "./ProductInformation.style";
 
 export default function ProductInformation({ negotiable, goodState, product }) {
@@ -145,19 +146,8 @@ export default function ProductInformation({ negotiable, goodState, product }) {
         )}
       </View>
 
-      {product.chips[0] && (
-        <View style={styles.container}>
-          <TextView
-            fontFamily="Source-Regular"
-            fontSize={20}
-            style={styles.headerSt}
-          >
-            Accessory
-          </TextView>
-          <Divider width="95%" />
-          <RowAccessory value={product.chips} />
-        </View>
-      )}
+
+      <Equipement />
     </>
   );
 }
