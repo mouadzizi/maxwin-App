@@ -9,7 +9,6 @@ export default function ProductSection({
   onClick,
   title,
   price,
-  imageCover,
   uri
 }) {
   return (

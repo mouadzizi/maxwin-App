@@ -31,7 +31,7 @@ export default function HomeSectionProductView({ navigation, route }) {
     ),
     []
   );
-  const renderHeader = () => <HeaderCategories />;
+  const renderHeader = () => <HeaderCategories  navigation={navigation}/>;
   const keyExtractor = useCallback((item) => item.id, []);
   return (
     <View style={styles.container}>
