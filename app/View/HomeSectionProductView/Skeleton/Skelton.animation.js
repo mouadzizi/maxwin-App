@@ -4,7 +4,7 @@ const pulseAnimation = (pulseAnim) =>
   Animated.loop(
     Animated.sequence([
       Animated.timing(pulseAnim, {
-        toValue: 0.5,
+        toValue: 0.65,
         duration: 750,
         useNativeDriver: true,
       }),
