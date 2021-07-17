@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../../GlobalStyle";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View, Text,Alert } from "react-native";
 
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,7 +18,6 @@ import AuthModal from './AuthModal/AuthModal'
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
-  const [isVisible, setIsVisible] = useState(false)
   let Modals = [];
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
@@ -28,6 +27,7 @@ export default function AddProductView({ navigation }) {
     useCallback(() => {
       const user = auth.currentUser;
       if(user){
+        setIsVisible(false)
         getPhotos().then((items) => {
           const imgs = JSON.parse(items);
           if (imgs) {
@@ -36,7 +36,7 @@ export default function AddProductView({ navigation }) {
         });
       }
       else {
-        setIsVisible(true)
+        showAlert()
       }
       return () => {
         setProduct({});
@@ -60,6 +60,20 @@ export default function AddProductView({ navigation }) {
     });
   };
 
+  const showAlert=()=>{
+    Alert.alert('Info','Authentication Required',[
+      {
+        text:'Login',
+        style:'default',
+        onPress:()=>navigation.navigate('SignIn')
+      },
+      {
+        text:'Annuler',
+        // onPress:()=>navigation.goBack()
+        style:'cancel'
+      }
+    ])
+  }  
   return (
     <View style={{ marginBottom: 70 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -171,7 +185,6 @@ export default function AddProductView({ navigation }) {
         data={product.images}
         onClick={() => navigation.navigate("ImageBrowser")}
       />
-      <AuthModal onAccept={()=>console.log('accept')} onReject={()=>console.log('reject')} visible={isVisible} />
       <CategoryModal ref={(el) => (Modals[1] = el)} onClick={chooseCategory} />
     </View>
   );
