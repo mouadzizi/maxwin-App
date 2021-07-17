@@ -3,9 +3,9 @@ import { View, Modal,Text,Pressable } from "react-native";
 import { styles } from "./AuthModal.style";
 import TextView from '../../../Components/TextView/TextView'
 
-export default function AuthModal({ visible,onAccept,onReject }) {
+export default function AuthModal({ onAccept,onReject,onClose }) {
   return (
-    <Modal  animationType="slide" visible={visible}>
+    <Modal  animationType="slide" onRequestClose={onClose} visible={true}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <TextView style={styles.modalText}>Authentication required</TextView>

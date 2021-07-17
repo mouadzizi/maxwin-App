@@ -28,16 +28,16 @@ export default function AddProductView({ navigation }) {
       const user = auth.currentUser;
       if(user){
         setIsVisible(false)
-        getPhotos().then((items) => {
-          const imgs = JSON.parse(items);
-          if (imgs) {
-            setProduct({ ...product, images: imgs });
-          }
-        });
       }
       else {
         showAlert()
       }
+      getPhotos().then((items) => {
+        const imgs = JSON.parse(items);
+        if (imgs) {
+          setProduct({ ...product, images: imgs });
+        }
+      });
       return () => {
         setProduct({});
         AsyncStorage.clear();
