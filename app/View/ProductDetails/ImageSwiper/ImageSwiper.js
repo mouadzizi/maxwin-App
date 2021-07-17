@@ -24,42 +24,44 @@ export default function ImageSwiper({ images, onClick }) {
           </TouchableWithoutFeedback>
         ))}
       </Swiper>
+
       <FAB
-      title="Like"
+        style={{ top: 190, right: 20, zIndex: 1, position: "absolute" }}
+        color="rgba(255, 255, 255, 0.8)"
         icon={
-          isLiked ? (
-            <AntDesign name="like1" size={23} color={COLORS.secondary} />
-          ) : (
-            <AntDesign name="like2" size={23} color="white" />
-          )
+          <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
         }
-        color={COLORS.primary}
-        style={{ top: 470, right: 20, zIndex: 1 ,position: "absolute" }}
-        onPress={() => setIsLiked(!isLiked)}
-      />
-      <FAB
-        style={{ top: 250, right: 20, position: "absolute" }}
-        color={COLORS.primary}
-        icon={<FontAwesome name="whatsapp" size={28} color="white" />}
         onPress={() => alert("Whats app")}
       />
       <FAB
         icon={<AntDesign name="sharealt" size={25} color="white" />}
         color={COLORS.primary}
-        style={{ top: 310, right: 20, position: "absolute" }}
+        style={{ top: 250, right: 20, position: "absolute" }}
         onPress={() => alert("Partagé")}
       />
       <FAB
         icon={
           isFavorite ? (
-            <AntDesign name="heart" size={23} color={COLORS.secondary} />
+            <AntDesign name="heart" size={23} color={COLORS.third} />
           ) : (
             <AntDesign name="hearto" size={23} color="white" />
           )
         }
         color={COLORS.primary}
-        style={{ top: 370, right: 20, position: "absolute" }}
+        style={{ top: 310, right: 20, position: "absolute" }}
         onPress={() => setIsFavorite(!isFavorite)}
+      />
+      <FAB
+        icon={
+          isLiked ? (
+            <AntDesign name="like1" size={23} color={COLORS.third} />
+          ) : (
+            <AntDesign name="like2" size={23} color="white" />
+          )
+        }
+        color={COLORS.primary}
+        style={{ top: 370, right: 20, position: "absolute" }}
+        onPress={() => setIsLiked(!isLiked)}
       />
     </>
   );

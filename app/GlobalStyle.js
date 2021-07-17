@@ -66,7 +66,7 @@ const COLORS = {
   },
   primary: "#232553",
   secondary: "#43A147",
-  third: '#43A147',
+  third: '#F16E44',
   text: "#000",
 };
 
