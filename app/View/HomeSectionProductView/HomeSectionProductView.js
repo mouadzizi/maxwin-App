@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-
-import { View, FlatList } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import Product from "../../Components/Product/Product";
 import styles from "./HomeSectionProductView.style";
 import HeaderCategories from "../../Components/HeaderCategories";
 import { getItemsByCollection } from "../../API/APIFunctions";
+import Skeleton from './Skeleton'
+
 export default function HomeSectionProductView({ navigation, route }) {
   const [products, setProducts] = useState([]);
 
@@ -31,16 +32,23 @@ export default function HomeSectionProductView({ navigation, route }) {
     ),
     []
   );
-  const renderHeader = () => <HeaderCategories  navigation={navigation}/>;
+  const renderHeader = () => <HeaderCategories navigation={navigation} />;
   const keyExtractor = useCallback((item) => item.id, []);
   return (
     <View style={styles.container}>
-      <FlatList
-        data={products}
-        keyExtractor={keyExtractor}
-        ListHeaderComponent={renderHeader}
-        renderItem={renderItem}
-      />
+      {products.length > 1 ? (
+        <FlatList
+          data={products}
+          keyExtractor={keyExtractor}
+          ListHeaderComponent={renderHeader}
+          renderItem={renderItem}
+        />
+      ) : (
+        <>
+        <Skeleton />
+        <Skeleton />
+        </>
+      )}
     </View>
   );
 }
