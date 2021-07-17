@@ -17,7 +17,6 @@ import Chip from '../../../Components/Chip/Chip'
             this.modal.current.open()
         }
     }
-
     render() {
         return (
             <Modalize
@@ -31,6 +30,7 @@ import Chip from '../../../Components/Chip/Chip'
                 style:{flex:1,padding:5}
 
             }}
+            onClose={this.props.onClose}
             />
         )
     }

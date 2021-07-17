@@ -13,9 +13,12 @@ import ImageModal from "./Modals/ImageModal";
 import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "./Modals/CategoryModal";
+import {auth} from '../../API/Firebase'
+import AuthModal from './AuthModal/AuthModal'
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
+  const [isVisible, setIsVisible] = useState(false)
   let Modals = [];
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
@@ -23,12 +26,18 @@ export default function AddProductView({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      getPhotos().then((items) => {
-        const imgs = JSON.parse(items);
-        if (imgs) {
-          setProduct({ ...product, images: imgs });
-        }
-      });
+      const user = auth.currentUser;
+      if(user){
+        getPhotos().then((items) => {
+          const imgs = JSON.parse(items);
+          if (imgs) {
+            setProduct({ ...product, images: imgs });
+          }
+        });
+      }
+      else {
+        setIsVisible(true)
+      }
       return () => {
         setProduct({});
         AsyncStorage.clear();
@@ -147,7 +156,8 @@ export default function AddProductView({ navigation }) {
           //   !product.title ||
           //   !product.price ||
           //   !product.city ||
-          //   !product.category
+          //   !product.category ||
+          //   !product.images
           // }
           title="Suivant"
           style={{ marginBottom: 40 }}
@@ -161,6 +171,7 @@ export default function AddProductView({ navigation }) {
         data={product.images}
         onClick={() => navigation.navigate("ImageBrowser")}
       />
+      <AuthModal onAccept={()=>console.log('accept')} onReject={()=>console.log('reject')} visible={isVisible} />
       <CategoryModal ref={(el) => (Modals[1] = el)} onClick={chooseCategory} />
     </View>
   );

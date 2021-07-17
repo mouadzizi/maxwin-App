@@ -38,6 +38,7 @@ export default function InformationStep({ navigation, route }) {
   };
 
   const addChip = (title, active) => {
+    console.log(title);
     if (active) {
       selectedChips.push(title);
     } else {
@@ -46,6 +47,9 @@ export default function InformationStep({ navigation, route }) {
     }
     selectedChips = [...new Set(selectedChips)];
   };
+  const saveChips = () => {
+    setProduct({...product,chips: selectedChips})
+  }
 
   return (
     <View>
@@ -404,7 +408,7 @@ export default function InformationStep({ navigation, route }) {
           style={{ marginBottom: 40, marginTop: 20 }}
         />
       </ScrollView>
-      <ChipModal ref={(curRef) => (modalRef = curRef)} onClick={addChip} />
+      <ChipModal onClose={saveChips} ref={(curRef) => (modalRef = curRef)} onClick={addChip} />
     </View>
   );
 }
