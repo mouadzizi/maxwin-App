@@ -1,17 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
-import {
-  Entypo,
-  AntDesign,
-  Feather,
-  FontAwesome5,
-} from "react-native-vector-icons";
+import { AntDesign, Feather } from "react-native-vector-icons";
 
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
-import CashOnDelivery from "../../../icons/CashOnDelivery"
-import PriceTag from "../../../icons/PriceTag"
+import CashOnDelivery from "../../../icons/CashOnDelivery";
+import PriceTag from "../../../icons/PriceTag";
 import Row from "./InfoRow";
 
 import Equipement from "./Equipement";
@@ -34,28 +29,30 @@ export default function ProductInformation({ product }) {
           {product.price} DH
         </TextView>
       </View>
-      <View style={styles.container}>
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={20}
-          style={styles.headerSt}
-        >
-          Services Disponibles
-        </TextView>
-        <Divider width="95%" />
-        {product.negotiable &&
-          (
+
+      {(product.negotiable ||
+        product.goodState ||
+        product.cashOnDelivery ||
+        product.delivery) && (
+        <View style={styles.container}>
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={20}
+            style={styles.headerSt}
+          >
+            Services Disponibles
+          </TextView>
+          <Divider width="95%" />
+          {product.negotiable && (
             <View style={styles.row}>
               <PriceTag />
-              <TextView
-                fontFamily="Source-Regular"
-                fontSize={20}>
+              <TextView fontFamily="Source-Regular" fontSize={20}>
                 Prix négociable
               </TextView>
             </View>
           )}
 
-        {product.goodState && (
+          {product.goodState && (
             <View style={styles.row}>
               <AntDesign name="like2" color={COLORS.primary} size={30} />
               <TextView
@@ -68,7 +65,7 @@ export default function ProductInformation({ product }) {
             </View>
           )}
 
-        {product.goodState  && (
+          {product.delivery && (
             <View style={styles.row}>
               <Feather name="truck" color={COLORS.primary} size={30} />
               <TextView
@@ -80,7 +77,7 @@ export default function ProductInformation({ product }) {
               </TextView>
             </View>
           )}
-        {product.goodState && (
+          {product.cashOnDelivery && (
             <View style={styles.row}>
               <CashOnDelivery />
               <TextView
@@ -92,7 +89,9 @@ export default function ProductInformation({ product }) {
               </TextView>
             </View>
           )}
-      </View>
+        </View>
+      )}
+
       {product.description && (
         <View style={styles.container}>
           <TextView
@@ -142,8 +141,6 @@ export default function ProductInformation({ product }) {
         )}
       </View>
       <Equipement />
-      
-
     </>
   );
 }

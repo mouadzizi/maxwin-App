@@ -18,5 +18,8 @@ export default StyleSheet.create({
   textInfo:{
     marginHorizontal: 20,
     color: COLORS.primary
+  },
+  headerSt:{
+    color: COLORS.secondary
   }
 });

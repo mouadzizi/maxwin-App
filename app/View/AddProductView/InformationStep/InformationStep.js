@@ -343,7 +343,9 @@ export default function InformationStep({ navigation, route }) {
             iconRight
             checkedColor={COLORS.secondary}
             checked={product.goodState}
-            onPress={() => setProduct({...product,goodState:!product.goodState})}
+            onPress={() =>
+              setProduct({ ...product, goodState: !product.goodState })
+            }
           />
 
           <CheckBox
@@ -352,7 +354,9 @@ export default function InformationStep({ navigation, route }) {
             iconRight
             checkedColor={COLORS.secondary}
             checked={product.negotiable}
-            onPress={() => setProduct({...product,negotiable:!product.negotiable})}
+            onPress={() =>
+              setProduct({ ...product, negotiable: !product.negotiable })
+            }
           />
         </View>
 
@@ -363,7 +367,12 @@ export default function InformationStep({ navigation, route }) {
             iconRight
             checkedColor={COLORS.secondary}
             checked={product.cashOnDelivery}
-            onPress={() => setProduct({...product,cashOnDelivery:!product.cashOnDelivery})}
+            onPress={() =>
+              setProduct({
+                ...product,
+                cashOnDelivery: !product.cashOnDelivery,
+              })
+            }
           />
 
           <CheckBox
@@ -372,7 +381,9 @@ export default function InformationStep({ navigation, route }) {
             iconRight
             checkedColor={COLORS.secondary}
             checked={product.delivery}
-            onPress={() => setProduct({...product,delivery:!product.delivery})}
+            onPress={() =>
+              setProduct({ ...product, delivery: !product.delivery })
+            }
           />
         </View>
 
@@ -388,9 +399,7 @@ export default function InformationStep({ navigation, route }) {
 
         <ButtonFill
           loading={loading}
-          onClick={
-            ()=>console.log(product.chips)
-          }
+          onClick={submit}
           title="Valider"
           style={{ marginBottom: 40, marginTop: 20 }}
         />
