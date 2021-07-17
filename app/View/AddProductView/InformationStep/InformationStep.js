@@ -13,13 +13,8 @@ import ChipModal from "../Modals/ChipsModal";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
-  const [product, setProduct] = useState({...prevProduct, goodState, negotiable, delivery, cashOnDelivery});
+  const [product, setProduct] = useState(prevProduct);
   const [loading, setLoading] = useState(false);
-
-  const [goodState, setGoodState] = useState(false);
-  const [negotiable, setNegotiable] = useState(false);
-  const [delivery, setDelivery] = useState(false);
-  const [cashOnDelivery, setCashOnDelivery] = useState(false);
 
   let modalRef;
 
@@ -347,8 +342,8 @@ export default function InformationStep({ navigation, route }) {
             title="En bonne état    "
             iconRight
             checkedColor={COLORS.secondary}
-            checked={goodState}
-            onPress={() => setGoodState(!goodState)}
+            checked={product.goodState}
+            onPress={() => setProduct({...product,goodState:!product.goodState})}
           />
 
           <CheckBox
@@ -356,8 +351,8 @@ export default function InformationStep({ navigation, route }) {
             title="Negociable"
             iconRight
             checkedColor={COLORS.secondary}
-            checked={negotiable}
-            onPress={() => setNegotiable(!negotiable)}
+            checked={product.negotiable}
+            onPress={() => setProduct({...product,negotiable:!product.negotiable})}
           />
         </View>
 
@@ -367,8 +362,8 @@ export default function InformationStep({ navigation, route }) {
             title="Cash on delevry"
             iconRight
             checkedColor={COLORS.secondary}
-            checked={cashOnDelivery}
-            onPress={() => setCashOnDelivery(!cashOnDelivery)}
+            checked={product.cashOnDelivery}
+            onPress={() => setProduct({...product,cashOnDelivery:!product.cashOnDelivery})}
           />
 
           <CheckBox
@@ -376,8 +371,8 @@ export default function InformationStep({ navigation, route }) {
             title="Laivraison  "
             iconRight
             checkedColor={COLORS.secondary}
-            checked={delivery}
-            onPress={() => setDelivery(!delivery)}
+            checked={product.delivery}
+            onPress={() => setProduct({...product,delivery:!product.delivery})}
           />
         </View>
 
@@ -393,7 +388,9 @@ export default function InformationStep({ navigation, route }) {
 
         <ButtonFill
           loading={loading}
-          onClick={submit}
+          onClick={
+            ()=>console.log(product.chips)
+          }
           title="Valider"
           style={{ marginBottom: 40, marginTop: 20 }}
         />

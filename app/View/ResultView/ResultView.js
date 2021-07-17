@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList } from "react-native";
 import Product from "../../Components/Product/Product";
-import { getItemsByCollection } from "../../API/APIFunctions";
+import { getItemsByCategory } from "../../API/APIFunctions";
 import styles from './ResultView.style'
 
-export default function ResultView({ route }) {
+export default function ResultView({ route,navigation }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const { collection } = route.params;
-    getItemsByCollection(collection, 10)
+    getItemsByCategory(collection, 10)
       .then((items) => {
         setProducts(items);
       })
       .catch(({ message }) => console.warn(message));
-    return () => {};
+    return () => { };
   }, []);
 
   const renderItem = useCallback(

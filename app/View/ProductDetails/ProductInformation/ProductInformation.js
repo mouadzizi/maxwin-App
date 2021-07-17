@@ -1,7 +1,13 @@
 import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
-import { AntDesign, Feather } from "react-native-vector-icons";
+import {
+  Entypo,
+  AntDesign,
+  Feather,
+  FontAwesome5,
+} from "react-native-vector-icons";
+
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
 import CashOnDelivery from "../../../icons/CashOnDelivery"
@@ -12,7 +18,7 @@ import Equipement from "./Equipement";
 
 import styles from "./ProductInformation.style";
 
-export default function ProductInformation({ negotiable, goodState, product }) {
+export default function ProductInformation({ product }) {
   return (
     <>
       <View style={styles.container}>
@@ -28,7 +34,6 @@ export default function ProductInformation({ negotiable, goodState, product }) {
           {product.price} DH
         </TextView>
       </View>
-
       <View style={styles.container}>
         <TextView
           fontFamily="Source-Regular"
@@ -38,21 +43,19 @@ export default function ProductInformation({ negotiable, goodState, product }) {
           Services Disponibles
         </TextView>
         <Divider width="95%" />
-        {negotiable ||
-          (true && (
+        {product.negotiable &&
+          (
             <View style={styles.row}>
               <PriceTag />
               <TextView
                 fontFamily="Source-Regular"
-                fontSize={20}
-                style={[styles.textSt, { marginLeft: 5 }]}
-              >  Prix négociable
+                fontSize={20}>
+                Prix négociable
               </TextView>
             </View>
-          ))}
+          )}
 
-        {goodState ||
-          (true && (
+        {product.goodState && (
             <View style={styles.row}>
               <AntDesign name="like2" color={COLORS.primary} size={30} />
               <TextView
@@ -63,10 +66,9 @@ export default function ProductInformation({ negotiable, goodState, product }) {
                 En bonne état
               </TextView>
             </View>
-          ))}
+          )}
 
-        {goodState ||
-          (true && (
+        {product.goodState  && (
             <View style={styles.row}>
               <Feather name="truck" color={COLORS.primary} size={30} />
               <TextView
@@ -77,22 +79,20 @@ export default function ProductInformation({ negotiable, goodState, product }) {
                 Livraison
               </TextView>
             </View>
-          ))}
-
-        {goodState ||
-          (true && (
+          )}
+        {product.goodState && (
             <View style={styles.row}>
               <CashOnDelivery />
               <TextView
                 fontFamily="Source-Regular"
                 fontSize={20}
                 style={[styles.textSt, { marginLeft: 10 }]}
-              >Paiement en livraison
+              >
+                Paiement en livraison
               </TextView>
             </View>
-          ))}
+          )}
       </View>
-
       {product.description && (
         <View style={styles.container}>
           <TextView
@@ -112,7 +112,6 @@ export default function ProductInformation({ negotiable, goodState, product }) {
           </TextView>
         </View>
       )}
-
       <View style={styles.container}>
         <TextView
           fontFamily="Source-Regular"
@@ -126,27 +125,22 @@ export default function ProductInformation({ negotiable, goodState, product }) {
         <Row detail="Catégorie" value={product.category[1]} />
         <Row detail="Ville" value={product.city} />
         {product.etat && <Row detail="Etat de produit" value={product.etat} />}
-
         {product.marqueVoiture && (
           <Row detail="Marque de Voiture" value={product.marqueVoiture} />
         )}
-
         {product.anneeFabrication && (
           <Row detail="Année de Fabrication" value={product.anneeFabrication} />
         )}
-
         {product.kilometrage && (
           <Row detail="Kilometrage" value={product.kilometrage + " Km"} />
         )}
         {product.transaction && (
           <Row detail="Transaction" value={product.transaction} />
         )}
-
         {product.puissanceFiscale && (
           <Row detail="Puissance Fiscale" value={product.puissanceFiscale} />
         )}
       </View>
-
       <Equipement />
       
 
