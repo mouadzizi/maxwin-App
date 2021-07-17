@@ -10,6 +10,8 @@ import ProductDetails from "../../../View/ProductDetails";
 import ResultView from "../../../View/ResultView";
 import ImagePreview from "../../../View/ImagePreview";
 import FilterView from "../../../View/FilterView";
+import SignIn from "../../../OnBording/SignIn";
+import SignUp from "../../../OnBording/SignUp";
 
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
@@ -149,6 +151,29 @@ export default function MainStack({ navigation }) {
           component={FilterView}
           options={{
             title: "Filter",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{
+            title: "SignIn",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{
+            title: "SignUp",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },

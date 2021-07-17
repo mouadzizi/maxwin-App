@@ -16,6 +16,8 @@ import CategoryModal from "./Modals/CategoryModal";
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
+  const [userConnected, setUserConnected] = useState(false);
+
   let Modals = [];
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
@@ -53,109 +55,129 @@ export default function AddProductView({ navigation }) {
 
   return (
     <View style={{ marginBottom: 70 }}>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={15}
-          style={styles.title}
+      {userConnected ? (
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
         >
-          veuillez sélectionner des images
-        </TextView>
-
-        <AddProductStep
-          nbImages={product.images ? product.images.length : 0}
-          onclick={() => Modals[0].openModal()}
-          title="Choisir des images"
-          iconName="camera"
-        />
-
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={15}
-          style={styles.title}
-        >
-          veuillez sélectionner votre Categorie
-        </TextView>
-
-        <AddProductStep
-          categorySelected={product.category ? product.category[1] : null}
-          onclick={openModalCategory}
-          title="Choisir votre Categorie"
-          iconName="list"
-        />
-
-        <TextView
-          fontFamily="Source-Regular"
-          fontSize={15}
-          style={styles.title}
-        >
-          Informations genérales
-        </TextView>
-
-        <Input
-          label="Titre *"
-          placeholder="Merci d'entrer le Nom exact de votre article"
-          containerStyle={{ marginTop: 20 }}
-          style={{ fontSize: 15 }}
-          labelStyle={{ color: COLORS.primary }}
-          onChangeText={(value) => setProduct({ ...product, title: value })}
-          value={product.title}
-        />
-
-        <Input
-          label="Prix *"
-          keyboardType="numeric"
-          placeholder="Merci d'entrer le prix de votre article"
-          style={{ fontSize: 15 }}
-          labelStyle={{ color: COLORS.primary, fontSize: 15 }}
-          onChangeText={(value) => setProduct({ ...product, price: value })}
-          value={product.price}
-        />
-
-        {/* Picker for city */}
-        <View style={styles.pickerView}>
-          <Text style={styles.label}>Ville *</Text>
-          <Picker
-            style={styles.pickerInput}
-            mode="dialog"
-            dropdownIconColor={COLORS.primary}
-            selectedValue={product.city}
-            onValueChange={(value) => setProduct({ ...product, city: value })}
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={15}
+            style={styles.title}
           >
-            <Picker.Item
-              label="Choisissez une Ville"
-              value=""
-              color={COLORS.Grey[400]}
-            />
-            <Picker.Item label="AL Hoceima" value="ALHoceima" />
-            <Picker.Item label="Agadir" value="Agadir" />
-            <Picker.Item label="Casablanca" value="Casablanca" />
-            <Picker.Item label="Dakhla" value="Dakhla" />
-            <Picker.Item label="Fès" value="Fès" />
-            <Picker.Item label="Kénitra" value="Kénitra" />
-            <Picker.Item label="Marrakech" value="Marrakech" />
-            <Picker.Item label="Meknès" value="Meknès" />
-            <Picker.Item label="Ouajda" value="Ouajda" />
-            <Picker.Item label="Rabat" value="Rabat" />
-            <Picker.Item label="Tanger" value="Tanger" />
-            <Picker.Item label="Tetouan" value="Tetouan" />
-          </Picker>
-        </View>
+            veuillez sélectionner des images
+          </TextView>
 
-        <ButtonFill
-          // disable={
-          //   !product.title ||
-          //   !product.price ||
-          //   !product.city ||
-          //   !product.category
-          // }
-          title="Suivant"
-          style={{ marginBottom: 40 }}
-          onClick={NextHandler}
-          loading={false}
-        />
-      </ScrollView>
+          <AddProductStep
+            nbImages={product.images ? product.images.length : 0}
+            onclick={() => Modals[0].openModal()}
+            title="Choisir des images"
+            iconName="camera"
+          />
 
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={15}
+            style={styles.title}
+          >
+            veuillez sélectionner votre Categorie
+          </TextView>
+
+          <AddProductStep
+            categorySelected={product.category ? product.category[1] : null}
+            onclick={openModalCategory}
+            title="Choisir votre Categorie"
+            iconName="list"
+          />
+
+          <TextView
+            fontFamily="Source-Regular"
+            fontSize={15}
+            style={styles.title}
+          >
+            Informations genérales
+          </TextView>
+
+          <Input
+            label="Titre *"
+            placeholder="Merci d'entrer le Nom exact de votre article"
+            containerStyle={{ marginTop: 20 }}
+            style={{ fontSize: 15 }}
+            labelStyle={{ color: COLORS.primary }}
+            onChangeText={(value) => setProduct({ ...product, title: value })}
+            value={product.title}
+          />
+
+          <Input
+            label="Prix *"
+            keyboardType="numeric"
+            placeholder="Merci d'entrer le prix de votre article"
+            style={{ fontSize: 15 }}
+            labelStyle={{ color: COLORS.primary, fontSize: 15 }}
+            onChangeText={(value) => setProduct({ ...product, price: value })}
+            value={product.price}
+          />
+
+          {/* Picker for city */}
+          <View style={styles.pickerView}>
+            <Text style={styles.label}>Ville *</Text>
+            <Picker
+              style={styles.pickerInput}
+              mode="dialog"
+              dropdownIconColor={COLORS.primary}
+              selectedValue={product.city}
+              onValueChange={(value) => setProduct({ ...product, city: value })}
+            >
+              <Picker.Item
+                label="Choisissez une Ville"
+                value=""
+                color={COLORS.Grey[400]}
+              />
+              <Picker.Item label="AL Hoceima" value="ALHoceima" />
+              <Picker.Item label="Agadir" value="Agadir" />
+              <Picker.Item label="Casablanca" value="Casablanca" />
+              <Picker.Item label="Dakhla" value="Dakhla" />
+              <Picker.Item label="Fès" value="Fès" />
+              <Picker.Item label="Kénitra" value="Kénitra" />
+              <Picker.Item label="Marrakech" value="Marrakech" />
+              <Picker.Item label="Meknès" value="Meknès" />
+              <Picker.Item label="Ouajda" value="Ouajda" />
+              <Picker.Item label="Rabat" value="Rabat" />
+              <Picker.Item label="Tanger" value="Tanger" />
+              <Picker.Item label="Tetouan" value="Tetouan" />
+            </Picker>
+          </View>
+
+          <ButtonFill
+            // disable={
+            //   !product.title ||
+            //   !product.price ||
+            //   !product.city ||
+            //   !product.category
+            // }
+            title="Suivant"
+            style={{ marginBottom: 40 }}
+            onClick={NextHandler}
+            loading={false}
+          />
+        </ScrollView>
+      ) : (
+        <>
+          <Text> usser need to be connected</Text>
+          <ButtonFill
+            // disable={
+            //   !product.title ||
+            //   !product.price ||
+            //   !product.city ||
+            //   !product.category
+            // }
+            title="SignIn"
+            style={{ marginBottom: 40 }}
+            onClick={()=> navigation.navigate('SignIn')}
+            loading={false}
+          />
+        </>
+      )}
       <ImageModal
         ref={(el) => (Modals[0] = el)}
         data={product.images}
