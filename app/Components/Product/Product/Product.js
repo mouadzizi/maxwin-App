@@ -1,6 +1,6 @@
 import React from "react";
-import { Image } from "react-native";
-import { View, Text } from "react-native";
+import { Image } from "react-native-elements";
+import { View, Text, ActivityIndicator } from "react-native";
 import styles from "./Product.style";
 import TextView from "../../../Components/TextView";
 import ButtonOutlined from "../../../Components/Button/ButtonOutlined";
@@ -46,25 +46,33 @@ export default function Product({
         </View>
       </View>
 
-      {numberImages === 1 ? (
+      {numberImages === 1 && (
         <View style={styles.imageContainer}>
           <View style={{ flex: 1 }}>
             <Image
               source={{ uri: images[0] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
+              placeholderStyle={{ backgroundColor: "#bbb" }}
+              PlaceholderContent={
+                <ActivityIndicator color="white" size="large" />
+              }
             />
           </View>
         </View>
-      ) : null}
+      )}
 
-      {numberImages === 2 ? (
+      {numberImages === 2 && (
         <View style={styles.imageContainer}>
           <View style={{ flex: 1, margin: 1 }}>
             <Image
               source={{ uri: images[0] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
+              placeholderStyle={{ backgroundColor: "#bbb" }}
+              PlaceholderContent={
+                <ActivityIndicator color="white" size="large" />
+              }
             />
           </View>
 
@@ -72,19 +80,27 @@ export default function Product({
             <Image
               source={{ uri: images[1] }}
               style={{ height: "100%", width: "100%" }}
-              resizeMode="stretch"
+              resizeMode="cover"
+              placeholderStyle={{ backgroundColor: "#bbb" }}
+              PlaceholderContent={
+                <ActivityIndicator color="white" size="large" />
+              }
             />
           </View>
         </View>
-      ) : null}
+      )}
 
-      {numberImages > 2 ? (
+      {numberImages > 2 && (
         <View style={styles.imageContainer}>
           <View style={{ flex: 2, margin: 1 }}>
             <Image
               source={{ uri: images[0] }}
               style={{ height: "100%", width: "100%" }}
               resizeMode="cover"
+              placeholderStyle={{ backgroundColor: "#bbb" }}
+              PlaceholderContent={
+                <ActivityIndicator color="white" size="large" />
+              }
             />
           </View>
 
@@ -94,6 +110,10 @@ export default function Product({
                 source={{ uri: images[1] }}
                 style={{ height: "100%", width: "100%" }}
                 resizeMode="cover"
+                placeholderStyle={{ backgroundColor: "#bbb" }}
+                PlaceholderContent={
+                  <ActivityIndicator color="white" size="large" />
+                }
               />
             </View>
 
@@ -102,11 +122,15 @@ export default function Product({
                 source={{ uri: images[2] }}
                 style={{ height: "100%", width: "100%" }}
                 resizeMode="cover"
+                placeholderStyle={{ backgroundColor: "#bbb" }}
+                PlaceholderContent={
+                  <ActivityIndicator color="white" size="large" />
+                }
               />
             </View>
           </View>
         </View>
-      ) : null}
+      )}
 
       <View style={styles.informationContainer}>
         <View style={styles.informationContainerSection1}>
