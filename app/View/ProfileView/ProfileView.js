@@ -3,6 +3,7 @@ import { View, Text, Alert } from "react-native";
 import styles from "./ProfileView.style";
 import ProfileSection from "./ProfileSection";
 import {GlobalStyle} from '../../GlobalStyle'
+import { auth } from "../../API/Firebase";
 export default function ProfileView() {
   return (
     <View style={styles.container}>
@@ -30,7 +31,7 @@ export default function ProfileView() {
       <ProfileSection
         title="FAQ"
         subTitle="Questions fréquemment"
-        onClick={() => Alert.alert("Web View for the FAQ")}
+        
         iconName="FAQ"
       />
     </View>

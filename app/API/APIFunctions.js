@@ -1,10 +1,17 @@
 import { auth, db, st } from './Firebase'
 import firebase from 'firebase';
+
 export const signIn = async (email, password) => {
    const user = await auth.signInWithEmailAndPassword(email, password)
    return user.user
 }
-
+export const createUser = async ( newUser ) => {
+   const userCrendtial = await auth.createUserWithEmailAndPassword(newUser.email, newUser.password)
+   if (userCrendtial) {
+      await addNewUser(newUser)
+   }
+   
+}
 export const signOut = async () => {
    return auth.signOut()
 }
@@ -56,4 +63,10 @@ export const getItemsByCategory = async (category, limit) => {
       items.push({ ...doc.data(), id: doc.id })
    })
    return items
+}
+
+const addNewUser = async(user) =>{
+  await db.collection('users').add(user)
+
+   
 }

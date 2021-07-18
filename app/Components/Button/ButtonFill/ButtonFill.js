@@ -6,16 +6,16 @@ import styles from './ButtonFill.style'
 
 export default function ButtonFill({onClick, title, style, disable,loading}) {
     const handlerClick = () => {
-        if(!disable){
+        if(!loading){
             onClick();
         }
     } 
     return (
         <TouchableOpacity 
     
-        style={disable ? [styles.containerDisable, style] : [styles.container, style]}
+        style={loading ? [styles.containerDisable, style] : [styles.container, style]}
         onPress={handlerClick}>
-            <ActivityIndicator animating={loading} size='large' color='white' style={{position:'absolute', left:'25%'}} />
+            <ActivityIndicator animating={loading} size='large' color='white' style={{position:'absolute', left:'10%'}} />
             <TextView fontFamily="Source-Regular"  fontSize={20} style={{color : 'white'}}>{title}</TextView>
         </TouchableOpacity>
     )

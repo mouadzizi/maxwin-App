@@ -14,7 +14,6 @@ import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "./Modals/CategoryModal";
 import {auth} from '../../API/Firebase'
-import AuthModal from './AuthModal/AuthModal'
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
@@ -25,13 +24,16 @@ export default function AddProductView({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      const user = auth.currentUser;
-      if(user){
-        setIsVisible(false)
-      }
-      else {
-        showAlert()
-      }
+      const _unsub = auth.onAuthStateChanged(user=>{
+        console.log(user);
+        if (user) {
+          
+        }
+        else {
+          showAlert()
+        }
+      })
+
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
         if (imgs) {
@@ -41,6 +43,7 @@ export default function AddProductView({ navigation }) {
       return () => {
         setProduct({});
         AsyncStorage.clear();
+        _unsub()
       };
     }, [])
   );
@@ -65,7 +68,7 @@ export default function AddProductView({ navigation }) {
       {
         text:'Login',
         style:'default',
-        onPress:()=>navigation.navigate('SignIn')
+        onPress:()=>navigation.navigate('SignUp')
       },
       {
         text:'Annuler',
@@ -73,7 +76,7 @@ export default function AddProductView({ navigation }) {
         style:'cancel'
       }
     ])
-  }  
+  }
   return (
     <View style={{ marginBottom: 70 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
