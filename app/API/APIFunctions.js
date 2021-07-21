@@ -7,6 +7,9 @@ export const signIn = async (email, password) => {
 }
 export const createUser = async ( newUser ) => {
    const userCrendtial = await auth.createUserWithEmailAndPassword(newUser.email.trim(), newUser.password.trim())
+   if (userCrendtial.user) {
+      addNewUser(userCrendtial.user)
+   }
    return userCrendtial.user
    
 }
@@ -15,7 +18,6 @@ export const signOut = async () => {
 }
 export const anonymouslySignIn = async () => {
    const user = await auth.signInAnonymously();
-
    return user.user;
 }
 
@@ -64,7 +66,9 @@ export const getItemsByCategory = async (category, limit) => {
 }
 
 const addNewUser = async(user) =>{
-  await db.collection('users').add(user)
+  await db.collection('users').add({
+     
+  })
 
    
 }
