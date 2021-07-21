@@ -31,7 +31,7 @@ export default function ProfileView() {
       <ProfileSection
         title="FAQ"
         subTitle="Questions fréquemment"
-        
+        onClick={()=>auth.signOut()}
         iconName="FAQ"
       />
     </View>

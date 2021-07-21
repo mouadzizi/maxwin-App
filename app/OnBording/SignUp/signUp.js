@@ -4,22 +4,21 @@ import styles from "./signUp.style";
 import { Input } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import { createUser } from "../../API/APIFunctions";
-import {} from 'firebase/app'
 
 export default function signUp({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
 
   const createNewUser = () => {
-      setLoading(true)
+    setLoading(true);
     createUser(user)
-      .then(()=>{
-        navigation.goBack()
-        setLoading(false)
+      .then(() => {
+        navigation.navigate("BottomNavigation");
+        setLoading(false);
       })
-      .catch(({ message }) =>{
+      .catch(({ message }) => {
         alert(message);
-        setLoading(false)
+        setLoading(false);
       });
   };
   return (
@@ -27,7 +26,7 @@ export default function signUp({ navigation }) {
       <View style={styles.inputContainer}>
         <View style={styles.input}>
           <Input
-          keyboardType='email-address'
+            keyboardType="email-address"
             label="Email"
             placeholder="Entrer votre e-mail"
             autoCapitalize="none"
@@ -46,6 +45,12 @@ export default function signUp({ navigation }) {
         <ButtonFill
           onClick={createNewUser}
           loading={loading}
+          style={styles.button}
+          title="Sinscrire"
+        />
+        <ButtonFill
+          onClick={()=>navigation.navigate('BottomNavigation')}
+          loading={false}
           style={styles.button}
           title="Sinscrire"
         />

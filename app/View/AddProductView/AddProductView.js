@@ -24,16 +24,11 @@ export default function AddProductView({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      const _unsub = auth.onAuthStateChanged(user=>{
-        console.log(user);
-        if (user) {
-          
-        }
-        else {
-          showAlert()
-        }
-      })
-
+      const user = auth.currentUser;
+      if (user) {
+        console.log(user.email);
+      }
+      else showAlert()
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
         if (imgs) {
@@ -42,8 +37,7 @@ export default function AddProductView({ navigation }) {
       });
       return () => {
         setProduct({});
-        AsyncStorage.clear();
-        _unsub()
+        AsyncStorage.removeItem('selectedImage');
       };
     }, [])
   );
@@ -68,7 +62,7 @@ export default function AddProductView({ navigation }) {
       {
         text:'Login',
         style:'default',
-        onPress:()=>navigation.navigate('SignUp')
+        onPress:()=>navigation.navigate('SignIn')
       },
       {
         text:'Annuler',

@@ -6,10 +6,8 @@ export const signIn = async (email, password) => {
    return user.user
 }
 export const createUser = async ( newUser ) => {
-   const userCrendtial = await auth.createUserWithEmailAndPassword(newUser.email, newUser.password)
-   if (userCrendtial) {
-      await addNewUser(newUser)
-   }
+   const userCrendtial = await auth.createUserWithEmailAndPassword(newUser.email.trim(), newUser.password.trim())
+   return userCrendtial.user
    
 }
 export const signOut = async () => {

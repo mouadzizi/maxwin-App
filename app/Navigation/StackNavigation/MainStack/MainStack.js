@@ -157,7 +157,6 @@ export default function MainStack({ navigation }) {
             headerTintColor: "white",
           }}
         />
-
         <Stack.Screen
           name="SignIn"
           component={SignIn}
