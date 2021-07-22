@@ -38,7 +38,7 @@ export default StyleSheet.create({
     },
     informationContainerSection2:{
         height: 50,
-        flex: 2,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
