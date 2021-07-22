@@ -1,8 +1,31 @@
 import {StyleSheet} from 'react-native';
+import { COLORS } from '../../GlobalStyle';
 export default StyleSheet.create({
-    container: {
+    safeArea:{
         flex: 1,
-        alignItems:'center',
-        justifyContent:'center'
-    }
+        backgroundColor: '#ddd',
+    },
+    imageContainer:{
+        backgroundColor: COLORS.primary,
+        height: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomRightRadius: 100,
+    },
+    container: {
+        marginTop: 20,
+        paddingHorizontal: 20,
+        backgroundColor: '#ddd'
+    },
+    errorMessage:{
+        color: 'red',
+        fontSize: 12,
+        marginLeft: 10
+    },
+    welcomeText:{
+        color: COLORS.text,
+        fontSize: 17,
+        textAlign: 'center',
+        marginTop: 20
+    },
 });

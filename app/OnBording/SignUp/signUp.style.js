@@ -1,20 +1,26 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
+import { COLORS } from "../../GlobalStyle";
 export default StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent:'center',
-        padding:8,
-        
-    },
-    inputContainer:{
-        flex:0.5,
-        
-    },
-    input:{
-        marginVertical:20,
-    },
-    button:{
-        width:'70%',
-        alignSelf:'center'
-    }
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#ddd",
+  },
+  imageContainer: {
+    backgroundColor: COLORS.primary,
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomRightRadius: 100,
+  },
+  container: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+    backgroundColor: '#ddd'
+  },
+  welcomeText:{
+    color: COLORS.text,
+    fontSize: 17,
+    textAlign: 'center',
+    marginTop: 20
+},
 });

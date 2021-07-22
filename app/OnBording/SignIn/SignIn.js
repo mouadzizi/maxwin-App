@@ -1,35 +1,84 @@
 import React, { useState } from "react";
-import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
-import styles from "./SignIn.styles";
-import { Input, Button } from "react-native-elements";
+import { SafeAreaView, Image, View, ScrollView, Text } from "react-native";
+import { Input } from "react-native-elements";
 import { signIn } from "../../API/APIFunctions";
+import ButtonFill from "../../Components/Button/ButtonFill";
+import ButtonOutlined from "../../Components/Button/ButtonOutlined";
+import Devider from "../../Components/Divider";
+import TextView from "../../Components/TextView";
 
-export default function SignIn() {
+import styles from "./SignIn.styles";
+import { Fontisto, Entypo } from "react-native-vector-icons";
+import { COLORS } from "../../GlobalStyle";
+
+export default function SignIn({ navigation }) {
+  const [isError, setIsError] = useState(
+    "Votre email/mot de passe n'est pas correct"
+  );
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
   return (
-    <View style={styles.container}>
-      <Input
-      style={styles.input}
-        autoCapitalize="none"
-        placeholder="enter your Email"
-        label="Email"
-        onChangeText={(e) => setUser({ ...user, email: e.trim() })}
-      />
-      <Input
-        placeholder="Password"
-        label="Password"
-        onChangeText={(e) => setUser({ ...user, password: e.trim() })}
-        secureTextEntry
-      />
-      <Button
-        title="sign in"
-        onPress={() =>
-          signIn(user.email, user.password).then((user) => console.log(user))
-        }
-      />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.imageContainer}>
+        <Image
+          source={require("../../../assets/headerIcon.png")}
+          style={{ height: "100%", width: "60%" }}
+          resizeMode="contain"
+        />
+      </View>
+
+      <ScrollView style={styles.container}>
+        <Input
+          autoCapitalize="none"
+          rightIcon={<Fontisto name="email" size={24} color={COLORS.primary} />}
+          placeholder="enter your Email"
+          label="Email"
+          errorMessage={
+            user.email.length > 12 && !user.email.includes("@")
+              ? "Votre email n'est pas correct"
+              : ""
+          }
+          onChangeText={(e) => setUser({ ...user, email: e.trim() })}
+        />
+        <Input
+          placeholder="Password"
+          label="Password"
+          containerStyle={{ marginTop: 10 }}
+          errorMessage={
+            user.password.length < 7 && user.password.length > 0
+              ? "Votre Mot de Pass est très court"
+              : ""
+          }
+          rightIcon={<Entypo name="lock" size={24} color={COLORS.primary} />}
+          onChangeText={(e) => setUser({ ...user, password: e.trim() })}
+          secureTextEntry
+        />
+
+        {isError && <Text style={styles.errorMessage}>{isError}</Text>}
+
+        <ButtonFill
+          title="SE CONNECTER"
+          loading={false}
+          onClick={() =>
+            signIn(user.email, user.password).then((user) => console.log(user))
+          }
+          style={{ marginTop: 20 }}
+        />
+        
+        <Devider width="100%" style={{backgroundColor: COLORS.primary, marginTop: 10}}/>
+        <TextView style={styles.welcomeText} fontFamily="Source-Regular">
+          Si vous n'êtes pas encore utilisateur, veuillez vous inscrire avec
+        </TextView>
+
+        <ButtonOutlined
+          title="Créer un compte"
+          style={{ marginTop: 20 }}
+          onClick={() => navigation.navigate("SignUp")}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
