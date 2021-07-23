@@ -82,7 +82,6 @@ export default function signUp({ navigation }) {
         <ButtonFill
           title="INSCRIVEZ-VOUS"
           loading={false}
-          disable={true}
           onClick={createNewUser}
           style={{ marginTop: 20 }}
         />

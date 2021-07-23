@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableWithoutFeedback, Image } from "react-native";
 import { FAB } from "react-native-elements";
 import { FontAwesome, AntDesign } from "react-native-vector-icons";
 import Swiper from "react-native-swiper";
 import styles from "./ImageSwiper.style";
 import { COLORS } from "../../../GlobalStyle";
+import { auth, db } from "../../../API/Firebase";
+import { addToFavorite, removeFavorite } from "../../../API/APIFunctions";
 
-export default function ImageSwiper({ images, onClick }) {
+export default function ImageSwiper({ images, onClick, post }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    const _unsub = db
+      .collection("users")
+      .doc(user.uid)
+      .collection("favorite")
+      .onSnapshot((snapShot) => {
+        const isFav = snapShot.docs.some(({ id }) => id == post.id);
+        setIsFavorite(isFav);
+      });
+    return () => {
+      _unsub();
+      
+    };
+  }, []);
+
+  
+  const addOrRemoveFavorite = () => {
+    if (isFavorite) {
+      removeFavorite(post.id);
+    } else {
+      addToFavorite(user.uid, post).catch((err) => alert(err.message));
+    }
+  };
 
   return (
     <>
@@ -49,7 +76,7 @@ export default function ImageSwiper({ images, onClick }) {
         }
         color={COLORS.primary}
         style={{ top: 310, right: 20, position: "absolute" }}
-        onPress={() => setIsFavorite(!isFavorite)}
+        onPress={addOrRemoveFavorite}
       />
       <FAB
         icon={

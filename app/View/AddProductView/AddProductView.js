@@ -62,12 +62,12 @@ export default function AddProductView({ navigation }) {
       {
         text:'Login',
         style:'default',
-        onPress:()=>navigation.navigate('SignIn')
+        onPress:()=>navigation.navigate('SignUp')
       },
       {
         text:'Annuler',
         // onPress:()=>navigation.goBack()
-        style:'cancel'
+        style:"cancel"
       }
     ])
   }
