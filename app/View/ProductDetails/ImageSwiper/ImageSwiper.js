@@ -65,7 +65,7 @@ export default function ImageSwiper({ images, onClick, post, navigation }) {
       </Swiper>
 
       <FAB
-        style={{ top: 190, right: 20, zIndex: 1, position: "absolute" }}
+        style={{ top: "8%", right: 20, zIndex: 1, position: "absolute" }}
         color="rgba(255, 255, 255, 0.8)"
         icon={
           <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
@@ -75,7 +75,7 @@ export default function ImageSwiper({ images, onClick, post, navigation }) {
       <FAB
         icon={<AntDesign name="sharealt" size={25} color="white" />}
         color={COLORS.primary}
-        style={{ top: 250, right: 20, position: "absolute" }}
+        style={{ top: "12%", right: 20, position: "absolute" }}
         onPress={() => alert("Partagé")}
       />
       <FAB
@@ -87,7 +87,7 @@ export default function ImageSwiper({ images, onClick, post, navigation }) {
           )
         }
         color={COLORS.primary}
-        style={{ top: 310, right: 20, position: "absolute" }}
+        style={{ top: "16%", right: 20, position: "absolute" }}
         onPress={addOrRemoveFavorite}
       />
       <FAB
@@ -99,7 +99,7 @@ export default function ImageSwiper({ images, onClick, post, navigation }) {
           )
         }
         color={COLORS.primary}
-        style={{ top: 370, right: 20, position: "absolute" }}
+        style={{ top: "20%", right: 20, position: "absolute" }}
         onPress={() => setIsLiked(!isLiked)}
       />
     </>
