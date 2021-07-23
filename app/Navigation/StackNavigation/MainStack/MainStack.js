@@ -13,6 +13,11 @@ import FilterView from "../../../View/FilterView";
 import SignIn from "../../../OnBording/SignIn";
 import SignUp from "../../../OnBording/SignUp";
 
+import ProfileInformationView from "../../../View/ProfileInformationView";
+import ContactView from "../../../View/ContactView";
+import NotificationView from "../../../View/NotificationView";
+import FAQView from "../../../View/FAQView";
+
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
 import { COLORS } from "../../../GlobalStyle";
@@ -173,6 +178,54 @@ export default function MainStack({ navigation }) {
           component={SignUp}
           options={{
             title: "SignUp",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          name="ProfileInformationView"
+          component={ProfileInformationView}
+          options={{
+            title: "Mon Profile Details",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          name="ContactView"
+          component={ContactView}
+          options={{
+            title: "Contacter Nous",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          name="NotificationView"
+          component={NotificationView}
+          options={{
+            title: "Notifications",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+          }}
+        />
+
+        <Stack.Screen
+          name="FAQView"
+          component={FAQView}
+          options={{
+            title: "FAQ",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
