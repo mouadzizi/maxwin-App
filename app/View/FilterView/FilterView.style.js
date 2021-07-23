@@ -12,12 +12,15 @@ export default StyleSheet.create({
   },
   pickerInput: {
     height: 50,
-    width: '100%'
-},
-label: {
+    width: "100%",
+  },
+  label: {
     color: COLORS.primary,
     fontSize: 16,
     marginLeft: 10,
-    fontWeight: 'bold'
-},
+    fontWeight: "bold",
+  },
+  row: {
+    flexDirection: "row",
+  },
 });
