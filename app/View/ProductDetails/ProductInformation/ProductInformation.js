@@ -140,7 +140,9 @@ export default function ProductInformation({ product }) {
           <Row detail="Puissance Fiscale" value={product.puissanceFiscale} />
         )}
       </View>
-      <Equipement chips={product.chips} />
+      {product.chips.length > 0 && 
+      <Equipement chips={product.chips} />}
+      
     </>
   );
 }

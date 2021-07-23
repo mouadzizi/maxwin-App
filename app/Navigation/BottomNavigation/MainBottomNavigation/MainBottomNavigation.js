@@ -80,7 +80,7 @@ export default function MainBottomNavigation() {
             tabBarIcon: () => (
               <Ionicons
                 name="add-circle"
-                color={COLORS.third}
+                color={COLORS.secondary}
                 size={80}
                 style={{top: -15}}
               />

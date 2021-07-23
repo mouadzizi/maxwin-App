@@ -57,16 +57,16 @@ export default function AddProductView({ navigation }) {
   };
 
   const showAlert = () => {
-    Alert.alert("Info", "Authentication Required", [
+    Alert.alert("Avez-vous un compte ?", "Veuillez vous connecter", [
       {
-        text: "Login",
+        text: "S'identifier",
         style: "default",
-        onPress: () => navigation.navigate("SignUp"),
+        onPress: () => navigation.navigate("SignIn"),
       },
       {
         text: "Annuler",
-        // onPress: () => navigation.goBack(),
-        style: "cancel",
+        onPress: () => navigation.goBack(),
+
       },
     ]);
   };

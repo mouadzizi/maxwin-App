@@ -5,7 +5,7 @@ import FavoriteProduct from "../../Components/Product/FavoritProduct";
 import { removeFavorite } from "../../API/APIFunctions";
 import { useFocusEffect } from "@react-navigation/native";
 import { db, auth } from "../../API/Firebase";
-export default function FavoriteView({navigation}) {
+export default function FavoriteView({ navigation }) {
   const [items, setItems] = useState([]);
   const [ready, setReady] = useState(false);
   useFocusEffect(
@@ -27,7 +27,7 @@ export default function FavoriteView({navigation}) {
             setReady(true);
           });
       } else {
-          setReady(true)
+        setReady(true);
         showAlert();
       }
       return () => {
@@ -64,19 +64,20 @@ export default function FavoriteView({navigation}) {
   const keys = useCallback((item) => item.id, []);
 
   const showAlert = () => {
-    Alert.alert("Info", "Authentication Required", [
+    Alert.alert("Avez-vous un compte ?", "Veuillez vous connecter", [
       {
-        text: "Login",
+        text: "S'identifier",
         style: "default",
-        onPress: () => navigation.navigate("SignUp"),
+        onPress: () => navigation.navigate("SignIn"),
       },
       {
         text: "Annuler",
-        // onPress:()=>navigation.goBack()
-        style: "cancel",
+        onPress: () => navigation.goBack(),
+
       },
     ]);
   };
+  
   return (
     <View style={styles.container}>
       {ready ? (

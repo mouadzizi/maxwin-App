@@ -81,7 +81,7 @@ export default function ImageSwiper({ images, onClick, post,navigation }) {
       <FAB
         icon={
           isFavorite ? (
-            <AntDesign name="heart" size={23} color={COLORS.third} />
+            <AntDesign name="heart" size={23} color="#D11111" />
           ) : (
             <AntDesign name="hearto" size={23} color="white" />
           )
@@ -93,7 +93,7 @@ export default function ImageSwiper({ images, onClick, post,navigation }) {
       <FAB
         icon={
           isLiked ? (
-            <AntDesign name="like1" size={23} color={COLORS.third} />
+            <AntDesign name="like1" size={23} color={COLORS.secondary} />
           ) : (
             <AntDesign name="like2" size={23} color="white" />
           )

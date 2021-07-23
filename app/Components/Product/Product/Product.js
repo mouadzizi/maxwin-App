@@ -148,15 +148,7 @@ export default function Product({
           <Text style={styles.priceText}>{price} MAD</Text>
         </View>
 
-        <View style={styles.informationContainerSection2}>
-          <TouchableOpacity onPress={() => setIsFavorite(!isFavorite)}>
-            {isFavorite ? (
-              <AntDesign name="heart" size={40} color="#D11111" />
-            ) : (
-              <AntDesign name="hearto" size={40} color="#D11111" />
-            )}
-          </TouchableOpacity>
-        </View>
+        <View style={styles.informationContainerSection2}></View>
       </View>
     </View>
   );
