@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableWithoutFeedback, Image } from "react-native";
+import { TouchableWithoutFeedback, Image,Alert } from "react-native";
 import { FAB } from "react-native-elements";
 import { FontAwesome, AntDesign } from "react-native-vector-icons";
 import Swiper from "react-native-swiper";
@@ -8,15 +8,15 @@ import { COLORS } from "../../../GlobalStyle";
 import { auth, db } from "../../../API/Firebase";
 import { addToFavorite, removeFavorite } from "../../../API/APIFunctions";
 
-export default function ImageSwiper({ images, onClick, post }) {
+export default function ImageSwiper({ images, onClick, post,navigation }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const user = auth.currentUser;
+  const uid = auth.currentUser?.uid;
 
   useEffect(() => {
     const _unsub = db
       .collection("users")
-      .doc(user.uid)
+      .doc(uid)
       .collection("favorite")
       .onSnapshot((snapShot) => {
         const isFav = snapShot.docs.some(({ id }) => id == post.id);
@@ -24,19 +24,31 @@ export default function ImageSwiper({ images, onClick, post }) {
       });
     return () => {
       _unsub();
-      
     };
   }, []);
 
-  
   const addOrRemoveFavorite = () => {
     if (isFavorite) {
       removeFavorite(post.id);
-    } else {
-      addToFavorite(user.uid, post).catch((err) => alert(err.message));
-    }
+    } else if (uid) {
+      addToFavorite(uid, post).catch((err) => alert(err.message));
+    } else showAlert();
   };
 
+  const showAlert=()=>{
+    Alert.alert('Info','Authentication Required',[
+      {
+        text:'Login',
+        style:'default',
+        onPress:()=>navigation.navigate('SignUp')
+      },
+      {
+        text:'Annuler',
+        // onPress:()=>navigation.goBack()
+        style:"cancel"
+      }
+    ])
+  }
   return (
     <>
       <Swiper activeDotColor={COLORS.secondary} style={styles.imageContainer}>

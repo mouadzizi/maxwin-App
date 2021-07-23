@@ -11,6 +11,7 @@ export default function ProductDetails({ route, navigation }) {
   return (
     <ScrollView>
       <ImageSwiper
+      navigation={navigation}
       post={product}
         images={product.images}
         onClick={() =>

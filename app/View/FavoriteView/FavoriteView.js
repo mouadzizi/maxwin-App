@@ -5,27 +5,31 @@ import FavoriteProduct from "../../Components/Product/FavoritProduct";
 import { removeFavorite } from "../../API/APIFunctions";
 import { useFocusEffect } from "@react-navigation/native";
 import { db, auth } from "../../API/Firebase";
-export default function FavoriteView() {
+export default function FavoriteView({navigation}) {
   const [items, setItems] = useState([]);
   const [ready, setReady] = useState(false);
   useFocusEffect(
     useCallback(() => {
-      const { uid } = auth.currentUser;
-      const _unsub = db
-        .collection("users")
-        .doc(uid)
-        .collection("favorite")
-        .onSnapshot((snapShot) => {
-          var array = [];
-          array = snapShot.docs.map((doc) => {
-            return {
-              id: doc.id,
-              ...doc.data(),
-            };
+      const uid = auth.currentUser?.uid;
+      if (uid) {
+        db.collection("users")
+          .doc(uid)
+          .collection("favorite")
+          .onSnapshot((snapShot) => {
+            var array = [];
+            array = snapShot.docs.map((doc) => {
+              return {
+                id: doc.id,
+                ...doc.data(),
+              };
+            });
+            setItems(array);
+            setReady(true);
           });
-          setItems(array);
-          setReady(true);
-        });
+      } else {
+          setReady(true)
+        showAlert();
+      }
       return () => {
         // _unsub();
       };
@@ -46,10 +50,11 @@ export default function FavoriteView() {
           text: "Annuler",
           style: "cancel",
         },
-      ],{cancelable:true}
+      ],
+      { cancelable: true }
     );
   };
-  
+
   const renderItem = useCallback(
     ({ item }) => (
       <FavoriteProduct fav={item} onClick={() => removeItem(item.id)} />
@@ -57,6 +62,21 @@ export default function FavoriteView() {
     []
   );
   const keys = useCallback((item) => item.id, []);
+
+  const showAlert = () => {
+    Alert.alert("Info", "Authentication Required", [
+      {
+        text: "Login",
+        style: "default",
+        onPress: () => navigation.navigate("SignUp"),
+      },
+      {
+        text: "Annuler",
+        // onPress:()=>navigation.goBack()
+        style: "cancel",
+      },
+    ]);
+  };
   return (
     <View style={styles.container}>
       {ready ? (

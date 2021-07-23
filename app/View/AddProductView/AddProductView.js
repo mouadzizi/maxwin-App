@@ -4,7 +4,7 @@ import { COLORS } from "../../GlobalStyle";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 
-import { ScrollView, View, Text,Alert } from "react-native";
+import { ScrollView, View, Text, Alert } from "react-native";
 
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -13,7 +13,7 @@ import ImageModal from "./Modals/ImageModal";
 import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "./Modals/CategoryModal";
-import {auth} from '../../API/Firebase'
+import { auth } from "../../API/Firebase";
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
@@ -27,8 +27,7 @@ export default function AddProductView({ navigation }) {
       const user = auth.currentUser;
       if (user) {
         console.log(user.email);
-      }
-      else showAlert()
+      } else showAlert();
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
         if (imgs) {
@@ -37,7 +36,7 @@ export default function AddProductView({ navigation }) {
       });
       return () => {
         setProduct({});
-        AsyncStorage.removeItem('selectedImage');
+        AsyncStorage.removeItem("selectedImage");
       };
     }, [])
   );
@@ -57,20 +56,20 @@ export default function AddProductView({ navigation }) {
     });
   };
 
-  const showAlert=()=>{
-    Alert.alert('Info','Authentication Required',[
+  const showAlert = () => {
+    Alert.alert("Info", "Authentication Required", [
       {
-        text:'Login',
-        style:'default',
-        onPress:()=>navigation.navigate('SignUp')
+        text: "Login",
+        style: "default",
+        onPress: () => navigation.navigate("SignUp"),
       },
       {
-        text:'Annuler',
-        // onPress:()=>navigation.goBack()
-        style:"cancel"
-      }
-    ])
-  }
+        text: "Annuler",
+        // onPress: () => navigation.goBack(),
+        style: "cancel",
+      },
+    ]);
+  };
   return (
     <View style={{ marginBottom: 70 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
