@@ -35,7 +35,7 @@ export default function ProfileView() {
         onClick={() => Alert.alert("Questions fréquemment Page")}
         iconName="FAQ"
       />
-      <Devider width="100%" style={{marginVertical : 20}}/>
+      <Devider width="100%" style={{ marginVertical: 20 }} />
       <ProfileSection
         title="Se déconnecter"
         subTitle="Se déconnecter"
