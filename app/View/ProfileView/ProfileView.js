@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, { useCallback, useState } from "react";
 import { View, Text, Alert } from "react-native";
 
 import ProfileSection from "./ProfileSection";
@@ -10,11 +10,11 @@ import { auth } from "../../API/Firebase";
 import { useFocusEffect } from "@react-navigation/core";
 
 export default function ProfileView({ navigation }) {
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState(false);
   useFocusEffect(
     useCallback(() => {
       const user = auth.currentUser;
-      setUser(!!user)
+      setUser(!!user);
     }, [])
   );
 
@@ -25,12 +25,16 @@ export default function ProfileView({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={GlobalStyle.H1}>Profile</Text>
-      <ProfileSection
-        subTitle="Informations personnelles"
-        title="MOAD El MOUSAWI"
-        onClick={() => navigation.navigate("ProfileInformationView")}
-      />
+      {user && (
+        <>
+          <Text style={GlobalStyle.H1}>Profile</Text>
+          <ProfileSection
+            subTitle="Informations personnelles"
+            title="MOAD El MOUSAWI"
+            onClick={() => navigation.navigate("ProfileInformationView")}
+          />
+        </>
+      )}
 
       <Text style={[GlobalStyle.H1, { marginTop: 20 }]}>Settings</Text>
       <ProfileSection
@@ -39,12 +43,17 @@ export default function ProfileView({ navigation }) {
         onClick={() => navigation.navigate("ContactView")}
         iconName="Mail"
       />
-      <ProfileSection
-        title="Notification"
-        subTitle="Votre Dernier Notifications"
-        onClick={() => navigation.navigate("NotificationView")}
-        iconName="Bell"
-      />
+      {user && (
+        <>
+          <ProfileSection
+            title="Notification"
+            subTitle="Votre Dernier Notifications"
+            onClick={() => navigation.navigate("NotificationView")}
+            iconName="Bell"
+          />
+        </>
+      )}
+
       <ProfileSection
         title="FAQ"
         subTitle="Questions fréquemment"

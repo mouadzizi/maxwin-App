@@ -17,10 +17,9 @@ export default function FavoritProduct({fav,onClick}) {
         />
       </View>
       <View style={styles.containerInfo}>
-          <Text style={styles.info}> {fav.title} </Text>
-          <Text style={styles.info}> {fav.price}  </Text>
-          <Text style={styles.info}> {fav.category} </Text>
-          <Text style={styles.info}> Product Title </Text>
+          <Text style={styles.info}> titre : {fav.title} </Text>
+          <Text style={styles.info}> prix : {fav.price}  </Text>
+          <Text style={styles.info}> category : {fav.category} </Text>
       </View>
       <TouchableOpacity 
       style={styles.containerBin}

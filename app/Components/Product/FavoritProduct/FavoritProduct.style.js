@@ -39,10 +39,12 @@ export default StyleSheet.create({
     alignSelf: "center",
     borderRadius: 10,
     marginTop: 5,
+    marginLeft: 5,
   },
   info:{
-      fontSize: 15,
+      fontSize: 12,
       fontFamily: 'monospace',
-      color: COLORS.primary
+      color: COLORS.primary,
+      fontWeight: 'bold'
   }
 });

@@ -1,13 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { View, ActivityIndicator, FlatList, Alert } from "react-native";
-import styles from "./FavoriteView.style";
+import React, { useCallback, useState } from "react";
+import { View, ActivityIndicator, FlatList, Alert, Image } from "react-native";
 import FavoriteProduct from "../../Components/Product/FavoritProduct";
+import EmptyFavorite from "../../SVG/EmptyFavorite";
+
 import { removeFavorite } from "../../API/APIFunctions";
 import { useFocusEffect } from "@react-navigation/native";
+
 import { db, auth } from "../../API/Firebase";
+
+import styles from "./FavoriteView.style";
+
 export default function FavoriteView({ navigation }) {
   const [items, setItems] = useState([]);
   const [ready, setReady] = useState(false);
+
   useFocusEffect(
     useCallback(() => {
       const uid = auth.currentUser?.uid;
@@ -73,13 +79,13 @@ export default function FavoriteView({ navigation }) {
       {
         text: "Annuler",
         onPress: () => navigation.goBack(),
-
       },
     ]);
   };
-  
+
   return (
-    <View style={styles.container}>
+    <View style={items.length < 1 ? styles.containerImage : styles.container }>
+      {items.length < 1 && <EmptyFavorite />}
       {ready ? (
         <FlatList data={items} keyExtractor={keys} renderItem={renderItem} />
       ) : (
