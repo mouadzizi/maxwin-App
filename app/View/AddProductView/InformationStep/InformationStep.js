@@ -14,11 +14,10 @@ import ChipModal from "../Modals/ChipsModal";
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
+  const [selectedChips, setSelectedChips] = useState([]);
   const [loading, setLoading] = useState(false);
 
   let modalRef;
-
-  let selectedChips = [];
 
   const submit = () => {
     setLoading(true);
@@ -40,16 +39,13 @@ export default function InformationStep({ navigation, route }) {
   const addChip = (title, active) => {
     console.log(title);
     if (active) {
-      selectedChips.push(title);
+      setSelectedChips((prevChips) => [...prevChips.concat(title)]);
     } else {
       const index = selectedChips.indexOf(title);
       selectedChips.splice(index, 1);
     }
-    selectedChips = [...new Set(selectedChips)];
+    console.log(selectedChips);
   };
-  const saveChips = () => {
-    setProduct({...product,chips: selectedChips})
-  }
 
   return (
     <View>
@@ -408,7 +404,7 @@ export default function InformationStep({ navigation, route }) {
           style={{ marginBottom: 40, marginTop: 20 }}
         />
       </ScrollView>
-      <ChipModal onClose={saveChips} ref={(curRef) => (modalRef = curRef)} onClick={addChip} />
+      <ChipModal ref={(curRef) => (modalRef = curRef)} onClick={addChip} />
     </View>
   );
 }
