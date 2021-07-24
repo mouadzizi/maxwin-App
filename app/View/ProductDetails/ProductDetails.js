@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, SafeAreaView, Alert, Linking } from "react-native";
+import {
+  ScrollView,
+  View,
+  SafeAreaView,
+  Alert,
+  Linking,
+  Share,
+} from "react-native";
 import { FAB } from "react-native-elements";
 
 import ImageSwiper from "./ImageSwiper";
@@ -86,7 +93,7 @@ export default function ProductDetails({ route, navigation }) {
     } else showAlert();
   };
 
-  const MessageToWhatsApp = () => {
+  const messageToWhatsApp = () => {
     let ProductName = "Iphone 12 Pro";
     let Message =
       "Bonjour, je vous contacte pour le produit : " +
@@ -96,6 +103,25 @@ export default function ProductDetails({ route, navigation }) {
     Linking.openURL(`whatsapp://send?text=${Message}&phone=${PhoneNumber}`);
   };
 
+  const shareTheApp = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          "MAXWIN | il s'agit d'une application puissante qui arrive lentement et régulièrement pour conquérir le marché ",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      console.warn(error.message);
+    }
+  };
   return (
     <SafeAreaView>
       <FAB
@@ -104,13 +130,13 @@ export default function ProductDetails({ route, navigation }) {
         icon={
           <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
         }
-        onPress={MessageToWhatsApp}
+        onPress={messageToWhatsApp}
       />
       <FAB
         icon={<AntDesign name="sharealt" size={25} color="white" />}
         color={COLORS.primary}
         style={{ top: 180, right: 20, zIndex: 1, position: "absolute" }}
-        onPress={() => alert("Whats app")}
+        onPress={shareTheApp}
       />
       <FAB
         icon={
