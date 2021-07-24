@@ -67,6 +67,7 @@ export default function FavoriteView({ navigation }) {
     ),
     []
   );
+
   const keys = useCallback((item) => item.id, []);
 
   const showAlert = () => {
@@ -84,7 +85,7 @@ export default function FavoriteView({ navigation }) {
   };
 
   return (
-    <View style={items.length < 1 ? styles.containerImage : styles.container }>
+    <View style={items.length < 1 ? styles.containerImage : styles.container}>
       {items.length < 1 && <EmptyFavorite />}
       {ready ? (
         <FlatList data={items} keyExtractor={keys} renderItem={renderItem} />

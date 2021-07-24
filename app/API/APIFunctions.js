@@ -1,5 +1,5 @@
 import { auth, db, st } from "./Firebase";
-import firebase from 'firebase'
+import firebase from "firebase";
 
 export const signIn = async (email, password) => {
   const user = await auth.signInWithEmailAndPassword(email, password);
@@ -85,16 +85,25 @@ const addNewUser = async (FBuser, user) => {
   await db.collection("users").doc(FBuser.uid).set(user);
 };
 export const addToFavorite = async (userId, post) => {
-  await db.collection("users").doc(userId).collection("favorite").doc(post.id).set({
-    title: post.title,
-    price: post.price,
-    category: post.category[1],
-    image: post.images[0],
-  });
+  await db
+    .collection("users")
+    .doc(userId)
+    .collection("favorite")
+    .doc(post.id)
+    .set({
+      title: post.title,
+      price: post.price,
+      category: post.category[1],
+      image: post.images[0],
+    });
 };
 
-export const removeFavorite = async (postId)=>{
-  const {uid}=auth.currentUser
-  await db.collection('users').doc(uid).collection('favorite').doc(postId).delete()
-}
-
+export const removeFavorite = async (postId) => {
+  const { uid } = auth.currentUser;
+  await db
+    .collection("users")
+    .doc(uid)
+    .collection("favorite")
+    .doc(postId)
+    .delete();
+};
