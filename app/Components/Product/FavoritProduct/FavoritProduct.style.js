@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   containerImage: {
     flex: 2,
-    borderColor: COLORS.secondary,
+    borderColor: COLORS.third,
     borderLeftWidth: 1,
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -19,15 +19,15 @@ export default StyleSheet.create({
   },
   containerInfo: {
     flex: 3,
-    borderColor: COLORS.secondary,
+    borderColor: COLORS.third,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   containerBin: {
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
-    borderColor: COLORS.secondary,
+    borderColor: COLORS.third,
     borderWidth: 1,
     flex: 1,
     justifyContent: "center",
@@ -41,10 +41,15 @@ export default StyleSheet.create({
     marginTop: 5,
     marginLeft: 5,
   },
-  info:{
-      fontSize: 12,
-      fontFamily: 'monospace',
-      color: COLORS.primary,
-      fontWeight: 'bold'
-  }
+  info: {
+    fontSize: 18,
+    color: COLORS.third,
+    fontWeight: "bold",
+    textTransform: 'capitalize'
+  },
+  value: {
+    fontSize: 18,
+    color: COLORS.text,
+    fontWeight: "bold",
+  },
 });

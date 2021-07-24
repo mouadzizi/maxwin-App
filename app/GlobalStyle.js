@@ -65,7 +65,6 @@ const COLORS = {
     100: "#FFFFFF",
   },
   primary: "#232553",
-  primaryOpacity : 'rgba(35, 37, 83, 0.9)',
   secondary: "#43A147",
   third: '#F16E44',
   text: "#000",
