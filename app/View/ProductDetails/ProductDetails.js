@@ -9,7 +9,12 @@ import ButtonOutlined from "../../Components/Button/ButtonOutlined";
 import SellerInformations from "./SellerInformations";
 
 import { auth, db } from "../../API/Firebase";
-import { addToFavorite, removeFavorite } from "../../API/APIFunctions";
+import {
+  addToFavorite,
+  removeFavorite,
+  addToLikedProducts,
+  removeLiked,
+} from "../../API/APIFunctions";
 
 import { FontAwesome, AntDesign } from "react-native-vector-icons";
 import styles from "./ProductDetails.style";
@@ -36,7 +41,7 @@ export default function ProductDetails({ route, navigation }) {
   };
 
   useEffect(() => {
-    const _unsub = db
+    let _unsub = db
       .collection("users")
       .doc(uid)
       .collection("favorite")
@@ -49,11 +54,35 @@ export default function ProductDetails({ route, navigation }) {
     };
   }, []);
 
+  useEffect(() => {
+    let _unsub = db
+      .collection("users")
+      .doc(uid)
+      .collection("liked")
+      .onSnapshot((snapShot) => {
+        const isLiked = snapShot.docs.some(({ id }) => id === product.id);
+        setIsLiked(isLiked);
+      });
+    return () => {
+      _unsub();
+    };
+  }, []);
+
   const addOrRemoveFavorite = () => {
     if (isFavorite) {
       removeFavorite(product.id);
     } else if (uid) {
       addToFavorite(uid, product).catch((err) => console.warn(err.message));
+    } else showAlert();
+  };
+
+  const addOrRemoveLikedProduct = () => {
+    if (isLiked) {
+      removeLiked(product.id);
+    } else if (uid) {
+      addToLikedProducts(uid, product).catch((err) =>
+        console.warn(err.message)
+      );
     } else showAlert();
   };
 
@@ -95,7 +124,7 @@ export default function ProductDetails({ route, navigation }) {
         }
         color={COLORS.primary}
         style={{ top: 340, right: 20, zIndex: 1, position: "absolute" }}
-        onPress={() => setIsLiked(!isLiked)}
+        onPress={addOrRemoveLikedProduct}
       />
       <ScrollView>
         <ImageSwiper

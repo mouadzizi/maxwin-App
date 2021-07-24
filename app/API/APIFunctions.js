@@ -84,6 +84,7 @@ export const getItemsByCategory = async (category, limit) => {
 const addNewUser = async (FBuser, user) => {
   await db.collection("users").doc(FBuser.uid).set(user);
 };
+
 export const addToFavorite = async (userId, post) => {
   await db
     .collection("users")
@@ -104,6 +105,27 @@ export const removeFavorite = async (postId) => {
     .collection("users")
     .doc(uid)
     .collection("favorite")
+    .doc(postId)
+    .delete();
+};
+
+export const addToLikedProducts = async (userId, post) => {
+  await db
+    .collection("users")
+    .doc(userId)
+    .collection("liked")
+    .doc(post.id)
+    .set({
+      id: post.id,
+    });
+};
+
+export const removeLiked = async (postId) => {
+  const { uid } = auth.currentUser;
+  await db
+    .collection("users")
+    .doc(uid)
+    .collection("liked")
     .doc(postId)
     .delete();
 };
