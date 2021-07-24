@@ -15,7 +15,7 @@ export default function ProfileView({ navigation }) {
     useCallback(() => {
       const user = auth.currentUser;
       setUser(!!user);
-    }, [])
+    }, [user])
   );
 
   const SignOut = () => {

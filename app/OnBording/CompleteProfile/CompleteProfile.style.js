@@ -5,4 +5,17 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#ddd',
     },
+    container: {
+        marginVertical: 7,
+        marginHorizontal: 10,
+        padding: 10,
+        backgroundColor: "white",
+        borderRadius: 15,
+      },
+
+      label: {
+        color: COLORS.primary,
+        fontSize: 17,
+        fontWeight: 'bold'
+      },
 });

@@ -12,6 +12,7 @@ import ImagePreview from "../../../View/ImagePreview";
 import FilterView from "../../../View/FilterView";
 import SignIn from "../../../OnBording/SignIn";
 import SignUp from "../../../OnBording/SignUp";
+import CompleteProfile from "../../../OnBording/CompleteProfile";
 
 import ProfileInformationView from "../../../View/ProfileInformationView";
 import ContactView from "../../../View/ContactView";
@@ -160,6 +161,7 @@ export default function MainStack({ navigation }) {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen
@@ -171,6 +173,7 @@ export default function MainStack({ navigation }) {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen
@@ -182,6 +185,20 @@ export default function MainStack({ navigation }) {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+
+        <Stack.Screen
+          name="CompleteProfile"
+          component={CompleteProfile}
+          options={{
+            title: "Information complementaires",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
 
@@ -189,11 +206,12 @@ export default function MainStack({ navigation }) {
           name="ProfileInformationView"
           component={ProfileInformationView}
           options={{
-            title: "Mon Profile Details",
+            title: "Mon Profile",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
 
@@ -206,6 +224,7 @@ export default function MainStack({ navigation }) {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
 
@@ -218,6 +237,7 @@ export default function MainStack({ navigation }) {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
 
@@ -230,6 +250,7 @@ export default function MainStack({ navigation }) {
               backgroundColor: COLORS.primary,
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
       </Stack.Navigator>

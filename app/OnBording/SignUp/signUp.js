@@ -82,7 +82,7 @@ export default function signUp({ navigation }) {
         <ButtonFill
           title="INSCRIVEZ-VOUS"
           loading={false}
-          onClick={createNewUser}
+          onClick={()=> navigation.navigate('CompleteProfile')}
           style={{ marginTop: 20 }}
         />
 
