@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, SafeAreaView, Alert } from "react-native";
+import { ScrollView, View, SafeAreaView, Alert, Linking } from "react-native";
 import { FAB } from "react-native-elements";
 
 import ImageSwiper from "./ImageSwiper";
@@ -86,6 +86,16 @@ export default function ProductDetails({ route, navigation }) {
     } else showAlert();
   };
 
+  const MessageToWhatsApp = () => {
+    let ProductName = "Iphone 12 Pro";
+    let Message =
+      "Bonjour, je vous contacte pour le produit : " +
+      ProductName +
+      "que vous vendez chez Maxwin, est-il toujours disponible ?";
+    let PhoneNumber = "+212626617611"; //need to be replaced with the product owner number.
+    Linking.openURL(`whatsapp://send?text=${Message}&phone=${PhoneNumber}`);
+  };
+
   return (
     <SafeAreaView>
       <FAB
@@ -94,7 +104,7 @@ export default function ProductDetails({ route, navigation }) {
         icon={
           <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
         }
-        onPress={() => alert("Open Whatsapp")}
+        onPress={MessageToWhatsApp}
       />
       <FAB
         icon={<AntDesign name="sharealt" size={25} color="white" />}
