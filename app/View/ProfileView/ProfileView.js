@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { View, Text, Alert } from "react-native";
+import React, { useCallback,  useState } from "react";
+import { View, Text, Alert, } from "react-native";
 
 import ProfileSection from "./ProfileSection";
 import Devider from "../../Components/Divider";
@@ -8,14 +8,15 @@ import styles from "./ProfileView.style";
 import { COLORS, GlobalStyle } from "../../GlobalStyle";
 import { auth } from "../../API/Firebase";
 import { useFocusEffect } from "@react-navigation/core";
+import { getUser } from "../../API/APIFunctions";
 
 export default function ProfileView({ navigation }) {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState({});
   useFocusEffect(
     useCallback(() => {
-      const user = auth.currentUser;
-      setUser(!!user);
-    }, [user])
+      const uid = auth.currentUser?.uid;
+      getUser(uid).then((firebaseUser) => setUser(firebaseUser));
+    }, [])
   );
 
   const SignOut = () => {
@@ -30,8 +31,10 @@ export default function ProfileView({ navigation }) {
           <Text style={GlobalStyle.H1}>Profile</Text>
           <ProfileSection
             subTitle="Informations personnelles"
-            title="MOAD El MOUSAWI"
-            onClick={() => navigation.navigate("ProfileInformationView")}
+            title={user.firstName + " " + user.lastName}
+            onClick={() =>
+              navigation.navigate("ProfileInformationView", { profile: user })
+            }
           />
         </>
       )}

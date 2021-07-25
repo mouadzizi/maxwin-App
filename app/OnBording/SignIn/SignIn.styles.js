@@ -19,8 +19,9 @@ export default StyleSheet.create({
     },
     errorMessage:{
         color: 'red',
-        fontSize: 12,
-        marginLeft: 10
+        fontSize: 14,
+        marginLeft: 10,
+        alignSelf:'center'
     },
     welcomeText:{
         color: COLORS.text,

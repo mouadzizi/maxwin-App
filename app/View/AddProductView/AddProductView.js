@@ -123,11 +123,17 @@ export default function AddProductView({ navigation }) {
 
         <Input
           label="Prix *"
-          keyboardType="numeric"
+          keyboardType="phone-pad"
           placeholder="Merci d'entrer le prix de votre article"
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary, fontSize: 15 }}
-          onChangeText={(value) => setProduct({ ...product, price: value })}
+          onChangeText={(value) =>{
+            try {
+              setProduct({ ...product, price: parseFloat(value) })
+            } catch (error) {
+              alert(error)
+            }
+          }}
           value={product.price}
         />
 
@@ -172,7 +178,7 @@ export default function AddProductView({ navigation }) {
           }
           title="Suivant"
           style={{ marginBottom: 40 }}
-          onClick={NextHandler}
+          onClick={()=>console.log(product)}
           loading={false}
         />
       </ScrollView>

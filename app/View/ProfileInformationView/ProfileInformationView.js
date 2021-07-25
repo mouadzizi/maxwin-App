@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { SafeAreaView, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -10,13 +10,23 @@ import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
 
-export default function ProfileInformation() {
+export default function ProfileInformation({ route }) {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const theUser = route.params?.profile;
+    setUser(theUser);
+    return () => {};
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.label}>A propo de vous</Text>
           <Input
+            disabled={true}
+            value={user.firstName}
             placeholder="Nom"
             label="Nom"
             renderErrorMessage={false}
@@ -27,6 +37,8 @@ export default function ProfileInformation() {
             }
           />
           <Input
+            disabled={true}
+            value={user.lastName}
             placeholder="Prénom"
             label="Prénom"
             renderErrorMessage={false}
@@ -37,6 +49,8 @@ export default function ProfileInformation() {
             }
           />
           <Input
+            disabled={true}
+            value={user.email}
             placeholder="E-Mail"
             label="E-Mail"
             renderErrorMessage={false}
@@ -51,6 +65,8 @@ export default function ProfileInformation() {
         <View style={styles.container}>
           <Text style={styles.label}>Où habitez-vous ?</Text>
           <Input
+            disabled={true}
+            value={user.address}
             placeholder="Adresse"
             label="Adresse"
             renderErrorMessage={false}
@@ -69,6 +85,8 @@ export default function ProfileInformation() {
         <View style={styles.container}>
           <Text style={styles.label}>Contact</Text>
           <Input
+            disabled={true}
+            value={user.phone}
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
             renderErrorMessage={false}
@@ -87,13 +105,14 @@ export default function ProfileInformation() {
               style={styles.pickerInput}
               mode="dropdown"
               dropdownIconColor={COLORS.primary}
+              selectedValue={user.type}
             >
               <Picker.Item
                 label="Choisissez votre Occupation"
-                value=""
+                value={user.type}
                 color={COLORS.Grey[400]}
               />
-              <Picker.Item label="Particullier" value="Particullier" />
+              <Picker.Item  label="Particullier" value="Particullier" />
               <Picker.Item label="Professionelle" value="Professionelle" />
             </Picker>
           </View>

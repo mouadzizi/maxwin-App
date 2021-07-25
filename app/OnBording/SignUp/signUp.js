@@ -15,25 +15,41 @@ import TextView from "../../Components/TextView";
 
 export default function signUp({ navigation }) {
   const [loading, setLoading] = useState(false);
-  const [isError, setIsError] = useState(
-    "Votre email/mot de passe n'est pas correct"
-  );
+  const [isError, setIsError] = useState();
   const [user, setUser] = useState({
     email: "",
     password: "",
+    confPassword: "",
   });
 
   const createNewUser = () => {
     setLoading(true);
-    createUser(user)
-      .then(() => {
-        navigation.navigate("BottomNavigation");
-        setLoading(false);
-      })
-      .catch(({ message }) => {
-        alert(message);
-        setLoading(false);
-      });
+    if (user.email && user.password && user.confPassword) {
+      if (user.password === user.confPassword) {
+        createUser(user)
+          .then(() => {
+            setLoading(false)
+            navigation.navigate("CompleteProfile");
+          })
+          .catch(({ code }) => {
+            setLoading(false);
+            switch (code) {
+              case "auth/email-already-in-use":
+                alert("Email déjà utilisé");
+                break;
+              case "auth/invalid-email":
+                setIsError("Email incorrect");
+                break;
+              case "auth/weak-password":
+                setIsError("mot de passe faible");
+                break;
+              default:
+                setIsError("Problème de connection");
+                break;
+            }
+          });
+      } else alert("Les mots de passe doivent correspondre");
+    }
   };
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -71,7 +87,7 @@ export default function signUp({ navigation }) {
         <Input
           label="Répéter le mot de passe "
           placeholder="Mot de passe"
-          onChangeText={(e) => setUser({ ...user, password: e })}
+          onChangeText={(e) => setUser({ ...user, confPassword: e })}
           rightIcon={<Entypo name="lock" size={24} color={COLORS.primary} />}
           labelStyle={{ color: COLORS.primary }}
           containerStyle={{ marginTop: 10 }}
@@ -80,9 +96,10 @@ export default function signUp({ navigation }) {
         />
 
         <ButtonFill
+          disable={!user.email || !user.password || !user.confPassword}
           title="INSCRIVEZ-VOUS"
-          loading={false}
-          onClick={()=> navigation.navigate('CompleteProfile')}
+          loading={loading}
+          onClick={createNewUser}
           style={{ marginTop: 20 }}
         />
 
@@ -97,7 +114,7 @@ export default function signUp({ navigation }) {
         <ButtonOutlined
           title="S'identifier "
           style={{ marginTop: 20 }}
-          onClick={() => navigation.navigate("SignIn")}
+          onClick={() => navigation.replace("SignIn")}
         />
       </ScrollView>
     </SafeAreaView>

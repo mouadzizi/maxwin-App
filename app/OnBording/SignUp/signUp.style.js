@@ -15,12 +15,18 @@ export default StyleSheet.create({
   container: {
     marginTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: '#ddd'
+    backgroundColor: "#ddd",
   },
-  welcomeText:{
+  welcomeText: {
     color: COLORS.text,
     fontSize: 17,
-    textAlign: 'center',
-    marginTop: 20
-},
+    textAlign: "center",
+    marginTop: 20,
+  },
+  errorMessage: {
+    color: "red",
+    fontSize: 14,
+    marginLeft: 10,
+    alignSelf: "center",
+  },
 });

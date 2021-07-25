@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { SafeAreaView, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -9,7 +9,29 @@ import { Entypo, Fontisto } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./CompleteProfile.style";
 import { Picker } from "@react-native-picker/picker";
-export default function CompleteProfile() {
+import { db, auth } from "../../API/Firebase";
+
+export default function CompleteProfile({navigation}) {
+  const user = auth.currentUser;
+  const [additionalInfo, setAdditionalInfo] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setAdditionalInfo({ ...additionalInfo, email: user.email });
+    return () => {};
+  }, []);
+
+  const complete = () => {
+    setLoading(true);
+    db.collection("users")
+      .doc(user.uid)
+      .set(additionalInfo)
+      .then(navigation.goBack)
+      .catch(({ message }) => {
+        setLoading(false);
+        alert(message);
+      });
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
@@ -24,6 +46,10 @@ export default function CompleteProfile() {
             rightIcon={
               <Entypo name="v-card" size={24} color={COLORS.primary} />
             }
+            onChangeText={(e) =>
+              setAdditionalInfo({ ...additionalInfo, firstName: e })
+            }
+            value={additionalInfo.nom}
           />
           <Input
             placeholder="Prénom"
@@ -34,15 +60,8 @@ export default function CompleteProfile() {
             rightIcon={
               <Entypo name="v-card" size={24} color={COLORS.primary} />
             }
-          />
-          <Input
-            placeholder="E-Mail"
-            label="E-Mail"
-            renderErrorMessage={false}
-            labelStyle={{ color: COLORS.primary }}
-            containerStyle={{ marginTop: 10 }}
-            rightIcon={
-              <Entypo name="v-card" size={24} color={COLORS.primary} />
+            onChangeText={(e) =>
+              setAdditionalInfo({ ...additionalInfo, lastName: e })
             }
           />
         </View>
@@ -62,18 +81,25 @@ export default function CompleteProfile() {
                 color={COLORS.primary}
               />
             }
+            onChangeText={(e) =>
+              setAdditionalInfo({ ...additionalInfo, address: e })
+            }
           />
         </View>
 
         <View style={styles.container}>
           <Text style={styles.label}>Contact</Text>
           <Input
+            keyboardType="phone-pad"
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
             rightIcon={<Entypo name="phone" size={24} color={COLORS.primary} />}
+            onChangeText={(e) =>
+              setAdditionalInfo({ ...additionalInfo, phone: e })
+            }
           />
         </View>
 
@@ -86,10 +112,13 @@ export default function CompleteProfile() {
               style={styles.pickerInput}
               mode="dropdown"
               dropdownIconColor={COLORS.primary}
+              onValueChange={(e) =>
+                setAdditionalInfo({ ...additionalInfo, type: e })
+              }
+              selectedValue={additionalInfo?.type}
             >
               <Picker.Item
                 label="Choisissez votre Occupation"
-                value=""
                 color={COLORS.Grey[400]}
               />
               <Picker.Item label="Particullier" value="Particullier" />
@@ -97,10 +126,9 @@ export default function CompleteProfile() {
             </Picker>
           </View>
         </View>
-        
-        <View 
-        style={styles.container}>
-                <ButtonFill title="compléter" loading={false}/>
+
+        <View style={styles.container}>
+          <ButtonFill title="Compléter" loading={loading} onClick={complete} />
         </View>
       </ScrollView>
     </SafeAreaView>

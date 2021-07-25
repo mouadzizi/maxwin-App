@@ -10,9 +10,6 @@ export const createUser = async (newUser) => {
     newUser.email.trim(),
     newUser.password.trim()
   );
-  if (userCrendtial.user) {
-    addNewUser(userCrendtial.user, newUser);
-  }
   return userCrendtial.user;
 };
 export const signOut = async () => {
@@ -81,9 +78,6 @@ export const getItemsByCategory = async (category, limit) => {
   return items;
 };
 
-const addNewUser = async (FBuser, user) => {
-  await db.collection("users").doc(FBuser.uid).set(user);
-};
 
 export const addToFavorite = async (userId, post) => {
   await db
@@ -129,3 +123,8 @@ export const removeLiked = async (postId) => {
     .doc(postId)
     .delete();
 };
+
+export const getUser=async ()=> { 
+  const doc = await db.collection('users').doc(auth.currentUser.uid).get()
+ return Promise.resolve(doc.data())
+}

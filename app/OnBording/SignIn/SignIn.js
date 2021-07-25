@@ -12,14 +12,35 @@ import { Fontisto, Entypo } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 
 export default function SignIn({ navigation }) {
-  const [isError, setIsError] = useState(
-    "Votre email/mot de passe n'est pas correct"
-  );
+  const [isError, setIsError] = useState();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false)
 
+  const logIn = () => {
+    setIsError()
+    setLoading(true)
+    signIn(user.email, user.password)
+      .then(navigation.goBack)
+      .catch(({ code }) => {
+        setLoading(false)
+        switch (code) {
+          case "auth/invalid-email":
+            setIsError("Email incorrect");
+            break;
+          case "auth/user-not-found":
+            setIsError("Email ou bien mot passe incorrect");
+            break;
+          case "auth/wrong-password":
+            setIsError("Mot de passe incorrect");
+            break;
+          default:
+            break;
+        }
+      });
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.imageContainer}>
@@ -34,7 +55,7 @@ export default function SignIn({ navigation }) {
         <Input
           autoCapitalize="none"
           rightIcon={<Fontisto name="email" size={24} color={COLORS.primary} />}
-          placeholder="enter your Email"
+          placeholder="Enter votre Email"
           label="Email"
           errorMessage={
             user.email.length > 12 && !user.email.includes("@")
@@ -44,7 +65,7 @@ export default function SignIn({ navigation }) {
           onChangeText={(e) => setUser({ ...user, email: e.trim() })}
         />
         <Input
-          placeholder="Password"
+          placeholder="Mot de passe"
           label="Password"
           containerStyle={{ marginTop: 10 }}
           errorMessage={
@@ -60,15 +81,17 @@ export default function SignIn({ navigation }) {
         {isError && <Text style={styles.errorMessage}>{isError}</Text>}
 
         <ButtonFill
+        disable={loading}
           title="SE CONNECTER"
-          loading={false}
-          onClick={() =>
-            signIn(user.email, user.password).then((user) => console.log(user))
-          }
+          loading={loading}
+          onClick={logIn}
           style={{ marginTop: 20 }}
         />
-        
-        <Devider width="100%" style={{backgroundColor: COLORS.primary, marginTop: 10}}/>
+
+        <Devider
+          width="100%"
+          style={{ backgroundColor: COLORS.primary, marginTop: 10 }}
+        />
         <TextView style={styles.welcomeText} fontFamily="Source-Regular">
           Si vous n'êtes pas encore utilisateur, veuillez vous inscrire avec
         </TextView>
@@ -76,7 +99,7 @@ export default function SignIn({ navigation }) {
         <ButtonOutlined
           title="Créer un compte"
           style={{ marginTop: 20 }}
-          onClick={() => navigation.navigate("SignUp")}
+          onClick={() => navigation.replace("SignUp")}
         />
       </ScrollView>
     </SafeAreaView>
