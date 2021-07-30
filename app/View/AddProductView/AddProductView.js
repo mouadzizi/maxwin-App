@@ -178,7 +178,7 @@ export default function AddProductView({ navigation }) {
           }
           title="Suivant"
           style={{ marginBottom: 40 }}
-          onClick={()=>console.log(product)}
+          onClick={NextHandler}
           loading={false}
         />
       </ScrollView>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
 import { Modalize } from 'react-native-modalize';
 import { chipsData } from '../../../API/Data';
 import Chip from '../../../Components/Chip/Chip'
