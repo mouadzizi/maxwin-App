@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, SafeAreaView, FlatList } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, Text, ScrollView } from "react-native";
 import { Input, CheckBox } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
@@ -8,20 +8,31 @@ import ButtonOutlined from "../../../Components/Button/ButtonOutlined";
 
 import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
-import { addProduct, uploadImages } from "../../../API/APIFunctions";
+import { addProduct, uploadImages, getUser } from "../../../API/APIFunctions";
 import ChipModal from "../Modals/ChipsModal";
+import { auth } from "../../../API/Firebase";
+import { useFocusEffect } from "@react-navigation/core";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
   const [product, setProduct] = useState(prevProduct);
   const [selectedChips, setSelectedChips] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [user, setUser] = useState({});
   let modalRef;
+
+  useFocusEffect(
+    useCallback(() => {
+      const uid = auth.currentUser?.uid;
+      console.log(uid)
+      getUser(uid).then((firebaseUser) => setUser(firebaseUser));
+    }, [])
+    
+  );
 
   const submit = () => {
     setLoading(true);
-    addProduct({ ...product, chips: selectedChips })
+    addProduct({ ...product, chips: selectedChips, owner: user })
       .then((docRef) => {
         uploadImages(product.images, docRef.id, "user.uid").then((links) => {
           docRef.update({ images: links }).then(() => {
@@ -32,19 +43,17 @@ export default function InformationStep({ navigation, route }) {
       })
       .catch(({ message }) => {
         setLoading(false);
-        alert(message);
+        console.warn(message);
       });
   };
 
   const addChip = (title, active) => {
-    console.log(title);
     if (active) {
       setSelectedChips((prevChips) => [...prevChips.concat(title)]);
     } else {
       const index = selectedChips.indexOf(title);
       selectedChips.splice(index, 1);
     }
-    console.log(selectedChips);
   };
 
   return (
@@ -389,9 +398,9 @@ export default function InformationStep({ navigation, route }) {
 
         <Input
           containerStyle={{ marginTop: 20 }}
-          value=""
-          onChangeText={(value) =>
-            setProduct({ ...product, phoneNumber: value })
+          keyboardType="numeric"
+          onChangeText={(phone) =>
+            setProduct({ ...product, phoneNumber: phone })
           }
           placeholder="Numéro de télephone"
           rightIcon={{ type: "Feather", name: "phone", color: COLORS.primary }}

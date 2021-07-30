@@ -172,7 +172,7 @@ export default function ProductDetails({ route, navigation }) {
           }
         />
         <ProductInformation product={product} />
-        <SellerInformations />
+        <SellerInformations product={product}/>
 
         <View style={styles.container}>
           <ButtonFill

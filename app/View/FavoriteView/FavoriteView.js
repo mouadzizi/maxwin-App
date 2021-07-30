@@ -2,10 +2,8 @@ import React, { useCallback, useState } from "react";
 import { View, ActivityIndicator, FlatList, Alert, Image } from "react-native";
 import FavoriteProduct from "../../Components/Product/FavoritProduct";
 import EmptyFavorite from "../../SVG/EmptyFavorite";
-
 import { removeFavorite } from "../../API/APIFunctions";
 import { useFocusEffect } from "@react-navigation/native";
-
 import { db, auth } from "../../API/Firebase";
 
 import styles from "./FavoriteView.style";

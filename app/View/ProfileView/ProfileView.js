@@ -1,17 +1,19 @@
-import React, { useCallback,  useState } from "react";
-import { View, Text, Alert, } from "react-native";
+import React, { useCallback, useState } from "react";
+import { View, Text, Alert } from "react-native";
 
 import ProfileSection from "./ProfileSection";
 import Devider from "../../Components/Divider";
 
 import styles from "./ProfileView.style";
 import { COLORS, GlobalStyle } from "../../GlobalStyle";
+
 import { auth } from "../../API/Firebase";
 import { useFocusEffect } from "@react-navigation/core";
 import { getUser } from "../../API/APIFunctions";
 
 export default function ProfileView({ navigation }) {
   const [user, setUser] = useState({});
+
   useFocusEffect(
     useCallback(() => {
       const uid = auth.currentUser?.uid;
