@@ -76,31 +76,31 @@ export const categoryData = [
 ];
 export const chipsData = [
   {
-    title: "Premier main", //done
+    title: "Premier main",
     iconName: "airbag",
   },
   {
-    title: "Salon en cuir", //done
+    title: "Salon en cuir",
     iconName: "car-seat-heater",
   },
   {
-    title: "Jantes", //done
+    title: "Jantes",
     iconName: "car-windshield-outline",
   },
   {
-    title: "Airbag", //done
+    title: "Airbag",
     iconName: "airbag",
   },
   {
-    title: "Climatisation", //done
+    title: "Climatisation",
     iconName: "car-seat-heater",
   },
   {
-    title: "Radar de Recul", //done
+    title: "Radar de Recul", 
     iconName: "expansion-card",
   },
   {
-    title: "GPS", //GPS
+    title: "GPS", 
     iconName: "car-traction-control",
   },
   {

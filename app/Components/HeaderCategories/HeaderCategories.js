@@ -14,16 +14,15 @@ export default function HeaderCategories({ navigation }) {
       iconName: "Car",
     },
     {
-      id: "SDSDgfss2984",
-      categoryName: "Maisons & Villas",
-      iconName: "Villa",
+      id: "SDSDgf25677984",
+      categoryName: "Motos & vélos",
+      iconName: "Bike",
     },
     {
       id: "SDSDgf2933R84",
       categoryName: "Appartements",
       iconName: "Apartment",
     },
-
     {
       id: "SDSDgf6782984",
       categoryName: "Meubles et déco",
@@ -48,6 +47,16 @@ export default function HeaderCategories({ navigation }) {
       id: "SDSDgf2fff6984",
       categoryName: "Vêtements Hommes",
       iconName: "MenClothes",
+    },
+    {
+      id: "SDSDgf2DQF4246984",
+      categoryName: "Vêtements Femmes",
+      iconName: "WomenClothes",
+    },
+    {
+      id: "Ssdqf224246984",
+      categoryName: "Maquillage et produits de bien être",
+      iconName: "MakeUp",
     },
   ];
 
