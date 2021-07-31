@@ -9,23 +9,39 @@ import { Entypo, Fontisto } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
+import { updateUser } from "../../API/APIFunctions";
+import { auth } from "../../API/Firebase";
 
-export default function ProfileInformation({ route }) {
+export default function ProfileInformation({ route,navigation }) {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const theUser = route.params?.profile;
     setUser(theUser);
+    console.log(auth.currentUser.uid);
     return () => {};
   }, []);
 
+  const updateAction = () => {
+    setLoading(true);
+    updateUser(user)
+      .then(() => {
+        setLoading(false)
+        navigation.goBack()
+      })
+      .catch(({ message }) => {
+        setLoading(false);
+        alert(message);
+      });
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.label}>A propo de vous</Text>
           <Input
-            disabled={true}
+            onChangeText={(e) => setUser({ ...user, firstName: e })}
             value={user.firstName}
             placeholder="Nom"
             label="Nom"
@@ -37,7 +53,7 @@ export default function ProfileInformation({ route }) {
             }
           />
           <Input
-            disabled={true}
+            onChangeText={(e) => setUser({ ...user, lastName: e })}
             value={user.lastName}
             placeholder="Prénom"
             label="Prénom"
@@ -65,7 +81,7 @@ export default function ProfileInformation({ route }) {
         <View style={styles.container}>
           <Text style={styles.label}>Où habitez-vous ?</Text>
           <Input
-            disabled={true}
+            onChangeText={(e) => setUser({ ...user, address: e })}
             value={user.address}
             placeholder="Adresse"
             label="Adresse"
@@ -85,7 +101,7 @@ export default function ProfileInformation({ route }) {
         <View style={styles.container}>
           <Text style={styles.label}>Contact</Text>
           <Input
-            disabled={true}
+            onChangeText={(e) => setUser({ ...user, phone: e })}
             value={user.phone}
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
@@ -106,20 +122,26 @@ export default function ProfileInformation({ route }) {
               mode="dropdown"
               dropdownIconColor={COLORS.primary}
               selectedValue={user.type}
+              onValueChange={(val)=>setUser({...user,type:val})}
             >
               <Picker.Item
                 label="Choisissez votre Occupation"
                 value={user.type}
                 color={COLORS.Grey[400]}
               />
-              <Picker.Item  label="Particullier" value="Particullier" />
+              <Picker.Item label="Particullier" value="Particullier" />
               <Picker.Item label="Professionelle" value="Professionelle" />
             </Picker>
           </View>
         </View>
 
         <View style={styles.container}>
-          <ButtonFill title="compléter" loading={false} />
+          <ButtonFill
+            disable={loading}
+            onClick={updateAction}
+            title="Modifier"
+            loading={loading}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

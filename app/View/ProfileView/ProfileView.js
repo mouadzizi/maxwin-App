@@ -18,6 +18,7 @@ export default function ProfileView({ navigation }) {
     useCallback(() => {
       const uid = auth.currentUser?.uid;
       getUser(uid).then((firebaseUser) => setUser(firebaseUser));
+      console.log(user);
     }, [])
   );
 
@@ -45,8 +46,9 @@ export default function ProfileView({ navigation }) {
       <ProfileSection
         title="Contacter Nous"
         subTitle="E-Mail"
-        onClick={() => navigation.navigate("ContactView")}
+        onClick={() => auth.signOut()}
         iconName="Mail"
+        
       />
       {user && (
         <>
