@@ -25,7 +25,8 @@ export default function SellerInformations({ product }) {
             <Text style={styles.name}>
               {owner.lastName} {owner.firstName}
             </Text>
-            <Text style={styles.product}> Type : {owner.type}</Text>
+            
+            <Text style={styles.product}>{owner.type.toUpperCase()}</Text>
           </View>
         </View>
         <Divider width={"100%"} />
@@ -37,7 +38,7 @@ export default function SellerInformations({ product }) {
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.info}> Genre :</Text>
+            <Text style={styles.info}>Genre :</Text>
             <Text style={styles.value}> {owner.gender} </Text>
           </View>
 

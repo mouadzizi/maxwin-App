@@ -92,7 +92,7 @@ export default function ProductInformation({ product }) {
         </View>
       )}
 
-      {product.Description && (
+      {product.description && (
         <View style={styles.container}>
           <TextView
             fontFamily="Source-Regular"
@@ -107,7 +107,7 @@ export default function ProductInformation({ product }) {
             fontSize={15}
             style={styles.textSt}
           >
-            {product.Description}
+            {product.description}
           </TextView>
         </View>
       )}
@@ -136,12 +136,17 @@ export default function ProductInformation({ product }) {
         {product.transaction && (
           <Row detail="Transaction" value={product.transaction} />
         )}
-        {product.puissanceFiscale && (
-          <Row detail="ROM : " value={product.RamTelephone} />
+        {product.ROM && (
+          <Row detail="ROM : " value={product.ROM} />
         )}
-        {product.RamTelephone && (
-          <Row detail="RAM : " value={product.RamTelephone} />
+        {product.RAM && (
+          <Row detail="RAM : " value={product.RAM} />
         )}
+        {product.pouces && (
+          <Row detail="Taille : " value={product.pouces} />
+        )
+
+        }
       </View>
       {product.chips.length > 0 && 
       <Equipement chips={product.chips} />}

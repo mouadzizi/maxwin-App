@@ -20,7 +20,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   containerTitle: {
-    flex: 1,
+    flex: 2,
     alignItems: "flex-start",
   },
   containerPrice: {
@@ -47,6 +47,6 @@ export default StyleSheet.create({
   },
   title: {
     paddingStart: 10,
-    letterSpacing:1, 
+    letterSpacing:1,
   },
 });

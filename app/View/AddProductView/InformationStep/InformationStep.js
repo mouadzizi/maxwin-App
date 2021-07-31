@@ -234,7 +234,7 @@ export default function InformationStep({ navigation, route }) {
               numberOfLines={2}
               labelStyle={{ color: COLORS.primary }}
               onChangeText={(input) =>
-                setProduct({ ...product, RamTelephone: input })
+                setProduct({ ...product, RAM: input })
               }
             />
 
@@ -245,7 +245,7 @@ export default function InformationStep({ navigation, route }) {
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               onChangeText={(input) =>
-                setProduct({ ...product, RomTelephone: input })
+                setProduct({ ...product, ROM: input })
               }
             />
           </View>
@@ -295,7 +295,7 @@ export default function InformationStep({ navigation, route }) {
           multiline={true}
           labelStyle={{ color: COLORS.primary }}
           onChangeText={(input) =>
-            setProduct({ ...product, Description: input })
+            setProduct({ ...product, description: input })
           }
         />
 
@@ -328,7 +328,7 @@ export default function InformationStep({ navigation, route }) {
                 dropdownIconColor={COLORS.primary}
                 selectedValue={product.pouces}
                 onValueChange={(itemValue) =>
-                  setProduct({ ...product, Pouces: itemValue })
+                  setProduct({ ...product, pouces: itemValue })
                 }
               >
                 <Picker.Item
