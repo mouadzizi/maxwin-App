@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Input } from "react-native-elements";
 import ButtonOutlined from "../../Components/Button/ButtonOutlined";
 import ButtonFill from "../../Components/Button/ButtonFill";
-
+import CategoryModal from "../AddProductView/Modals/CategoryModal";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./FilterView.style";
 
 export default function FilterView({ navigation, route }) {
+  const [data, setData] = useState({
+    minPrice: 0,
+    maxPrice: Number.POSITIVE_INFINITY,
+    minKM: 0,
+    maxKM: Number.POSITIVE_INFINITY,
+    fuel: "*",
+    state: "*",
+    brand: "*",
+  });
+  let modals = [];
+
+  const selectCategory = (selCategory) => {
+    setData({ ...data, category: selCategory });
+    modals[0].closeModal();
+  };
+
   return (
-    <View style={{ marginTop: 20, flex: 1}}>
+    <View style={{ marginTop: 20, flex: 1 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.pickerView}>
           <Text style={styles.label}>Choisissez la Ville</Text>
@@ -18,12 +34,12 @@ export default function FilterView({ navigation, route }) {
             style={styles.pickerInput}
             mode="dialog"
             dropdownIconColor={COLORS.primary}
-            selectedValue={""}
-            onValueChange={() => console.log("hey")}
+            selectedValue={data.city}
+            onValueChange={(e) => setData({ ...data, city: e })}
           >
             <Picker.Item
               label="Choisissez une Ville"
-              value=""
+              value="*"
               color={COLORS.Grey[400]}
             />
             <Picker.Item label="AL Hoceima" value="ALHoceima" />
@@ -42,8 +58,8 @@ export default function FilterView({ navigation, route }) {
         </View>
 
         <ButtonOutlined
-          title="Choisissez une categorie"
-          onClick={() => alert("modal for category")}
+          title={data.category || "Choisissez une categorie"}
+          onClick={() => modals[0].openModal()}
           style={{ marginBottom: 20 }}
         />
 
@@ -55,12 +71,14 @@ export default function FilterView({ navigation, route }) {
             placeholder="Prix MIN"
             containerStyle={{ width: "50%" }}
             labelStyle={{ color: COLORS.primary }}
+            onChangeText={(e) => setData({ ...data, minPrice: parseFloat(e) })}
           />
           <Input
             keyboardType="numeric"
             placeholder="Prix MAX"
             containerStyle={{ width: "50%" }}
             labelStyle={{ color: COLORS.primary }}
+            onChangeText={(e) => setData({ ...data, maxPrice: parseFloat(e) })}
           />
         </View>
 
@@ -69,11 +87,13 @@ export default function FilterView({ navigation, route }) {
           <Picker
             style={styles.pickerInput}
             mode="dialog"
+            selectedValue={data.brand}
+            onValueChange={(e) => setData({ ...data, brand: e })}
             dropdownIconColor={COLORS.primary}
           >
             <Picker.Item
               label="Choisissez une marque"
-              value=""
+              value="*"
               color={COLORS.Grey[400]}
             />
             <Picker.Item label="AUDI" value="AUDI" />
@@ -90,12 +110,21 @@ export default function FilterView({ navigation, route }) {
             placeholder="MIN"
             containerStyle={{ width: "50%" }}
             labelStyle={{ color: COLORS.primary }}
+            onChangeText={(e) =>
+              setData({ ...data, minKM: parseFloat(e) || 0 })
+            }
           />
           <Input
             keyboardType="numeric"
             placeholder="MAX"
             containerStyle={{ width: "50%" }}
             labelStyle={{ color: COLORS.primary }}
+            onChangeText={(e) =>
+              setData({
+                ...data,
+                maxKM: parseFloat(e) || Number.POSITIVE_INFINITY,
+              })
+            }
           />
         </View>
 
@@ -104,11 +133,13 @@ export default function FilterView({ navigation, route }) {
           <Picker
             style={styles.pickerInput}
             mode="dropdown"
+            selectedValue={data.fuel}
+            onValueChange={(e) => setData({ ...data, fuel: e })}
             dropdownIconColor={COLORS.primary}
           >
             <Picker.Item
               label="Choisissez le carburant"
-              value=""
+              value="*"
               color={COLORS.Grey[400]}
             />
             <Picker.Item label="Diesel" value="Diesel" />
@@ -139,10 +170,36 @@ export default function FilterView({ navigation, route }) {
       </ScrollView>
 
       <ButtonFill
+        disable={!data.city}
         title="Validé"
         style={{ marginHorizontal: 20, marginBottom: 20 }}
         loading={false}
+        onClick={() =>
+          navigation.navigate("ResultView", {
+            filterOpt: data,
+            parent: route.name,
+          })
+        }
       />
+      <ButtonFill
+        title="Supprimer le filtre"
+        style={{ marginHorizontal: 20, marginBottom: 20,backgroundColor: COLORS.third
+        }}
+        loading={false}
+        onClick={() =>
+          setData({
+            minPrice: 0,
+            maxPrice: Number.POSITIVE_INFINITY,
+            minKM: 0,
+            maxKM: Number.POSITIVE_INFINITY,
+            fuel: "*",
+            state: "*",
+            brand: "*",
+          })
+        }
+      />
+
+      <CategoryModal ref={(el) => (modals[0] = el)} onClick={selectCategory} />
     </View>
   );
 }
