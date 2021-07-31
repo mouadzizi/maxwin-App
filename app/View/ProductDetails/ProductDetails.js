@@ -134,7 +134,7 @@ export default function ProductDetails({ route, navigation }) {
       {product.owner.phone && (
         <FAB
           style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
-          color={COLORS.primary}
+          color='white'
           icon={
             <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
           }

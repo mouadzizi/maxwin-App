@@ -22,12 +22,13 @@ export default function CompleteProfile({ navigation }) {
   useEffect(() => {
     setAdditionalInfo({
       ...additionalInfo,
-      firstName: '',
-      lastName: '',
+      firstName: 'Prenom',
+      lastName: 'Nom',
+      gender: 'Homme',
+      type: 'Particullier',
       email: user.email,
       creationDate: date,
     });
-    return () => {};
   }, []);
 
   const complete = () => {
@@ -150,7 +151,6 @@ export default function CompleteProfile({ navigation }) {
               <Picker.Item
                 label="Choisissez votre Occupation"
                 color={COLORS.Grey[400]}
-                value="Particullier"
               />
               <Picker.Item label="Particullier" value="Particullier" />
               <Picker.Item label="Professionelle" value="Professionelle" />
