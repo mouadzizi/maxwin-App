@@ -1,5 +1,11 @@
 import React, { useCallback, useState } from "react";
-import { View, ActivityIndicator, FlatList, Alert, Image } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  FlatList,
+  Alert,
+  ToastAndroid,
+} from "react-native";
 import FavoriteProduct from "../../Components/Product/FavoritProduct";
 import EmptyFavorite from "../../SVG/EmptyFavorite";
 import { removeFavorite } from "../../API/APIFunctions";

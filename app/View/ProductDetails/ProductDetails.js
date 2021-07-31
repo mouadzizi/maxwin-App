@@ -6,6 +6,7 @@ import {
   Alert,
   Linking,
   Share,
+  ToastAndroid
 } from "react-native";
 import { FAB } from "react-native-elements";
 
@@ -78,8 +79,10 @@ export default function ProductDetails({ route, navigation }) {
   const addOrRemoveFavorite = () => {
     if (isFavorite) {
       removeFavorite(product.id);
+      ToastAndroid.show("Cet article a été supprimé à vos favoris !", ToastAndroid.SHORT);
     } else if (uid) {
       addToFavorite(uid, product).catch((err) => console.warn(err.message));
+      ToastAndroid.show("Cet article a été ajouté à vos favoris !", ToastAndroid.SHORT);
     } else showAlert();
   };
 
