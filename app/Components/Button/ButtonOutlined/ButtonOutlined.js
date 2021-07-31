@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import styles from './ButtonOutlined.style'
 import { COLORS } from '../../../GlobalStyle'
 
-export default function ButtonFill({onClick, title, style, disable, fontSize}) {
+export default function ButtonFill({onClick, title, style, disable, fontSize,longClick}) {
     const handlerClick = () => {
         if(!disable){
             onClick();
@@ -12,6 +12,7 @@ export default function ButtonFill({onClick, title, style, disable, fontSize}) {
     } 
     return (
         <TouchableOpacity 
+        onLongPress={longClick}
         style={disable ? [styles.containerDisable, style] : [styles.container, style]}
         onPress={handlerClick}>
             <TextView fontFamily="Source-Regular"  fontSize={fontSize ? fontSize : 18} style={{color : COLORS.primary}}>{title}</TextView>

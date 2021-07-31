@@ -5,19 +5,18 @@ import { Input } from "react-native-elements";
 import ButtonOutlined from "../../Components/Button/ButtonOutlined";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "../AddProductView/Modals/CategoryModal";
-
 import { COLORS } from "../../GlobalStyle";
 import styles from "./FilterView.style";
 
 export default function FilterView({ navigation, route }) {
   const [data, setData] = useState({
-    minPrice:0,
+    minPrice: 0,
     maxPrice: Number.POSITIVE_INFINITY,
-    minKM:0,
-    maxKM:Number.POSITIVE_INFINITY,
-    fuel:"*",
-    state:"*",
-    brand:"*"
+    minKM: 0,
+    maxKM: Number.POSITIVE_INFINITY,
+    fuel: "*",
+    state: "*",
+    brand: "*",
   });
   let modals = [];
 
@@ -72,14 +71,14 @@ export default function FilterView({ navigation, route }) {
             placeholder="Prix MIN"
             containerStyle={{ width: "50%" }}
             labelStyle={{ color: COLORS.primary }}
-            onChangeText={(e) => setData({ ...data, minPrice: e })}
+            onChangeText={(e) => setData({ ...data, minPrice: parseFloat(e) })}
           />
           <Input
             keyboardType="numeric"
             placeholder="Prix MAX"
             containerStyle={{ width: "50%" }}
             labelStyle={{ color: COLORS.primary }}
-            onChangeText={(e) => setData({ ...data, maxPrice: e })}
+            onChangeText={(e) => setData({ ...data, maxPrice: parseFloat(e) })}
           />
         </View>
 
@@ -88,6 +87,7 @@ export default function FilterView({ navigation, route }) {
           <Picker
             style={styles.pickerInput}
             mode="dialog"
+            selectedValue={data.brand}
             onValueChange={(e) => setData({ ...data, brand: e })}
             dropdownIconColor={COLORS.primary}
           >
@@ -133,6 +133,7 @@ export default function FilterView({ navigation, route }) {
           <Picker
             style={styles.pickerInput}
             mode="dropdown"
+            selectedValue={data.fuel}
             onValueChange={(e) => setData({ ...data, fuel: e })}
             dropdownIconColor={COLORS.primary}
           >
@@ -169,12 +170,35 @@ export default function FilterView({ navigation, route }) {
       </ScrollView>
 
       <ButtonFill
-      disable={!data.city}
+        disable={!data.city}
         title="Validé"
         style={{ marginHorizontal: 20, marginBottom: 20 }}
         loading={false}
-        onClick={()=>navigation.navigate("ResultView", { filterOpt: data, parent: route.name })}
+        onClick={() =>
+          navigation.navigate("ResultView", {
+            filterOpt: data,
+            parent: route.name,
+          })
+        }
       />
+      <ButtonFill
+        title="Supprimer le filtre"
+        style={{ marginHorizontal: 20, marginBottom: 20,backgroundColor: COLORS.third
+        }}
+        loading={false}
+        onClick={() =>
+          setData({
+            minPrice: 0,
+            maxPrice: Number.POSITIVE_INFINITY,
+            minKM: 0,
+            maxKM: Number.POSITIVE_INFINITY,
+            fuel: "*",
+            state: "*",
+            brand: "*",
+          })
+        }
+      />
+
       <CategoryModal ref={(el) => (modals[0] = el)} onClick={selectCategory} />
     </View>
   );
