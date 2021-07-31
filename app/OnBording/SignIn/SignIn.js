@@ -66,6 +66,7 @@ export default function SignIn({ navigation }) {
         />
         <Input
           placeholder="Mot de passe"
+          autoCapitalize="none"
           label="Password"
           containerStyle={{ marginTop: 10 }}
           errorMessage={

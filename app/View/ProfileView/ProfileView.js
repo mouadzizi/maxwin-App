@@ -17,13 +17,16 @@ export default function ProfileView({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       const uid = auth.currentUser?.uid;
-      getUser(uid).then((firebaseUser) => setUser(firebaseUser));
-      console.log(user);
-    }, [])
+      if(uid){
+        getUser(uid).then((firebaseUser) => setUser(firebaseUser));
+      }
+    }, [user])
   );
 
+  
   const SignOut = () => {
     auth.signOut();
+    setUser(false)
     Alert.alert("You have been Sign out");
   };
 
@@ -46,7 +49,7 @@ export default function ProfileView({ navigation }) {
       <ProfileSection
         title="Contacter Nous"
         subTitle="E-Mail"
-        onClick={() => auth.signOut()}
+        onClick={() => navigation.navigate('ContactView')}
         iconName="Mail"
         
       />
