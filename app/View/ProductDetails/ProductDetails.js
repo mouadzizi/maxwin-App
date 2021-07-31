@@ -103,7 +103,7 @@ export default function ProductDetails({ route, navigation }) {
   };
 
   const messageToWhatsApp = () => {
-    let ProductName = "Iphone 12 Pro";
+    let ProductName = product.title;
     let Message =
       "Bonjour, je vous contacte pour le produit : " +
       ProductName +

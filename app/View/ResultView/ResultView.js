@@ -4,30 +4,28 @@ import Product from "../../Components/Product/Product";
 import { getItemsByCategory, filter } from "../../API/APIFunctions";
 import styles from "./ResultView.style";
 import * as Progress from "react-native-progress";
-import {COLORS} from '../../GlobalStyle'
+import {COLORS, windowWidth} from '../../GlobalStyle'
 
 
 
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
   const [ready, setReady] = useState(false);
-  const { parent } = route.params;
-  const width = Dimensions.get("window").width;
+  const  parent = route.params?.parent;
+
   useEffect(() => {
     switch (parent) {
       case "FilterView":
         const filterOpt = route.params?.filterOpt;
-        console.log(filterOpt);
         filter(filterOpt)
           .then((data) => {
             setReady(true);
             setProducts(data);
           })
-          .catch(({ message }) => alert(message));
+          .catch(({ message }) => console.warn(message));
         break;
 
       default:
-        console.log("test");
         const collection = route.params?.collection;
         getItemsByCategory(collection, 10)
           .then((items) => {
@@ -66,12 +64,12 @@ export default function ResultView({ route, navigation }) {
         />
       ) : (
         <Progress.Bar
-        color={COLORS.primary}
+          color={COLORS.primary}
           indeterminate
           animationType='timing'
-          width={width}
+          width={windowWidth}
           height={8}
-          style={{ marginTop: 8 }}
+          style={{ marginTop: 10 }}
         />
       )}
     </View>
