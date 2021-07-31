@@ -9,17 +9,16 @@ import { COLORS } from "../../../GlobalStyle";
 import styles from "./FavoritProduct.style";
 
 export default function FavoritProduct({ fav, onClick, navigation }) {
-  console.log(fav);
   return (
     <LinearGradient style={styles.container} colors={["#FFF", "#FFF", "#FFF"]}>
       <View style={styles.containerImage}>
         <Image
-          source={{ uri: fav.images }}
+          source={{ uri: fav.image }}
           style={styles.image}
           PlaceholderContent={<ActivityIndicator size="large" color={"red"} />}
         />
       </View>
-      <TouchableOpacity style={styles.containerInfo} onPress={()=> navigation.navigate("ProductDetails", { product: fav })}>
+      <TouchableOpacity style={styles.containerInfo} onPress={()=> navigation.navigate("ProductDetails", { product: fav.product })}>
         <Text style={styles.info}>
           {" "}
           titre : <Text style={styles.value}> {fav.title} </Text>{" "}
