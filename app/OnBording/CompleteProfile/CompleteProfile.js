@@ -4,20 +4,29 @@ import { SafeAreaView, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Input } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
-
 import { Entypo, Fontisto } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./CompleteProfile.style";
 import { Picker } from "@react-native-picker/picker";
 import { db, auth } from "../../API/Firebase";
 
-export default function CompleteProfile({navigation}) {
+export default function CompleteProfile({ navigation }) {
   const user = auth.currentUser;
   const [additionalInfo, setAdditionalInfo] = useState({});
   const [loading, setLoading] = useState(false);
 
+  var today = new Date();
+  var date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
   useEffect(() => {
-    setAdditionalInfo({ ...additionalInfo, email: user.email });
+    setAdditionalInfo({
+      ...additionalInfo,
+      firstName: '',
+      lastName: '',
+      email: user.email,
+      creationDate: date,
+    });
     return () => {};
   }, []);
 
@@ -26,10 +35,10 @@ export default function CompleteProfile({navigation}) {
     db.collection("users")
       .doc(user.uid)
       .set(additionalInfo)
-      .then(navigation.goBack)
+      .then(navigation.navigate('BottomNavigation'))
       .catch(({ message }) => {
         setLoading(false);
-        alert(message);
+        console.warn(message);
       });
   };
   return (
@@ -47,7 +56,7 @@ export default function CompleteProfile({navigation}) {
               <Entypo name="v-card" size={24} color={COLORS.primary} />
             }
             onChangeText={(e) =>
-              setAdditionalInfo({ ...additionalInfo, firstName: e })
+              setAdditionalInfo({ ...additionalInfo, lastName: e })
             }
             value={additionalInfo.nom}
           />
@@ -61,11 +70,33 @@ export default function CompleteProfile({navigation}) {
               <Entypo name="v-card" size={24} color={COLORS.primary} />
             }
             onChangeText={(e) =>
-              setAdditionalInfo({ ...additionalInfo, lastName: e })
+              setAdditionalInfo({ ...additionalInfo, firstName: e })
             }
           />
         </View>
 
+        <View style={styles.container}>
+          <Text style={styles.label}> Genre </Text>
+          {/* Picker for city */}
+          <View style={styles.pickerView}>
+            <Picker
+              style={styles.pickerInput}
+              mode="dropdown"
+              dropdownIconColor={COLORS.primary}
+              onValueChange={(e) =>
+                setAdditionalInfo({ ...additionalInfo, gender: e })
+              }
+              selectedValue={additionalInfo?.gender}
+            >
+              <Picker.Item
+                label="Choisissez votre sexe"
+                color={COLORS.Grey[400]}
+              />
+              <Picker.Item label="Homme" value="Homme" />
+              <Picker.Item label="Femme" value="Femme" />
+            </Picker>
+          </View>
+        </View>
         <View style={styles.container}>
           <Text style={styles.label}>Où habitez-vous ?</Text>
           <Input
@@ -105,7 +136,6 @@ export default function CompleteProfile({navigation}) {
 
         <View style={styles.container}>
           <Text style={styles.label}>(Professionnel ou Particulier) </Text>
-
           {/* Picker for city */}
           <View style={styles.pickerView}>
             <Picker

@@ -76,6 +76,7 @@ export default function signUp({ navigation }) {
         <Input
           placeholder="Mot de passe"
           label="Mot de passe"
+          autoCapitalize="none"
           onChangeText={(e) => setUser({ ...user, password: e })}
           renderErrorMessage={false}
           labelStyle={{ color: COLORS.primary }}
@@ -87,6 +88,7 @@ export default function signUp({ navigation }) {
         <Input
           label="Répéter le mot de passe "
           placeholder="Mot de passe"
+          autoCapitalize="none"
           onChangeText={(e) => setUser({ ...user, confPassword: e })}
           rightIcon={<Entypo name="lock" size={24} color={COLORS.primary} />}
           labelStyle={{ color: COLORS.primary }}

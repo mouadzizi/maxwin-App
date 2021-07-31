@@ -24,10 +24,9 @@ export default function InformationStep({ navigation, route }) {
   useFocusEffect(
     useCallback(() => {
       const uid = auth.currentUser?.uid;
-      console.log(uid)
+      console.log(uid);
       getUser(uid).then((firebaseUser) => setUser(firebaseUser));
     }, [])
-    
   );
 
   const submit = () => {
@@ -223,15 +222,15 @@ export default function InformationStep({ navigation, route }) {
           </View>
         ) : null}
 
-        {product.category[1] ===
-          (product.category[1] === "Tablettes" ||
-            product.category[1] === "Téléphones" ||
-            product.category[1] === "Ordinateurs") && (
+        {(product.category[1] === "Tablettes" ||
+          product.category[1] === "Téléphones" ||
+          product.category[1] === "Ordinateurs") && (
           <View style={{ marginTop: 30 }}>
             <Input
               label="RAM"
               placeholder="Gb"
               style={{ fontSize: 15 }}
+              keyboardType="numeric"
               numberOfLines={2}
               labelStyle={{ color: COLORS.primary }}
               onChangeText={(input) =>
@@ -242,6 +241,7 @@ export default function InformationStep({ navigation, route }) {
             <Input
               label="ROM"
               placeholder="Gb"
+              keyboardType="numeric"
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
               onChangeText={(input) =>

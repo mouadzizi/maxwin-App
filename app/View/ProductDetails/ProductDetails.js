@@ -99,8 +99,15 @@ export default function ProductDetails({ route, navigation }) {
       "Bonjour, je vous contacte pour le produit : " +
       ProductName +
       "que vous vendez chez Maxwin, est-il toujours disponible ?";
-    let PhoneNumber = "+212626617611"; //need to be replaced with the product owner number.
+    let CountryCode = "212"
+    let phoneOwner = product.owner?.phone;
+    let PhoneNumber = CountryCode.concat(phoneOwner); 
     Linking.openURL(`whatsapp://send?text=${Message}&phone=${PhoneNumber}`);
+  };
+
+  const CallOwner = () => {
+    let Phone = product.owner?.phone;
+    Linking.openURL(`tel:${Phone}`);
   };
 
   const shareTheApp = async () => {
@@ -124,14 +131,17 @@ export default function ProductDetails({ route, navigation }) {
   };
   return (
     <SafeAreaView>
-      <FAB
-        style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
-        color={COLORS.primary}
-        icon={
-          <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
-        }
-        onPress={messageToWhatsApp}
-      />
+      {product.owner.phone && (
+        <FAB
+          style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
+          color={COLORS.primary}
+          icon={
+            <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
+          }
+          onPress={messageToWhatsApp}
+        />
+      )}
+
       <FAB
         icon={<AntDesign name="sharealt" size={25} color="white" />}
         color={COLORS.primary}
@@ -172,14 +182,15 @@ export default function ProductDetails({ route, navigation }) {
           }
         />
         <ProductInformation product={product} />
-        <SellerInformations product={product}/>
+
+        <SellerInformations product={product} />
 
         <View style={styles.container}>
           <ButtonFill
             title="Apple vendeur "
             loading={false}
             style={{ marginVertical: 10 }}
-            onClick={() => alert("appel")}
+            onClick={CallOwner}
           />
           <ButtonOutlined
             title="Messagerie"

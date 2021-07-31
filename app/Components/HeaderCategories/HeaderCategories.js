@@ -14,17 +14,17 @@ export default function HeaderCategories({ navigation }) {
       iconName: "Car",
     },
     {
-      id: "SDSDgf25677984",
+      id: "SDSDgf2512677984",
       categoryName: "Motos & vélos",
       iconName: "Bike",
     },
     {
-      id: "SDSDgf2933R84",
+      id: "SDSDgf289933R84",
       categoryName: "Appartements",
       iconName: "Apartment",
     },
     {
-      id: "SDSDgf6782984",
+      id: "SDSDgf456782984",
       categoryName: "Meubles et déco",
       iconName: "Lamp",
     },
@@ -44,7 +44,7 @@ export default function HeaderCategories({ navigation }) {
       iconName: "Tv",
     },
     {
-      id: "SDSDgf2fff6984",
+      id: "SDSDgfFDSQF2fff6984",
       categoryName: "Vêtements Hommes",
       iconName: "MenClothes",
     },

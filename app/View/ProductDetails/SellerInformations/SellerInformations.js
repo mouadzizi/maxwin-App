@@ -1,12 +1,19 @@
-import React, { useFocusEffect, useCallback, useState } from "react";
+import React from "react";
 import { View, Text } from "react-native";
 
 import styles from "./SellerInformation.style";
-import { Entypo } from "react-native-vector-icons";
 import Divider from "../../../Components/Divider";
+import { Entypo } from "react-native-vector-icons";
 
 export default function SellerInformations({ product }) {
-  console.log(product.owner);
+  const owner = {
+    firstName: product.owner?.firstName,
+    lastName: product.owner?.lastName,
+    address: product.owner?.address,
+    type: product.owner?.type,
+    gender: product.owner?.gender,
+    creationDate: product.owner?.creationDate,
+  };
   return (
     <View style={styles.container}>
       <View style={styles.containerCard}>
@@ -16,31 +23,30 @@ export default function SellerInformations({ product }) {
           </View>
           <View style={styles.nameContainer}>
             <Text style={styles.name}>
-              {product.owner.lastName} {product.owner.firstName.toUpperCase()}{" "}
+              {owner.lastName} {owner.firstName}
             </Text>
-            <Text style={styles.product}>
-              {" "}
-              Type : {product.owner.type.toUpperCase()}
-            </Text>
+            <Text style={styles.product}> Type : {owner.type}</Text>
           </View>
         </View>
         <Divider width={"100%"} />
 
         <View style={styles.secondRow}>
           <View style={styles.row}>
-            <Text style={styles.info}> Email : </Text>
-            <Text style={styles.value}> {product.owner.email}</Text>
+            <Text style={styles.info}> date d'inscription en Maxwin : </Text>
+            <Text style={styles.value}> {owner.creationDate} </Text>
           </View>
 
           <View style={styles.row}>
             <Text style={styles.info}> Genre :</Text>
-            <Text style={styles.value}> {product.owner.phone}</Text>
+            <Text style={styles.value}> {owner.gender} </Text>
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.info}> Nationalité :</Text>
-            <Text style={styles.value}> Marocaine </Text>
+            <Text style={styles.info}> Adresse :</Text>
+            <Text style={styles.value}> {owner.address} </Text>
           </View>
+
+
         </View>
       </View>
     </View>

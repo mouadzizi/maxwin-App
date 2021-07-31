@@ -26,7 +26,6 @@ export default function AddProductView({ navigation }) {
     useCallback(() => {
       const user = auth.currentUser;
       if (user) {
-        console.log(user.email);
       } else showAlert();
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
@@ -66,7 +65,6 @@ export default function AddProductView({ navigation }) {
       {
         text: "Annuler",
         onPress: () => navigation.goBack(),
-
       },
     ]);
   };
@@ -123,15 +121,15 @@ export default function AddProductView({ navigation }) {
 
         <Input
           label="Prix *"
-          keyboardType="phone-pad"
+          keyboardType="numeric"
           placeholder="Merci d'entrer le prix de votre article"
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary, fontSize: 15 }}
-          onChangeText={(value) =>{
+          onChangeText={(value) => {
             try {
-              setProduct({ ...product, price: parseFloat(value) })
+              setProduct({ ...product, price: value });
             } catch (error) {
-              alert(error)
+              console.warn(error);
             }
           }}
           value={product.price}
