@@ -42,13 +42,13 @@ export default StyleSheet.create({
     marginLeft: 5,
   },
   info: {
-    fontSize: 18,
+    fontSize: 14,
     color: COLORS.third,
     fontWeight: "bold",
     textTransform: 'capitalize'
   },
   value: {
-    fontSize: 18,
+    fontSize: 15,
     color: COLORS.text,
     fontWeight: "bold",
   },

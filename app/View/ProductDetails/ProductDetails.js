@@ -6,7 +6,7 @@ import {
   Alert,
   Linking,
   Share,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 import { FAB } from "react-native-elements";
 
@@ -79,10 +79,16 @@ export default function ProductDetails({ route, navigation }) {
   const addOrRemoveFavorite = () => {
     if (isFavorite) {
       removeFavorite(product.id);
-      ToastAndroid.show("Cet article a été supprimé à vos favoris !", ToastAndroid.SHORT);
+      ToastAndroid.show(
+        "Cet article a été supprimé à vos favoris !",
+        ToastAndroid.SHORT
+      );
     } else if (uid) {
       addToFavorite(uid, product).catch((err) => console.warn(err.message));
-      ToastAndroid.show("Cet article a été ajouté à vos favoris !", ToastAndroid.SHORT);
+      ToastAndroid.show(
+        "Cet article a été ajouté à vos favoris !",
+        ToastAndroid.SHORT
+      );
     } else showAlert();
   };
 
@@ -102,9 +108,9 @@ export default function ProductDetails({ route, navigation }) {
       "Bonjour, je vous contacte pour le produit : " +
       ProductName +
       "que vous vendez chez Maxwin, est-il toujours disponible ?";
-    let CountryCode = "212"
+    let CountryCode = "212";
     let phoneOwner = product.owner?.phone;
-    let PhoneNumber = CountryCode.concat(phoneOwner); 
+    let PhoneNumber = CountryCode.concat(phoneOwner);
     Linking.openURL(`whatsapp://send?text=${Message}&phone=${PhoneNumber}`);
   };
 
@@ -137,7 +143,7 @@ export default function ProductDetails({ route, navigation }) {
       {product.owner.phone && (
         <FAB
           style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
-          color='white'
+          color="white"
           icon={
             <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
           }
@@ -189,12 +195,15 @@ export default function ProductDetails({ route, navigation }) {
         <SellerInformations product={product} />
 
         <View style={styles.container}>
-          <ButtonFill
-            title="Apple vendeur "
-            loading={false}
-            style={{ marginVertical: 10 }}
-            onClick={CallOwner}
-          />
+          {product.owner.phone && (
+            <ButtonFill
+              title="Apple vendeur "
+              loading={false}
+              style={{ marginVertical: 10 }}
+              onClick={CallOwner}
+            />
+          )}
+
           <ButtonOutlined
             title="Messagerie"
             style={{ marginVertical: 10 }}

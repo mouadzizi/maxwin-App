@@ -7,29 +7,28 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "react-native-vector-icons";
 import { COLORS } from "../../../GlobalStyle";
 import styles from "./FavoritProduct.style";
-export default function FavoritProduct({ fav, onClick }) {
+
+export default function FavoritProduct({ fav, onClick, navigation }) {
+  console.log(fav);
   return (
-    <LinearGradient
-      style={styles.container}
-      colors={["#9193cf", "#afb1db", "#FFF"]}
-    >
+    <LinearGradient style={styles.container} colors={["#FFF", "#FFF", "#FFF"]}>
       <View style={styles.containerImage}>
         <Image
-          source={{ uri: fav.image }}
+          source={{ uri: fav.images }}
           style={styles.image}
           PlaceholderContent={<ActivityIndicator size="large" color={"red"} />}
         />
       </View>
-      <View style={styles.containerInfo}>
+      <TouchableOpacity style={styles.containerInfo} onPress={()=> navigation.navigate("ProductDetails", { product: fav })}>
         <Text style={styles.info}>
           {" "}
           titre : <Text style={styles.value}> {fav.title} </Text>{" "}
         </Text>
         <Text style={styles.info}>
           {" "}
-          prix  : <Text style={styles.value}> {fav.price} </Text>{" "}
+          prix : <Text style={styles.value}> {fav.price} </Text>{" "}
         </Text>
-      </View>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.containerBin} onPress={onClick}>
         <Ionicons
           name="ios-trash-bin-outline"

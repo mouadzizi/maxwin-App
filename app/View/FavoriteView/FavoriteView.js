@@ -67,7 +67,7 @@ export default function FavoriteView({ navigation }) {
 
   const renderItem = useCallback(
     ({ item }) => (
-      <FavoriteProduct fav={item} onClick={() => removeItem(item.id)} />
+      <FavoriteProduct fav={item} onClick={() => removeItem(item.id)} navigation={navigation}/>
     ),
     []
   );

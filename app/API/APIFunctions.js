@@ -90,6 +90,7 @@ export const addToFavorite = async (userId, post) => {
       price: post.price,
       category: post.category[1],
       image: post.images[0],
+      product : post,
     });
 };
 
