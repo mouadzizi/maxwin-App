@@ -12,7 +12,7 @@ import Gps from "../../../../icons/CarSpecifications/Gps";
 import CarAirConditioner from "../../../../icons/CarSpecifications/CarAirConditioner";
 import Divider from "../../../../Components/Divider";
 import RadarRedcule from "../../../../icons/CarSpecifications/RadarRecule";
-import { Entypo } from "react-native-vector-icons";
+import { Entypo, MaterialCommunityIcons } from "react-native-vector-icons";
 
 export default function Equipement({ chips }) {
   const renderChip = (title, index) => {
@@ -124,6 +124,26 @@ export default function Equipement({ chips }) {
                 style={styles.textInfo}
               >
                 Salon en cuir
+              </TextView>
+            </View>
+            <Divider width="95%" />
+          </View>
+        );
+      case "ABS":
+        return (
+          <View key={index}>
+            <View key={index} style={styles.row}>
+              <MaterialCommunityIcons
+                name="car-brake-abs"
+                color={COLORS.primary}
+                size={40}
+              />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={17}
+                style={styles.textInfo}
+              >
+                ABS
               </TextView>
             </View>
             <Divider width="95%" />

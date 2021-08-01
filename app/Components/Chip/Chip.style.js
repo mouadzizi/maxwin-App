@@ -5,6 +5,7 @@ export default StyleSheet.create({
 	containerOutlined: {
 		padding: 10,
 		width: 170,
+		height: 50,
 		borderWidth: 1,
 		borderColor: COLORS.primary,
 		borderRadius: 10,
@@ -19,6 +20,7 @@ export default StyleSheet.create({
 		backgroundColor: COLORS.primary,
 		borderRadius: 10,
 		width: 170,
+		height: 50,
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		flexDirection: 'row',

@@ -2,15 +2,15 @@ import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 import { COLORS } from "../../GlobalStyle";
 
-const RadarRecule = () => {
+const RadarRecule = ({white, width}) => {
   return (
     <Svg
       viewBox="0 0 60 58"
       xmlns="http://www.w3.org/2000/svg"
-      width={40}
+      width={width ? width : 40}
       height={40}
-      stroke={COLORS.primary}
-      fill={COLORS.primary}
+      stroke={white ? '#fff' :COLORS.primary}
+      fill={white ? '#fff' : COLORS.primary}
       fillRule={"nonzero"}
     >
       <Path d="M23.283 28.888l-5-.715A2 2 0 0016 30.153V32a2 2 0 002 2h5a2 2 0 002-2v-1.133a2.008 2.008 0 00-1.717-1.979zM18 32v-1.847l5 .714V32zM41.717 28.173l-5 .715A2.008 2.008 0 0035 30.867V32a2 2 0 002 2h5a2 2 0 002-2v-1.847a2 2 0 00-2.283-1.98zM42 32h-5v-1.133l5-.714zM32 28h-4a1 1 0 000 2h4a1 1 0 000-2zM32 32h-4a1 1 0 000 2h4a1 1 0 000-2zM23 18c.543 0 .565-.151 2.707-2.293a1 1 0 00-1.414-1.414l-2 2A1 1 0 0023 18zM24.293 21.707a1 1 0 001.414 0l6-6a1 1 0 00-1.414-1.414l-6 6a1 1 0 000 1.414zM1.419 14.871a1 1 0 00.959-1.285A9.009 9.009 0 0115.261 3.078a1 1 0 00.959-1.755A10.994 10.994 0 00.461 14.154a1 1 0 00.958.717z" />

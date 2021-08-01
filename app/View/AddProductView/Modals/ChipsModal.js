@@ -22,7 +22,7 @@ import Chip from '../../../Components/Chip/Chip'
             ref={this.modal}
             snapPoint={300}
             flatListProps={{
-                data:this.data,
+                data: this.data,
                 keyExtractor:this.keyExtractor.bind(this),
                 renderItem:this.renderItem.bind(this),
                 numColumns:2,

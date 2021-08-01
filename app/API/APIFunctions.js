@@ -89,7 +89,7 @@ export const addToFavorite = async (userId, post) => {
       price: post.price,
       category: post.category[1],
       image: post.images[0],
-      product : post,
+      product: post,
     });
 };
 
@@ -128,25 +128,27 @@ export const getUser = async () => {
   const doc = await db.collection("users").doc(auth.currentUser.uid).get();
   return Promise.resolve(doc.data());
 };
+
 export const filter = async (data) => {
   var itemsRef = db.collection("products").where("city", "==", data.city);
+  
   // filter by category
   if (data.category) {
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 
   // filter by category brand
-  if (data.brand !="*") {
+  if (data.brand != "*") {
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
   // filter by fuel
-  if (data.fuel !="*") {
+  if (data.fuel != "*") {
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
 
   // filter by etat
-  if (data.state !="*") {
+  if (data.state != "*") {
     itemsRef = itemsRef.where("state", "==", data.state);
   }
 
@@ -164,13 +166,13 @@ export const filter = async (data) => {
     });
   return await Promise.all(results);
 };
-export const updateUser = async(data) =>{
-  const {uid} = auth.currentUser
-  await db.collection('users').doc(uid).update({
-    firstName:data.firstName,
-    lastName:data.lastName,
-    address:data.address,
-    phone:data.phone,
-    type:data.type,
-  })
-}
+export const updateUser = async (data) => {
+  const { uid } = auth.currentUser;
+  await db.collection("users").doc(uid).update({
+    firstName: data.firstName,
+    lastName: data.lastName,
+    address: data.address,
+    phone: data.phone,
+    type: data.type,
+  });
+};

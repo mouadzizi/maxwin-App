@@ -19,12 +19,12 @@ export default function InformationStep({ navigation, route }) {
   const [selectedChips, setSelectedChips] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
+
   let modalRef;
 
   useFocusEffect(
     useCallback(() => {
       const uid = auth.currentUser?.uid;
-      console.log(uid);
       getUser(uid).then((firebaseUser) => setUser(firebaseUser));
     }, [])
   );
@@ -233,9 +233,7 @@ export default function InformationStep({ navigation, route }) {
               keyboardType="numeric"
               numberOfLines={2}
               labelStyle={{ color: COLORS.primary }}
-              onChangeText={(input) =>
-                setProduct({ ...product, RAM: input })
-              }
+              onChangeText={(input) => setProduct({ ...product, RAM: input })}
             />
 
             <Input
@@ -244,9 +242,7 @@ export default function InformationStep({ navigation, route }) {
               keyboardType="numeric"
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
-              onChangeText={(input) =>
-                setProduct({ ...product, ROM: input })
-              }
+              onChangeText={(input) => setProduct({ ...product, ROM: input })}
             />
           </View>
         )}
@@ -399,10 +395,8 @@ export default function InformationStep({ navigation, route }) {
         <Input
           containerStyle={{ marginTop: 20 }}
           keyboardType="numeric"
-          onChangeText={(phone) =>
-            setProduct({ ...product, phoneNumber: phone })
-          }
-          placeholder="Numéro de télephone"
+          onChangeText={(phone) => setProduct({ ...product, phone: phone })}
+          placeholder="Num phone"
           rightIcon={{ type: "Feather", name: "phone", color: COLORS.primary }}
         />
 
