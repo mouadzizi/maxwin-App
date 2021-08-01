@@ -63,110 +63,122 @@ export default function FilterView({ navigation, route }) {
           style={{ marginBottom: 20 }}
         />
 
-        <Text style={styles.label}>Prix</Text>
+        {data.category && (
+          <>
+            <Text style={styles.label}>Prix</Text>
 
-        <View style={styles.row}>
-          <Input
-            keyboardType="numeric"
-            placeholder="Prix MIN"
-            containerStyle={{ width: "50%" }}
-            labelStyle={{ color: COLORS.primary }}
-            onChangeText={(e) => setData({ ...data, minPrice: parseFloat(e) })}
-          />
-          <Input
-            keyboardType="numeric"
-            placeholder="Prix MAX"
-            containerStyle={{ width: "50%" }}
-            labelStyle={{ color: COLORS.primary }}
-            onChangeText={(e) => setData({ ...data, maxPrice: parseFloat(e) })}
-          />
-        </View>
+            <View style={styles.row}>
+              <Input
+                keyboardType="numeric"
+                placeholder="Prix MIN"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, minPrice: parseFloat(e) })
+                }
+              />
+              <Input
+                keyboardType="numeric"
+                placeholder="Prix MAX"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, maxPrice: parseFloat(e) })
+                }
+              />
+            </View>
+          </>
+        )}
 
-        <View style={styles.pickerView}>
-          <Text style={styles.label}>Marque de Voiture</Text>
-          <Picker
-            style={styles.pickerInput}
-            mode="dialog"
-            selectedValue={data.brand}
-            onValueChange={(e) => setData({ ...data, brand: e })}
-            dropdownIconColor={COLORS.primary}
-          >
-            <Picker.Item
-              label="Choisissez une marque"
-              value="*"
-              color={COLORS.Grey[400]}
+        {data.category === "Voitures" && (
+          <>
+            <View style={styles.pickerView}>
+              <Text style={styles.label}>Marque de Voiture</Text>
+              <Picker
+                style={styles.pickerInput}
+                mode="dialog"
+                selectedValue={data.brand}
+                onValueChange={(e) => setData({ ...data, brand: e })}
+                dropdownIconColor={COLORS.primary}
+              >
+                <Picker.Item
+                  label="Choisissez une marque"
+                  value="*"
+                  color={COLORS.Grey[400]}
+                />
+                <Picker.Item label="AUDI" value="AUDI" />
+                <Picker.Item label="BMW" value="BMW" />
+                <Picker.Item label="CHEVROLET" value="CHEVROLET" />
+              </Picker>
+            </View>
+
+            <Text style={styles.label}>Kilométrage</Text>
+
+            <View style={styles.row}>
+              <Input
+                keyboardType="numeric"
+                placeholder="MIN"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, minKM: parseFloat(e) || 0 })
+                }
+              />
+              <Input
+                keyboardType="numeric"
+                placeholder="MAX"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({
+                    ...data,
+                    maxKM: parseFloat(e) || Number.POSITIVE_INFINITY,
+                  })
+                }
+              />
+            </View>
+
+            <View style={styles.pickerView}>
+              <Text style={styles.label}>Carburant</Text>
+              <Picker
+                style={styles.pickerInput}
+                mode="dropdown"
+                selectedValue={data.fuel}
+                onValueChange={(e) => setData({ ...data, fuel: e })}
+                dropdownIconColor={COLORS.primary}
+              >
+                <Picker.Item
+                  label="Choisissez le carburant"
+                  value="*"
+                  color={COLORS.Grey[400]}
+                />
+                <Picker.Item label="Diesel" value="Diesel" />
+                <Picker.Item label="Essence" value="Essence" />
+              </Picker>
+            </View>
+
+            <Input
+              label="Kilométrage"
+              placeholder="Merci d'entrer le Nom exact de votre article"
+              style={{ fontSize: 15 }}
+              labelStyle={{ color: COLORS.primary }}
             />
-            <Picker.Item label="AUDI" value="AUDI" />
-            <Picker.Item label="BMW" value="BMW" />
-            <Picker.Item label="CHEVROLET" value="CHEVROLET" />
-          </Picker>
-        </View>
 
-        <Text style={styles.label}>Kilométrage</Text>
-
-        <View style={styles.row}>
-          <Input
-            keyboardType="numeric"
-            placeholder="MIN"
-            containerStyle={{ width: "50%" }}
-            labelStyle={{ color: COLORS.primary }}
-            onChangeText={(e) =>
-              setData({ ...data, minKM: parseFloat(e) || 0 })
-            }
-          />
-          <Input
-            keyboardType="numeric"
-            placeholder="MAX"
-            containerStyle={{ width: "50%" }}
-            labelStyle={{ color: COLORS.primary }}
-            onChangeText={(e) =>
-              setData({
-                ...data,
-                maxKM: parseFloat(e) || Number.POSITIVE_INFINITY,
-              })
-            }
-          />
-        </View>
-
-        <View style={styles.pickerView}>
-          <Text style={styles.label}>Carburant</Text>
-          <Picker
-            style={styles.pickerInput}
-            mode="dropdown"
-            selectedValue={data.fuel}
-            onValueChange={(e) => setData({ ...data, fuel: e })}
-            dropdownIconColor={COLORS.primary}
-          >
-            <Picker.Item
-              label="Choisissez le carburant"
-              value="*"
-              color={COLORS.Grey[400]}
+            <Input
+              label="Kilométrage"
+              placeholder="Merci d'entrer le Nom exact de votre article"
+              style={{ fontSize: 15 }}
+              labelStyle={{ color: COLORS.primary }}
             />
-            <Picker.Item label="Diesel" value="Diesel" />
-            <Picker.Item label="Essence" value="Essence" />
-          </Picker>
-        </View>
 
-        <Input
-          label="Kilométrage"
-          placeholder="Merci d'entrer le Nom exact de votre article"
-          style={{ fontSize: 15 }}
-          labelStyle={{ color: COLORS.primary }}
-        />
-
-        <Input
-          label="Kilométrage"
-          placeholder="Merci d'entrer le Nom exact de votre article"
-          style={{ fontSize: 15 }}
-          labelStyle={{ color: COLORS.primary }}
-        />
-
-        <Input
-          label="Kilométrage"
-          placeholder="Merci d'entrer le Nom exact de votre article"
-          style={{ fontSize: 15 }}
-          labelStyle={{ color: COLORS.primary }}
-        />
+            <Input
+              label="Kilométrage"
+              placeholder="Merci d'entrer le Nom exact de votre article"
+              style={{ fontSize: 15 }}
+              labelStyle={{ color: COLORS.primary }}
+            />
+          </>
+        )}
       </ScrollView>
 
       <ButtonFill
@@ -183,7 +195,10 @@ export default function FilterView({ navigation, route }) {
       />
       <ButtonFill
         title="Supprimer le filtre"
-        style={{ marginHorizontal: 20, marginBottom: 20,backgroundColor: COLORS.third
+        style={{
+          marginHorizontal: 20,
+          marginBottom: 20,
+          backgroundColor: COLORS.third,
         }}
         loading={false}
         onClick={() =>
