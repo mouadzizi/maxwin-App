@@ -113,7 +113,6 @@ export default function InformationStep({ navigation, route }) {
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
               errorMessage={
-                product.anneeFabrication > 2021 ||
                 product.anneeFabrication < 1900
                   ? "veuillez choisir une année valide"
                   : null
@@ -179,7 +178,7 @@ export default function InformationStep({ navigation, route }) {
                 }
               >
                 <Picker.Item
-                  label="Choisissez la Puissance Fiscale"
+                  label="Choisissez la Transaction"
                   value=""
                   color={COLORS.Grey[400]}
                 />

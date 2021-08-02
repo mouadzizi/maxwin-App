@@ -90,7 +90,8 @@ export default function FilterView({ navigation, route }) {
           </>
         )}
 
-        {data.category === "Voitures" && (
+        {(data.category === "Voitures" ||
+          data.category === "Location de Voiture") && (
           <>
             <View style={styles.pickerView}>
               <Text style={styles.label}>Marque de Voiture</Text>
@@ -156,27 +157,109 @@ export default function FilterView({ navigation, route }) {
                 <Picker.Item label="Essence" value="Essence" />
               </Picker>
             </View>
+            {/* THIS IS NEW ADDED START --------------------*/}
+            <View style={styles.pickerView}>
+              <Text style={styles.label}>Transaction</Text>
+              <Picker
+                style={styles.pickerInput}
+                mode="dropdown"
+                dropdownIconColor={COLORS.primary}
+                selectedValue={data.transaction}
+                onValueChange={(itemValue) =>
+                  setData({ ...product, transaction: itemValue })
+                }
+              >
+                <Picker.Item
+                  label="Choisissez la Transaction"
+                  value=""
+                  color={COLORS.Grey[400]}
+                />
+                <Picker.Item label="Manuelle" value="Manuelle" />
+                <Picker.Item label="Automatique" value="Automatique" />
+              </Picker>
+            </View>
+          </>
+        )}
 
-            <Input
-              label="Kilométrage"
-              placeholder="Merci d'entrer le Nom exact de votre article"
-              style={{ fontSize: 15 }}
-              labelStyle={{ color: COLORS.primary }}
-            />
+        {(data.category === "Appartements" ||
+          data.category === "Maisons & Villas" ||
+          data.category === "Location long durée" ||
+          data.category === "Location courte durée (vacances)" ||
+          data.category === "Commerces & Bureaux") && (
+          <>
+            <Text style={styles.label}>Superficie</Text>
 
-            <Input
-              label="Kilométrage"
-              placeholder="Merci d'entrer le Nom exact de votre article"
-              style={{ fontSize: 15 }}
-              labelStyle={{ color: COLORS.primary }}
-            />
+            <View style={styles.row}>
+              <Input
+                keyboardType="numeric"
+                placeholder="Superficie MIN"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, superficieMin: parseFloat(e) })
+                }
+              />
+              <Input
+                keyboardType="numeric"
+                placeholder="Superficie MAX"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, superficieMax: parseFloat(e) })
+                }
+              />
+            </View>
+          </>
+        )}
 
-            <Input
-              label="Kilométrage"
-              placeholder="Merci d'entrer le Nom exact de votre article"
-              style={{ fontSize: 15 }}
-              labelStyle={{ color: COLORS.primary }}
-            />
+        {(data.category === "Tablettes" ||
+          data.category === "Téléphones" ||
+          data.category === "Ordinateurs") && (
+          <>
+            <Text style={styles.label}>RAM</Text>
+
+            <View style={styles.row}>
+              <Input
+                keyboardType="numeric"
+                placeholder="RAM MIN"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, RamMin: parseFloat(e) })
+                }
+              />
+              <Input
+                keyboardType="numeric"
+                placeholder="RAM MAX"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, RamMax: parseFloat(e) })
+                }
+              />
+            </View>
+
+            <Text style={styles.label}>ROM</Text>
+            <View style={styles.row}>
+              <Input
+                keyboardType="numeric"
+                placeholder="ROM MIN"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, RomMin: parseFloat(e) })
+                }
+              />
+              <Input
+                keyboardType="numeric"
+                placeholder="ROM MAX"
+                containerStyle={{ width: "50%" }}
+                labelStyle={{ color: COLORS.primary }}
+                onChangeText={(e) =>
+                  setData({ ...data, RomMax: parseFloat(e) })
+                }
+              />
+            </View>
           </>
         )}
       </ScrollView>
