@@ -133,17 +133,20 @@ export const filter = async (data) => {
   var itemsRef = db.collection("products").where("city", "==", data.city);
   
   // filter by category
-  if (data.category) {
+  if (data.category !="*" ) {
+    console.log('cat');
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 
   // filter by category brand
   if (data.brand != "*") {
+    console.log('fuel');
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
   // filter by fuel
   if (data.fuel != "*") {
+    console.log('fuel');
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
 
@@ -156,8 +159,6 @@ export const filter = async (data) => {
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)
-    .filter((doc) => doc.data().kilometrage >= data.minKM)
-    .filter((doc) => doc.data().kilometrage >= data.minKM)
     .map((doc) => {
       return {
         id: doc.id,

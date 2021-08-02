@@ -17,8 +17,10 @@ export default function ResultView({ route, navigation }) {
     switch (parent) {
       case "FilterView":
         const filterOpt = route.params?.filterOpt;
+        console.log(filterOpt);
         filter(filterOpt)
           .then((data) => {
+            console.log(data);
             setReady(true);
             setProducts(data);
           })

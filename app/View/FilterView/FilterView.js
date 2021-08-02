@@ -17,6 +17,8 @@ export default function FilterView({ navigation, route }) {
     fuel: "*",
     state: "*",
     brand: "*",
+    city: "*",
+    category: "*",
   });
   let modals = [];
 
@@ -182,7 +184,6 @@ export default function FilterView({ navigation, route }) {
       </ScrollView>
 
       <ButtonFill
-        disable={!data.city}
         title="Validé"
         style={{ marginHorizontal: 20, marginBottom: 20 }}
         loading={false}
@@ -210,11 +211,12 @@ export default function FilterView({ navigation, route }) {
             fuel: "*",
             state: "*",
             brand: "*",
+            category:"*"
           })
         }
       />
 
-      <CategoryModal ref={(el) => (modals[0] = el)} onClick={selectCategory} />
+      <CategoryModal ref={(el) => (modals[0] = el)} onClick={(cat)=>selectCategory(cat)} />
     </View>
   );
 }
