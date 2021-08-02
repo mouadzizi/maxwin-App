@@ -13,6 +13,7 @@ import FilterView from "../../../View/FilterView";
 import SignIn from "../../../OnBording/SignIn";
 import SignUp from "../../../OnBording/SignUp";
 import CompleteProfile from "../../../OnBording/CompleteProfile";
+import MyProductsView from "../../../View/MyProductsView";
 
 import ProfileInformationView from "../../../View/ProfileInformationView";
 import ContactView from "../../../View/ContactView";
@@ -246,6 +247,19 @@ export default function MainStack({ navigation }) {
           component={FAQView}
           options={{
             title: "FAQ",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+
+        <Stack.Screen
+          name="MyProductsView"
+          component={MyProductsView}
+          options={{
+            title: "Ma boutique",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
