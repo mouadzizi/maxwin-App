@@ -17,16 +17,15 @@ export default function ProfileView({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       const uid = auth.currentUser?.uid;
-      if(uid){
+      if (uid) {
         getUser(uid).then((firebaseUser) => setUser(firebaseUser));
       }
     }, [user])
   );
 
-  
   const SignOut = () => {
     auth.signOut();
-    setUser(false)
+    setUser(false);
     Alert.alert("You have been Sign out");
   };
 
@@ -42,6 +41,13 @@ export default function ProfileView({ navigation }) {
               navigation.navigate("ProfileInformationView", { profile: user })
             }
           />
+
+          <ProfileSection
+            subTitle="Mes produits"
+            title="Ma boutique"
+            iconName="Shop"
+            onClick={() => navigation.navigate("MyProductsView", { profile: user })}
+          />
         </>
       )}
 
@@ -49,11 +55,10 @@ export default function ProfileView({ navigation }) {
       <ProfileSection
         title="Contacter Nous"
         subTitle="E-Mail"
-        onClick={() => navigation.navigate('ContactView')}
+        onClick={() => navigation.navigate("ContactView")}
         iconName="Mail"
-        
       />
-      {user && (
+      {/* {user && (
         <>
           <ProfileSection
             title="Notification"
@@ -62,7 +67,7 @@ export default function ProfileView({ navigation }) {
             iconName="Bell"
           />
         </>
-      )}
+      )} */}
 
       <ProfileSection
         title="FAQ"
@@ -74,7 +79,7 @@ export default function ProfileView({ navigation }) {
         <>
           <Devider
             width="100%"
-            style={{ marginVertical: 20, backgroundColor: COLORS.third }}
+            style={{ marginVertical: 20, backgroundColor: COLORS.primary }}
           />
           <ProfileSection
             title="Se déconnecter"
