@@ -130,23 +130,26 @@ export const getUser = async () => {
 };
 
 export const filter = async (data) => {
-  var itemsRef = db.collection("products").where("city", "==", data.city);
-  
+  var itemsRef = db.collection("products");
+  if (data.city != "*") {
+    itemsRef = db.collection("products").where("city", "==", data.city);
+  }
+
   // filter by category
-  if (data.category !="*" ) {
-    console.log('cat');
+  if (data.category != "Choisissez une categorie") {
+    console.log("cat");
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 
   // filter by category brand
   if (data.brand != "*") {
-    console.log('fuel');
+    console.log("fuel");
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
   // filter by fuel
   if (data.fuel != "*") {
-    console.log('fuel');
+    console.log("fuel");
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
 
@@ -155,7 +158,7 @@ export const filter = async (data) => {
     itemsRef = itemsRef.where("state", "==", data.state);
   }
 
-  const querySnap = await itemsRef.get();
+  const querySnap = await itemsRef.orderBy('createdDate','desc').limit(10).get();
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)

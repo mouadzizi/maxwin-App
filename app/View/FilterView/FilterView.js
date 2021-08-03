@@ -18,7 +18,7 @@ export default function FilterView({ navigation, route }) {
     state: "*",
     brand: "*",
     city: "*",
-    category: "*",
+    category: "Choisissez une categorie",
   });
   let modals = [];
 
@@ -294,12 +294,16 @@ export default function FilterView({ navigation, route }) {
             fuel: "*",
             state: "*",
             brand: "*",
-            category:"*"
+            category: "Choisissez une categorie",
+            city: "*",
           })
         }
       />
 
-      <CategoryModal ref={(el) => (modals[0] = el)} onClick={(cat)=>selectCategory(cat)} />
+      <CategoryModal
+        ref={(el) => (modals[0] = el)}
+        onClick={(cat) => selectCategory(cat)}
+      />
     </View>
   );
 }

@@ -138,6 +138,21 @@ export default function ProductDetails({ route, navigation }) {
       console.warn(error.message);
     }
   };
+  const handleNavigation = () => {
+    const { owner, title, images } = product;
+    if (owner._id != uid)
+      navigation.navigate("ChatView", {
+        seller: owner,
+        postTitle: title,
+        postId: product.id,
+        pic: images[0],
+      });
+    else
+      Alert.alert(
+        "Désolé(e)",
+        "vous êtes le propriétaire de ce produit, vous ne pouvez pas vous envoyer de message"
+      );
+  };
   return (
     <SafeAreaView>
       {product.owner.phone && (
@@ -207,7 +222,7 @@ export default function ProductDetails({ route, navigation }) {
           <ButtonOutlined
             title="Messagerie"
             style={{ marginVertical: 10 }}
-            onClick={() => alert("Messages")}
+            onClick={handleNavigation}
           />
         </View>
       </ScrollView>
