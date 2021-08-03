@@ -110,6 +110,33 @@ export default function FilterView({ navigation, route }) {
                 <Picker.Item label="AUDI" value="AUDI" />
                 <Picker.Item label="BMW" value="BMW" />
                 <Picker.Item label="CHEVROLET" value="CHEVROLET" />
+                <Picker.Item label="CITROEN" value="CITROEN" />
+                <Picker.Item label="DACIA" value="DACIA" />
+                <Picker.Item label="FIAT" value="FIAT" />
+                <Picker.Item label="FORD" value="FORD" />
+                <Picker.Item label="HYUNDAI" value="HYUNDAI" />
+                <Picker.Item label="INFINITI" value="INFINITI" />
+                <Picker.Item label="JAGUAR" value="JAGUAR" />
+                <Picker.Item label="KIA " value="KIA" />
+                <Picker.Item label="LANDROVER" value="LANDROVER" />
+                <Picker.Item label="MASERATI" value="MASERATI" />
+                <Picker.Item label="MAZDA" value="MAZDA" />
+                <Picker.Item label="MERCEDES" value="MERCEDES" />
+                <Picker.Item label="MINI" value="MINI" />
+                <Picker.Item label="MITSUBISHI" value="MITSUBISHI" />
+                <Picker.Item label="NISSAN" value="NISSAN" />
+                <Picker.Item label="OPEL" value="OPEL" />
+                <Picker.Item label="PEUGEOT" value="PEUGEOT" />
+                <Picker.Item label="PORSCHE" value="PORSCHE" />
+                <Picker.Item label="RENAULT" value="RENAULT" />
+                <Picker.Item label="ROVER" value="ROVER" />
+                <Picker.Item label="SEAT" value="SEAT" />
+                <Picker.Item label="SKODA" value="SKODA" />
+                <Picker.Item label="SUZUKI" value="SUZUKI" />
+                <Picker.Item label="TOYOTA" value="TOYOTA" />
+                <Picker.Item label="VOLSWAGEN" value="VOLSWAGEN" />
+                <Picker.Item label="VOLVO" value="VOLVO" />
+                <Picker.Item label="AUTRE" value="AUTRE" />
               </Picker>
             </View>
 
