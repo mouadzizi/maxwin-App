@@ -1,12 +1,14 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import EmptyChats from '../../SVG/EmptyChats'
-import styles from './MessagesView.style';
+import React from "react";
+import { View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import EmptyChats from "../../SVG/EmptyChats";
+import styles from "./MessagesView.style";
 
-export default function MessagesView({ navigation}) {
-    return (
-        <View style={styles.container}>
-            <EmptyChats />
-        </View>
-    )
+export default function MessagesView({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <EmptyChats />
+
+    </View>
+  );
 }

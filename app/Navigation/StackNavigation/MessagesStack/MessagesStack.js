@@ -1,7 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import MessagesView from "../../../View/MessagesView";
-import ChatView from '../../../View/ChatView/ChatView'
 import { COLORS } from '../../../GlobalStyle'
 
 export default function MessagesStack() {
@@ -25,11 +24,7 @@ export default function MessagesStack() {
         component={MessagesView}
         options={{ title: "Messages" }}
       />
-      <Stack.Screen
-        name="ChatView"
-        component={ChatView}
-        options={{ title: "Chat" }}
-      />
+
     </Stack.Navigator>
   );
 }

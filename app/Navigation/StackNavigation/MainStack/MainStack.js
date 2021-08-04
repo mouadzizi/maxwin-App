@@ -14,7 +14,7 @@ import SignIn from "../../../OnBording/SignIn";
 import SignUp from "../../../OnBording/SignUp";
 import CompleteProfile from "../../../OnBording/CompleteProfile";
 import MyProductsView from "../../../View/MyProductsView";
-
+import ChatView from "../../../View/ChatView";
 import ProfileInformationView from "../../../View/ProfileInformationView";
 import ContactView from "../../../View/ContactView";
 import NotificationView from "../../../View/NotificationView";
@@ -260,6 +260,19 @@ export default function MainStack({ navigation }) {
           component={MyProductsView}
           options={{
             title: "Ma boutique",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+
+        <Stack.Screen
+          name="ChatView"
+          component={ChatView}
+          options={{
+            title: "ChatView",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },

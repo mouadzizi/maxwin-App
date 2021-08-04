@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import {
-  GiftedChat,
-  Bubble,
-  Send,
-  MessageText,
-} from "react-native-gifted-chat";
+import React, { useState } from "react";
+import { View } from "react-native";
+import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { auth } from "../../API/Firebase";
 
-export default function ChatView({ route }) {
+export default function ChatView({ route, navigation }) {
   const [messages, setMessages] = useState([]);
   const user = auth.currentUser;
-  const { seller, postTitle, postId, pic } = route.params
-
-  useEffect(() => {
-    console.log(route.params);
-    return () => {};
-  }, []);
+  const { seller, postTitle, postId, pic } = route.params;
 
   return (
     <View style={{ flex: 1 }}>
