@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   containerImage: {
     flex: 2,
-    borderColor: COLORS.third,
+    borderColor: COLORS.secondary,
     borderLeftWidth: 1,
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
   containerInfo: {
     flex: 3,
-    borderColor: COLORS.third,
+    borderColor: COLORS.secondary,
     borderTopWidth: 1,
     borderBottomWidth: 1,
     justifyContent: "center",
@@ -27,7 +27,7 @@ export default StyleSheet.create({
   containerBin: {
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
-    borderColor: COLORS.third,
+    borderColor: COLORS.secondary,
     borderWidth: 1,
     flex: 1,
     justifyContent: "center",

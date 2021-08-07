@@ -19,6 +19,7 @@ import ProfileInformationView from "../../../View/ProfileInformationView";
 import ContactView from "../../../View/ContactView";
 import NotificationView from "../../../View/NotificationView";
 import FAQView from "../../../View/FAQView";
+import EditProduct from "../../../View/EditProduct";
 
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
@@ -280,6 +281,21 @@ export default function MainStack({ navigation }) {
             headerTitleAlign: "center",
           }}
         />
+
+<Stack.Screen
+          name="EditProduct"
+          component={EditProduct}
+          options={{
+            title: "EditProduct",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
