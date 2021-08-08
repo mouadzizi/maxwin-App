@@ -24,7 +24,7 @@ export default function HomeSectionProductView({ navigation, route }) {
         numberImages={item.images.length}
         images={item.images}
         location={item.city}
-        nbLikes={55}
+        nbLikes={item.likes}
         title={item.title}
         price={item.price}
         onClick={() => navigation.navigate("ProductDetails", { product: item })}

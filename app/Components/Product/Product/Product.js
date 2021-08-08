@@ -34,15 +34,15 @@ export default function Product({
             </TextView>
           </>
           <View style={styles.containerLikes}>
-            {nbLikes !== 0 ? (
+            {nbLikes != 0 ? (
               <>
                 <AntDesign name="like1" color={COLORS.primary} size={25} />
-                <Text style={styles.likeNumber}>{nbLikes}</Text>
+                <Text style={styles.likeNumber}>{nbLikes || 0}</Text>
               </>
             ) : (
               <>
                 <AntDesign name="like2" color={COLORS.primary} size={25} />
-                <Text style={styles.likeNumber}>{nbLikes}</Text>
+                <Text style={styles.likeNumber}>{nbLikes || 0}</Text>
               </>
             )}
           </View>

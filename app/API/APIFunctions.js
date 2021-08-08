@@ -1,7 +1,7 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
 
-export const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
 export const signIn = async (email, password) => {
   const user = await auth.signInWithEmailAndPassword(email, password);
@@ -113,7 +113,18 @@ export const addToLikedProducts = async (userId, post) => {
     .doc(post.id)
     .set({
       id: post.id,
+    })
+    .then(async () => {
+      var like = await getLikes(post.id);
+      await db
+        .collection("products")
+        .doc(post.id)
+        .update({ likes: like + 1 });
     });
+};
+export const getLikes = async (productId) => {
+  const prod = await db.collection("products").doc(productId).get();
+  return prod.data()?.likes || 0;
 };
 
 export const removeLiked = async (postId) => {
@@ -123,14 +134,21 @@ export const removeLiked = async (postId) => {
     .doc(uid)
     .collection("liked")
     .doc(postId)
-    .delete();
+    .delete()
+    .then(async () => {
+      var like = await getLikes(postId);
+      await db
+        .collection("products")
+        .doc(postId)
+        .update({ likes: like - 1 });
+    });
 };
 
 export const getUser = async () => {
   const doc = await db.collection("users").doc(auth.currentUser.uid).get();
   return Promise.resolve({
-    uid:doc.id,
-    ...doc.data()
+    uid: doc.id,
+    ...doc.data(),
   });
 };
 
@@ -163,7 +181,10 @@ export const filter = async (data) => {
     itemsRef = itemsRef.where("state", "==", data.state);
   }
 
-  const querySnap = await itemsRef.orderBy('createdDate','desc').limit(10).get();
+  const querySnap = await itemsRef
+    .orderBy("createdDate", "desc")
+    .limit(10)
+    .get();
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)
