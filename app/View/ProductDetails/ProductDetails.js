@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   ScrollView,
   View,
@@ -104,10 +104,13 @@ export default function ProductDetails({ route, navigation }) {
 
   const messageToWhatsApp = () => {
     let ProductName = product.title;
+    let ownerName = product.owner?.firstName;
     let Message =
-      "Bonjour, je vous contacte pour le produit : " +
+      "Salut " +
+      ownerName +
+      ", je vous contacte à propos de votre annonce sur Maxwin : " +
       ProductName +
-      "que vous vendez chez Maxwin, est-il toujours disponible ?";
+      " , est ce que cet article est-il toujours disponible ?";
     let CountryCode = "212";
     let phoneOwner = product.owner?.phone;
     let PhoneNumber = CountryCode.concat(phoneOwner);
@@ -156,48 +159,48 @@ export default function ProductDetails({ route, navigation }) {
   return (
     <SafeAreaView>
       <ScrollView>
-      {product.owner.phone && (
-        <FAB
-          style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
-          color="white"
-          icon={
-            <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
-          }
-          onPress={messageToWhatsApp}
-        />
-      )}
+        {product.owner.phone && (
+          <FAB
+            style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
+            color="white"
+            icon={
+              <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
+            }
+            onPress={messageToWhatsApp}
+          />
+        )}
 
-      <FAB
-        icon={<AntDesign name="sharealt" size={25} color="white" />}
-        color={COLORS.primary}
-        style={{ top: 180, right: 20, zIndex: 1, position: "absolute" }}
-        onPress={shareTheApp}
-      />
-      <FAB
-        icon={
-          isFavorite ? (
-            <AntDesign name="heart" size={23} color="#D11111" />
-          ) : (
-            <AntDesign name="hearto" size={23} color="white" />
-          )
-        }
-        color={COLORS.primary}
-        style={{ top: 260, right: 20, zIndex: 1, position: "absolute" }}
-        onPress={addOrRemoveFavorite}
-      />
-      <FAB
-        icon={
-          isLiked ? (
-            <AntDesign name="like1" size={23} color={COLORS.secondary} />
-          ) : (
-            <AntDesign name="like2" size={23} color="white" />
-          )
-        }
-        color={COLORS.primary}
-        style={{ top: 340, right: 20, zIndex: 1, position: "absolute" }}
-        onPress={addOrRemoveLikedProduct}
-      />
-      
+        <FAB
+          icon={<AntDesign name="sharealt" size={25} color="white" />}
+          color={COLORS.primary}
+          style={{ top: 180, right: 20, zIndex: 1, position: "absolute" }}
+          onPress={shareTheApp}
+        />
+        <FAB
+          icon={
+            isFavorite ? (
+              <AntDesign name="heart" size={23} color="#D11111" />
+            ) : (
+              <AntDesign name="hearto" size={23} color="white" />
+            )
+          }
+          color={COLORS.primary}
+          style={{ top: 260, right: 20, zIndex: 1, position: "absolute" }}
+          onPress={addOrRemoveFavorite}
+        />
+        <FAB
+          icon={
+            isLiked ? (
+              <AntDesign name="like1" size={23} color={COLORS.secondary} />
+            ) : (
+              <AntDesign name="like2" size={23} color="white" />
+            )
+          }
+          color={COLORS.primary}
+          style={{ top: 340, right: 20, zIndex: 1, position: "absolute" }}
+          onPress={addOrRemoveLikedProduct}
+        />
+
         <ImageSwiper
           images={product.images}
           onClick={() =>
