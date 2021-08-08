@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Dimensions } from "react-native";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
-import { auth, db } from "../../API/Firebase";
+import { db } from "../../API/Firebase";
 import { getUser, timestamp } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
+import {COLORS} from '../../GlobalStyle'
 
 const { width, height } = Dimensions.get("screen");
 export default function ChatView({ route, navigation }) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { seller, postTitle, postId, pic } = route.params;
   const chatRef = db.collection("chats");
 
@@ -19,7 +20,6 @@ export default function ChatView({ route, navigation }) {
 
   const fetchMessages = useCallback((snapShot) => {
     setMessages([]);
-    setLoading(true);
     const promises = snapShot.docs.map((doc) => {
       const dbMessages = doc.data();
       return {
@@ -85,7 +85,7 @@ export default function ChatView({ route, navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-        <Progress.Bar  animated={false} color="blue" width={width} height={8} />
+        {loading ?<Progress.Bar  indeterminate color={COLORS.primary} width={width} height={8} />:null}
         <GiftedChat
           placeholder="Tapper un message"
           renderBubble={(props) => (
