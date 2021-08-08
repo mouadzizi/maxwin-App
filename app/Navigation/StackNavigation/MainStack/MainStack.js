@@ -286,7 +286,7 @@ export default function MainStack({ navigation }) {
           name="EditProduct"
           component={EditProduct}
           options={{
-            title: "EditProduct",
+            title: "Modifier produit",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
