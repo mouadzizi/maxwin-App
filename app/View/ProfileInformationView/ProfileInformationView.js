@@ -115,7 +115,7 @@ export default function ProfileInformation({ route,navigation }) {
         <View style={styles.container}>
           <Text style={styles.label}>(Professionnel ou Particulier) </Text>
 
-          {/* Picker for city */}
+          {/* Picker */}
           <View style={styles.pickerView}>
             <Picker
               style={styles.pickerInput}

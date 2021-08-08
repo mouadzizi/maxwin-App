@@ -10,6 +10,8 @@ import { COLORS, GlobalStyle } from "../../GlobalStyle";
 import { auth } from "../../API/Firebase";
 import { useFocusEffect } from "@react-navigation/core";
 import { getUser } from "../../API/APIFunctions";
+import { SafeAreaView } from "react-native";
+import { ScrollView } from "react-native";
 
 export default function ProfileView({ navigation }) {
   const [user, setUser] = useState({});
@@ -30,35 +32,39 @@ export default function ProfileView({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      {user && (
-        <>
-          <Text style={GlobalStyle.H1}>Profile</Text>
-          <ProfileSection
-            subTitle="Informations personnelles"
-            title={user.firstName + " " + user.lastName}
-            onClick={() =>
-              navigation.navigate("ProfileInformationView", { profile: user })
-            }
-          />
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.containerMain} showsVerticalScrollIndicator={false}>
+        <View>
+        {user && (
+          <>
+            <Text style={GlobalStyle.H1}>Profile</Text>
+            <ProfileSection
+              subTitle="Informations personnelles"
+              title={user.firstName + " " + user.lastName}
+              onClick={() =>
+                navigation.navigate("ProfileInformationView", { profile: user })
+              }
+            />
 
-          <ProfileSection
-            subTitle="Mes produits"
-            title="Ma boutique"
-            iconName="Shop"
-            onClick={() => navigation.navigate("MyProductsView", { profile: user })}
-          />
-        </>
-      )}
+            <ProfileSection
+              subTitle="Mes produits"
+              title="Ma boutique"
+              iconName="Shop"
+              onClick={() =>
+                navigation.navigate("MyProductsView", { profile: user })
+              }
+            />
+          </>
+        )}
 
-      <Text style={[GlobalStyle.H1, { marginTop: 20 }]}>Settings</Text>
-      <ProfileSection
-        title="Contacter Nous"
-        subTitle="E-Mail"
-        onClick={() => navigation.navigate("ContactView")}
-        iconName="Mail"
-      />
-      {/* {user && (
+        <Text style={[GlobalStyle.H1, { marginTop: 20 }]}>Settings</Text>
+        <ProfileSection
+          title="Contacter Nous"
+          subTitle="E-Mail"
+          onClick={() => navigation.navigate("ContactView")}
+          iconName="Mail"
+        />
+        {/* {user && (
         <>
           <ProfileSection
             title="Notification"
@@ -69,26 +75,36 @@ export default function ProfileView({ navigation }) {
         </>
       )} */}
 
-      <ProfileSection
-        title="FAQ"
-        subTitle="Questions fréquemment"
-        onClick={() => navigation.navigate("FAQView")}
-        iconName="FAQ"
-      />
-      {user && (
-        <>
-          <Devider
-            width="100%"
-            style={{ marginVertical: 20, backgroundColor: COLORS.primary }}
-          />
-          <ProfileSection
-            title="Se déconnecter"
-            subTitle="Se déconnecter"
-            onClick={SignOut}
-            iconName="LogOut"
-          />
-        </>
-      )}
-    </View>
+        <ProfileSection
+          title="FAQ"
+          subTitle="Questions fréquemment"
+          onClick={() => navigation.navigate("FAQView")}
+          iconName="FAQ"
+        />
+
+        <ProfileSection
+          title="Condition générale"
+          subTitle="condition Maxwin"
+          onClick={() => navigation.navigate("FAQView")}
+          iconName="FAQ"
+        />
+
+        {user && (
+          <>
+            <Devider
+              width="100%"
+              style={{ marginVertical: 20, backgroundColor: COLORS.primary }}
+            />
+            <ProfileSection
+              title="Se déconnecter"
+              subTitle="Se déconnecter"
+              onClick={SignOut}
+              iconName="LogOut"
+            />
+          </>
+        )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

@@ -3,6 +3,6 @@ import { COLORS, windowHeight, windowWidth } from "../../GlobalStyle";
 
 export default StyleSheet.create({
   container: {
-    flex: 1
+    width: '100%'
   },
 });
