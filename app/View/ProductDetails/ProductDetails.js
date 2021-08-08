@@ -155,6 +155,7 @@ export default function ProductDetails({ route, navigation }) {
   };
   return (
     <SafeAreaView>
+      <ScrollView>
       {product.owner.phone && (
         <FAB
           style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
@@ -196,7 +197,7 @@ export default function ProductDetails({ route, navigation }) {
         style={{ top: 340, right: 20, zIndex: 1, position: "absolute" }}
         onPress={addOrRemoveLikedProduct}
       />
-      <ScrollView>
+      
         <ImageSwiper
           images={product.images}
           onClick={() =>
