@@ -18,14 +18,16 @@ export default function HomeView({ navigation }) {
     <View style={styles.container}>
       <ScrollView style={styles.ScrollContainer}>
         <StatusBar backgroundColor={COLORS.primary} />
+
         <HeaderCategories navigation={navigation} />
+
         <Vehicule navigation={navigation} />
         <Immobilier navigation={navigation} />
-        <Electronics navigation={navigation} />
-        <Mens navigation={navigation} />
-        <Female navigation={navigation} />
-        <Babe navigation={navigation}/>
         <Decorations navigation={navigation} />
+        <Electronics navigation={navigation} />
+        <Female navigation={navigation} />
+        <Mens navigation={navigation} />
+        <Babe navigation={navigation}/>
       </ScrollView>
     </View>
   );
