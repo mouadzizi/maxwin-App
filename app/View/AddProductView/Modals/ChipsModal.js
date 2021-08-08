@@ -20,14 +20,11 @@ import Chip from '../../../Components/Chip/Chip'
         return (
             <Modalize
             ref={this.modal}
-            snapPoint={300}
+            snapPoint={500}
             flatListProps={{
                 data: this.data,
                 keyExtractor:this.keyExtractor.bind(this),
                 renderItem:this.renderItem.bind(this),
-                numColumns:2,
-                style:{flex:1,padding:5}
-
             }}
             onClose={this.props.onClose}
             />

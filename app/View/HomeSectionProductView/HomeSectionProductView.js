@@ -7,6 +7,7 @@ import { getItemsByCollection } from "../../API/APIFunctions";
 import Skeleton from "./Skeleton";
 import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
+import { FontAwesome, AntDesign } from "react-native-vector-icons";
 
 export default function HomeSectionProductView({ navigation, route }) {
   const [products, setProducts] = useState([]);
@@ -64,7 +65,7 @@ export default function HomeSectionProductView({ navigation, route }) {
         titleStyle={{ fontSize: 15, fontWeight: "bold" }}
         color={COLORS.primary}
         style={styles.FAB}
-        size="large"
+        icon={<AntDesign name="sharealt" size={23} color="white" />}
       />
       {products.length > 1 ? (
         <FlatList
