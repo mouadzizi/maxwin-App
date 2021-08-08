@@ -6,7 +6,7 @@ import { getUser, timestamp } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
 import {COLORS} from '../../GlobalStyle'
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 export default function ChatView({ route, navigation }) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});

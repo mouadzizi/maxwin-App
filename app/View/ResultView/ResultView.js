@@ -71,7 +71,7 @@ export default function ResultView({ route, navigation }) {
           animationType='timing'
           width={windowWidth}
           height={8}
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 5 }}
         />
       )}
     </View>

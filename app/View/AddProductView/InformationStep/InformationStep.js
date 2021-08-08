@@ -31,7 +31,7 @@ export default function InformationStep({ navigation, route }) {
 
   const submit = () => {
     setLoading(true);
-    addProduct({ ...product, chips: selectedChips, owner: user })
+    addProduct({ ...product, chips: selectedChips, owner: user,likes:0 })
       .then((docRef) => {
         uploadImages(product.images, docRef.id, "user.uid").then((links) => {
           docRef.update({ images: links }).then(() => {

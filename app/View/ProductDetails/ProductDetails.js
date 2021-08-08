@@ -22,6 +22,7 @@ import {
   removeFavorite,
   addToLikedProducts,
   removeLiked,
+  getLikes
 } from "../../API/APIFunctions";
 
 import { FontAwesome, AntDesign } from "react-native-vector-icons";
@@ -57,6 +58,7 @@ export default function ProductDetails({ route, navigation }) {
         const isFav = snapShot.docs.some(({ id }) => id === product.id);
         setIsFavorite(isFav);
       });
+      
     return () => {
       _unsub();
     };
@@ -143,7 +145,7 @@ export default function ProductDetails({ route, navigation }) {
   };
   const handleNavigation = () => {
     const { owner, title, images } = product;
-    if (owner.id != uid)
+    if (owner.uid != uid)
       navigation.navigate("ChatView", {
         seller: owner,
         postTitle: title,
