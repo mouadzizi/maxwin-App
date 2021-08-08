@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Modalize } from "react-native-modalize";
 import { categoryData } from "../../../API/Data";
 import SectionHeader from "../../../Components/CategorySections/CategorySectionHeader";

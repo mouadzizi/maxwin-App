@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./HomeView.style";
 
+import HeaderCategories from "../../Components/HeaderCategories";
 import Immobilier from "./Immobilier";
 import Vehicule from "./Vehicule";
 import Electronics from "./Electronics";
@@ -11,7 +12,7 @@ import Decorations from "./Decorations";
 import Mens from "./Mens";
 import Female from "./Female";
 import Babe from "./Babe";
-import HeaderCategories from "../../Components/HeaderCategories";
+import ServicesMaterial from "./ServicesMaterial";
 
 export default function HomeView({ navigation }) {
   return (
@@ -28,6 +29,7 @@ export default function HomeView({ navigation }) {
         <Female navigation={navigation} />
         <Mens navigation={navigation} />
         <Babe navigation={navigation}/>
+        <ServicesMaterial navigation={navigation}/>
       </ScrollView>
     </View>
   );

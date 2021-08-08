@@ -4,6 +4,7 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from '../Skeletone'
+
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "VEHICULES";

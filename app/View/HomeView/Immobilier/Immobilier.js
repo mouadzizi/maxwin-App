@@ -6,8 +6,9 @@ import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 
 export default function Immobilier({ navigation }) {
-  const collection = "IMMOBILIER";
+  
   const [products, setProducts] = useState([]);
+  const collection = "IMMOBILIER";
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {

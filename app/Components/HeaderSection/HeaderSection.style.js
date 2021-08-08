@@ -8,7 +8,7 @@ export default StyleSheet.create({
   
     },
     container1:{
-        flex: 1,
+        flex: 2,
         alignItems: 'flex-start'
     },
     container2:{
