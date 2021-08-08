@@ -106,10 +106,13 @@ export default function ProductDetails({ route, navigation }) {
 
   const messageToWhatsApp = () => {
     let ProductName = product.title;
+    let ownerName = product.owner?.firstName;
     let Message =
-      "Bonjour, je vous contacte pour le produit : " +
+      "Salut " +
+      ownerName +
+      ", je vous contacte à propos de votre annonce sur Maxwin : " +
       ProductName +
-      "que vous vendez chez Maxwin, est-il toujours disponible ?";
+      " , est ce que cet article est-il toujours disponible ?";
     let CountryCode = "212";
     let phoneOwner = product.owner?.phone;
     let PhoneNumber = CountryCode.concat(phoneOwner);
