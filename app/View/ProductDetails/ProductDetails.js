@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import {
   ScrollView,
   View,
@@ -140,7 +140,7 @@ export default function ProductDetails({ route, navigation }) {
   };
   const handleNavigation = () => {
     const { owner, title, images } = product;
-    if (owner._id != uid)
+    if (owner.id != uid)
       navigation.navigate("ChatView", {
         seller: owner,
         postTitle: title,

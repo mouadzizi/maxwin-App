@@ -1,6 +1,8 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
 
+export const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+
 export const signIn = async (email, password) => {
   const user = await auth.signInWithEmailAndPassword(email, password);
   return user.user;
@@ -126,7 +128,10 @@ export const removeLiked = async (postId) => {
 
 export const getUser = async () => {
   const doc = await db.collection("users").doc(auth.currentUser.uid).get();
-  return Promise.resolve(doc.data());
+  return Promise.resolve({
+    uid:doc.id,
+    ...doc.data()
+  });
 };
 
 export const filter = async (data) => {

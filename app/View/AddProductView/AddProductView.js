@@ -35,7 +35,7 @@ export default function AddProductView({ navigation }) {
       });
       return () => {
         setProduct({});
-        AsyncStorage.removeItem("selectedImage");
+         AsyncStorage.removeItem("selectedImage");
       };
     }, [])
   );
@@ -129,12 +129,12 @@ export default function AddProductView({ navigation }) {
           labelStyle={{ color: COLORS.primary, fontSize: 15 }}
           onChangeText={(value) => {
             try {
-              setProduct({ ...product, price: value });
+              setProduct({ ...product, price: parseFloat(value) });
             } catch (error) {
               console.warn(error);
             }
           }}
-          value={product.price}
+          value={product.price?product.price.toString():""}
         />
 
         {/* Picker for city */}
