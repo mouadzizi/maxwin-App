@@ -4,7 +4,7 @@ import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { db } from "../../API/Firebase";
 import { getUser, timestamp } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
-import {COLORS} from '../../GlobalStyle'
+import { COLORS } from "../../GlobalStyle";
 
 const { width } = Dimensions.get("screen");
 export default function ChatView({ route, navigation }) {
@@ -15,6 +15,7 @@ export default function ChatView({ route, navigation }) {
   const chatRef = db.collection("chats");
 
   useEffect(() => {
+    console.log(seller);
     getUser().then((fb_user) => setUser(fb_user));
   }, []);
 
@@ -52,8 +53,8 @@ export default function ChatView({ route, navigation }) {
           name: user.firstName,
         },
         contact2: {
-          _id: seller.uid,
-          name: seller.firstName,
+          _id: seller._id || seller.uid ,
+          name: seller.firstName || seller.name,
         },
         chatPic: pic,
         seen: false,
@@ -78,55 +79,61 @@ export default function ChatView({ route, navigation }) {
     setMessages((prevMsg) => GiftedChat.append(prevMsg, messages));
   });
   const chatId = () => {
-    if (seller.uid > user.uid)
-      return seller.uid + "-" + user.uid + "-" + postId;
-    else return user.uid + "-" + seller.uid + "-" + postId;
+    if ((seller._id || seller.uid) > user.uid)
+      return (seller._id || seller.uid) + "-" + user.uid + "-" + postId;
+    else return user.uid + "-" + (seller._id || seller.uid) + "-" + postId;
   };
 
   return (
     <View style={{ flex: 1 }}>
-        {loading ?<Progress.Bar  indeterminate color={COLORS.primary} width={width} height={8} />:null}
-        <GiftedChat
-          placeholder="Tapper un message"
-          renderBubble={(props) => (
-            <Bubble
-              {...props}
-              timeTextStyle={{
-                left: {
-                  color: "white",
-                },
-              }}
-              textStyle={{
-                left: {
-                  color: "white",
-                },
-              }}
-              wrapperStyle={{
-                left: {
-                  backgroundColor: "#F16E44",
-                },
-                right: {
-                  backgroundColor: "#4898D3",
-                },
-              }}
-            />
-          )}
-          renderSend={(props) => (
-            <Send
-              {...props}
-              alwaysShowSend={true}
-              label="Envoyer"
-              textStyle={{ color: "#4898D3" }}
-            />
-          )}
-          messages={messages}
-          onSend={sendMessage}
-          user={{
-            _id: user.uid,
-            name: user.firstName,
-          }}
+      {loading ? (
+        <Progress.Bar
+          indeterminate
+          color={COLORS.primary}
+          width={width}
+          height={8}
         />
-    
+      ) : null}
+      <GiftedChat
+        placeholder="Tapper un message"
+        renderBubble={(props) => (
+          <Bubble
+            {...props}
+            timeTextStyle={{
+              left: {
+                color: "white",
+              },
+            }}
+            textStyle={{
+              left: {
+                color: "white",
+              },
+            }}
+            wrapperStyle={{
+              left: {
+                backgroundColor: "#F16E44",
+              },
+              right: {
+                backgroundColor: "#4898D3",
+              },
+            }}
+          />
+        )}
+        renderSend={(props) => (
+          <Send
+            {...props}
+            alwaysShowSend={true}
+            label="Envoyer"
+            textStyle={{ color: "#4898D3" }}
+          />
+        )}
+        messages={messages}
+        onSend={sendMessage}
+        user={{
+          _id: user.uid,
+          name: user.firstName,
+        }}
+      />
     </View>
   );
 }

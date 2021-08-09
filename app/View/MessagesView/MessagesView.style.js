@@ -3,6 +3,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        padding:6,
+        backgroundColor:'#dcdde1'
     }
 });
