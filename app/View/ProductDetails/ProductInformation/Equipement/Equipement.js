@@ -10,11 +10,19 @@ import Airbags from "../../../../icons/CarSpecifications/Airbags";
 import CarSeat from "../../../../icons/CarSpecifications/CarSeat";
 import Gps from "../../../../icons/CarSpecifications/Gps";
 import CarAirConditioner from "../../../../icons/CarSpecifications/CarAirConditioner";
+import KeyCar from "../../../../icons/CarSpecifications/KeyCar";
+import CarWheel from "../../../../icons/CarSpecifications/CarWheel";
+
 import Divider from "../../../../Components/Divider";
 import RadarRedcule from "../../../../icons/CarSpecifications/RadarRecule";
-import { Entypo, MaterialCommunityIcons } from "react-native-vector-icons";
+import {
+  Entypo,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "react-native-vector-icons";
 
 export default function Equipement({ chips }) {
+  console.log(chips);
   const renderChip = (title, index) => {
     switch (title) {
       case "Premier main":
@@ -144,6 +152,82 @@ export default function Equipement({ chips }) {
                 style={styles.textInfo}
               >
                 ABS
+              </TextView>
+            </View>
+            <Divider width="95%" />
+          </View>
+        );
+
+      case "écran Tactile":
+        return (
+          <View key={index}>
+            <View key={index} style={styles.row}>
+              <MaterialIcons
+                name="fit-screen"
+                color={COLORS.primary}
+                size={40}
+              />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={17}
+                style={styles.textInfo}
+              >
+                écran Tactile
+              </TextView>
+            </View>
+            <Divider width="95%" />
+          </View>
+        );
+
+      case "Démarrage sans clé":
+        return (
+          <View key={index}>
+            <View key={index} style={styles.row}>
+              <KeyCar />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={17}
+                style={styles.textInfo}
+              >
+                Démarrage sans clé
+              </TextView>
+            </View>
+            <Divider width="95%" />
+          </View>
+        );
+
+      case "Frein à main électrique":
+        return (
+          <View key={index}>
+            <View key={index} style={styles.row}>
+              <MaterialCommunityIcons
+                name="car-brake-retarder"
+                color={COLORS.primary}
+                size={40}
+              />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={17}
+                style={styles.textInfo}
+              >
+                Frein à main électrique
+              </TextView>
+            </View>
+            <Divider width="95%" />
+          </View>
+        );
+
+        case "Volant multi-fonctions":
+        return (
+          <View key={index}>
+            <View key={index} style={styles.row}>
+            <CarWheel width={40} />
+              <TextView
+                fontFamily="Source-Regular"
+                fontSize={17}
+                style={styles.textInfo}
+              >
+                Volant multi-fonctions
               </TextView>
             </View>
             <Divider width="95%" />

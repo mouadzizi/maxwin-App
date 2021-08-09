@@ -85,7 +85,7 @@ export const chipsData = [
     iconName: "carSeat",
   },
   {
-    title: "GPS", 
+    title: "GPS",
     iconName: "gps",
   },
 
@@ -102,12 +102,28 @@ export const chipsData = [
     iconName: "Climatisation",
   },
   {
-    title: "Radar de Recul", 
+    title: "Radar de Recul",
     iconName: "RadarRedcule",
   },
-  
+
   {
     title: "ABS",
     iconName: "ABS",
+  },
+  {
+    title: "Démarrage sans clé",
+    iconName: "keys",
+  },
+  {
+    title: "écran Tactile",
+    iconName: "Tactil",
+  },
+  {
+    title: "Frein à main électrique",
+    iconName: "brake",
+  },
+  {
+    title: "Volant multi-fonctions",
+    iconName: "car-wheels",
   },
 ];

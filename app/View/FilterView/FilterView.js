@@ -18,7 +18,7 @@ export default function FilterView({ navigation, route }) {
     state: "*",
     brand: "*",
     city: "*",
-    category: "Choisissez une categorie",
+    category: "tous les catégories",
   });
   let modals = [];
 
@@ -60,7 +60,7 @@ export default function FilterView({ navigation, route }) {
         </View>
 
         <ButtonOutlined
-          title={data.category || "Choisissez une categorie"}
+          title={data.category || "tous les catégories"}
           onClick={() => modals[0].openModal()}
           style={{ marginBottom: 20 }}
         />
@@ -294,7 +294,7 @@ export default function FilterView({ navigation, route }) {
       </ScrollView>
 
       <ButtonFill
-        title="Validé"
+        title="Chercher"
         style={{ marginHorizontal: 20, marginBottom: 20 }}
         loading={false}
         onClick={() =>
@@ -305,7 +305,7 @@ export default function FilterView({ navigation, route }) {
         }
       />
       <ButtonFill
-        title="Supprimer le filtre"
+        title="Réinitialiser le filtre"
         style={{
           marginHorizontal: 20,
           marginBottom: 20,
@@ -321,7 +321,7 @@ export default function FilterView({ navigation, route }) {
             fuel: "*",
             state: "*",
             brand: "*",
-            category: "Choisissez une categorie",
+            category: "tous les catégories",
             city: "*",
           })
         }
