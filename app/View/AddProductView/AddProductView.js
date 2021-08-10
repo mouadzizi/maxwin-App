@@ -18,6 +18,7 @@ import { auth } from "../../API/Firebase";
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
   let Modals = [];
+  
   const getPhotos = async () => {
     return await AsyncStorage.getItem("selectedImage");
   };

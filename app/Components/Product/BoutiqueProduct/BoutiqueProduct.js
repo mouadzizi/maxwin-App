@@ -12,7 +12,7 @@ export default function BoutiqueProduct({ image, title, onClick, price }) {
     <TouchableOpacity style={styles.container} onPress={onClick}>
       <View style={styles.imageContainer}>
         <Image
-          source={image}
+          source={{uri:image}}
           style={styles.image}
           resizeMode="cover"
           PlaceholderContent={

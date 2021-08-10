@@ -1,5 +1,6 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
+import { diffClamp } from "react-native-reanimated";
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -206,3 +207,32 @@ export const updateUser = async (data) => {
     type: data.type,
   });
 };
+
+export const getUserItems = async () => {
+  const uid = auth.currentUser?.uid;
+  console.log(uid);
+  const snapShot = await db
+    .collection("products")
+    .where("owner.uid", "==", uid)
+    .get();
+  const promises = snapShot.docs.map((doc) => {
+    return {
+      key: doc.id,
+      ...doc.data()
+    };
+  });
+
+  return promises
+};
+
+export const editProduct = async(product)=>{
+ await db.collection('products').doc(product.key).update({
+    title:product.title,
+    price:product.price,
+    description:product.description || "",
+    etat:product.etat
+  })
+}
+export const deleteProduct = async(prodID)=>{
+  await db.collection('products').doc(prodID).delete()
+}
