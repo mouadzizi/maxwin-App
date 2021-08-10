@@ -26,7 +26,6 @@ export default function ProfileView({ navigation }) {
             .then(() => setIsSignIn(true));
         } else setIsSignIn(false);
       });
-
       return () => {
         cleanup();
       };
