@@ -7,20 +7,22 @@ import { getItemsByCollection } from "../../API/APIFunctions";
 import Skeleton from "./Skeleton";
 import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
-import { FontAwesome, AntDesign } from "react-native-vector-icons";
+import { AntDesign } from "react-native-vector-icons";
 
 export default function HomeSectionProductView({ navigation, route }) {
   const [products, setProducts] = useState([]);
+  const collection = route.params?.collection;
+
 
   useEffect(() => {
-    const { collection } = route.params;
     getItemsByCollection(collection, 10)
       .then((items) => {
         setProducts(items);
       })
       .catch(({ message }) => console.warn(message));
-    return () => {};
+    return(()=> {})
   }, []);
+
   const renderItem = useCallback(
     ({ item }) => (
       <Product

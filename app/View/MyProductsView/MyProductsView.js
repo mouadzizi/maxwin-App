@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useFocusEffect } from "react";
 import { View, FlatList } from "react-native";
 import BoutiqueProduct from "../../Components/Product/BoutiqueProduct";
+import { db, auth } from "../../API/Firebase";
 
-export default function MyProductsView({navigation}) {
+export default function MyProductsView({ navigation }) {
+  const [product, setProduct] = useState({});
   const DATA = [
     {
       title: "product 1",
@@ -47,16 +49,16 @@ export default function MyProductsView({navigation}) {
     },
   ];
 
+
   const Item = ({ item }) => {
     return (
-      <View
-      style={{width: '45%', marginRight: 10}}>
-      <BoutiqueProduct
-        title={item.title}
-        price={item.price}
-        onClick={() => navigation.navigate('EditProduct')}
-        image={require("../../../assets/ProductTest/product4.jpeg")}
-      />
+      <View style={{ width: "45%", marginRight: 10 }}>
+        <BoutiqueProduct
+          title={item.title}
+          price={item.price}
+          onClick={() => navigation.navigate("EditProduct")}
+          image={require("../../../assets/ProductTest/product4.jpeg")}
+        />
       </View>
     );
   };
