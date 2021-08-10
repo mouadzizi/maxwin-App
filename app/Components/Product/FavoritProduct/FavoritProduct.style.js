@@ -1,55 +1,54 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
+
 export default StyleSheet.create({
   container: {
-    height: 130,
+    height: 230,
+    width: "100%",
     margin: 10,
-    flexDirection: "row",
     borderRadius: 10,
-  },
-  containerImage: {
-    flex: 2,
-    borderColor: COLORS.secondary,
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    justifyContent: "center",
-  },
-  containerInfo: {
-    flex: 3,
-    borderColor: COLORS.secondary,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    justifyContent: "center",
-  },
-  containerBin: {
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderColor: COLORS.secondary,
     borderWidth: 1,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    borderColor: COLORS.secondary,
   },
-  image: {
-    width: "90%",
-    height: "90%",
+  imageContainer: {
+    height: 170,
+    width: "100%",
     alignSelf: "center",
     borderRadius: 10,
-    marginTop: 5,
-    marginLeft: 5,
+    borderRadius: 10,
   },
-  info: {
-    fontSize: 14,
-    color: COLORS.third,
-    fontWeight: "bold",
-    textTransform: 'capitalize'
+  image: {
+    height: 170,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
   },
-  value: {
-    fontSize: 15,
-    color: COLORS.text,
-    fontWeight: "bold",
+  detailsContainer: {
+    backgroundColor: COLORS.Grey[400],
+    height: 60,
+    width: "100%",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    flexDirection: "row",
+  },
+  textContainer: {
+    padding: 5,
+    flex: 3,
+    width: "100%",
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  iconContainer:{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
   },
 });

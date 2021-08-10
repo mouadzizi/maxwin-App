@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import { getUserItems } from "../../API/APIFunctions";
 import BoutiqueProduct from "../../Components/Product/BoutiqueProduct";
+import { db, auth } from "../../API/Firebase";
 
 export default function MyProductsView({ navigation }) {
   const [products, setProducts] = useState([]);
@@ -55,6 +56,7 @@ export default function MyProductsView({ navigation }) {
       id: "214SDQsfddQQSDQSSDdqF332",
     },
   ];
+
 
   const Item = ({ item }) => {
     return (

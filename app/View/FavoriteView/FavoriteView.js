@@ -1,11 +1,5 @@
 import React, { useCallback, useState } from "react";
-import {
-  View,
-  ActivityIndicator,
-  FlatList,
-  Alert,
-  ToastAndroid,
-} from "react-native";
+import { View, ActivityIndicator, FlatList, Alert } from "react-native";
 import FavoriteProduct from "../../Components/Product/FavoritProduct";
 import EmptyFavorite from "../../SVG/EmptyFavorite";
 import { removeFavorite } from "../../API/APIFunctions";
@@ -65,12 +59,17 @@ export default function FavoriteView({ navigation }) {
     );
   };
 
-  const renderItem = useCallback(
-    ({ item }) => (
-      <FavoriteProduct fav={item} onClick={() => removeItem(item.id)} navigation={navigation}/>
-    ),
-    []
-  );
+  const renderItem = ({ item }) => {
+    return (
+      <View style={{ width: "45%", marginRight: 10 }}>
+        <FavoriteProduct
+          fav={item}
+          onClick={() => removeItem(item.id)}
+          navigation={navigation}
+        />
+      </View>
+    );
+  };
 
   const keys = useCallback((item) => item.id, []);
 
@@ -92,7 +91,12 @@ export default function FavoriteView({ navigation }) {
     <View style={items.length < 1 ? styles.containerImage : styles.container}>
       {items.length < 1 && <EmptyFavorite />}
       {ready ? (
-        <FlatList data={items} keyExtractor={keys} renderItem={renderItem} />
+        <FlatList
+          data={items}
+          keyExtractor={keys}
+          renderItem={renderItem}
+          numColumns={2}
+        />
       ) : (
         <ActivityIndicator size="large" animating color="black" />
       )}

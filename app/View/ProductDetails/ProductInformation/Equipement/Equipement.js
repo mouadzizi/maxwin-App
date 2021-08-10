@@ -22,7 +22,6 @@ import {
 } from "react-native-vector-icons";
 
 export default function Equipement({ chips }) {
-  console.log(chips);
   const renderChip = (title, index) => {
     switch (title) {
       case "Premier main":
@@ -115,7 +114,7 @@ export default function Equipement({ chips }) {
                 fontSize={17}
                 style={styles.textInfo}
               >
-                Jantes
+                Jantes aluminium
               </TextView>
             </View>
             <Divider width="95%" />

@@ -136,21 +136,11 @@ export default function ProductInformation({ product }) {
         {product.transaction && (
           <Row detail="Transaction" value={product.transaction} />
         )}
-        {product.ROM && (
-          <Row detail="ROM : " value={product.ROM} />
-        )}
-        {product.RAM && (
-          <Row detail="RAM : " value={product.RAM} />
-        )}
-        {product.pouces && (
-          <Row detail="Taille : " value={product.pouces} />
-        )
-
-        }
+        {product.ROM && <Row detail="ROM : " value={product.ROM} />}
+        {product.RAM && <Row detail="RAM : " value={product.RAM} />}
+        {product.pouces && <Row detail="Taille : " value={product.pouces} />}
       </View>
-      {product.chips.length > 0 && 
-      <Equipement chips={product.chips} />}
-      
+      {product.chips.length > 0 && <Equipement chips={product.chips} />}
     </>
   );
 }

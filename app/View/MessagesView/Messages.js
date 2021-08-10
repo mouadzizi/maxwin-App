@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import EmptyChats from "../../SVG/EmptyChats";
+import Conversation from '../../Components/Conversation'
 import styles from "./MessagesView.style";
 import Conversation from "../../Components/Conversation/Conversation";
 import { db, auth } from "../../API/Firebase";
