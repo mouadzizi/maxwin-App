@@ -30,15 +30,44 @@ export default function MessagesView({ navigation }) {
   }, []);
 
   useEffect(() => {
-    var cleanup = chatRef
-      .orderBy("createdAt", "desc")
-      .onSnapshot(fetchConversations);
+    console.log("fetching");
+    if (user) {
+      var cleanup = chatRef
+        .orderBy("createdAt", "desc")
+        .onSnapshot((snapShot)=>{
+          const conversations = snapShot.docs
+          .filter(
+            (doc) =>
+              doc.data().contact1._id.search(user.uid) >= 0 ||
+              doc.data().contact2._id.search(user.uid) >= 0
+          )
+          .map((d) => {
+            return {
+              key: d.id,
+              ...d.data(),
+            };
+          });
+          setConversation(conversations)
+        });
+    }
 
     return () => {
       cleanup;
       setConversation([]);
     };
   }, [user]);
+
+  useEffect(() => {
+    const cleanUp = auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("user exist");
+        setUser(user);
+      } else console.log("user not exist");
+    });
+    return () => {
+      cleanUp();
+    };
+  }, []);
 
   const goToChat = (item) => {
     db.collection("chats")
