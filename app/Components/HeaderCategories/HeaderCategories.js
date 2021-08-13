@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { Feather } from "react-native-vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./HeaderCategories.style";
@@ -7,6 +7,22 @@ import Category from "../Button/CategoryButton";
 import { COLORS } from "../../GlobalStyle";
 
 export default function HeaderCategories({ navigation }) {
+  // Voiture ----Done
+  // Accessoires auto ----Done
+  // Appartement ----Done
+  // Électroménagers ----Done
+  // Meubles & déco ----Done
+  // Téléphones ----Done
+  // Ordinateurs ----Done
+  // Télévisions ----Done
+  // Vêtements hommes ----Done
+  // Chaussures hommes ----Done
+  // Vêtements femmes ----Done
+  // Chaussures femmes ----Done
+  // Montres bijoux & accessoires ----Done
+  // Vêtements enfants
+  // Matériels Pro
+  // Services & travaux
   const DATA = [
     {
       id: "SDSDgf25677984",
@@ -14,14 +30,19 @@ export default function HeaderCategories({ navigation }) {
       iconName: "Car",
     },
     {
-      id: "SDSDgf2512677984",
-      categoryName: "Motos & vélos",
-      iconName: "Bike",
+      id: "SDSDgf25677984",
+      categoryName: "ccessoires Auto",
+      iconName: "carAccesory",
     },
     {
       id: "SDSDgf289933R84",
       categoryName: "Appartements",
-      iconName: "Apartment",
+      iconName: "Villa",
+    },
+    {
+      id: "SDSDgf289933R84",
+      categoryName: "Electroménagers",
+      iconName: "ElectroMenage",
     },
     {
       id: "SDSDgf456782984",
@@ -44,19 +65,35 @@ export default function HeaderCategories({ navigation }) {
       iconName: "Tv",
     },
     {
-      id: "SDSDgfFDSQF2fff6984",
+      id: "SDSDgfFDSQF2ff6984",
       categoryName: "Vêtements Hommes",
       iconName: "MenClothes",
     },
     {
-      id: "SDSDgf2DQF4246984",
+      id: "SDSDgfFDSQF2ff3f6984",
+      categoryName: "haussures Hommes",
+      iconName: "MenShoes",
+    },
+    
+    {
+      id: "SDSDgf32421F4246984",
       categoryName: "Vêtements Femmes",
       iconName: "WomenClothes",
     },
     {
+      id: "SDSDgf2D21344246984",
+      categoryName: "Chaussures Femmes",
+      iconName: "WomenShoes",
+    },
+    {
       id: "Ssdqf224246984",
-      categoryName: "Maquillage et produits de bien être",
+      categoryName: "Montres, Bijoux et accessoires",
       iconName: "MakeUp",
+    },
+    {
+      id: "Ssdqf2242469AF384",
+      categoryName: "Matériels professionnels",
+      iconName: "MaterialPro",
     },
   ];
 
@@ -71,7 +108,7 @@ export default function HeaderCategories({ navigation }) {
     );
   };
 
-  return ( 
+  return (
     <>
       <FlatList
         data={DATA}
@@ -81,7 +118,9 @@ export default function HeaderCategories({ navigation }) {
           <Category
             iconName={item.iconName}
             onClick={() =>
-              navigation.navigate("ResultView", { collection: item.categoryName })
+              navigation.navigate("ResultView", {
+                collection: item.categoryName,
+              })
             }
           />
         )}
