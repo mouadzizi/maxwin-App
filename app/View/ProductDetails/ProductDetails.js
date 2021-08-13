@@ -175,7 +175,7 @@ export default function ProductDetails({ route, navigation }) {
         <FAB
           icon={<AntDesign name="sharealt" size={25} color="white" />}
           color={COLORS.primary}
-          style={{ top: 180, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 170, right: 20, zIndex: 1, position: "absolute" }}
           onPress={shareTheApp}
         />
         <FAB
@@ -187,7 +187,7 @@ export default function ProductDetails({ route, navigation }) {
             )
           }
           color={COLORS.primary}
-          style={{ top: 260, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 240, right: 20, zIndex: 1, position: "absolute" }}
           onPress={addOrRemoveFavorite}
         />
         <FAB
@@ -199,7 +199,7 @@ export default function ProductDetails({ route, navigation }) {
             )
           }
           color={COLORS.primary}
-          style={{ top: 340, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 310, right: 20, zIndex: 1, position: "absolute" }}
           onPress={addOrRemoveLikedProduct}
         />
 

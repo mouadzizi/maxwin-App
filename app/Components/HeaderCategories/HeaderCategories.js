@@ -74,6 +74,11 @@ export default function HeaderCategories({ navigation }) {
       categoryName: "haussures Hommes",
       iconName: "MenShoes",
     },
+    {
+      id: "SDS23f2D21344246984",
+      categoryName: "Montres et accessoires",
+      iconName: "WomenWatch",
+    },
     
     {
       id: "SDSDgf32421F4246984",
@@ -85,6 +90,7 @@ export default function HeaderCategories({ navigation }) {
       categoryName: "Chaussures Femmes",
       iconName: "WomenShoes",
     },
+
     {
       id: "Ssdqf224246984",
       categoryName: "Montres, Bijoux et accessoires",
@@ -94,6 +100,11 @@ export default function HeaderCategories({ navigation }) {
       id: "Ssdqf2242469AF384",
       categoryName: "Matériels professionnels",
       iconName: "MaterialPro",
+    },
+    {
+      id: "Ssdqf224246dQS1F384",
+      categoryName: "Services et travaux professionnels",
+      iconName: "ServiceProfesional",
     },
   ];
 
