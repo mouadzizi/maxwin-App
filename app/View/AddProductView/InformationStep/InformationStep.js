@@ -31,7 +31,7 @@ export default function InformationStep({ navigation, route }) {
 
   const submit = () => {
     setLoading(true);
-    addProduct({ ...product, chips: selectedChips, owner: user,likes:0 })
+    addProduct({ ...product, chips: selectedChips, owner: user, likes: 0 })
       .then((docRef) => {
         uploadImages(product.images, docRef.id, "user.uid").then((links) => {
           docRef.update({ images: links }).then(() => {
@@ -65,6 +65,27 @@ export default function InformationStep({ navigation, route }) {
         >
           Merci d'entrer le max d'information possible de votre produit
         </TextView>
+
+        <Input
+          label="Ville"
+          value={product.city}
+          containerStyle={{ marginTop: 20 }}
+          style={{ fontSize: 15 }}
+          labelStyle={{ color: COLORS.primary }}
+          disabled={true}
+        />
+
+        <Input
+          label="Votre quartier"
+          placeholder="Cela vous aidera à gagner plus de confiance"
+          maxLength={19}
+          containerStyle={{ marginTop: 20 }}
+          style={{ fontSize: 15 }}
+          labelStyle={{ color: COLORS.primary }}
+          onChangeText={(value) => setProduct({ ...product, adresse: value })}
+          value={product.adresse}
+        />
+
         {product.category[1] === "Voitures" ||
         product.category[1] === "Location de Voiture" ? (
           <View style={{ marginTop: 30 }}>
@@ -420,7 +441,7 @@ export default function InformationStep({ navigation, route }) {
           containerStyle={{ marginTop: 20 }}
           keyboardType="numeric"
           onChangeText={(phone) => setProduct({ ...product, phone: phone })}
-          placeholder="Num phone"
+          placeholder="numéro de téléphone"
           rightIcon={{ type: "Feather", name: "phone", color: COLORS.primary }}
         />
 

@@ -17,8 +17,8 @@ export default function Product({
   nbLikes,
   price,
   onClick,
+  quartier,
 }) {
-  const [isFavorite, setIsFavorite] = useState(false);
   return (
     <View style={styles.containerGlobal} onPress={onClick}>
       <TouchableOpacity onPress={onClick}>
@@ -30,7 +30,7 @@ export default function Product({
               style={styles.location}
               fontFamily="Source-Regular"
             >
-              {location}, Hay Val Fleuri 90100
+              {location}, {quartier}
             </TextView>
           </>
           <View style={styles.containerLikes}>
