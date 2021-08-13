@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, FlatList, Dimensions } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import Product from "../../Components/Product/Product";
 import { getItemsByCategory, filter } from "../../API/APIFunctions";
 import styles from "./ResultView.style";
 import * as Progress from "react-native-progress";
-import {COLORS, windowWidth} from '../../GlobalStyle'
-
-
+import { COLORS, windowWidth } from "../../GlobalStyle";
+import EmptyProducts from "../../SVG/EmptyProducts";
 
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
   const [ready, setReady] = useState(false);
-  const  parent = route.params?.parent;
+  const parent = route.params?.parent;
 
   useEffect(() => {
     switch (parent) {
@@ -57,7 +56,10 @@ export default function ResultView({ route, navigation }) {
   );
   const keyExtractor = useCallback((item) => item.id, []);
   return (
-    <View style={styles.container}>
+    <View
+      style={products.length < 1 ? styles.containerImage : styles.container}
+    >
+      {products.length < 1 && <EmptyProducts />}
       {ready ? (
         <FlatList
           data={products}
@@ -68,7 +70,7 @@ export default function ResultView({ route, navigation }) {
         <Progress.Bar
           color={COLORS.primary}
           indeterminate
-          animationType='timing'
+          animationType="timing"
           width={windowWidth}
           height={8}
           style={{ marginTop: 5 }}

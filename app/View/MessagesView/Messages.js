@@ -30,24 +30,23 @@ export default function MessagesView({ navigation }) {
   }, []);
 
   useEffect(() => {
-    console.log("fetching");
     if (user) {
       var cleanup = chatRef
         .orderBy("createdAt", "desc")
-        .onSnapshot((snapShot)=>{
+        .onSnapshot((snapShot) => {
           const conversations = snapShot.docs
-          .filter(
-            (doc) =>
-              doc.data().contact1._id.search(user.uid) >= 0 ||
-              doc.data().contact2._id.search(user.uid) >= 0
-          )
-          .map((d) => {
-            return {
-              key: d.id,
-              ...d.data(),
-            };
-          });
-          setConversation(conversations)
+            .filter(
+              (doc) =>
+                doc.data().contact1._id.search(user.uid) >= 0 ||
+                doc.data().contact2._id.search(user.uid) >= 0
+            )
+            .map((d) => {
+              return {
+                key: d.id,
+                ...d.data(),
+              };
+            });
+          setConversation(conversations);
         });
     }
 
@@ -60,9 +59,9 @@ export default function MessagesView({ navigation }) {
   useEffect(() => {
     const cleanUp = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("user exist");
+        console.warn("user exist");
         setUser(user);
-      } else console.log("user not exist");
+      } else console.warn("user not exist");
     });
     return () => {
       cleanUp();
@@ -99,11 +98,13 @@ export default function MessagesView({ navigation }) {
     []
   );
   return (
-    <View style={styles.container}>
+    <View
+      style={conversation.length < 1 ? styles.containerImage : styles.container}
+    >
+      {conversation.length < 1 && <EmptyChats />}
       <FlatList
         data={conversation}
         renderItem={renderItem}
-        ListHeaderComponent={() => <Text> Messages </Text>}
       />
     </View>
   );

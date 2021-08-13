@@ -160,20 +160,17 @@ export const filter = async (data) => {
   }
 
   // filter by category
-  if (data.category != "Choisissez une categorie") {
-    console.log("cat");
+  if (data.category != "Toutes les catégories") {
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 
   // filter by category brand
   if (data.brand != "*") {
-    console.log("fuel");
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
   // filter by fuel
   if (data.fuel != "*") {
-    console.log("fuel");
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
 
@@ -210,7 +207,6 @@ export const updateUser = async (data) => {
 
 export const getUserItems = async () => {
   const uid = auth.currentUser?.uid;
-  console.log(uid);
   const snapShot = await db
     .collection("products")
     .where("owner.uid", "==", uid)
@@ -218,21 +214,24 @@ export const getUserItems = async () => {
   const promises = snapShot.docs.map((doc) => {
     return {
       key: doc.id,
-      ...doc.data()
+      ...doc.data(),
     };
   });
 
-  return promises
+  return promises;
 };
 
-export const editProduct = async(product)=>{
- await db.collection('products').doc(product.key).update({
-    title:product.title,
-    price:product.price,
-    description:product.description || "",
-    etat:product.etat
-  })
-}
-export const deleteProduct = async(prodID)=>{
-  await db.collection('products').doc(prodID).delete()
-}
+export const editProduct = async (product) => {
+  await db
+    .collection("products")
+    .doc(product.key)
+    .update({
+      title: product.title,
+      price: product.price,
+      description: product.description || "",
+      etat: product.etat,
+    });
+};
+export const deleteProduct = async (prodID) => {
+  await db.collection("products").doc(prodID).delete();
+};
