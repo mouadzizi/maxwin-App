@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Input } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
@@ -12,14 +11,13 @@ import { Picker } from "@react-native-picker/picker";
 import { updateUser } from "../../API/APIFunctions";
 import { auth } from "../../API/Firebase";
 
-export default function ProfileInformation({ route,navigation }) {
+export default function ProfileInformation({ route, navigation }) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const theUser = route.params?.profile;
     setUser(theUser);
-    console.log(auth.currentUser.uid);
     return () => {};
   }, []);
 
@@ -27,8 +25,8 @@ export default function ProfileInformation({ route,navigation }) {
     setLoading(true);
     updateUser(user)
       .then(() => {
-        setLoading(false)
-        navigation.goBack()
+        setLoading(false);
+        navigation.goBack();
       })
       .catch(({ message }) => {
         setLoading(false);
@@ -40,6 +38,17 @@ export default function ProfileInformation({ route,navigation }) {
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.label}>A propo de vous</Text>
+
+          <View style={styles.avatarContainer}>
+            <View style={styles.avatar}>
+              {user.firstName && user.lastName && (
+                <Text style={styles.avatarText}>
+                  {user?.firstName.charAt(0)}
+                  {user?.lastName.charAt(0)}
+                </Text>
+              )}
+            </View>
+          </View>
           <Input
             onChangeText={(e) => setUser({ ...user, firstName: e })}
             value={user.firstName}
@@ -122,7 +131,7 @@ export default function ProfileInformation({ route,navigation }) {
               mode="dropdown"
               dropdownIconColor={COLORS.primary}
               selectedValue={user.type}
-              onValueChange={(val)=>setUser({...user,type:val})}
+              onValueChange={(val) => setUser({ ...user, type: val })}
             >
               <Picker.Item
                 label="Choisissez votre Occupation"

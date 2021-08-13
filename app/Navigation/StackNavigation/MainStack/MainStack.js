@@ -282,7 +282,7 @@ export default function MainStack({ navigation }) {
           }}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="EditProduct"
           component={EditProduct}
           options={{
@@ -294,8 +294,6 @@ export default function MainStack({ navigation }) {
             headerTitleAlign: "center",
           }}
         />
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );
