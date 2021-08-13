@@ -26,6 +26,7 @@ export default function AddProductView({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       const user = auth.currentUser;
+      console.log(user.uid);
       if (user) {
       } else showAlert();
       getPhotos().then((items) => {

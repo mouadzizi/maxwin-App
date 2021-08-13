@@ -24,8 +24,7 @@ export default function InformationStep({ navigation, route }) {
 
   useFocusEffect(
     useCallback(() => {
-      const uid = auth.currentUser?.uid;
-      getUser(uid).then((firebaseUser) => setUser(firebaseUser));
+      getUser().then((firebaseUser) => setUser(firebaseUser));
     }, [])
   );
 
@@ -33,7 +32,7 @@ export default function InformationStep({ navigation, route }) {
     setLoading(true);
     addProduct({ ...product, chips: selectedChips, owner: user,likes:0 })
       .then((docRef) => {
-        uploadImages(product.images, docRef.id, "user.uid").then((links) => {
+        uploadImages(product.images, docRef.id, user.uid).then((links) => {
           docRef.update({ images: links }).then(() => {
             setLoading(false);
             navigation.navigate("Home");
