@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+
+import EmptyChats from "../../SVG/EmptyChats";
 import styles from "./MessagesView.style";
 import Conversation from "../../Components/Conversation/Conversation";
 import { db, auth } from "../../API/Firebase";
@@ -8,23 +10,24 @@ import { db, auth } from "../../API/Firebase";
 export default function MessagesView({ navigation }) {
   const [conversation, setConversation] = useState([]);
   const [user, setUser] = useState({});
+  const uid = auth.currentUser?.uid;
   const chatRef = db.collection("chats");
 
-  // const fetchConversations = useCallback((snapShot) => {
-  //   const conversations = snapShot.docs
-  //     .filter(
-  //       (doc) =>
-  //         doc.data().contact1._id.search(user.uid) >= 0 ||
-  //         doc.data().contact2._id.search(user.uid) >= 0
-  //     )
-  //     .map((d) => {
-  //       return {
-  //         key: d.id,
-  //         ...d.data(),
-  //       };
-  //     });
-  //   Promise.all(conversations).then((res) => setConversation(res));
-  // }, []);
+  const fetchConversations = useCallback((snapShot) => {
+    const conversations = snapShot.docs
+      .filter(
+        (doc) =>
+          doc.data().contact1._id.search(user.uid) >= 0 ||
+          doc.data().contact2._id.search(user.uid) >= 0
+      )
+      .map((d) => {
+        return {
+          key: d.id,
+          ...d.data(),
+        };
+      });
+    Promise.all(conversations).then((res) => setConversation(res));
+  }, []);
 
   useEffect(() => {
     console.log("fetching");
@@ -72,8 +75,7 @@ export default function MessagesView({ navigation }) {
       .update({ seen: true })
       .then(() => {
         navigation.navigate("ChatView", {
-          seller:
-            user.uid === item.contact1._id ? item.contact2 : item.contact1,
+          seller: uid === item.contact1._id ? item.contact2 : item.contact1,
           chatId: item.key,
           pic: item.chatPic,
           postTitle: item.title,
@@ -85,7 +87,7 @@ export default function MessagesView({ navigation }) {
   const renderItem = useCallback(
     ({ item }) => (
       <Conversation
-        seen={user.uid === item.contact1._id ? false : !item.seen}
+        seen={uid === item.contact1._id ? false : !item.seen}
         picture={item.chatPic}
         lastMessage={item.lastMessage}
         title={item.title}

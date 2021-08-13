@@ -31,6 +31,7 @@ export default function HomeSectionProductView({ navigation, route }) {
         location={item.city}
         nbLikes={item.likes}
         title={item.title}
+        quartier={item.adresse}
         price={item.price}
         onClick={() => navigation.navigate("ProductDetails", { product: item })}
       />
@@ -63,7 +64,7 @@ export default function HomeSectionProductView({ navigation, route }) {
     <View style={styles.container}>
       <FAB
         onPress={shareTheApp}
-        title="Partager"
+        title="Application"
         titleStyle={{ fontSize: 15, fontWeight: "bold" }}
         color={COLORS.primary}
         style={styles.FAB}

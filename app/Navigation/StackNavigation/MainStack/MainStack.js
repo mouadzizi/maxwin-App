@@ -50,10 +50,10 @@ export default function MainStack({ navigation }) {
     );
   };
 
-  const HeaderRight = () => {
+  const HeaderRight = ({navigation}) => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback onPress={() => alert("Search")}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("ResultView")} >
           <Ionicons
             name="search"
             size={36}
@@ -63,7 +63,7 @@ export default function MainStack({ navigation }) {
         </TouchableWithoutFeedback>
 
         <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("ResultView")}
+          onPress={() => navigation.navigate("FilterView")}
         >
           <Ionicons
             name="options"
@@ -119,7 +119,6 @@ export default function MainStack({ navigation }) {
           options={{
             headerTitle: (props) => <HeaderTitle {...props} />,
             headerLeft: () => <HeaderLeft />,
-            headerRight: () => <HeaderRight />,
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
@@ -282,7 +281,7 @@ export default function MainStack({ navigation }) {
           }}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="EditProduct"
           component={EditProduct}
           options={{
@@ -294,8 +293,6 @@ export default function MainStack({ navigation }) {
             headerTitleAlign: "center",
           }}
         />
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );
