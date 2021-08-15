@@ -1,6 +1,5 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
-import { isLoading } from "expo-font";
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -159,12 +158,7 @@ export const filter = async (data) => {
   }
 
   // filter by category
-<<<<<<< HEAD
-  if (data.category != "tous les catégories") {
-    console.log("cat");
-=======
   if (data.category != "Toutes les catégories") {
->>>>>>> 4477806f8e5d40501052125052711f47c9c48303
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 

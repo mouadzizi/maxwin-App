@@ -13,6 +13,8 @@ export default function SellerInformations({ product }) {
     type: product.owner?.type,
     gender: product.owner?.gender,
     creationDate: product.owner?.creationDate,
+    address: product.owner?.address,
+    id : product.owner?.uid,
   };
   return (
     <View style={styles.container}>
@@ -34,24 +36,25 @@ export default function SellerInformations({ product }) {
             </Text>
 
             <Text style={styles.product}>{owner.type.toUpperCase()}</Text>
+            <Text style={styles.info}>Adresse : {owner.address}</Text>
           </View>
         </View>
         <Divider width={"100%"} />
 
         <View style={styles.secondRow}>
           <View style={styles.row}>
-            <Text style={styles.info}>date d'inscription en Maxwin : </Text>
+            <Text style={styles.info}>date d'inscription : </Text>
             <Text style={styles.value}> {owner.creationDate} </Text>
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.info}>Genre :</Text>
-            <Text style={styles.value}> {owner.gender} </Text>
+            <Text style={styles.info}>Nombre d'acconce :</Text>
+            <Text style={styles.value}> 3 </Text>
           </View>
 
-          <View style={styles.row}>
-            <Text style={styles.info}>Adresse :</Text>
-            <Text style={styles.value}> {owner.address} </Text>
+          <View style={[styles.row, {marginTop: 12, alignItems: 'center'}]}>
+            <Text style={styles.info}>Id :  </Text>
+            <Text style={styles.infoID}>{owner.id} </Text>
           </View>
         </View>
       </View>

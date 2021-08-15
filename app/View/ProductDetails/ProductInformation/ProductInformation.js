@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
 import { AntDesign, Feather } from "react-native-vector-icons";
@@ -14,12 +14,6 @@ import Equipement from "./Equipement";
 import styles from "./ProductInformation.style";
 
 export default function ProductInformation({ product }) {
-  useEffect(() => {
-    console.log(product);
-    return () => {
-      
-    }
-  }, [])
   return (
     <>
       <View style={styles.container}>

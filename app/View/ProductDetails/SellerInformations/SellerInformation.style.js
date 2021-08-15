@@ -49,6 +49,11 @@ export default StyleSheet.create({
     fontSize: 15,
     color: COLORS.text,
   },
+  infoID :{
+    fontSize: 13,
+    color: COLORS.text,
+    textDecorationLine: 'underline'
+  },
   value:{
     fontSize: 15,
     fontWeight: 'bold',
