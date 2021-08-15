@@ -16,7 +16,6 @@ export default StyleSheet.create({
   textSt: {
     color: COLORS.text,
     marginTop: 5,
-    textAlign: "justify",
     marginRight: 15,
     lineHeight: 28,
   },

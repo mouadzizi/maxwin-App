@@ -159,20 +159,22 @@ export const filter = async (data) => {
   }
 
   // filter by category
+<<<<<<< HEAD
   if (data.category != "tous les catégories") {
     console.log("cat");
+=======
+  if (data.category != "Toutes les catégories") {
+>>>>>>> 4477806f8e5d40501052125052711f47c9c48303
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 
   // filter by category brand
   if (data.brand != "*") {
-    console.log("fuel");
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
   // filter by fuel
   if (data.fuel != "*") {
-    console.log("fuel");
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
 

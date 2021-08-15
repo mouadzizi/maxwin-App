@@ -5,9 +5,11 @@ import { db } from "../../API/Firebase";
 import { getUser, timestamp } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
 import { COLORS } from "../../GlobalStyle";
-
 const { width } = Dimensions.get("screen");
+
 export default function ChatView({ route, navigation }) {
+
+
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,6 @@ export default function ChatView({ route, navigation }) {
   const chatRef = db.collection("chats");
 
   useEffect(() => {
-    console.log(seller);
     getUser().then((fb_user) => setUser(fb_user));
     
   }, []);
@@ -112,10 +113,10 @@ export default function ChatView({ route, navigation }) {
             }}
             wrapperStyle={{
               left: {
-                backgroundColor: "#F16E44",
+                backgroundColor: COLORS.Grey[300],
               },
               right: {
-                backgroundColor: "#4898D3",
+                backgroundColor: COLORS.primary,
               },
             }}
           />
@@ -125,7 +126,7 @@ export default function ChatView({ route, navigation }) {
             {...props}
             alwaysShowSend={true}
             label="Envoyer"
-            textStyle={{ color: "#4898D3" }}
+            textStyle={{ color: COLORS.primary }}
           />
         )}
         messages={messages}

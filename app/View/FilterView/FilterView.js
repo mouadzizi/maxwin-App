@@ -18,7 +18,7 @@ export default function FilterView({ navigation, route }) {
     state: "*",
     brand: "*",
     city: "*",
-    category: "tous les catégories",
+    category: "Toutes les catégories",
   });
   let modals = [];
 
@@ -321,7 +321,7 @@ export default function FilterView({ navigation, route }) {
             fuel: "*",
             state: "*",
             brand: "*",
-            category: "tous les catégories",
+            category: "Toutes les catégories",
             city: "*",
           })
         }

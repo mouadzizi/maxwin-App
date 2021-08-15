@@ -18,6 +18,9 @@ import ElectroMenage from "../../../icons/Categories/ElectroMenage";
 import MenShoes from "../../../icons/Categories/MenShoes";
 import WomenShoes from "../../../icons/Categories/WomenShoes";
 import MaterialPRo from "../../../icons/Categories/MaterialPro";
+import CarAccessory from "../../../icons/Categories/CarAccessory";
+import WomenWatch from "../../../icons/Categories/WomenWatch";
+import ServiceProfesional from "../../../icons/Categories/ServiceProfesional";
 
 export default function CategoryButton({ iconName, onClick }) {
   const RenderIcon = () => {
@@ -45,9 +48,7 @@ export default function CategoryButton({ iconName, onClick }) {
       case "MakeUp":
         return <MakeUp />;
       case "carAccesory":
-        return (
-          <MaterialCommunityIcons name="car-cog" color="white" size={35} />
-        );
+        return <CarAccessory />;
       case "ElectroMenage":
         return <ElectroMenage />;
       case "MenShoes":
@@ -56,6 +57,11 @@ export default function CategoryButton({ iconName, onClick }) {
         return <WomenShoes />;
       case "MaterialPro":
         return <MaterialPRo />;
+      case "WomenWatch":
+        return <WomenWatch />;
+
+      case "ServiceProfesional":
+        return <ServiceProfesional />
 
       default:
         return <Car />;

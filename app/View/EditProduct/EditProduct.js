@@ -20,7 +20,7 @@ export default function EditProduct({ navigation, route }) {
 
   let Modal = null;
   useEffect(() => {
-    const passedProduct = route.params.product;
+    const passedProduct = route.params?.product;
     setProduct(passedProduct);
   }, []);
 
@@ -28,6 +28,7 @@ export default function EditProduct({ navigation, route }) {
     setReady(true);
     return () => { };
   }, [product]);
+
   const update = () => {
     setLoading(true);
     editProduct(product)
@@ -38,6 +39,7 @@ export default function EditProduct({ navigation, route }) {
       .then(() => setLoading(false))
 
   };
+
   const remove = () => {
     setLoading(true);
     deleteProduct(product.key)
@@ -46,6 +48,7 @@ export default function EditProduct({ navigation, route }) {
         deleteProdImages(product.key).then(navigation.goBack).catch(({message})=>alert(message))
       })
   };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {ready ? (
@@ -57,7 +60,6 @@ export default function EditProduct({ navigation, route }) {
               value={product.title}
               placeholder="Titre"
               label="Titre de produit"
-              keyboardType="numeric"
               renderErrorMessage={false}
               labelStyle={{ color: COLORS.primary }}
               containerStyle={{ marginTop: 20 }}
@@ -69,6 +71,7 @@ export default function EditProduct({ navigation, route }) {
               value={!isNaN(product.price) ? product.price.toString() : ""}
               placeholder="prix de produit"
               label="Prix"
+              keyboardType="numeric"
               renderErrorMessage={false}
               labelStyle={{ color: COLORS.primary }}
               containerStyle={{ marginTop: 20 }}
