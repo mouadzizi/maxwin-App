@@ -96,7 +96,7 @@ export default function ProfileView({ navigation }) {
           />
 
           <ProfileSection
-            title="Conditions générale"
+            title="Conditions générales"
             subTitle="conditions Maxwin"
             onClick={() => navigation.navigate("FAQView")}
             iconName="FAQ"
