@@ -1,6 +1,6 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
-import { diffClamp } from "react-native-reanimated";
+import { isLoading } from "expo-font";
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -68,9 +68,8 @@ export const getItemsByCollection = async (collection, limit) => {
 };
 
 export const getItemsByCategory = async (category, limit) => {
-  let items = [];
-  const snap = await db
-    .collection("products")
+  let items = []
+  const snap = await db.collection("products")
     .where("category", "array-contains", category)
     .orderBy("createdDate", "desc")
     .limit(limit)
@@ -160,7 +159,7 @@ export const filter = async (data) => {
   }
 
   // filter by category
-  if (data.category != "Choisissez une categorie") {
+  if (data.category != "tous les catégories") {
     console.log("cat");
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
@@ -210,7 +209,6 @@ export const updateUser = async (data) => {
 
 export const getUserItems = async () => {
   const uid = auth.currentUser?.uid;
-  console.log(uid);
   const snapShot = await db
     .collection("products")
     .where("owner.uid", "==", uid)
@@ -218,21 +216,43 @@ export const getUserItems = async () => {
   const promises = snapShot.docs.map((doc) => {
     return {
       key: doc.id,
-      ...doc.data()
+      ...doc.data(),
     };
   });
 
-  return promises
+  return promises;
 };
 
-export const editProduct = async(product)=>{
- await db.collection('products').doc(product.key).update({
-    title:product.title,
-    price:product.price,
-    description:product.description || "",
-    etat:product.etat
-  })
-}
-export const deleteProduct = async(prodID)=>{
-  await db.collection('products').doc(prodID).delete()
-}
+export const editProduct = async (product) => {
+  await db
+    .collection("products")
+    .doc(product.key)
+    .update({
+      title: product.title,
+      price: product.price,
+      description: product.description || "",
+      etat: product.etat,
+    });
+};
+export const deleteProduct = async (prodID) => {
+  await db.collection("products").doc(prodID).delete();
+};
+
+export const deleteProdImages = async (prodId) => {
+  const uid = auth.currentUser?.uid;
+  var listRef = await st.ref(`images/${uid}/${prodId}`).listAll();
+  listRef.items.forEach((item) => item.delete());
+};
+
+export const fecthItems = async (snapShot) => {
+  const promises = snapShot.docs
+  .map((doc) => {
+    return {
+      key: doc.id,
+      ...doc.data(),
+    };
+  });
+  return Promise.all(promises);
+};
+
+

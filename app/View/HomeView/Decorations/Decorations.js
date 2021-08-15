@@ -8,7 +8,9 @@ export default function Decorations({ navigation }) {
   const collection = "MAISON & DECO";
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    getItemsByCollection(collection, 10).then((items) => setProducts(items));
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items)
+    });
   }, []);
 
   const ItemRender = useCallback(

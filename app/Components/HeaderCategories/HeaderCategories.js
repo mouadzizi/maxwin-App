@@ -25,7 +25,7 @@ export default function HeaderCategories({ navigation }) {
   // Services & travaux
   const DATA = [
     {
-      id: "SDSDgf25677984",
+      id: "SDSDgf2567984",
       categoryName: "Voitures",
       iconName: "Car",
     },
@@ -35,7 +35,7 @@ export default function HeaderCategories({ navigation }) {
       iconName: "carAccesory",
     },
     {
-      id: "SDSDgf289933R84",
+      id: "SDSDgf28993R84",
       categoryName: "Appartements",
       iconName: "Villa",
     },

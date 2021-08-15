@@ -69,7 +69,7 @@ class ConfirmationModal extends PureComponent {
 
   render() {
     return (
-      <Modalize openAnimationConfig={{timing:{},spring:{stiffness:25}}} ref={this.ModalRef} snapPoint={350} adjustToContentHeight>
+      <Modalize openAnimationConfig={{timing:{},spring:{stiffness:50}}} ref={this.ModalRef}  closeOnOverlayTap={false} adjustToContentHeight withHandle={false} >
         {this.renderContent()}
       </Modalize>
     );

@@ -1,16 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text,Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import EmptyChats from "../../SVG/EmptyChats";
 import styles from "./MessagesView.style";
 import Conversation from "../../Components/Conversation/Conversation";
 import { db, auth } from "../../API/Firebase";
+import {useFocusEffect} from '@react-navigation/native'
+
 
 export default function MessagesView({ navigation }) {
   const [conversation, setConversation] = useState([]);
   const [user, setUser] = useState({});
-  const uid = auth.currentUser?.uid;
   const chatRef = db.collection("chats");
 
   const fetchConversations = useCallback((snapShot) => {
@@ -30,44 +31,44 @@ export default function MessagesView({ navigation }) {
   }, []);
 
   useEffect(() => {
-    console.log("fetching");
     if (user) {
       var cleanup = chatRef
         .orderBy("createdAt", "desc")
-        .onSnapshot((snapShot)=>{
+        .onSnapshot((snapShot) => {
           const conversations = snapShot.docs
-          .filter(
-            (doc) =>
-              doc.data().contact1._id.search(user.uid) >= 0 ||
-              doc.data().contact2._id.search(user.uid) >= 0
-          )
-          .map((d) => {
-            return {
-              key: d.id,
-              ...d.data(),
-            };
-          });
+            .filter(
+              (doc) =>
+                doc.data().contact1._id.search(user.uid) >= 0 ||
+                doc.data().contact2._id.search(user.uid) >= 0
+            )
+            .map((d) => {
+              return {
+                key: d.id,
+                ...d.data(),
+              };
+            });
           setConversation(conversations)
         });
     }
-
     return () => {
       cleanup;
       setConversation([]);
     };
   }, [user]);
 
-  useEffect(() => {
-    const cleanUp = auth.onAuthStateChanged((user) => {
+  useFocusEffect(useCallback(() => {
+    let cleanUp = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("user exist");
         setUser(user);
-      } else console.log("user not exist");
+      } else {
+        showAlert()
+        setConversation([])
+      }
     });
     return () => {
       cleanUp();
     };
-  }, []);
+  }, []));
 
   const goToChat = (item) => {
     db.collection("chats")
@@ -75,7 +76,7 @@ export default function MessagesView({ navigation }) {
       .update({ seen: true })
       .then(() => {
         navigation.navigate("ChatView", {
-          seller: uid === item.contact1._id ? item.contact2 : item.contact1,
+          seller: user.uid == item.contact1._id ? item.contact2 : item.contact1,
           chatId: item.key,
           pic: item.chatPic,
           postTitle: item.title,
@@ -84,10 +85,23 @@ export default function MessagesView({ navigation }) {
       });
   };
 
-  const renderItem = useCallback(
+  const showAlert = () => {
+    Alert.alert("Avez-vous un compte ?", "Veuillez vous connecter", [
+      {
+        text: "S'identifier",
+        style: "default",
+        onPress: () => navigation.navigate("SignIn"),
+      },
+      {
+        text: "Annuler",
+        onPress: () => navigation.goBack(),
+      },
+    ]);
+  };
+  const renderItem = 
     ({ item }) => (
       <Conversation
-        seen={uid === item.contact1._id ? false : !item.seen}
+        seen={user.uid === item.contact1._id ? false : !item.seen}
         picture={item.chatPic}
         lastMessage={item.lastMessage}
         title={item.title}
@@ -95,16 +109,17 @@ export default function MessagesView({ navigation }) {
         // time={item.createdAt.toDate().toLocaleTimeString()}
         contact={user.uid == item.contact1._id ? "Vous" : item.contact1.name}
       />
-    ),
-    []
-  );
+    )
+    
+  
   return (
     <View style={styles.container}>
-      <FlatList
-        data={conversation}
-        renderItem={renderItem}
-        ListHeaderComponent={() => <Text> Messages </Text>}
-      />
+       <FlatList
+          data={conversation}
+          renderItem={renderItem}
+          ListHeaderComponent={() => <Text> Messages </Text>}
+        /> 
+      
     </View>
   );
 }

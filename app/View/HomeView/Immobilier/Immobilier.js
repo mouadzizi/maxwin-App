@@ -3,18 +3,24 @@ import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
-import { getItemsByCollection } from "../../../API/APIFunctions";
+import { fecthItems } from "../../../API/APIFunctions";
+import { db } from "../../../API/Firebase";
 
 export default function Immobilier({ navigation }) {
-  
   const [products, setProducts] = useState([]);
   const collection = "IMMOBILIER";
+  const categoryRef = db
+    .collection("products")
+    .where("category", "array-contains", collection)
+    .orderBy("createdDate", "desc");
 
   useEffect(() => {
-    getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
-    });
-    return () => {};
+    const cleanUp = categoryRef
+      .limit(10)
+      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    return () => {
+      cleanUp();
+    };
   }, []);
 
   const ItemRender = useCallback(
@@ -43,7 +49,6 @@ export default function Immobilier({ navigation }) {
       ) : (
         <FlatList
           data={products}
-          keyExtractor={keyExtractor}
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}

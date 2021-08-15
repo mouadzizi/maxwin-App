@@ -4,15 +4,23 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
-
+import { fecthItems } from "../../../API/APIFunctions";
+import { db } from "../../../API/Firebase";
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = React.useState([]);
   const collection = "ESPACE FEMMES";
+  const categoryRef = db
+    .collection("products")
+    .where("category", "array-contains", collection)
+    .orderBy("createdDate", "desc");
+
   useEffect(() => {
-    getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
-    });
-    return () => {};
+    const cleanUp = categoryRef
+      .limit(10)
+      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    return () => {
+      cleanUp();
+    };
   }, []);
 
   const ItemRender = ({ item }) => (
@@ -24,7 +32,6 @@ export default function Vehicule({ navigation }) {
     />
   );
 
-  const keyExtractor = useCallback((item) => item.id, []);
 
   return (
     <>
@@ -39,7 +46,6 @@ export default function Vehicule({ navigation }) {
       ) : (
         <FlatList
           data={products}
-          keyExtractor={keyExtractor}
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}

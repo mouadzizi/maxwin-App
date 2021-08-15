@@ -11,7 +11,7 @@ export default function InfoRow({detail, value}) {
         fontSize={16}
         style={styles.textSt}
       >
-        {detail}
+        {detail || " "}
       </TextView>
 
       <TextView
@@ -19,7 +19,7 @@ export default function InfoRow({detail, value}) {
         fontSize={17}
         style={styles.textInfo}
       >
-        {value}
+        {value || " "}
       </TextView>
         </View>
     )

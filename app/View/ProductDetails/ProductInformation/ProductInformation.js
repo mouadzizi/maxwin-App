@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
 import { AntDesign, Feather } from "react-native-vector-icons";
@@ -14,11 +14,17 @@ import Equipement from "./Equipement";
 import styles from "./ProductInformation.style";
 
 export default function ProductInformation({ product }) {
+  useEffect(() => {
+    console.log(product);
+    return () => {
+      
+    }
+  }, [])
   return (
     <>
       <View style={styles.container}>
         <TextView fontFamily="Source-Regular" fontSize={23}>
-          {product.title}
+          {product.title || "" } 
         </TextView>
         <Divider width="95%" />
         <TextView
@@ -26,7 +32,7 @@ export default function ProductInformation({ product }) {
           fontSize={23}
           style={styles.headerSt}
         >
-          {product.price} DH
+          {product.price || "ERR"} DH
         </TextView>
       </View>
 
@@ -111,6 +117,7 @@ export default function ProductInformation({ product }) {
           </TextView>
         </View>
       )}
+
       <View style={styles.container}>
         <TextView
           fontFamily="Source-Regular"
@@ -120,9 +127,9 @@ export default function ProductInformation({ product }) {
           Détails
         </TextView>
         <Divider width="95%" />
-        <Row detail="Section" value={product.category[0]} />
-        <Row detail="Catégorie" value={product.category[1]} />
-        <Row detail="Ville" value={product.city} />
+         <Row detail="Section" value={product.category[0]} />
+       <Row detail="Catégorie" value={product.category[1]} />
+         <Row detail="Ville" value={product.city} />
         {product.etat && <Row detail="Etat de produit" value={product.etat} />}
         {product.marqueVoiture && (
           <Row detail="Marque de Voiture" value={product.marqueVoiture} />
@@ -140,6 +147,7 @@ export default function ProductInformation({ product }) {
         {product.RAM && <Row detail="RAM : " value={product.RAM} />}
         {product.pouces && <Row detail="Taille : " value={product.pouces} />}
       </View>
+
       {product.chips.length > 0 && <Equipement chips={product.chips} />}
     </>
   );

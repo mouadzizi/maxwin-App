@@ -17,6 +17,7 @@ export default function ChatView({ route, navigation }) {
   useEffect(() => {
     console.log(seller);
     getUser().then((fb_user) => setUser(fb_user));
+    
   }, []);
 
   const fetchMessages = useCallback((snapShot) => {

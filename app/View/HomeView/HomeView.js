@@ -19,9 +19,7 @@ export default function HomeView({ navigation }) {
     <View style={styles.container}>
       <ScrollView style={styles.ScrollContainer}>
         <StatusBar backgroundColor={COLORS.primary} />
-
         <HeaderCategories navigation={navigation} />
-
         <Vehicule navigation={navigation} />
         <Immobilier navigation={navigation} />
         <Decorations navigation={navigation} />

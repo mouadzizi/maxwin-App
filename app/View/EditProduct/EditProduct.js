@@ -10,7 +10,7 @@ import ButtonFill from "../../Components/Button/ButtonFill";
 import { Entypo, Fontisto } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./EditProduct.style";
-import { editProduct, deleteProduct } from "../../API/APIFunctions";
+import { editProduct, deleteProduct,deleteProdImages } from "../../API/APIFunctions";
 import ConfirmationModal from "./Modal/ConfirmationModal";
 
 export default function EditProduct({ navigation, route }) {
@@ -26,25 +26,25 @@ export default function EditProduct({ navigation, route }) {
 
   useEffect(() => {
     setReady(true);
-    return () => {};
+    return () => { };
   }, [product]);
   const update = () => {
     setLoading(true);
     editProduct(product)
-      .then(navigation.goBack)
+    .catch(({ message }) => {
+      setLoading(false);
+      alert(message);
+    }).then(navigation.goBack)
       .then(() => setLoading(false))
-      .catch(({ message }) => {
-        setLoading(false);
-        alert(message);
-      });
+
   };
   const remove = () => {
     setLoading(true);
     deleteProduct(product.key)
       .then(() => setLoading(false))
       .then(() => {
-        navigation.goBack();
-      });
+        deleteProdImages(product.key).then(navigation.goBack).catch(({message})=>alert(message))
+      })
   };
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -143,7 +143,9 @@ export default function EditProduct({ navigation, route }) {
         onClick={remove}
         loading={loading}
         ref={(el) => (Modal = el)}
-      />
+      >
+        
+      </ConfirmationModal>
     </SafeAreaView>
   );
 }
