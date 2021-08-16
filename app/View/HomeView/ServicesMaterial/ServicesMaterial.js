@@ -10,17 +10,13 @@ import { db } from "../../../API/Firebase";
 export default function ServicesMaterial({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "MATERIELS ET SERVICES";
-  const categoryRef = db
-    .collection("products")
-    .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc");
 
   useEffect(() => {
-    const cleanUp = categoryRef
-      .limit(10)
-      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items);
+    });
     return () => {
-      cleanUp();
+    
     };
   }, []);
 

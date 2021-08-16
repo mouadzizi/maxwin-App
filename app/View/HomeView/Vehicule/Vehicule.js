@@ -4,25 +4,15 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { fecthItem,getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
-import { db } from "../../../API/Firebase";
 
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "VEHICULES";
-  const categoryRef = db
-    .collection("products")
-    .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc");
 
   useEffect(() => {
-    // const cleanUp = categoryRef
-    //   .limit(10)
-    //   .onSnapshot((snap) => fecthItems(snap).then((res) => {
-    //     console.log(res[0])
-    //     setProducts(res)}));
     getItemsByCategory(collection,10).then(res=>setProducts(res))
     return () => {
-      // cleanUp();
+  
     };
   }, []);
 

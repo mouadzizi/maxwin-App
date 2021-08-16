@@ -5,21 +5,17 @@ import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import { fecthItems } from "../../../API/APIFunctions";
-import { db } from "../../../API/Firebase";
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = React.useState([]);
   const collection = "ESPACE FEMMES";
-  const categoryRef = db
-    .collection("products")
-    .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc");
+
 
   useEffect(() => {
-    const cleanUp = categoryRef
-      .limit(10)
-      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items);
+    });
     return () => {
-      cleanUp();
+    
     };
   }, []);
 
@@ -31,7 +27,6 @@ export default function Vehicule({ navigation }) {
       uri={item.images[0]}
     />
   );
-
 
   return (
     <>

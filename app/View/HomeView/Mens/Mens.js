@@ -4,23 +4,16 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
-import { fecthItems } from "../../../API/APIFunctions";
-import { db } from "../../../API/Firebase";
 export default function Mens({ navigation }) {
   const collection = "ESPACE HOMMES";
 
   const [products, setProducts] = useState([]);
-  const categoryRef = db
-    .collection("products")
-    .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc");
 
   useEffect(() => {
-    const cleanUp = categoryRef
-      .limit(10)
-      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items);
+    });
     return () => {
-      cleanUp();
     };
   }, []);
 

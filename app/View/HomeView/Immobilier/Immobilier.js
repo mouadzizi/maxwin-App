@@ -3,23 +3,19 @@ import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
-import { fecthItems } from "../../../API/APIFunctions";
-import { db } from "../../../API/Firebase";
+import {getItemsByCollection } from "../../../API/APIFunctions";
 
 export default function Immobilier({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "IMMOBILIER";
-  const categoryRef = db
-    .collection("products")
-    .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc");
+
 
   useEffect(() => {
-    const cleanUp = categoryRef
-      .limit(10)
-      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items);
+    });
     return () => {
-      cleanUp();
+    
     };
   }, []);
 

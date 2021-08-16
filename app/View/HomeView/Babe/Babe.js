@@ -3,25 +3,27 @@ import { FlatList, Alert } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
-import { fecthItems } from "../../../API/APIFunctions";
-import { db } from "../../../API/Firebase";
+import {useFocusEffect} from '@react-navigation/native'
+import {getItemsByCollection } from "../../../API/APIFunctions";
+
 export default function Babe({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "ESPACE BEBES ET ENFANTS";
-  const categoryRef = db
-    .collection("products")
-    .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc");
 
   useEffect(() => {
-    const cleanUp = categoryRef
-      .limit(10)
-      .onSnapshot((snap) => fecthItems(snap).then((res) => setProducts(res)));
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items);
+    });
     return () => {
-      cleanUp();
+
     };
   }, []);
 
+  useFocusEffect(useCallback(
+    () => {
+    },
+    [],
+  ))
   const ItemRender = ({ item }) => (
     <ProductSection
       onClick={() => navigation.navigate("ProductDetails", { product: item })}
