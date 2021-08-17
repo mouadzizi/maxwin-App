@@ -9,4 +9,11 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  FAB: {
+    position: "absolute",
+    bottom: 50,
+    right: 20,
+    zIndex: 1,
+    fontSize: 10,
+  },
 });

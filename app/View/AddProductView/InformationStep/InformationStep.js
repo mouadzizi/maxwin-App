@@ -25,8 +25,12 @@ export default function InformationStep({ navigation, route }) {
   useFocusEffect(
     useCallback(() => {
       getUser().then((firebaseUser) => setUser(firebaseUser));
+      if(user.phone && user.phone !== "" ){
+        setProduct({ ...product, phoneNumber: user.phone });
+      }
     }, [])
   );
+  console.log(user);
   const submit = () => {
     setLoading(true);
     addProduct({ ...product, chips: selectedChips, owner: user, likes: 0 })
@@ -438,7 +442,10 @@ export default function InformationStep({ navigation, route }) {
         <Input
           containerStyle={{ marginTop: 20 }}
           keyboardType="numeric"
-          onChangeText={(phone) => setProduct({ ...product, phone: phone })}
+          value={product.phoneNumber}
+          onChangeText={(value) =>
+            setProduct({ ...product, phoneNumber: value })
+          }
           placeholder="numéro de téléphone"
           rightIcon={{ type: "Feather", name: "phone", color: COLORS.primary }}
         />

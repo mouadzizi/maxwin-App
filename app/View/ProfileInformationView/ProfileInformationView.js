@@ -9,7 +9,6 @@ import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
 import { updateUser } from "../../API/APIFunctions";
-import { auth } from "../../API/Firebase";
 
 export default function ProfileInformation({ route, navigation }) {
   const [user, setUser] = useState({});
@@ -112,8 +111,15 @@ export default function ProfileInformation({ route, navigation }) {
           <Input
             onChangeText={(e) => setUser({ ...user, phone: e })}
             value={user.phone}
+            keyboardType="numeric"
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
+            maxLength={10}
+            errorMessage={
+              user.phone.length < 10 && user.phone.length > 0
+                ? "veuillez entrer une numéro valide"
+                : null
+            }
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
