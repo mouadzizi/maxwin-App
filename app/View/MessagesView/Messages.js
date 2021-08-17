@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text,Alert } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import EmptyChats from "../../SVG/EmptyChats";
 import styles from "./MessagesView.style";
 import Conversation from "../../Components/Conversation/Conversation";
 import { db, auth } from "../../API/Firebase";
-import {useFocusEffect} from '@react-navigation/native'
-
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function MessagesView({ navigation }) {
   const [conversation, setConversation] = useState([]);
@@ -47,7 +46,7 @@ export default function MessagesView({ navigation }) {
                 ...d.data(),
               };
             });
-          setConversation(conversations)
+          setConversation(conversations);
         });
     }
     return () => {
@@ -56,19 +55,21 @@ export default function MessagesView({ navigation }) {
     };
   }, [user]);
 
-  useFocusEffect(useCallback(() => {
-    let cleanUp = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        showAlert()
-        setConversation([])
-      }
-    });
-    return () => {
-      cleanUp();
-    };
-  }, []));
+  useFocusEffect(
+    useCallback(() => {
+      let cleanUp = auth.onAuthStateChanged((user) => {
+        if (user) {
+          setUser(user);
+        } else {
+          showAlert();
+          setConversation([]);
+        }
+      });
+      return () => {
+        cleanUp();
+      };
+    }, [])
+  );
 
   const goToChat = (item) => {
     db.collection("chats")
@@ -98,28 +99,27 @@ export default function MessagesView({ navigation }) {
       },
     ]);
   };
-  const renderItem = 
-    ({ item }) => (
-      <Conversation
-        seen={user.uid === item.contact1._id ? false : !item.seen}
-        picture={item.chatPic}
-        lastMessage={item.lastMessage}
-        title={item.title}
-        onClick={() => goToChat(item)}
-        // time={item.createdAt.toDate().toLocaleTimeString()}
-        contact={user.uid == item.contact1._id ? "Vous" : item.contact1.name}
-      />
-    )
-    
-  
+  const renderItem = ({ item }) => (
+    <Conversation
+      seen={user.uid === item.contact1._id ? false : !item.seen}
+      picture={item.chatPic}
+      lastMessage={item.lastMessage}
+      title={item.title}
+      onClick={() => goToChat(item)}
+      // time={item.createdAt.toDate().toLocaleTimeString()}
+      contact={user.uid == item.contact1._id ? "Vous" : item.contact1.name}
+    />
+  );
+
   return (
-    <View style={styles.container}>
-       <FlatList
-          data={conversation}
-          renderItem={renderItem}
-          ListHeaderComponent={() => <Text> Messages </Text>}
-        /> 
-      
+    <View
+      style={conversation.length < 1 ? styles.containerImage : styles.container}
+    >
+      {conversation.length < 1 && <EmptyChats />}
+      <FlatList
+        data={conversation}
+        renderItem={renderItem}
+      />
     </View>
   );
 }

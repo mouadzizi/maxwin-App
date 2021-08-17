@@ -27,7 +27,6 @@ export default function HomeView({ navigation }) {
         <Female navigation={navigation} />
         <Mens navigation={navigation} />
         <Babe navigation={navigation}/>
-        <ServicesMaterial navigation={navigation}/>
       </ScrollView>
     </View>
   );
