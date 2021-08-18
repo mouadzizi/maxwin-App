@@ -27,6 +27,26 @@ export default function FilterView({ navigation, route }) {
     modals[0].closeModal();
   };
 
+  const setPriceMin = (value) => {
+    value == ""
+      ? setData({ ...data, minPrice: 0 })
+      : setData({ ...data, minPrice: parseFloat(value) });
+  };
+  const setPriceMax = (value) => {
+    value == ""
+      ? setData({ ...data, maxPrice: Number.POSITIVE_INFINITY })
+      : setData({ ...data, maxPrice: parseFloat(value) });
+  };
+  const setMinKM = (value) => {
+    value == ""
+      ? setData({ ...data, minPrice: 0 })
+      : setData({ ...data, minPrice: parseFloat(value) });
+  };
+  const setMaxKM = (value) => {
+    value == ""
+      ? setData({ ...data, maxKM: Number.POSITIVE_INFINITY })
+      : setData({ ...data, maxKM: parseFloat(value) });
+  };
   return (
     <View style={{ marginTop: 20, flex: 1 }}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -75,18 +95,14 @@ export default function FilterView({ navigation, route }) {
                 placeholder="Prix MIN"
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
-                onChangeText={(e) =>
-                  setData({ ...data, minPrice: parseFloat(e) })
-                }
+                onChangeText={setPriceMin}
               />
               <Input
                 keyboardType="numeric"
                 placeholder="Prix MAX"
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
-                onChangeText={(e) =>
-                  setData({ ...data, maxPrice: parseFloat(e) })
-                }
+                onChangeText={setPriceMax}
               />
             </View>
           </>
@@ -195,7 +211,7 @@ export default function FilterView({ navigation, route }) {
                 dropdownIconColor={COLORS.primary}
                 selectedValue={data.transaction}
                 onValueChange={(itemValue) =>
-                  setData({ ...product, transaction: itemValue })
+                  setData({ ...data, transaction: itemValue })
                 }
               >
                 <Picker.Item
@@ -225,7 +241,7 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={(e) =>
-                  setData({ ...data, superficieMin: parseFloat(e) })
+                  setData({ ...data, superficieMin: parseFloat(e) || 0 })
                 }
               />
               <Input
@@ -234,7 +250,10 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={(e) =>
-                  setData({ ...data, superficieMax: parseFloat(e) })
+                  setData({
+                    ...data,
+                    superficieMax: parseFloat(e) || Number.POSITIVE_INFINITY,
+                  })
                 }
               />
             </View>
@@ -254,7 +273,7 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={(e) =>
-                  setData({ ...data, RamMin: parseFloat(e) })
+                  setData({ ...data, RamMin: parseFloat(e) || 0 })
                 }
               />
               <Input
@@ -263,7 +282,7 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={(e) =>
-                  setData({ ...data, RamMax: parseFloat(e) })
+                  setData({ ...data, RamMax: parseFloat(e) || Number.POSITIVE_INFINITY })
                 }
               />
             </View>
@@ -276,7 +295,7 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={(e) =>
-                  setData({ ...data, RomMin: parseFloat(e) })
+                  setData({ ...data, RomMin: parseFloat(e) || 0 })
                 }
               />
               <Input
@@ -285,7 +304,7 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={(e) =>
-                  setData({ ...data, RomMax: parseFloat(e) })
+                  setData({ ...data, RomMax: parseFloat(e) || Number.POSITIVE_INFINITY })
                 }
               />
             </View>
