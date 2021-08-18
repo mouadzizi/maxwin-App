@@ -12,7 +12,11 @@ import { AntDesign } from "react-native-vector-icons";
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
   const [ready, setReady] = useState(false);
+  const [limit, setLimit] = useState(10);
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [noMoreItems, setnoMoreItems] = useState(false)
   const parent = route.params?.parent;
+  let listRef;
 
   const shareTheApp = async () => {
     try {
@@ -39,18 +43,19 @@ export default function ResultView({ route, navigation }) {
       case "FilterView":
         const filterOpt = route.params?.filterOpt;
         console.log(filterOpt);
-        filter(filterOpt)
+        setIsRefreshing(true)
+        filter(filterOpt, limit)
           .then((data) => {
-            console.log(data);
             setReady(true);
             setProducts(data);
+            setIsRefreshing(false)
           })
           .catch(({ message }) => console.warn(message));
         break;
 
       default:
         const collection = route.params?.collection;
-        getItemsByCategory(collection, 10)
+        getItemsByCategory(collection, limit)
           .then((items) => {
             setReady(true);
             setProducts(items);
@@ -60,7 +65,7 @@ export default function ResultView({ route, navigation }) {
     }
 
     return () => {};
-  }, []);
+  }, [limit]);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -83,7 +88,7 @@ export default function ResultView({ route, navigation }) {
       style={products.length < 1 ? styles.containerImage : styles.container}
     >
       <FAB
-        onPress={shareTheApp}
+        onPress={()=>listRef.scrollToItem({animated:true,item:products[0]})}
         title="Application"
         titleStyle={{ fontSize: 15, fontWeight: "bold" }}
         color={COLORS.primary}
@@ -93,9 +98,14 @@ export default function ResultView({ route, navigation }) {
       {products.length < 1 && <EmptyProducts />}
       {ready ? (
         <FlatList
+        ref={(ref)=>(listRef=ref)}
           data={products}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
+          onEndReached={() => setLimit((prevLimit) => prevLimit + 10)}
+          onEndReachedThreshold={0.3}
+          refreshing={isRefreshing}
+          onRefresh={()=>console.log('ref')}
         />
       ) : (
         <Progress.Bar
@@ -104,7 +114,7 @@ export default function ResultView({ route, navigation }) {
           animationType="timing"
           width={windowWidth}
           height={8}
-          style={{ marginTop: 5 }}
+          style={{ position: "absolute", top: 0 }}
         />
       )}
     </View>

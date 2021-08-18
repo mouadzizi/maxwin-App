@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, FlatList, Share } from "react-native";
+import { View, FlatList, Share,ToastAndroid } from "react-native";
 import Product from "../../Components/Product/Product";
 import styles from "./HomeSectionProductView.style";
 import HeaderCategories from "../../Components/HeaderCategories";
@@ -8,20 +8,31 @@ import Skeleton from "./Skeleton";
 import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
 import { AntDesign } from "react-native-vector-icons";
+import { set } from "react-native-reanimated";
+
 
 export default function HomeSectionProductView({ navigation, route }) {
   const [products, setProducts] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [limit, setLimit] = useState(3)
+  const [noMoreItems, setnoMoreItems] = useState(false)
   const collection = route.params?.collection;
 
 
   useEffect(() => {
-    getItemsByCollection(collection, 10)
-      .then((items) => {
-        setProducts(items);
-      })
-      .catch(({ message }) => console.warn(message));
+    if (!noMoreItems) {
+      setIsRefreshing(true)
+      getItemsByCollection(collection, limit)
+        .then((items) => {
+          setnoMoreItems(items.length == products.length)
+          setProducts(items);
+          setIsRefreshing(false)
+        })
+        .catch(({ message }) => console.warn(message));
+    }
+    else ToastAndroid.show('No more items',ToastAndroid.SHORT)
     return(()=> {})
-  }, []);
+  }, [limit]);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -59,9 +70,17 @@ export default function HomeSectionProductView({ navigation, route }) {
     }
   };
   const renderHeader = () => <HeaderCategories navigation={navigation} />;
+  const handleRefresh= ()=>{
+    setIsRefreshing(true)
+    getItemsByCollection(collection,limit).then(res=>setProducts(res)).then(()=>setIsRefreshing(false))
+  }
+  const loadMore = ()=>{
+    setLimit((prevLimit)=>prevLimit+3)
+  }
   const keyExtractor = useCallback((item) => item.id, []);
   return (
     <View style={styles.container}>
+      
       <FAB
         onPress={shareTheApp}
         title="Application"
@@ -76,6 +95,10 @@ export default function HomeSectionProductView({ navigation, route }) {
           keyExtractor={keyExtractor}
           ListHeaderComponent={renderHeader}
           renderItem={renderItem}
+          onRefresh={handleRefresh}
+          refreshing={isRefreshing}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.3}
         />
       ) : (
         <>

@@ -67,8 +67,9 @@ export const getItemsByCollection = async (collection, limit) => {
 };
 
 export const getItemsByCategory = async (category, limit) => {
-  let items = []
-  const snap = await db.collection("products")
+  let items = [];
+  const snap = await db
+    .collection("products")
     .where("category", "array-contains", category)
     .orderBy("createdDate", "desc")
     .limit(limit)
@@ -151,7 +152,7 @@ export const getUser = async () => {
   });
 };
 
-export const filter = async (data) => {
+export const filter = async (data,limit) => {
   var itemsRef = db.collection("products");
   if (data.city != "*") {
     itemsRef = db.collection("products").where("city", "==", data.city);
@@ -179,7 +180,7 @@ export const filter = async (data) => {
 
   const querySnap = await itemsRef
     .orderBy("createdDate", "desc")
-    .limit(10)
+    .limit(limit)
     .get();
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
@@ -241,8 +242,7 @@ export const deleteProdImages = async (prodId) => {
 };
 
 export const fecthItems = async (snapShot) => {
-  const promises = snapShot.docs
-  .map((doc) => {
+  const promises = snapShot.docs.map((doc) => {
     return {
       key: doc.id,
       ...doc.data(),
