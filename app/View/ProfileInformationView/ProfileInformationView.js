@@ -91,8 +91,8 @@ export default function ProfileInformation({ route, navigation }) {
           <Input
             onChangeText={(e) => setUser({ ...user, address: e })}
             value={user.address}
-            placeholder="Adresse"
-            label="Adresse"
+            placeholder="Quartier"
+            label="Quartier"
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
