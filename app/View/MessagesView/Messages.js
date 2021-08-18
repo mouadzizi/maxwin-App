@@ -103,7 +103,7 @@ export default function MessagesView({ navigation }) {
     <Conversation
       seen={user.uid === item.contact1._id ? false : !item.seen}
       picture={item.chatPic}
-      lastMessage={item.lastMessage}
+      lastMessage={item.lastMessage.substring(0, 18)}
       title={item.title}
       onClick={() => goToChat(item)}
       // time={item.createdAt.toDate().toLocaleTimeString()}

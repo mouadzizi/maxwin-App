@@ -115,11 +115,6 @@ export default function ProfileInformation({ route, navigation }) {
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
             maxLength={10}
-            errorMessage={
-              user.phone.length < 10 && user.phone.length > 0
-                ? "veuillez entrer une numéro valide"
-                : null
-            }
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}

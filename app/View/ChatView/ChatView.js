@@ -97,7 +97,7 @@ export default function ChatView({ route, navigation }) {
         />
       ) : null}
       <GiftedChat
-        placeholder="Tapper un message"
+        placeholder="Tappez votre message"
         renderBubble={(props) => (
           <Bubble
             {...props}

@@ -14,7 +14,7 @@ export default function ProfileStack() {
         height: 55,
       },
       headerTitleAlign: "center",
-      headerTitle: 'Mon Profile',
+      headerTitle: 'Mon Profil',
       headerTitleStyle:{
         fontSize: 20,
       }

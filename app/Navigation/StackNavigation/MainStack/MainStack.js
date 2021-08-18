@@ -207,7 +207,7 @@ export default function MainStack({ navigation }) {
           name="ProfileInformationView"
           component={ProfileInformationView}
           options={{
-            title: "Mon Profile",
+            title: "Mon Profil",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },

@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   infoBox: {
     flexDirection: "row",
+    flex: 1
   },
   badge: {
     position: "absolute",
@@ -29,5 +30,6 @@ export const styles = StyleSheet.create({
   title: {
     paddingHorizontal: 3,
     justifyContent: "space-around",
+    flex: 1,
   },
 });
