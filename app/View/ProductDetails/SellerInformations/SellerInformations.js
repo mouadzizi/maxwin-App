@@ -36,7 +36,7 @@ export default function SellerInformations({ product }) {
             </Text>
 
             <Text style={styles.product}>{owner.type.toUpperCase()}</Text>
-            <Text style={styles.info}>Adresse : {owner.address}</Text>
+            <Text style={styles.info}>Quartier : {owner.address}</Text>
           </View>
         </View>
         <Divider width={"100%"} />
@@ -53,7 +53,7 @@ export default function SellerInformations({ product }) {
           </View>
 
           <View style={[styles.row, {marginTop: 12, alignItems: 'center'}]}>
-            <Text style={styles.info}>Id :  </Text>
+            <Text style={styles.info}>ID :  </Text>
             <Text style={styles.infoID}>{owner.id} </Text>
           </View>
         </View>

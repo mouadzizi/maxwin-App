@@ -91,8 +91,8 @@ export default function ProfileInformation({ route, navigation }) {
           <Input
             onChangeText={(e) => setUser({ ...user, address: e })}
             value={user.address}
-            placeholder="Adresse"
-            label="Adresse"
+            placeholder="Quartier"
+            label="Quartier"
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
@@ -115,11 +115,6 @@ export default function ProfileInformation({ route, navigation }) {
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
             maxLength={10}
-            errorMessage={
-              user.phone.length < 10 && user.phone.length > 0
-                ? "veuillez entrer une numéro valide"
-                : null
-            }
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}

@@ -48,7 +48,7 @@ export default function ProfileView({ navigation }) {
         <View style={{ flex: 1 }}>
           {isSignIn && (
             <>
-              <Text style={GlobalStyle.H1}>Profile</Text>
+              <Text style={GlobalStyle.H1}>Profil</Text>
               <ProfileSection
                 subTitle="Informations personnelles"
                 title={user.firstName + " " + user.lastName}
@@ -72,7 +72,7 @@ export default function ProfileView({ navigation }) {
 
           <Text style={[GlobalStyle.H1, { marginTop: 20 }]}>Settings</Text>
           <ProfileSection
-            title="Contacter Nous"
+            title="Contactez nous"
             subTitle="E-Mail"
             onClick={() => navigation.navigate("ContactView")}
             iconName="Mail"
