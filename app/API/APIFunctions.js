@@ -1,5 +1,6 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
+import * as Notifications from 'expo-notifications'
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -172,7 +173,7 @@ export const filter = async (data,limit) => {
   if (data.fuel != "*") {
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
-
+  
   // filter by etat
   if (data.state != "*") {
     itemsRef = itemsRef.where("state", "==", data.state);
@@ -251,4 +252,43 @@ export const fecthItems = async (snapShot) => {
   return Promise.all(promises);
 };
 
+export const registerForPushNotification = async ()=>{
+  let token;
+  
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+  return token;
+}
 
+export const sendNotification = async (expoPushNotif,message)=>{
+  var messages = []
+  console.log(expoPushNotif);
+  messages.push({
+      "to":expoPushNotif,
+      "title":"Vous avez reçu un message",
+      "body": message,
+      "android": {
+          "sound": true
+        },
+  })
+  await Promise.all(messages)
+
+  await fetch('https://exp.host/--/api/v2/push/send', {
+      method:'POST',
+      headers:{
+          "Accept":"application/json",
+          "Content-Type":"application/json",
+          'Accept-encoding': 'gzip, deflate'
+      },
+      body:JSON.stringify(messages)
+      })
+}

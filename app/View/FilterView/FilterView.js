@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Input } from "react-native-elements";
@@ -7,6 +7,8 @@ import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "../AddProductView/Modals/CategoryModal";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./FilterView.style";
+import { registerForPushNotification } from "../../API/APIFunctions";
+
 
 export default function FilterView({ navigation, route }) {
   const [data, setData] = useState({
@@ -36,16 +38,6 @@ export default function FilterView({ navigation, route }) {
     value == ""
       ? setData({ ...data, maxPrice: Number.POSITIVE_INFINITY })
       : setData({ ...data, maxPrice: parseFloat(value) });
-  };
-  const setMinKM = (value) => {
-    value == ""
-      ? setData({ ...data, minPrice: 0 })
-      : setData({ ...data, minPrice: parseFloat(value) });
-  };
-  const setMaxKM = (value) => {
-    value == ""
-      ? setData({ ...data, maxKM: Number.POSITIVE_INFINITY })
-      : setData({ ...data, maxKM: parseFloat(value) });
   };
   return (
     <View style={{ marginTop: 20, flex: 1 }}>

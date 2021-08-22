@@ -30,7 +30,6 @@ export default function InformationStep({ navigation, route }) {
       }
     }, [])
   );
-  console.log(user);
   const submit = () => {
     setLoading(true);
     addProduct({ ...product, chips: selectedChips, owner: user, likes: 0 })

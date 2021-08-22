@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { View, Dimensions } from "react-native";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { db } from "../../API/Firebase";
-import { getUser, timestamp } from "../../API/APIFunctions";
+import { getUser, timestamp,sendNotification } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
 import { COLORS } from "../../GlobalStyle";
 const { width } = Dimensions.get("screen");
@@ -53,10 +53,12 @@ export default function ChatView({ route, navigation }) {
         contact1: {
           _id: user.uid,
           name: user.firstName,
+          expoPushNotif:user.expoPushNotif
         },
         contact2: {
           _id: seller._id || seller.uid ,
           name: seller.firstName || seller.name,
+          expoPushNotif:seller.expoPushNotif
         },
         chatPic: pic,
         seen: false,
@@ -72,8 +74,9 @@ export default function ChatView({ route, navigation }) {
         .add({
           ...m,
           serverTime: timestamp,
-        });
+        })
     });
+    await sendNotification(seller.expoPushNotif,messages[0].text)
     await Promise.all(writes);
   }
 

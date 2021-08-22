@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Image, Text, SafeAreaView, ScrollView } from "react-native";
 import { Input } from "react-native-elements";
 import { createUser } from "../../API/APIFunctions";
@@ -28,7 +28,7 @@ export default function signUp({ navigation }) {
       if (user.password === user.confPassword) {
         createUser(user)
           .then(() => {
-            setLoading(false)
+            setLoading(false);
             navigation.navigate("CompleteProfile");
           })
           .catch(({ code }) => {
@@ -51,6 +51,7 @@ export default function signUp({ navigation }) {
       } else alert("Les mots de passe doivent correspondre");
     }
   };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.imageContainer}>

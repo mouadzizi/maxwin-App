@@ -9,6 +9,7 @@ import { COLORS } from "../../GlobalStyle";
 import styles from "./CompleteProfile.style";
 import { Picker } from "@react-native-picker/picker";
 import { db, auth } from "../../API/Firebase";
+import { registerForPushNotification } from "../../API/APIFunctions";
 
 export default function CompleteProfile({ navigation }) {
   const user = auth.currentUser;
@@ -20,15 +21,17 @@ export default function CompleteProfile({ navigation }) {
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
   useEffect(() => {
-    setAdditionalInfo({
-      ...additionalInfo,
-      firstName: 'Prenom',
-      lastName: 'Nom',
-      gender: 'Homme',
-      type: 'Particullier',
-      email: user.email,
-      creationDate: date,
-    });
+    registerForPushNotification().then((token) =>
+      setAdditionalInfo({
+        expoPushNotif: token,
+        firstName: "Prenom",
+        lastName: "Nom",
+        gender: "Homme",
+        type: "Particullier",
+        email: user.email,
+        creationDate: date,
+      })
+    );
   }, []);
 
   const complete = () => {
@@ -36,7 +39,7 @@ export default function CompleteProfile({ navigation }) {
     db.collection("users")
       .doc(user.uid)
       .set(additionalInfo)
-      .then(navigation.navigate('BottomNavigation'))
+      .then(() => navigation.navigate("BottomNavigation"))
       .catch(({ message }) => {
         setLoading(false);
         console.warn(message);
