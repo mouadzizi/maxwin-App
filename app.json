@@ -24,8 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "org.maxwin",
-      "googleServicesFile": "./google-services.json"
+      "package": "org.maxwin"
     },
     "web": {
       "favicon": "./assets/favicon.png"
