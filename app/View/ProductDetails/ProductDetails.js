@@ -22,19 +22,20 @@ import {
   removeFavorite,
   addToLikedProducts,
   removeLiked,
-  getLikes
+  getLikes,
 } from "../../API/APIFunctions";
 
 import { FontAwesome, AntDesign } from "react-native-vector-icons";
 import styles from "./ProductDetails.style";
 import { COLORS } from "../../GlobalStyle";
+import AuthModal from "../../Components/AuthModal/AuthModal";
 
 export default function ProductDetails({ route, navigation }) {
   const { product } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const uid = auth.currentUser?.uid;
-
+  let Modal = null;
   const showAlert = () => {
     Alert.alert("Avez-vous un compte ?", "Veuillez vous connecter svp", [
       {
@@ -44,7 +45,7 @@ export default function ProductDetails({ route, navigation }) {
       },
       {
         text: "Annuler",
-        onPress: () => navigation.goBack(),
+        style: "cancel",
       },
     ]);
   };
@@ -58,7 +59,7 @@ export default function ProductDetails({ route, navigation }) {
         const isFav = snapShot.docs.some(({ id }) => id === product.id);
         setIsFavorite(isFav);
       });
-      
+
     return () => {
       _unsub();
     };
@@ -91,7 +92,7 @@ export default function ProductDetails({ route, navigation }) {
         "Cet article a été ajouté à vos favoris !",
         ToastAndroid.SHORT
       );
-    } else showAlert();
+    } else Modal.openModal()
   };
 
   const addOrRemoveLikedProduct = () => {
@@ -101,7 +102,7 @@ export default function ProductDetails({ route, navigation }) {
       addToLikedProducts(uid, product).catch((err) =>
         console.warn(err.message)
       );
-    } else showAlert();
+    } else Modal.openModal()
   };
 
   const messageToWhatsApp = () => {
@@ -144,19 +145,23 @@ export default function ProductDetails({ route, navigation }) {
     }
   };
   const handleNavigation = () => {
-    const { owner, title, images } = product;
-    if (owner.uid != uid)
-      navigation.navigate("ChatView", {
-        seller: owner,
-        postTitle: title,
-        postId: product.id,
-        pic: images[0],
-      });
-    else
-      Alert.alert(
-        "Désolé(e)",
-        "vous êtes le propriétaire de ce produit, vous ne pouvez pas vous envoyer de message"
-      );
+    if (uid) {
+      const { owner, title, images } = product;
+      if (owner.uid != uid)
+        navigation.navigate("ChatView", {
+          seller: owner,
+          postTitle: title,
+          postId: product.id,
+          pic: images[0],
+        });
+      else
+        Alert.alert(
+          "Désolé(e)",
+          "vous êtes le propriétaire de ce produit, vous ne pouvez pas vous envoyer de message"
+        );
+    } else {
+      Modal.openModal()
+    }
   };
   return (
     <SafeAreaView>
@@ -232,6 +237,9 @@ export default function ProductDetails({ route, navigation }) {
           />
         </View>
       </ScrollView>
+      <AuthModal ref={(el) => (Modal = el)} onClick={()=>{
+        Modal.closeModal()
+        navigation.navigate("SignIn")}} />
     </SafeAreaView>
   );
 }
