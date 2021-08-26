@@ -7,7 +7,6 @@ import { COLORS } from "../../../GlobalStyle";
 import styles from "./BoutiqueProduct.style";
 
 export default function BoutiqueProduct({ image, title, onClick, price }) {
-  const res = require("../../../../assets/ProductTest/product2.jpeg");
   return (
     <TouchableOpacity style={styles.container} onPress={onClick}>
       <View style={styles.imageContainer}>
