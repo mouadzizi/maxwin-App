@@ -4,7 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Input } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
 
-import { Entypo, Fontisto } from "react-native-vector-icons";
+import { Entypo } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
@@ -19,6 +19,7 @@ export default function ProfileInformation({ route, navigation }) {
     setUser(theUser);
     return () => {};
   }, []);
+
 
   const updateAction = () => {
     setLoading(true);
@@ -36,8 +37,6 @@ export default function ProfileInformation({ route, navigation }) {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.label}>A propo de vous</Text>
-
           <View style={styles.avatarContainer}>
             <View style={styles.avatar}>
               {user.firstName && user.lastName && (
@@ -87,35 +86,46 @@ export default function ProfileInformation({ route, navigation }) {
         </View>
 
         <View style={styles.container}>
-          <Text style={styles.label}>Où habitez-vous ?</Text>
-          <Input
-            onChangeText={(e) => setUser({ ...user, address: e })}
-            value={user.address}
-            placeholder="Quartier"
-            label="Quartier"
-            renderErrorMessage={false}
-            labelStyle={{ color: COLORS.primary }}
-            containerStyle={{ marginTop: 20 }}
-            rightIcon={
-              <Fontisto
-                name="map-marker-alt"
-                size={24}
-                color={COLORS.primary}
-              />
-            }
-          />
+          {/* Picker for city */}
+        <View style={styles.pickerView}>
+          <Text style={styles.label}>Ville *</Text>
+          <Picker
+            style={styles.pickerInput}
+            mode="dialog"
+            dropdownIconColor={COLORS.primary}
+            selectedValue={user.city}
+            onValueChange={(value) => setUser({ ...user, city: value })}
+          >
+            <Picker.Item
+              label="Choisissez une Ville"
+              value=""
+              color={COLORS.Grey[400]}
+            />
+            <Picker.Item label="AL Hoceima" value="ALHoceima" />
+            <Picker.Item label="Agadir" value="Agadir" />
+            <Picker.Item label="Casablanca" value="Casablanca" />
+            <Picker.Item label="Dakhla" value="Dakhla" />
+            <Picker.Item label="Fès" value="Fès" />
+            <Picker.Item label="Kénitra" value="Kénitra" />
+            <Picker.Item label="Marrakech" value="Marrakech" />
+            <Picker.Item label="Meknès" value="Meknès" />
+            <Picker.Item label="Ouajda" value="Ouajda" />
+            <Picker.Item label="Rabat" value="Rabat" />
+            <Picker.Item label="Tanger" value="Tanger" />
+            <Picker.Item label="Tetouan" value="Tetouan" />
+          </Picker>
+        </View>
         </View>
 
         <View style={styles.container}>
           <Text style={styles.label}>Contact</Text>
           <Input
-            onChangeText={(e) => setUser({ ...user, phone: e })}
+            onChangeText={(e) => setUser({ ...user, phone: String(e) })}
             value={user.phone}
             keyboardType="numeric"
             placeholder="Numéro du téléphone"
             label="Numéro du téléphone"
             maxLength={10}
-            renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
             rightIcon={<Entypo name="phone" size={24} color={COLORS.primary} />}

@@ -10,7 +10,6 @@ import styles from "./InformationStep.style";
 import { COLORS } from "../../../GlobalStyle";
 import { addProduct, uploadImages, getUser } from "../../../API/APIFunctions";
 import ChipModal from "../Modals/ChipsModal";
-import { auth } from "../../../API/Firebase";
 import { useFocusEffect } from "@react-navigation/core";
 
 export default function InformationStep({ navigation, route }) {
@@ -25,8 +24,8 @@ export default function InformationStep({ navigation, route }) {
   useFocusEffect(
     useCallback(() => {
       getUser().then((firebaseUser) => setUser(firebaseUser));
-      if(user.phone && user.phone !== "" ){
-        setProduct({ ...product, phoneNumber: user.phone });
+      if(user.phone !== ""){
+        setProduct({ ...product, phoneNumber: user?.phone });
       }
     }, [])
   );
@@ -441,7 +440,7 @@ export default function InformationStep({ navigation, route }) {
         <Input
           containerStyle={{ marginTop: 20 }}
           keyboardType="numeric"
-          value={product.phoneNumber}
+          value={product?.phoneNumber}
           onChangeText={(value) =>
             setProduct({ ...product, phoneNumber: value })
           }

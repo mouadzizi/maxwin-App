@@ -38,13 +38,13 @@ export default function signUp({ navigation }) {
                 alert("Email déjà utilisé");
                 break;
               case "auth/invalid-email":
-                setIsError("Email incorrect");
+                alert("Email incorrect");
                 break;
               case "auth/weak-password":
-                setIsError("mot de passe faible");
+                alert("mot de passe faible");
                 break;
               default:
-                setIsError("Problème de connection");
+                alert("Problème de connection");
                 break;
             }
           });

@@ -168,7 +168,7 @@ export default function ProductDetails({ route, navigation }) {
       <ScrollView>
         {product?.phoneNumber && (
           <FAB
-            style={{ top: 100, right: 20, zIndex: 1, position: "absolute" }}
+            style={{ top: 80, right: 20, zIndex: 1, position: "absolute" }}
             color="white"
             icon={
               <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
@@ -180,7 +180,7 @@ export default function ProductDetails({ route, navigation }) {
         <FAB
           icon={<AntDesign name="sharealt" size={25} color="white" />}
           color={COLORS.primary}
-          style={{ top: 170, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 140, right: 20, zIndex: 1, position: "absolute" }}
           onPress={shareTheApp}
         />
         <FAB
@@ -192,19 +192,19 @@ export default function ProductDetails({ route, navigation }) {
             )
           }
           color={COLORS.primary}
-          style={{ top: 240, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 200, right: 20, zIndex: 1, position: "absolute" }}
           onPress={addOrRemoveFavorite}
         />
         <FAB
           icon={
             isLiked ? (
-              <AntDesign name="like1" size={23} color={COLORS.secondary} />
+              <AntDesign name="like1" size={23} color="#8BB1E7" />
             ) : (
               <AntDesign name="like2" size={23} color="white" />
             )
           }
           color={COLORS.primary}
-          style={{ top: 310, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 260, right: 20, zIndex: 1, position: "absolute" }}
           onPress={addOrRemoveLikedProduct}
         />
 

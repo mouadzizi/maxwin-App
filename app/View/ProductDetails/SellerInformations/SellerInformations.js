@@ -9,7 +9,7 @@ export default function SellerInformations({ product }) {
   const owner = {
     firstName: product.owner?.firstName,
     lastName: product.owner?.lastName,
-    address: product.owner?.address,
+    city: product.owner?.city,
     type: product.owner?.type,
     gender: product.owner?.gender,
     creationDate: product.owner?.creationDate,
@@ -36,7 +36,7 @@ export default function SellerInformations({ product }) {
             </Text>
 
             <Text style={styles.product}>{owner.type.toUpperCase()}</Text>
-            <Text style={styles.info}>Quartier : {owner.address}</Text>
+            <Text style={styles.info}>Ville : {owner.city}</Text>
           </View>
         </View>
         <Divider width={"100%"} />
@@ -45,11 +45,6 @@ export default function SellerInformations({ product }) {
           <View style={styles.row}>
             <Text style={styles.info}>date d'inscription : </Text>
             <Text style={styles.value}> {owner.creationDate} </Text>
-          </View>
-
-          <View style={styles.row}>
-            <Text style={styles.info}>Nombre d'acconce :</Text>
-            <Text style={styles.value}> 3 </Text>
           </View>
 
           <View style={[styles.row, {marginTop: 12, alignItems: 'center'}]}>

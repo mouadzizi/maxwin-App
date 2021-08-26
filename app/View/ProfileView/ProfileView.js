@@ -38,7 +38,6 @@ export default function ProfileView({ navigation }) {
       .then(() => setUser({}))
       .then(() => Alert.alert("You have been Sign out"));
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -77,16 +76,6 @@ export default function ProfileView({ navigation }) {
             onClick={() => navigation.navigate("ContactView")}
             iconName="Mail"
           />
-          {/* {user && (
-        <>
-          <ProfileSection
-            title="Notification"
-            subTitle="Votre Dernier Notifications"
-            onClick={() => navigation.navigate("NotificationView")}
-            iconName="Bell"
-          />
-        </>
-      )} */}
 
           <ProfileSection
             title="FAQ"

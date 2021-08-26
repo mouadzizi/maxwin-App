@@ -8,7 +8,6 @@ import Skeleton from "./Skeleton";
 import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
 import { AntDesign } from "react-native-vector-icons";
-import { set } from "react-native-reanimated";
 
 
 export default function HomeSectionProductView({ navigation, route }) {
@@ -89,7 +88,7 @@ export default function HomeSectionProductView({ navigation, route }) {
         style={styles.FAB}
         icon={<AntDesign name="sharealt" size={23} color="white" />}
       />
-      {products.length > 1 ? (
+      {products.length !== 0  ? (
         <FlatList
           data={products}
           keyExtractor={keyExtractor}
