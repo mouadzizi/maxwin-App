@@ -30,7 +30,7 @@ export default function CompleteProfile({ navigation }) {
         type: "Particullier",
         email: user.email,
         creationDate: date,
-        phone: "",
+        phone: "XXXXXXXXX",
         ville: "",
       })
     );

@@ -128,7 +128,7 @@ export const getLikes = async (productId) => {
   return prod.data()?.likes || 0;
 };
 
-export const removeLiked = async (postId) => {
+export const removeLiked = async (postId) => { 
   const { uid } = auth.currentUser;
   await db
     .collection("users")
@@ -199,7 +199,6 @@ export const updateUser = async (data) => {
   await db.collection("users").doc(uid).update({
     firstName: data.firstName,
     lastName: data.lastName,
-    address: data.address,
     phone: data.phone,
     type: data.type,
   });
@@ -278,7 +277,6 @@ export const sendNotification = async (expoPushNotif, message) => {
     android: {
       sound: true,
     },
-    badge: 3,
   });
   await Promise.all(messages);
 
