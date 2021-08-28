@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, ActivityIndicator, View } from 'react-native'
 import { ImageBrowser } from 'expo-image-picker-multiple'
 import SelectedItem from '../../Components/ImageBrowser/SelectedItem';
