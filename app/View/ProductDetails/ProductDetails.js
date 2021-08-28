@@ -36,6 +36,7 @@ export default function ProductDetails({ route, navigation }) {
   const [isLiked, setIsLiked] = useState(false);
   const uid = auth.currentUser?.uid;
   let Modal = null;
+
   const showAlert = () => {
     Alert.alert("Avez-vous un compte ?", "Veuillez vous connecter svp", [
       {
@@ -115,13 +116,13 @@ export default function ProductDetails({ route, navigation }) {
       ProductName +
       " , est ce que cet article est-il toujours disponible ?";
     let CountryCode = "212";
-    let phoneOwner = product?.phoneNumber;
+    let phoneOwner = product.owner?.phone;
     let PhoneNumber = CountryCode.concat(phoneOwner);
     Linking.openURL(`whatsapp://send?text=${Message}&phone=${PhoneNumber}`);
   };
 
   const CallOwner = () => {
-    let Phone = product?.phoneNumber;
+    let Phone = product.owner?.phone;
     Linking.openURL(`tel:${Phone}`);
   };
 
@@ -166,7 +167,7 @@ export default function ProductDetails({ route, navigation }) {
   return (
     <SafeAreaView>
       <ScrollView>
-        {product?.phoneNumber && (
+        {product.owner?.phone && (
           <FAB
             style={{ top: 80, right: 20, zIndex: 1, position: "absolute" }}
             color="white"
@@ -221,7 +222,7 @@ export default function ProductDetails({ route, navigation }) {
         <SellerInformations product={product} />
 
         <View style={styles.container}>
-          {product?.phoneNumber && (
+          {product.owner?.phone && (
             <ButtonFill
               title="Apple vendeur "
               loading={false}

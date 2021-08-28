@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, Image, View, ScrollView, Text } from "react-native";
-import { Input } from "react-native-elements";
+import { Input, SocialIcon } from "react-native-elements";
 import { signIn } from "../../API/APIFunctions";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import ButtonOutlined from "../../Components/Button/ButtonOutlined";
@@ -92,6 +92,19 @@ export default function SignIn({ navigation }) {
         <Devider
           width="100%"
           style={{ backgroundColor: COLORS.primary, marginTop: 10 }}
+        />
+        <SocialIcon
+          title='Se connecter avec Facebook'
+          button
+          type='facebook'
+          onPress={()=> alert('facebook auth')}
+        />
+
+        <SocialIcon
+          title='Se connecter avec Google'
+          button
+          type='google'
+          onPress={()=> alert('Google auth')}
         />
         <TextView style={styles.welcomeText} fontFamily="Source-Regular">
           Si vous n'êtes pas encore utilisateur, veuillez vous inscrire avec

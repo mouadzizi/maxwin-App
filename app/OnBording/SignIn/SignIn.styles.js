@@ -7,10 +7,10 @@ export default StyleSheet.create({
     },
     imageContainer:{
         backgroundColor: COLORS.primary,
-        height: 200,
+        height: 130,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomRightRadius: 100,
+        borderBottomRightRadius: 75,
     },
     container: {
         marginTop: 20,

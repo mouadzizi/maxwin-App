@@ -169,7 +169,7 @@ export default function MainStack({ navigation }) {
           name="SignIn"
           component={SignIn}
           options={{
-            title: "SignIn",
+            title: "",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
@@ -181,7 +181,7 @@ export default function MainStack({ navigation }) {
           name="SignUp"
           component={SignUp}
           options={{
-            title: "SignUp",
+            title: "",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },

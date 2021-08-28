@@ -23,10 +23,10 @@ export default function InformationStep({ navigation, route }) {
 
   useFocusEffect(
     useCallback(() => {
-      console.log(product);
       getUser().then((firebaseUser) => setUser(firebaseUser));
     }, [])
   );
+
   const submit = () => {
     setLoading(true);
     addProduct({ ...product, chips: selectedChips, owner: user, likes: 0 })
