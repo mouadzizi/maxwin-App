@@ -35,7 +35,7 @@ export default function SellerInformations({ product }) {
               {owner.lastName} {owner.firstName}
             </Text>
 
-            <Text style={styles.product}>{owner.type.toUpperCase()}</Text>
+            <Text style={styles.product}>{owner.type ? owner.type : "Particullier"}</Text>
             <Text style={styles.info}>Ville : {owner.city}</Text>
           </View>
         </View>
