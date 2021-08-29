@@ -52,6 +52,28 @@ export default function SignIn({ navigation }) {
       </View>
 
       <ScrollView style={styles.container}>
+
+      <SocialIcon
+          title='Se connecter avec Facebook'
+          button
+          type='facebook'
+          onPress={()=> alert('facebook auth')}
+          style={{borderRadius: 10}}
+        />
+
+        <SocialIcon
+          title='Se connecter avec Google'
+          button
+          type='google'
+          onPress={()=> alert('Google auth')}
+          style={{borderRadius: 10}}
+        />
+        
+        <Devider
+          width="100%"
+          style={{ backgroundColor: COLORS.primary, marginVertical: 15 }}
+        />
+        
         <Input
           autoCapitalize="none"
           rightIcon={<Fontisto name="email" size={24} color={COLORS.primary} />}
@@ -86,27 +108,10 @@ export default function SignIn({ navigation }) {
           title="SE CONNECTER"
           loading={loading}
           onClick={logIn}
-          style={{ marginTop: 20 }}
         />
 
-        <Devider
-          width="100%"
-          style={{ backgroundColor: COLORS.primary, marginTop: 10 }}
-        />
-        <SocialIcon
-          title='Se connecter avec Facebook'
-          button
-          type='facebook'
-          onPress={()=> alert('facebook auth')}
-        />
-
-        <SocialIcon
-          title='Se connecter avec Google'
-          button
-          type='google'
-          onPress={()=> alert('Google auth')}
-        />
-        <TextView style={styles.welcomeText} fontFamily="Source-Regular">
+        
+        <TextView style={styles.welcomeText} fontFamily="Source-Regular" >
           Si vous n'êtes pas encore utilisateur, veuillez vous inscrire avec
         </TextView>
 

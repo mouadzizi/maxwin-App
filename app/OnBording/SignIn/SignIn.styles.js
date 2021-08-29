@@ -11,6 +11,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomRightRadius: 75,
+        
     },
     container: {
         marginTop: 20,
@@ -25,8 +26,8 @@ export default StyleSheet.create({
     },
     welcomeText:{
         color: COLORS.text,
-        fontSize: 17,
+        fontSize: 15,
         textAlign: 'center',
-        marginTop: 20
+        marginTop: 10
     },
 });

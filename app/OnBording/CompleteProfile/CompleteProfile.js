@@ -32,6 +32,7 @@ export default function CompleteProfile({ navigation }) {
         creationDate: date,
         phone: "",
         ville: "",
+        profilPic: "",
       })
     );
   }, []);
