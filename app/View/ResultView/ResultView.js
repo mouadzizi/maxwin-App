@@ -12,9 +12,8 @@ import { AntDesign } from "react-native-vector-icons";
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
   const [ready, setReady] = useState(false);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(8);
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [noMoreItems, setnoMoreItems] = useState(false)
   const parent = route.params?.parent;
   let listRef;
 
@@ -38,11 +37,11 @@ export default function ResultView({ route, navigation }) {
     }
   };
 
+
   useEffect(() => {
     switch (parent) {
       case "FilterView":
         const filterOpt = route.params?.filterOpt;
-        console.log(filterOpt);
         setIsRefreshing(true)
         filter(filterOpt, limit)
           .then((data) => {
@@ -83,6 +82,7 @@ export default function ResultView({ route, navigation }) {
     []
   );
   const keyExtractor = useCallback((item) => item.id, []);
+
   return (
     <View
       style={products.length < 1 ? styles.containerImage : styles.container}
@@ -105,7 +105,6 @@ export default function ResultView({ route, navigation }) {
           onEndReached={() => setLimit((prevLimit) => prevLimit + 10)}
           onEndReachedThreshold={0.3}
           refreshing={isRefreshing}
-          onRefresh={()=>console.log('ref')}
         />
       ) : (
         <Progress.Bar

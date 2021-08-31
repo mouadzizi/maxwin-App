@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Input } from "react-native-elements";
@@ -7,7 +7,6 @@ import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "../AddProductView/Modals/CategoryModal";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./FilterView.style";
-import { registerForPushNotification } from "../../API/APIFunctions";
 
 
 export default function FilterView({ navigation, route }) {
@@ -119,8 +118,6 @@ export default function FilterView({ navigation, route }) {
                 />
                 <Picker.Item label="AUDI" value="AUDI" />
                 <Picker.Item label="BMW" value="BMW" />
-                <Picker.Item label="CHEVROLET" value="CHEVROLET" />
-                <Picker.Item label="CITROEN" value="CITROEN" />
                 <Picker.Item label="DACIA" value="DACIA" />
                 <Picker.Item label="FIAT" value="FIAT" />
                 <Picker.Item label="FORD" value="FORD" />

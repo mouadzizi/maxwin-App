@@ -183,6 +183,7 @@ export const filter = async (data, limit) => {
     .orderBy("createdDate", "desc")
     .limit(limit)
     .get();
+    
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)

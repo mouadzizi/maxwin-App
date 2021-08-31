@@ -13,7 +13,7 @@ import { AntDesign } from "react-native-vector-icons";
 export default function HomeSectionProductView({ navigation, route }) {
   const [products, setProducts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [limit, setLimit] = useState(3)
+  const [limit, setLimit] = useState(10)
   const [noMoreItems, setnoMoreItems] = useState(false)
   const collection = route.params?.collection;
 
@@ -29,7 +29,7 @@ export default function HomeSectionProductView({ navigation, route }) {
         })
         .catch(({ message }) => console.warn(message));
     }
-    else ToastAndroid.show('No more items',ToastAndroid.SHORT)
+    else ToastAndroid.show("il n'y a plus d'articles",ToastAndroid.SHORT)
     return(()=> {})
   }, [limit]);
 
@@ -74,7 +74,7 @@ export default function HomeSectionProductView({ navigation, route }) {
     getItemsByCollection(collection,limit).then(res=>setProducts(res)).then(()=>setIsRefreshing(false))
   }
   const loadMore = ()=>{
-    setLimit((prevLimit)=>prevLimit+3)
+    setLimit((prevLimit)=>prevLimit+10)
   }
   const keyExtractor = useCallback((item) => item.id, []);
   return (
