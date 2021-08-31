@@ -115,7 +115,7 @@ export default function AddProductView({ navigation }) {
         <Input
           label="Titre *"
           placeholder="Merci d'entrer le Nom exact de votre article"
-          maxLength={19}
+          maxLength={22}
           containerStyle={{ marginTop: 20 }}
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary }}
@@ -126,7 +126,7 @@ export default function AddProductView({ navigation }) {
         <Input
           label="Prix *"
           keyboardType="numeric"
-          maxLength={6}
+          maxLength={9}
           placeholder="Merci d'entrer le prix de votre article"
           style={{ fontSize: 15 }}
           labelStyle={{ color: COLORS.primary, fontSize: 15 }}

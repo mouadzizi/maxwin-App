@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -22,7 +22,6 @@ import {
   removeFavorite,
   addToLikedProducts,
   removeLiked,
-  getLikes,
 } from "../../API/APIFunctions";
 
 import { FontAwesome, AntDesign } from "react-native-vector-icons";

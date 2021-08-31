@@ -88,7 +88,7 @@ export default function ResultView({ route, navigation }) {
       style={products.length < 1 ? styles.containerImage : styles.container}
     >
       <FAB
-        onPress={()=>listRef.scrollToItem({animated:true,item:products[0]})}
+        onPress={shareTheApp}
         title="Application"
         titleStyle={{ fontSize: 15, fontWeight: "bold" }}
         color={COLORS.primary}
