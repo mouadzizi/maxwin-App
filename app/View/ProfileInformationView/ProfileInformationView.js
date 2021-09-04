@@ -119,7 +119,6 @@ export default function ProfileInformation({ route, navigation }) {
         </View>
 
         <View style={styles.container}>
-          <Text style={styles.label}>Contact</Text>
           <Input
             onChangeText={(e) => setUser({ ...user, phone: e })}
             value={user.phone}

@@ -61,5 +61,9 @@ export default StyleSheet.create({
   },
   row:{
     flexDirection: 'row'
-  }
+  },
+  headerSt: {
+    color: COLORS.secondary,
+    marginTop: 5,
+  },
 });

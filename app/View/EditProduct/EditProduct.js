@@ -54,30 +54,25 @@ export default function EditProduct({ navigation, route }) {
       {ready ? (
         <ScrollView>
           <View style={styles.container}>
-            <Text style={styles.label}>Information basic</Text>
             <Input
               onChangeText={(e) => setProduct({ ...product, title: e })}
               value={product.title}
               placeholder="Titre"
               label="Titre de produit"
+              maxLength={22}
               renderErrorMessage={false}
               labelStyle={{ color: COLORS.primary }}
               containerStyle={{ marginTop: 20 }}
-              rightIcon={
-                <Entypo name="v-card" size={24} color={COLORS.primary} />
-              }
             />
             <Input
               value={!isNaN(product.price) ? product.price.toString() : ""}
               placeholder="prix de produit"
               label="Prix"
+              maxLength={9}
               keyboardType="numeric"
               renderErrorMessage={false}
               labelStyle={{ color: COLORS.primary }}
               containerStyle={{ marginTop: 20 }}
-              rightIcon={
-                <Entypo name="v-card" size={24} color={COLORS.primary} />
-              }
               onChangeText={(e) =>
                 setProduct({ ...product, price: parseFloat(e) })
               }
@@ -91,9 +86,6 @@ export default function EditProduct({ navigation, route }) {
               containerStyle={{ marginTop: 20 }}
               numberOfLines={5}
               multiline={true}
-              rightIcon={
-                <Entypo name="v-card" size={24} color={COLORS.primary} />
-              }
               onChangeText={(e) => setProduct({ ...product, description: e })}
             />
 

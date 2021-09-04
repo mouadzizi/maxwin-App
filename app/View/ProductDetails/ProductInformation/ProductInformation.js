@@ -140,6 +140,8 @@ export default function ProductInformation({ product }) {
         {product.ROM && <Row detail="ROM : " value={product.ROM} />}
         {product.RAM && <Row detail="RAM : " value={product.RAM} />}
         {product.pouces && <Row detail="Taille : " value={product.pouces} />}
+        
+        {product.superficie && <Row detail="superficie : " value={product.superficie + " m²"}  />}
       </View>
 
       {product.chips.length > 0 && <Equipement chips={product.chips} />}

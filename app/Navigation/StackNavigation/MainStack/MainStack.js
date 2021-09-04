@@ -91,7 +91,7 @@ export default function MainStack({ navigation }) {
           name="InformationStep"
           component={InformationStep}
           options={{
-            title: "Information",
+            title: "Informations",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
