@@ -118,10 +118,10 @@ export default function MainStack({ navigation }) {
           component={HomeSectionProductView}
           options={{
             headerTitle: (props) => <HeaderTitle {...props} />,
-            headerLeft: () => <HeaderLeft />,
+            headerLeft: () => <HeaderLeft  />,
             headerStyle: {
               backgroundColor: COLORS.primary,
-            },
+            }
           }}
         />
 
