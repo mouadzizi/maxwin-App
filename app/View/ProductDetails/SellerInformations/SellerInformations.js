@@ -46,7 +46,10 @@ export default function SellerInformations({ product }) {
             </Text>
 
             <Text style={styles.product}>{owner.type ? owner.type : "Particullier"}</Text>
-            <Text style={styles.info}>Ville : {owner.city}</Text>
+            {owner.city && 
+              <Text style={styles.info}>Ville : {owner.city}</Text>
+            }
+            
           </View>
         </View>
         <Divider width={"100%"} />
