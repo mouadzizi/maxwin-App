@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback,useLayoutEffect } from "react";
 import { View, FlatList, Share,ToastAndroid } from "react-native";
 import Product from "../../Components/Product/Product";
 import styles from "./HomeSectionProductView.style";
@@ -7,7 +7,8 @@ import { getItemsByCollection } from "../../API/APIFunctions";
 import Skeleton from "./Skeleton";
 import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
-import { AntDesign } from "react-native-vector-icons";
+import { AntDesign,Ionicons } from "react-native-vector-icons";
+import { TouchableWithoutFeedback } from "react-native";
 
 
 export default function HomeSectionProductView({ navigation, route }) {
@@ -19,6 +20,9 @@ export default function HomeSectionProductView({ navigation, route }) {
 
 
   useEffect(() => {
+    navigation.setOptions({
+      headerRight:()=><HeaderRight navigation={navigation} />,
+    })
     if (!noMoreItems) {
       setIsRefreshing(true)
       getItemsByCollection(collection, limit)
@@ -49,6 +53,31 @@ export default function HomeSectionProductView({ navigation, route }) {
     []
   );
 
+  const HeaderRight = ({navigation}) => {
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("ResultView")} >
+          <Ionicons
+            name="search"
+            size={36}
+            color="#fff"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableWithoutFeedback>
+
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate("FilterView")}
+        >
+          <Ionicons
+            name="options"
+            size={36}
+            color="#fff"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  };
   const shareTheApp = async () => {
     try {
       const result = await Share.share({
