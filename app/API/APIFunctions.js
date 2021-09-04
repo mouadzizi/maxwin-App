@@ -128,7 +128,7 @@ export const getLikes = async (productId) => {
   return prod.data()?.likes || 0;
 };
 
-export const removeLiked = async (postId) => { 
+export const removeLiked = async (postId) => {
   const { uid } = auth.currentUser;
   await db
     .collection("users")
@@ -199,8 +199,8 @@ export const updateUser = async (data) => {
   await db.collection("users").doc(uid).update({
     firstName: data.firstName,
     lastName: data.lastName,
-    phone: data.phone,
-    type: data.type,
+    phone: data.phone || "",
+    type: data.type || ""
   });
 };
 
@@ -289,4 +289,19 @@ export const sendNotification = async (expoPushNotif, message) => {
     },
     body: JSON.stringify(messages),
   });
+};
+
+export const hasAllInfo = (user) => {
+  return (
+    typeof user.firstName != "undefined" &&
+    user.firstName.length > 0 &&
+    typeof user.lastName != "undefined" &&
+    user.lastName.length > 0 &&
+    typeof user.expoPushNotif != "undefined" &&
+    user.expoPushNotif.length > 0 &&
+    typeof user.phone != "undefined" &&
+    user.phone.length > 0 &&
+    typeof user.type != "undefined" &&
+    user.type.length > 0
+  );
 };

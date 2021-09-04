@@ -1,7 +1,15 @@
-import React, { useState } from "react";
-import { SafeAreaView, Image, View, ScrollView, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  SafeAreaView,
+  Image,
+  View,
+  ScrollView,
+  Text,
+  Alert,
+  Dimensions,
+} from "react-native";
 import { Input, SocialIcon } from "react-native-elements";
-import { signIn } from "../../API/APIFunctions";
+import { signIn, hasAllInfo, getUser, updateUser } from "../../API/APIFunctions";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import ButtonOutlined from "../../Components/Button/ButtonOutlined";
 import Devider from "../../Components/Divider";
@@ -11,21 +19,38 @@ import styles from "./SignIn.styles";
 import { Fontisto, Entypo } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 
+import * as GoogleSignIn from "expo-google-sign-in";
+import * as Facebook from "expo-facebook";
+import * as Updates from "expo-updates";
+import { auth } from "../../API/Firebase";
+import firebase from "firebase";
+import AuthModal from "../../Components/AuthModal/AuthModal";
+
+const { width } = Dimensions.get("window");
+var Modal;
 export default function SignIn({ navigation }) {
   const [isError, setIsError] = useState();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState({
+    email: false,
+    google: false,
+    facebook: false,
+  });
+
+  useEffect(() => {
+    update();
+  }, []);
 
   const logIn = () => {
-    setIsError()
-    setLoading(true)
+    setIsError();
+    setLoading({ ...loading, email: true });
     signIn(user.email, user.password)
-      .then(navigation.goBack)
-      .catch(({ code }) => {
-        setLoading(false)
+      .then(()=>navigation.goBack())
+      .catch(({ code,message }) => {
+        setLoading({ ...loading, email: false });
         switch (code) {
           case "auth/invalid-email":
             setIsError("Email incorrect");
@@ -37,9 +62,121 @@ export default function SignIn({ navigation }) {
             setIsError("Mot de passe incorrect");
             break;
           default:
+            setIsError(message);
             break;
         }
       });
+  };
+  const loginWithGoogle = async () => {
+    try {
+      await GoogleSignIn.askForPlayServicesAsync();
+      const { type, user } = await GoogleSignIn.signInAsync();
+      if (type === "success") {
+        setLoading({...loading,google:true})
+        onSignIn(user);
+      } else {
+        Alert.alert("Login with google ", type);
+      }
+    } catch (e) {
+      Alert.alert("Google Error", e.message);
+    }
+  };
+
+  const update = async () => {
+    try {
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        Alert.alert("INFO", "New updates Available", [
+          {
+            text: "Update",
+            style: "default",
+            onPress: async () => {
+              await Updates.fetchUpdateAsync();
+              // ... notify user of update ...
+              await Updates.reloadAsync();
+            },
+          },
+        ]);
+      }
+    } catch (e) {
+      alert("Update Error " + e.message);
+    }
+  };
+  const onSignIn = (googleUser) => {
+    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    var unsubscribe = auth.onAuthStateChanged(function () {
+      unsubscribe();
+      // Check if we are already signed-in Firebase with the correct user.
+      // Build Firebase credential with the Google ID token.
+      var credential = firebase.auth.GoogleAuthProvider.credential(
+        googleUser.auth.idToken,
+        googleUser.auth.accessToken
+      );
+      // Sign in with credential from the Google user.
+      auth
+        .signInWithCredential(credential)
+        .then(async () => {
+          const dbUser = await getUser();
+          if (hasAllInfo(dbUser)) navigation.goBack();
+          else Modal.openModal();
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          setLoading({...loading,google:false})
+          Alert.alert("BACK_END_ERROR", JSON.stringify(error.message));
+
+        });
+    });
+  };
+  const renderContent = () => {
+    return (
+      <View style={{ padding: 20 }}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "600",
+            color: "#333",
+            marginBottom: 10,
+            alignSelf: "center",
+            fontWeight: "bold",
+          }}
+        >
+          Completé votre profile
+        </Text>
+        <Text
+          style={{
+            marginBottom: 2,
+            fontSize: 16,
+            fontWeight: "600",
+            alignSelf: "center",
+            textAlign: "center",
+          }}
+        >
+          Compléter votre profil vous permettre d'ajouter des produits
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginVertical: 5,
+          }}
+        >
+          <ButtonFill
+            loading={false}
+            style={{ width: width * 0.4 }}
+            title="Completé"
+            onClick={() => {
+              navigation.navigate("CompleteProfile");
+            }}
+          />
+          <ButtonOutlined
+            style={{ width: width * 0.4 }}
+            title="Passer"
+            onClick={()=>navigation.navigate("CompleteProfile")}
+          />
+        </View>
+      </View>
+    );
   };
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -82,9 +219,9 @@ export default function SignIn({ navigation }) {
         {isError && <Text style={styles.errorMessage}>{isError}</Text>}
 
         <ButtonFill
-        disable={loading}
+          disable={loading.email}
           title="SE CONNECTER"
-          loading={loading}
+          loading={loading.email}
           onClick={logIn}
           style={{ marginTop: 20 }}
         />
@@ -94,17 +231,20 @@ export default function SignIn({ navigation }) {
           style={{ backgroundColor: COLORS.primary, marginTop: 10 }}
         />
         <SocialIcon
-          title='Se connecter avec Facebook'
+          title="Se connecter avec Facebook"
           button
-          type='facebook'
-          onPress={()=> alert('facebook auth')}
+          type="facebook"
+          onPress={() =>
+            GoogleSignIn.signOutAsync().then(() => alert("signed out"))
+          }
         />
 
         <SocialIcon
-          title='Se connecter avec Google'
+          title="Se connecter avec Google "
           button
-          type='google'
-          onPress={()=> alert('Google auth')}
+          type="google"
+          onPress={loginWithGoogle}
+          loading={loading.google}
         />
         <TextView style={styles.welcomeText} fontFamily="Source-Regular">
           Si vous n'êtes pas encore utilisateur, veuillez vous inscrire avec
@@ -116,6 +256,9 @@ export default function SignIn({ navigation }) {
           onClick={() => navigation.replace("SignUp")}
         />
       </ScrollView>
+      <AuthModal onClose={() => navigation.goBack()} ref={(el) => (Modal = el)}>
+        {renderContent()}
+      </AuthModal>
     </SafeAreaView>
   );
 }

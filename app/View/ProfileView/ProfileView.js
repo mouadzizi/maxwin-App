@@ -12,6 +12,8 @@ import { useFocusEffect } from "@react-navigation/core";
 import { getUser } from "../../API/APIFunctions";
 import { SafeAreaView } from "react-native";
 import { ScrollView } from "react-native";
+import { signOutAsync } from "expo-google-sign-in";
+import { logOutAsync } from "expo-facebook";
 
 export default function ProfileView({ navigation }) {
   const [user, setUser] = useState({});
@@ -33,10 +35,21 @@ export default function ProfileView({ navigation }) {
   );
 
   const SignOut = () => {
+    const authProider = auth.currentUser.providerData[0].providerId;
     auth
       .signOut()
-      .then(() => setUser({}))
-      .then(() => Alert.alert("You have been Sign out"));
+      .then(async () => {
+        setUser({});
+        switch (authProider) {
+          case "google.com":
+            await signOutAsync();
+            break;
+          case "facebook.com":
+            await logOutAsync();
+            break;
+        }
+      })
+      .then(() => setIsSignIn(false));
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -50,7 +63,7 @@ export default function ProfileView({ navigation }) {
               <Text style={GlobalStyle.H1}>Profil</Text>
               <ProfileSection
                 subTitle="Informations personnelles"
-                title={user.firstName + " " + user.lastName}
+                title={user.firstName || "No name" + " " + user.lastName || "No name"}
                 onClick={() =>
                   navigation.navigate("ProfileInformationView", {
                     profile: user,

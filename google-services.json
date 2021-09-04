@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "296245537422",
+    "firebase_url": "https://maxwin-35d61.firebaseio.com",
+    "project_id": "maxwin-35d61",
+    "storage_bucket": "maxwin-35d61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296245537422:android:edc622b4c18ca3d66677df",
+        "android_client_info": {
+          "package_name": "org.maxwin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296245537422-blq2ki7tsompefj2tljp33f187ni7dgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ1Wtx0Zi1oz2HVFsYgsDxbDuwlTdHavs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296245537422-blq2ki7tsompefj2tljp33f187ni7dgt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

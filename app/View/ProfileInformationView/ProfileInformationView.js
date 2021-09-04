@@ -9,6 +9,7 @@ import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
 import { updateUser } from "../../API/APIFunctions";
+import { auth } from "../../API/Firebase";
 
 export default function ProfileInformation({ route, navigation }) {
   const [user, setUser] = useState({});
@@ -73,7 +74,7 @@ export default function ProfileInformation({ route, navigation }) {
           />
           <Input
             disabled={true}
-            value={user.email}
+            value={user.email || auth.currentUser.email}
             placeholder="E-Mail"
             label="E-Mail"
             renderErrorMessage={false}

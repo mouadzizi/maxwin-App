@@ -7,6 +7,8 @@ import {
   Linking,
   Share,
   ToastAndroid,
+  Text,
+  Dimensions,
 } from "react-native";
 import { FAB } from "react-native-elements";
 
@@ -30,26 +32,14 @@ import styles from "./ProductDetails.style";
 import { COLORS } from "../../GlobalStyle";
 import AuthModal from "../../Components/AuthModal/AuthModal";
 
+const { width } = Dimensions.get("window");
+
 export default function ProductDetails({ route, navigation }) {
   const { product } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const uid = auth.currentUser?.uid;
   let Modal = null;
-
-  const showAlert = () => {
-    Alert.alert("Avez-vous un compte ?", "Veuillez vous connecter svp", [
-      {
-        text: "S'identifier",
-        style: "default",
-        onPress: () => navigation.navigate("SignIn"),
-      },
-      {
-        text: "Annuler",
-        style: "cancel",
-      },
-    ]);
-  };
 
   useEffect(() => {
     let _unsub = db
@@ -93,7 +83,7 @@ export default function ProductDetails({ route, navigation }) {
         "Cet article a été ajouté à vos favoris !",
         ToastAndroid.SHORT
       );
-    } else Modal.openModal()
+    } else Modal.openModal();
   };
 
   const addOrRemoveLikedProduct = () => {
@@ -103,7 +93,7 @@ export default function ProductDetails({ route, navigation }) {
       addToLikedProducts(uid, product).catch((err) =>
         console.warn(err.message)
       );
-    } else Modal.openModal()
+    } else Modal.openModal();
   };
 
   const messageToWhatsApp = () => {
@@ -161,8 +151,59 @@ export default function ProductDetails({ route, navigation }) {
           "vous êtes le propriétaire de ce produit, vous ne pouvez pas vous envoyer de message"
         );
     } else {
-      Modal.openModal()
+      Modal.openModal();
     }
+  };
+  const renderContent = () => {
+    return (
+      <View style={{ padding: 20 }}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "600",
+            color: "#333",
+            marginBottom: 10,
+            alignSelf: "center",
+            fontWeight: "bold",
+          }}
+        >
+          Avez vous un compte ?
+        </Text>
+        <Text
+          style={{
+            marginBottom: 2,
+            fontSize: 16,
+            fontWeight: "600",
+            alignSelf: "center",
+            textAlign: "center",
+          }}
+        >
+          Pour completer cette action,veuillez nous connecter s'il vous plait
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginVertical: 5,
+          }}
+        >
+          <ButtonFill
+            loading={false}
+            style={{ width: width * 0.4 }}
+            title="S'identifier"
+            onClick={() => {
+              Modal.closeModal();
+              navigation.navigate("SignIn");
+            }}
+          />
+          <ButtonOutlined
+            style={{ width: width * 0.4 }}
+            title="Annuler"
+            onClick={()=>Modal.closeModal()}
+          />
+        </View>
+      </View>
+    );
   };
   return (
     <SafeAreaView>
@@ -238,9 +279,7 @@ export default function ProductDetails({ route, navigation }) {
           />
         </View>
       </ScrollView>
-      <AuthModal ref={(el) => (Modal = el)} onClick={()=>{
-        Modal.closeModal()
-        navigation.navigate("SignIn")}} />
+      <AuthModal ref={(el) => (Modal = el)}>{renderContent()}</AuthModal>
     </SafeAreaView>
   );
 }

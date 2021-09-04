@@ -21,20 +21,22 @@ export default function CompleteProfile({ navigation }) {
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
   useEffect(() => {
-    registerForPushNotification().then((token) =>
+    console.log('Add',user);
+    registerForPushNotification().then((token) => {
       setAdditionalInfo({
         expoPushNotif: token,
-        firstName: "-----",
-        lastName: "---",
+        firstName: user.displayName?.split(' ')[1] ||  "----",
+        lastName: user.displayName?.split(' ')[0] || "---",
         gender: "Homme",
         type: "Particullier",
         email: user.email,
         creationDate: date,
-        phone: "",
+        phone: user.phoneNumber || "",
         ville: "",
-      })
-    );
-  }, []);
+        picUrl:user.photoURL
+      });
+    });
+  }, [user]);
 
   const complete = () => {
     setLoading(true);
@@ -44,7 +46,7 @@ export default function CompleteProfile({ navigation }) {
       .then(() => navigation.navigate("BottomNavigation"))
       .catch(({ message }) => {
         setLoading(false);
-        console.warn(message);
+        alert("database error" + message);
       });
   };
   return (
@@ -64,7 +66,7 @@ export default function CompleteProfile({ navigation }) {
             onChangeText={(e) =>
               setAdditionalInfo({ ...additionalInfo, lastName: e })
             }
-            value={additionalInfo.nom}
+            value={additionalInfo.firstName}
           />
           <Input
             placeholder="Prénom"
@@ -78,6 +80,7 @@ export default function CompleteProfile({ navigation }) {
             onChangeText={(e) =>
               setAdditionalInfo({ ...additionalInfo, firstName: e })
             }
+            value={additionalInfo.lastName }
           />
         </View>
 
@@ -104,37 +107,37 @@ export default function CompleteProfile({ navigation }) {
           </View>
         </View>
         <View style={styles.container}>
-
-           {/* Picker for city */}
-        <View style={styles.pickerView}>
-          <Text style={styles.label}>Ville *</Text>
-          <Picker
-            style={styles.pickerInput}
-            mode="dialog"
-            dropdownIconColor={COLORS.primary}
-            selectedValue={additionalInfo.city}
-            
-            onValueChange={(value) => setAdditionalInfo({ ...additionalInfo, city: value })}
-          >
-            <Picker.Item
-              label="Choisissez une Ville"
-              value=""
-              color={COLORS.Grey[400]}
-            />
-            <Picker.Item label="AL Hoceima" value="ALHoceima" />
-            <Picker.Item label="Agadir" value="Agadir" />
-            <Picker.Item label="Casablanca" value="Casablanca" />
-            <Picker.Item label="Dakhla" value="Dakhla" />
-            <Picker.Item label="Fès" value="Fès" />
-            <Picker.Item label="Kénitra" value="Kénitra" />
-            <Picker.Item label="Marrakech" value="Marrakech" />
-            <Picker.Item label="Meknès" value="Meknès" />
-            <Picker.Item label="Ouajda" value="Ouajda" />
-            <Picker.Item label="Rabat" value="Rabat" />
-            <Picker.Item label="Tanger" value="Tanger" />
-            <Picker.Item label="Tetouan" value="Tetouan" />
-          </Picker>
-        </View>
+          {/* Picker for city */}
+          <View style={styles.pickerView}>
+            <Text style={styles.label}>Ville *</Text>
+            <Picker
+              style={styles.pickerInput}
+              mode="dialog"
+              dropdownIconColor={COLORS.primary}
+              selectedValue={additionalInfo.city}
+              onValueChange={(value) =>
+                setAdditionalInfo({ ...additionalInfo, city: value })
+              }
+            >
+              <Picker.Item
+                label="Choisissez une Ville"
+                value=""
+                color={COLORS.Grey[400]}
+              />
+              <Picker.Item label="AL Hoceima" value="ALHoceima" />
+              <Picker.Item label="Agadir" value="Agadir" />
+              <Picker.Item label="Casablanca" value="Casablanca" />
+              <Picker.Item label="Dakhla" value="Dakhla" />
+              <Picker.Item label="Fès" value="Fès" />
+              <Picker.Item label="Kénitra" value="Kénitra" />
+              <Picker.Item label="Marrakech" value="Marrakech" />
+              <Picker.Item label="Meknès" value="Meknès" />
+              <Picker.Item label="Ouajda" value="Ouajda" />
+              <Picker.Item label="Rabat" value="Rabat" />
+              <Picker.Item label="Tanger" value="Tanger" />
+              <Picker.Item label="Tetouan" value="Tetouan" />
+            </Picker>
+          </View>
         </View>
 
         <View style={styles.container}>

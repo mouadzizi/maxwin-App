@@ -28,7 +28,7 @@ export default function AddProductView({ navigation }) {
       const user = auth.currentUser;
       // console.log(user.uid);
       if (user) {
-      } 
+      }
       else showAlert();
       getPhotos().then((items) => {
         const imgs = JSON.parse(items);
