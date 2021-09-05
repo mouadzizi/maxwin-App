@@ -4,6 +4,7 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
+import {shuffle} from 'underscore'
 
 export default function ServicesMaterial({ navigation }) {
 
@@ -13,8 +14,7 @@ export default function ServicesMaterial({ navigation }) {
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
-    });
+      setProducts(shuffle(items))    });
     return () => {
     };
   }, []);

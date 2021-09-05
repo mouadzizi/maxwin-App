@@ -4,12 +4,14 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
+import {shuffle} from 'underscore'
+
 export default function Decorations({ navigation }) {
   const collection = "MAISON & DECO";
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items)
+      setProducts(shuffle(items))
     });
   }, []);
 

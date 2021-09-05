@@ -5,15 +5,16 @@ import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import {useFocusEffect} from '@react-navigation/native'
 import {getItemsByCollection } from "../../../API/APIFunctions";
-
+import {shuffle} from 'underscore'
 export default function Babe({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "ESPACE BEBES ET ENFANTS";
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
-    });
+      setProducts(shuffle(items))
+    })
+
     return () => {
 
     };

@@ -4,7 +4,8 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
-import { fecthItems } from "../../../API/APIFunctions";
+import {shuffle} from 'underscore'
+
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = React.useState([]);
   const collection = "ESPACE FEMMES";
@@ -12,8 +13,7 @@ export default function Vehicule({ navigation }) {
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
-    });
+      setProducts(shuffle(items))    });
     return () => {
     
     };

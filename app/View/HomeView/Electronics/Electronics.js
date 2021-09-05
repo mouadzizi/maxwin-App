@@ -4,6 +4,7 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
+import {shuffle} from 'underscore'
 
 export default function Electronics({ navigation }) {
   const collection = "INFORMATIQUE ET ELECTRONIQUE";
@@ -11,7 +12,7 @@ export default function Electronics({ navigation }) {
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
+      setProducts(shuffle(items))
     });
     return () => {
     };

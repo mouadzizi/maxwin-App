@@ -22,6 +22,7 @@
     "expo-font": "~9.1.0",
     "expo-google-sign-in": "^9.2.1",
     "expo-image-manipulator": "^9.2.2",
+    "expo-image-picker": "~10.1.4",
     "expo-image-picker-multiple": "^1.4.1",
     "expo-linear-gradient": "~9.1.0",
     "expo-media-library": "^12.0.2",
@@ -45,7 +46,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-swiper": "^1.6.0",
     "react-native-web": "^0.16.5",
-    "expo-image-picker": "~10.1.4"
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

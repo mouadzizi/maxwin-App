@@ -2,19 +2,22 @@ import React, { useEffect, useCallback, useState } from "react";
 import { FlatList, Text } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { fecthItem,getItemsByCategory } from "../../../API/APIFunctions";
+import { get_random,getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
-
+import {shuffle} from 'underscore'
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "VEHICULES";
 
   useEffect(() => {
-    getItemsByCategory(collection,10).then(res=>setProducts(res))
+    getItemsByCategory(collection,10).then(res=>{
+      setProducts(shuffle(res))
+    })
     return () => {
-  
+
     };
   }, []);
+
 
   const ItemRender = ({ item }) => (
     <ProductSection

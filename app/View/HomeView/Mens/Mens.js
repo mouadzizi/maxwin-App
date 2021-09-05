@@ -4,6 +4,8 @@ import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
+import {shuffle} from 'underscore'
+
 export default function Mens({ navigation }) {
   const collection = "ESPACE HOMMES";
 
@@ -11,8 +13,7 @@ export default function Mens({ navigation }) {
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
-    });
+      setProducts(shuffle(items))    });
     return () => {
     };
   }, []);

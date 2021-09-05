@@ -3,20 +3,18 @@ import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
-import {getItemsByCollection } from "../../../API/APIFunctions";
+import { getItemsByCollection } from "../../../API/APIFunctions";
+import { shuffle } from "underscore";
 
 export default function Immobilier({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "IMMOBILIER";
 
-
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
+      setProducts(shuffle(items));
     });
-    return () => {
-    
-    };
+    return () => {};
   }, []);
 
   const ItemRender = useCallback(
