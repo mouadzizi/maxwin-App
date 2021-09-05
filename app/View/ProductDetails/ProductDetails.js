@@ -209,7 +209,7 @@ export default function ProductDetails({ route, navigation }) {
       <ScrollView>
         {product.owner.phone !== "" && (
           <FAB
-            style={{ top: 150, right: 20, zIndex: 1, position: "absolute" }}
+            style={{ top: 180, right: 20, zIndex: 1, position: "absolute" }}
             color="white"
             icon={
               <FontAwesome name="whatsapp" size={28} color={COLORS.secondary} />
@@ -221,7 +221,7 @@ export default function ProductDetails({ route, navigation }) {
         <FAB
           icon={<AntDesign name="sharealt" size={25} color="white" />}
           color={COLORS.primary}
-          style={{ top: 210, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 240, right: 20, zIndex: 1, position: "absolute" }}
           onPress={shareTheApp}
         />
         <FAB
@@ -233,7 +233,7 @@ export default function ProductDetails({ route, navigation }) {
             )
           }
           color={COLORS.primary}
-          style={{ top: 270, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 300, right: 20, zIndex: 1, position: "absolute" }}
           onPress={addOrRemoveFavorite}
         />
         <FAB
@@ -245,7 +245,7 @@ export default function ProductDetails({ route, navigation }) {
             )
           }
           color={COLORS.primary}
-          style={{ top: 330, right: 20, zIndex: 1, position: "absolute" }}
+          style={{ top: 360, right: 20, zIndex: 1, position: "absolute" }}
           onPress={addOrRemoveLikedProduct}
         />
 

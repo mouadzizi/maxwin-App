@@ -7,22 +7,8 @@ import Category from "../Button/CategoryButton";
 import { COLORS } from "../../GlobalStyle";
 
 export default function HeaderCategories({ navigation }) {
-  // Voiture ----Done
-  // Accessoires auto ----Done
-  // Appartement ----Done
-  // Électroménagers ----Done
-  // Meubles & déco ----Done
-  // Téléphones ----Done
-  // Ordinateurs ----Done
-  // Télévisions ----Done
-  // Vêtements hommes ----Done
-  // Chaussures hommes ----Done
-  // Vêtements femmes ----Done
-  // Chaussures femmes ----Done
-  // Montres bijoux & accessoires ----Done
-  // Vêtements enfants
-  // Matériels Pro
-  // Services & travaux
+
+
   const DATA = [
     {
       id: "SDSDgf2567984",
@@ -31,7 +17,7 @@ export default function HeaderCategories({ navigation }) {
     },
     {
       id: "SDSDgf25677984",
-      categoryName: "ccessoires Auto",
+      categoryName: "Accessoires Auto",
       iconName: "carAccesory",
     },
     {
