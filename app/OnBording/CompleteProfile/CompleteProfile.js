@@ -4,7 +4,7 @@ import { SafeAreaView, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Input } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
-import { Entypo, Fontisto } from "react-native-vector-icons";
+import { Entypo } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./CompleteProfile.style";
 import { Picker } from "@react-native-picker/picker";
@@ -21,7 +21,6 @@ export default function CompleteProfile({ navigation }) {
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
   useEffect(() => {
-    console.log('Add',user);
     registerForPushNotification().then((token) => {
       setAdditionalInfo({
         expoPushNotif: token,
@@ -33,7 +32,7 @@ export default function CompleteProfile({ navigation }) {
         creationDate: date,
         phone: user.phoneNumber || "",
         ville: "",
-        picUrl:user.photoURL
+        picUrl: user.photoURL
       });
     });
   }, [user]);

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Input } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
-
 import { Entypo } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
 import { updateUser } from "../../API/APIFunctions";
 import { auth } from "../../API/Firebase";
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ProfileInformation({ route, navigation }) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const [image, setImage] = useState()
   useEffect(() => {
     const theUser = route.params?.profile;
     setUser(theUser);
@@ -34,19 +34,39 @@ export default function ProfileInformation({ route, navigation }) {
         alert(message);
       });
   };
+
+  async function openImagePicker() {
+			let result = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				allowsEditing: true,
+				aspect: [1, 1],
+				quality: .3,
+				allowsMultipleSelection:true
+				
+			  });
+			  if (!result.cancelled) {
+				setImage(result.uri);
+			  }
+			  if(result.cancelled)console.log('cancelled');
+	}
+ 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.avatarContainer}>
-            <View style={styles.avatar}>
+
+            <TouchableOpacity style={styles.avatar} onPress={openImagePicker}>
+            <Entypo name="camera" style={{position : 'absolute', bottom: 0, right: 0}} size={30} color={COLORS.primary
+            }/>
               {user.firstName && user.lastName && (
                 <Text style={styles.avatarText}>
                   {user?.firstName.charAt(0)}
                   {user?.lastName.charAt(0)}
                 </Text>
               )}
-            </View>
+            </TouchableOpacity>
+
           </View>
           <Input
             onChangeText={(e) => setUser({ ...user, firstName: e })}
@@ -57,7 +77,7 @@ export default function ProfileInformation({ route, navigation }) {
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
             rightIcon={
-              <Entypo name="v-card" size={24} color={COLORS.primary} />
+              <Entypo name="user" size={24} color={COLORS.primary} />
             }
           />
           <Input
@@ -69,7 +89,7 @@ export default function ProfileInformation({ route, navigation }) {
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 10 }}
             rightIcon={
-              <Entypo name="v-card" size={24} color={COLORS.primary} />
+              <Entypo name="user" size={24} color={COLORS.primary} />
             }
           />
           <Input
@@ -81,7 +101,7 @@ export default function ProfileInformation({ route, navigation }) {
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 10 }}
             rightIcon={
-              <Entypo name="v-card" size={24} color={COLORS.primary} />
+              <Entypo name="email" size={24} color={COLORS.primary} />
             }
           />
         </View>

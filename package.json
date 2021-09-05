@@ -44,7 +44,13 @@
     "react-native-screens": "^3.0.0",
     "react-native-svg": "^12.1.1",
     "react-native-swiper": "^1.6.0",
+<<<<<<< Updated upstream
     "react-native-web": "^0.16.5"
+=======
+    "react-native-web": "^0.16.5",
+    "expo-updates": "~0.5.4",
+    "expo-image-picker": "~10.1.4"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
