@@ -23,7 +23,7 @@ export default function HomeStack({navigation}) {
   const HeaderRight = () => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('ResultView')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('SearchView')}>
           <Ionicons
             name="search"
             size={36}

@@ -306,3 +306,14 @@ export const hasAllInfo = (user) => {
     user.type.length > 0
   );
 };
+ export const searchByTitle = async(title)=>{
+   const snapShot = await db.collection('products').where('keywords','array-contains',title.toLowerCase()).get()
+   const results = snapShot.docs.map(d=>{
+     return {
+       key:d.id,
+       ...d.data()
+     }
+   })
+
+   return Promise.all(results)
+ }

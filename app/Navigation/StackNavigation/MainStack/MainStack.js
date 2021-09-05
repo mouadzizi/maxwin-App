@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, TouchableWithoutFeedback, Text } from "react-native";
+import { View, Image, TouchableWithoutFeedback, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -25,7 +25,9 @@ import HomeSectionProductView from "../../../View/HomeSectionProductView";
 
 import { COLORS } from "../../../GlobalStyle";
 import { Ionicons } from "react-native-vector-icons";
+import SearchView from "../../../View/SearchView/SearchView";
 
+const {screenWidth} = Dimensions.get('window')
 export default function MainStack({ navigation }) {
   const Stack = createStackNavigator();
 
@@ -53,7 +55,7 @@ export default function MainStack({ navigation }) {
   const HeaderRight = ({navigation}) => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("ResultView")} >
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("SearchView")} >
           <Ionicons
             name="search"
             size={36}
@@ -291,6 +293,14 @@ export default function MainStack({ navigation }) {
             },
             headerTintColor: "white",
             headerTitleAlign: "center",
+          }}
+        />
+
+        <Stack.Screen
+          name="SearchView"
+          component={SearchView}
+          options={{
+            headerShown:false
           }}
         />
       </Stack.Navigator>

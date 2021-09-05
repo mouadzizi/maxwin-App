@@ -29,7 +29,13 @@ export default function InformationStep({ navigation, route }) {
 
   const submit = () => {
     setLoading(true);
-    addProduct({ ...product, chips: selectedChips, owner: user, likes: 0 })
+    addProduct({
+      ...product,
+      chips: selectedChips,
+      owner: user,
+      likes: 0,
+      keywords: generateKeywords(product.title),
+    })
       .then((docRef) => {
         uploadImages(product.images, docRef.id, user.uid).then((links) => {
           docRef.update({ images: links }).then(() => {
@@ -53,6 +59,15 @@ export default function InformationStep({ navigation, route }) {
     }
   };
 
+  const generateKeywords = (title) => {
+    const arrTerms = [];
+    let curTitle = "";
+    title.split("").forEach((letter) => {
+      curTitle += letter;
+      arrTerms.push(curTitle);
+    });
+    return arrTerms;
+  };
   return (
     <View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -439,9 +454,7 @@ export default function InformationStep({ navigation, route }) {
           containerStyle={{ marginTop: 20 }}
           keyboardType="numeric"
           value={user.phone}
-          onChangeText={(value) =>
-            setUser({ ...user, phone: value })
-          }
+          onChangeText={(value) => setUser({ ...user, phone: value })}
           placeholder="numéro de téléphone"
           rightIcon={{ type: "Feather", name: "phone", color: COLORS.primary }}
         />

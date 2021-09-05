@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback,useLayoutEffect } from "react";
+ import React, { useState, useEffect, useCallback,useLayoutEffect } from "react";
 import { View, FlatList, Share,ToastAndroid } from "react-native";
 import Product from "../../Components/Product/Product";
 import styles from "./HomeSectionProductView.style";
@@ -56,7 +56,7 @@ export default function HomeSectionProductView({ navigation, route }) {
   const HeaderRight = ({navigation}) => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("ResultView")} >
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("SearchView")} >
           <Ionicons
             name="search"
             size={36}
