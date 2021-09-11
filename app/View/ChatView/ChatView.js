@@ -53,12 +53,14 @@ export default function ChatView({ route, navigation }) {
         contact1: {
           _id: user.uid,
           name: user.firstName,
-          expoPushNotif:user.expoPushNotif
+          expoPushNotif:user.expoPushNotif,
+          avatar:user.picUrl
         },
         contact2: {
           _id: seller._id || seller.uid ,
           name: seller.firstName || seller.name,
-          expoPushNotif:seller.expoPushNotif
+          expoPushNotif:seller.expoPushNotif,
+          avatar:user.picUrl
         },
         chatPic: pic,
         seen: false,
@@ -137,6 +139,7 @@ export default function ChatView({ route, navigation }) {
         user={{
           _id: user.uid,
           name: user.firstName,
+          avatar:user.picUrl
         }}
       />
     </View>

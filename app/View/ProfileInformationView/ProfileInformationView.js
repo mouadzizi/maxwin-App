@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Input } from "react-native-elements";
+import { Input, Avatar } from "react-native-elements";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import { Entypo } from "react-native-vector-icons";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./ProfileInformationView.style";
 import { Picker } from "@react-native-picker/picker";
-import { updateUser } from "../../API/APIFunctions";
+import { updateUser, uploadProfileImage } from "../../API/APIFunctions";
 import { auth } from "../../API/Firebase";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 
 export default function ProfileInformation({ route, navigation }) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState()
+  const [image, setImage] = useState();
   useEffect(() => {
     const theUser = route.params?.profile;
+    console.log(theUser);
     setUser(theUser);
     return () => {};
   }, []);
-
 
   const updateAction = () => {
     setLoading(true);
     updateUser(user)
       .then(() => {
         setLoading(false);
-        navigation.goBack();
+        // navigation.goBack();
       })
       .catch(({ message }) => {
         setLoading(false);
@@ -36,37 +36,41 @@ export default function ProfileInformation({ route, navigation }) {
   };
 
   async function openImagePicker() {
-			let result = await ImagePicker.launchImageLibraryAsync({
-				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				allowsEditing: true,
-				aspect: [1, 1],
-				quality: .3,
-				allowsMultipleSelection:true
-				
-			  });
-			  if (!result.cancelled) {
-				setImage(result.uri);
-			  }
-			  if(result.cancelled)console.log('cancelled');
-	}
- 
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.3,
+    });
+    if (!result.cancelled) {
+      setLoading(true);
+      uploadProfileImage(result.uri, user.uid).then((link) => {
+        setUser({ ...user, picUrl: link });
+        setLoading(false);
+      });
+      setImage(result.uri);
+    }
+    if (result.cancelled) console.log("cancelled");
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.avatarContainer}>
-
             <TouchableOpacity style={styles.avatar} onPress={openImagePicker}>
-            <Entypo name="camera" style={{position : 'absolute', bottom: 0, right: 0}} size={30} color={COLORS.primary
-            }/>
-              {user.firstName && user.lastName && (
-                <Text style={styles.avatarText}>
-                  {user?.firstName.charAt(0)}
-                  {user?.lastName.charAt(0)}
-                </Text>
-              )}
+              <Entypo
+                name="camera"
+                style={{ position: "absolute", bottom: 0, right: 0,zIndex:2 }}
+                size={30}
+                color={COLORS.primary}
+              />
+              <Avatar
+                size="large"
+                rounded
+                source={{uri:user.picUrl}}
+              />
             </TouchableOpacity>
-
           </View>
           <Input
             onChangeText={(e) => setUser({ ...user, firstName: e })}
@@ -76,9 +80,7 @@ export default function ProfileInformation({ route, navigation }) {
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
-            rightIcon={
-              <Entypo name="user" size={24} color={COLORS.primary} />
-            }
+            rightIcon={<Entypo name="user" size={24} color={COLORS.primary} />}
           />
           <Input
             onChangeText={(e) => setUser({ ...user, lastName: e })}
@@ -88,9 +90,7 @@ export default function ProfileInformation({ route, navigation }) {
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 10 }}
-            rightIcon={
-              <Entypo name="user" size={24} color={COLORS.primary} />
-            }
+            rightIcon={<Entypo name="user" size={24} color={COLORS.primary} />}
           />
           <Input
             disabled={true}
@@ -100,42 +100,40 @@ export default function ProfileInformation({ route, navigation }) {
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 10 }}
-            rightIcon={
-              <Entypo name="email" size={24} color={COLORS.primary} />
-            }
+            rightIcon={<Entypo name="email" size={24} color={COLORS.primary} />}
           />
         </View>
 
         <View style={styles.container}>
           {/* Picker for city */}
-        <View style={styles.pickerView}>
-          <Text style={styles.label}>Ville *</Text>
-          <Picker
-            style={styles.pickerInput}
-            mode="dialog"
-            dropdownIconColor={COLORS.primary}
-            selectedValue={user.city}
-            onValueChange={(value) => setUser({ ...user, city: value })}
-          >
-            <Picker.Item
-              label="Choisissez une Ville"
-              value=""
-              color={COLORS.Grey[400]}
-            />
-            <Picker.Item label="AL Hoceima" value="ALHoceima" />
-            <Picker.Item label="Agadir" value="Agadir" />
-            <Picker.Item label="Casablanca" value="Casablanca" />
-            <Picker.Item label="Dakhla" value="Dakhla" />
-            <Picker.Item label="Fès" value="Fès" />
-            <Picker.Item label="Kénitra" value="Kénitra" />
-            <Picker.Item label="Marrakech" value="Marrakech" />
-            <Picker.Item label="Meknès" value="Meknès" />
-            <Picker.Item label="Ouajda" value="Ouajda" />
-            <Picker.Item label="Rabat" value="Rabat" />
-            <Picker.Item label="Tanger" value="Tanger" />
-            <Picker.Item label="Tetouan" value="Tetouan" />
-          </Picker>
-        </View>
+          <View style={styles.pickerView}>
+            <Text style={styles.label}>Ville *</Text>
+            <Picker
+              style={styles.pickerInput}
+              mode="dialog"
+              dropdownIconColor={COLORS.primary}
+              selectedValue={user.city}
+              onValueChange={(value) => setUser({ ...user, city: value })}
+            >
+              <Picker.Item
+                label="Choisissez une Ville"
+                value=""
+                color={COLORS.Grey[400]}
+              />
+              <Picker.Item label="AL Hoceima" value="ALHoceima" />
+              <Picker.Item label="Agadir" value="Agadir" />
+              <Picker.Item label="Casablanca" value="Casablanca" />
+              <Picker.Item label="Dakhla" value="Dakhla" />
+              <Picker.Item label="Fès" value="Fès" />
+              <Picker.Item label="Kénitra" value="Kénitra" />
+              <Picker.Item label="Marrakech" value="Marrakech" />
+              <Picker.Item label="Meknès" value="Meknès" />
+              <Picker.Item label="Ouajda" value="Ouajda" />
+              <Picker.Item label="Rabat" value="Rabat" />
+              <Picker.Item label="Tanger" value="Tanger" />
+              <Picker.Item label="Tetouan" value="Tetouan" />
+            </Picker>
+          </View>
         </View>
 
         <View style={styles.container}>

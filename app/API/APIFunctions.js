@@ -183,10 +183,12 @@ export const filter = async (data, limit) => {
     .orderBy("createdDate", "desc")
     .limit(limit)
     .get();
-    
+
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)
+    .filter((doc) => doc.data().kilometrage >= data.minKM)
+    .filter((doc) => doc.data().kilometrage <= data.maxKM)
     .map((doc) => {
       return {
         id: doc.id,
@@ -197,12 +199,16 @@ export const filter = async (data, limit) => {
 };
 export const updateUser = async (data) => {
   const { uid } = auth.currentUser;
-  await db.collection("users").doc(uid).update({
-    firstName: data.firstName,
-    lastName: data.lastName,
-    phone: data.phone || "",
-    type: data.type || ""
-  });
+  await db
+    .collection("users")
+    .doc(uid)
+    .update({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone || "",
+      type: data.type || "",
+      picUrl:data.picUrl
+    });
 };
 
 export const getUserItems = async () => {
@@ -306,14 +312,40 @@ export const hasAllInfo = (user) => {
     user.type.length > 0
   );
 };
- export const searchByTitle = async(title)=>{
-   const snapShot = await db.collection('products').where('keywords','array-contains',title.toLowerCase()).get()
-   const results = snapShot.docs.map(d=>{
-     return {
-       key:d.id,
-       ...d.data()
-     }
-   })
+export const searchByTitle = async (title) => {
+  const snapShot = await db
+    .collection("products")
+    .where("keywords", "array-contains", title.toLowerCase())
+    .get();
+  const results = snapShot.docs.map((d) => {
+    return {
+      key: d.id,
+      ...d.data(),
+    };
+  });
 
-   return Promise.all(results)
- }
+  return Promise.all(results);
+};
+export const getAllProducts = async()=>{
+  const snapShot  = await db.collection('products').get()
+  const results = snapShot.docs.map(d=>{
+    return {
+      id:d.id,
+      ...d.data()
+    }
+  })
+  return Promise.all(results)
+}
+
+export const uploadProfileImage = async (uri, userID) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    var ref = st
+      .ref()
+      .child("images")
+      .child(userID)
+      .child("profile")
+    const snapShot = await ref.put(blob);
+    const link = await snapShot.ref.getDownloadURL();
+  return link;
+};
