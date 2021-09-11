@@ -21,7 +21,7 @@ export default function ResultView({ route, navigation }) {
     try {
       const result = await Share.share({
         message:
-          "MAXWIN | Salut Je partage avec vous la nouvelle application d'achat et de vente au Maroc, N'hésitez pas à l'utiliser, pour télécharger l'application cliquez sur le lien suivant : ",
+          "MAXWIN | il s'agit d'une application puissante qui arrive lentement et régulièrement pour conquérir le marché",
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
