@@ -97,13 +97,14 @@ export default function ProductDetails({ route, navigation }) {
 
   const messageToWhatsApp = () => {
     let ProductName = product.title;
+    let ProductPrice = product.price;
+    let ProductCity = product.city;
     let ownerName = product.owner?.firstName;
     let Message =
-      "Salut " +
+      "Salam " +
       ownerName +
-      ", je vous contacte à propos de votre annonce sur Maxwin : " +
-      ProductName +
-      " , est ce que cet article est-il toujours disponible ?";
+      "Je vous invite à découvrir l'annonce que j'ai trouvée sur l'application Maxwin " +
+      ProductName + ", " + ProductPrice + "dhs sur " + ProductCity;
     let CountryCode = "212";
     let phoneOwner = product.owner?.phone;
     let PhoneNumber = CountryCode.concat(phoneOwner);
