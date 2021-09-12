@@ -160,7 +160,7 @@ export default function InformationStep({ navigation, route }) {
               onChangeText={(input) =>
                 setProduct({
                   ...product,
-                  kilometrage: input,
+                  kilometrage: parseFloat(input) || 0,
                 })
               }
             />
@@ -179,7 +179,7 @@ export default function InformationStep({ navigation, route }) {
               onChangeText={(input) =>
                 setProduct({
                   ...product,
-                  anneeFabrication: input,
+                  anneeFabrication: parseFloat(input) || 0,
                 })
               }
               maxLength={4}
@@ -261,7 +261,7 @@ export default function InformationStep({ navigation, route }) {
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
               onChangeText={(input) =>
-                setProduct({ ...product, superficie: input })
+                setProduct({ ...product, superficie: parseFloat(input) || 0 })
               }
               maxLength={6}
             />
@@ -273,7 +273,7 @@ export default function InformationStep({ navigation, route }) {
               labelStyle={{ color: COLORS.primary }}
               keyboardType="number-pad"
               onChangeText={(input) =>
-                setProduct({ ...product, nbPiece: input })
+                setProduct({ ...product, nbPiece: parseInt(input) || 0 })
               }
               maxLength={3}
             />

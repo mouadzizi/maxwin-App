@@ -37,6 +37,7 @@ export default function ProductDetails({ route, navigation }) {
   const { product } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(false)
   const uid = auth.currentUser?.uid;
   let Modal = null;
 
@@ -85,13 +86,12 @@ export default function ProductDetails({ route, navigation }) {
     } else Modal.openModal();
   };
 
-  const addOrRemoveLikedProduct = () => {
+  const addOrRemoveLikedProduct = async() => {
+    setLoading(true)
     if (isLiked) {
-      removeLiked(product.id);
+     removeLiked(product.id).then(()=>setLoading(false));
     } else if (uid) {
-      addToLikedProducts(uid, product).catch((err) =>
-        console.warn(err.message)
-      );
+     addToLikedProducts(uid, product).then(()=>setLoading(false))
     } else Modal.openModal();
   };
 
@@ -238,6 +238,7 @@ export default function ProductDetails({ route, navigation }) {
           onPress={addOrRemoveFavorite}
         />
         <FAB
+        loading={loading}
           icon={
             isLiked ? (
               <AntDesign name="like1" size={23} color="#8BB1E7" />
