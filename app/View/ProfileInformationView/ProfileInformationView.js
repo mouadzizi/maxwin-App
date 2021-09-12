@@ -17,7 +17,6 @@ export default function ProfileInformation({ route, navigation }) {
   const [image, setImage] = useState();
   useEffect(() => {
     const theUser = route.params?.profile;
-    console.log(theUser);
     setUser(theUser);
     return () => {};
   }, []);
@@ -50,7 +49,7 @@ export default function ProfileInformation({ route, navigation }) {
       });
       setImage(result.uri);
     }
-    if (result.cancelled) console.log("cancelled");
+    if (result.cancelled) console.warn("cancelled");
   }
 
   return (
@@ -67,8 +66,9 @@ export default function ProfileInformation({ route, navigation }) {
               />
               <Avatar
                 size="large"
+                containerStyle={{alignSelf: 'center', width: '100%', height: '100%'}}
                 rounded
-                source={{uri:user.picUrl}}
+                source={{ uri:user.picUrl }}
               />
             </TouchableOpacity>
           </View>
