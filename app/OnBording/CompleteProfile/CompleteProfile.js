@@ -24,8 +24,8 @@ export default function CompleteProfile({ navigation }) {
     registerForPushNotification().then((token) => {
       setAdditionalInfo({
         expoPushNotif: token,
-        firstName: user.displayName?.split(' ')[1] ||  "----",
-        lastName: user.displayName?.split(' ')[0] || "---",
+        firstName: user.displayName?.split(' ')[0] ||  "",
+        lastName: user.displayName?.split(' ')[1] || "",
         gender: "Homme",
         type: "Particullier",
         email: user.email,
@@ -63,7 +63,7 @@ export default function CompleteProfile({ navigation }) {
               <Entypo name="v-card" size={24} color={COLORS.primary} />
             }
             onChangeText={(e) =>
-              setAdditionalInfo({ ...additionalInfo, lastName: e })
+              setAdditionalInfo({ ...additionalInfo, firstName: e })
             }
             value={additionalInfo.firstName}
           />
@@ -77,7 +77,7 @@ export default function CompleteProfile({ navigation }) {
               <Entypo name="v-card" size={24} color={COLORS.primary} />
             }
             onChangeText={(e) =>
-              setAdditionalInfo({ ...additionalInfo, firstName: e })
+              setAdditionalInfo({ ...additionalInfo,lastName: e })
             }
             value={additionalInfo.lastName }
           />

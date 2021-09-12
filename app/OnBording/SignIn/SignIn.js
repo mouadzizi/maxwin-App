@@ -202,7 +202,7 @@ export default function SignIn({ navigation }) {
           title='Se connecter avec Google'
           button
           type='google'
-          onPress={()=> alert('Google auth')}
+          onPress={loginWithGoogle}
           style={{borderRadius: 10}}
         />
         
