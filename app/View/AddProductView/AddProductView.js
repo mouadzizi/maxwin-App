@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
+import { ScrollView, View, Text, Alert } from "react-native";
+
 import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../../GlobalStyle";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
-
-import { ScrollView, View, Text, Alert } from "react-native";
+import { auth } from "../../API/Firebase";
 
 import styles from "./AddProductView.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -13,7 +14,6 @@ import ImageModal from "./Modals/ImageModal";
 import AddProductStep from "../../Components/AddProductStep";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import CategoryModal from "./Modals/CategoryModal";
-import { auth } from "../../API/Firebase";
 
 export default function AddProductView({ navigation }) {
   const [product, setProduct] = useState({});
@@ -26,7 +26,6 @@ export default function AddProductView({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       const user = auth.currentUser;
-      // console.log(user.uid);
       if (user) {
       }
       else showAlert();

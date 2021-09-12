@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 export default function TextView(props) {
 	const [ loaded, setLoaded ] = useState(false);
 	useEffect(() => {
-		loadFonts().then(() => setLoaded(true)).catch((err) => console.log(err.message));
+		loadFonts().then(() => setLoaded(true)).catch((err) => console.warn(err.message));
 	}, []);
 
 	const loadFonts = async () => {

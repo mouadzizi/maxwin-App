@@ -102,6 +102,7 @@ export default function InformationStep({ navigation, route }) {
         {product.category[1] === "Voitures" ||
         product.category[1] === "Location de Voiture" ? (
           <View style={{ marginTop: 30 }}>
+          
             {/* Picker for brand */}
             <View style={styles.pickerView}>
               <Text style={styles.label}>Marque</Text>

@@ -24,7 +24,6 @@ export default StyleSheet.create({
   },
   avatarContainer: {
     flex: 1,
-    backgroundColor: "#ccc",
     borderRadius: 7,
     justifyContent: "center",
     alignItems: "center",

@@ -6,6 +6,8 @@ import Divider from "../../../Components/Divider";
 import { Entypo, Fontisto } from "react-native-vector-icons";
 import TextView from "../../../Components/TextView";
 import { COLORS } from "../../../GlobalStyle";
+import { Avatar } from "react-native-elements/dist/avatar/Avatar";
+import { Image } from "react-native-elements/dist/image/Image";
 
 export default function SellerInformations({ product }) {
   const owner = {
@@ -17,6 +19,7 @@ export default function SellerInformations({ product }) {
     creationDate: product.owner?.creationDate,
     address: product.owner?.address,
     id : product.owner?.uid,
+    picUrl: product.owner?.picUrl,
   };
   return (
     <View style={styles.container}>
@@ -30,15 +33,15 @@ export default function SellerInformations({ product }) {
 
       <View style={styles.containerCard}>
         <View style={styles.firstRow}>
-          {owner.gender === "Femme" ? (
+         
             <View style={styles.avatarContainer}>
-              <Fontisto name="female" size={60} />
+            <Avatar 
+                source={{ uri: owner.picUrl}}
+                rounded
+                containerStyle={{height: '100%', width: '100%'}}
+              />
             </View>
-          ) : (
-            <View style={styles.avatarContainer}>
-              <Entypo name="user" size={60} />
-            </View>
-          )}
+
 
           <View style={styles.nameContainer}>
             <Text style={styles.name}>
