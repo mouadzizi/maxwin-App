@@ -31,6 +31,15 @@ export default function Avatar({ iconName }) {
             size={40}
           />
         );
+      
+        case "LogIn":
+        return (
+          <MaterialCommunityIcons
+            name="login"
+            color={COLORS.primary}
+            size={40}
+          />
+        );
       default:
         return <FontAwesome name="user" color={COLORS.primary} size={30} />;
     }

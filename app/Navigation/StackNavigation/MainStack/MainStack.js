@@ -274,7 +274,7 @@ export default function MainStack({ navigation }) {
           name="ChatView"
           component={ChatView}
           options={{
-            title: "ChatView",
+            title: "Discussion",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
