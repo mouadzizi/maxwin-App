@@ -27,7 +27,6 @@ import { COLORS } from "../../../GlobalStyle";
 import { Ionicons } from "react-native-vector-icons";
 import SearchView from "../../../View/SearchView/SearchView";
 
-const {screenWidth} = Dimensions.get('window')
 export default function MainStack({ navigation }) {
   const Stack = createStackNavigator();
 
@@ -35,7 +34,7 @@ export default function MainStack({ navigation }) {
     return <></>;
   };
 
-  const HeaderLeft = () => {
+  const HeaderLeft = (navigation) => {
     return (
       <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
         <Image
@@ -52,17 +51,9 @@ export default function MainStack({ navigation }) {
     );
   };
 
-  const HeaderRight = ({navigation}) => {
+  const HeaderRight = () => {
     return (
       <View style={{ flexDirection: "row" }}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("SearchView")} >
-          <Ionicons
-            name="search"
-            size={36}
-            color="#fff"
-            style={{ marginRight: 20 }}
-          />
-        </TouchableWithoutFeedback>
 
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate("FilterView")}
@@ -147,6 +138,7 @@ export default function MainStack({ navigation }) {
           name="ResultView"
           component={ResultView}
           options={{
+            headerRight: () => <HeaderRight />,
             title: "Resultat",
             headerStyle: {
               backgroundColor: COLORS.primary,
