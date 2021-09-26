@@ -24,6 +24,7 @@ export default function CompleteProfile({ navigation }) {
     registerForPushNotification().then((token) => {
       setAdditionalInfo({
         expoPushNotif: token,
+        username: "",
         firstName: user.displayName?.split(' ')[0] ||  "",
         lastName: user.displayName?.split(' ')[1] || "",
         gender: "Homme",
@@ -53,6 +54,20 @@ export default function CompleteProfile({ navigation }) {
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.label}>A propo de vous</Text>
+          <Input
+            placeholder="Nom d'utilisateur"
+            label="Nom d'utilisateur"
+            renderErrorMessage={false}
+            labelStyle={{ color: COLORS.primary }}
+            containerStyle={{ marginTop: 20 }}
+            rightIcon={
+              <Entypo name="v-card" size={24} color={COLORS.primary} />
+            }
+            onChangeText={(e) =>
+              setAdditionalInfo({ ...additionalInfo, username: e })
+            }
+            value={additionalInfo.username}
+          />
           <Input
             placeholder="Nom"
             label="Nom"
