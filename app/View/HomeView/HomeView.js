@@ -13,20 +13,8 @@ import Mens from "./Mens";
 import Female from "./Female";
 import Babe from "./Babe";
 import ServicesMaterial from "./ServicesMaterial";
-import { getAllProducts } from "../../API/APIFunctions";
-import { db } from "../../API/Firebase";
 
 export default function HomeView({ navigation }) {
-  // useEffect(() => {
-  //   getAllProducts().then(res=>{
-  //     res.forEach(p=>{
-  //       db.collection('products').doc(p.id).update({kilometrage:parseFloat(p.kilometrage)})
-  //     })
-  //   })
-  //   return () => {
-      
-  //   }
-  // }, [])
   return (
     <View style={styles.container}>
       <ScrollView style={styles.ScrollContainer}>
