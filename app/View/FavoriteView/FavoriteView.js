@@ -35,7 +35,7 @@ export default function FavoriteView({ navigation }) {
         showAlert();
       }
       return () => {
-        // _unsub();
+        //  _unsub();
       };
     }, [])
   );

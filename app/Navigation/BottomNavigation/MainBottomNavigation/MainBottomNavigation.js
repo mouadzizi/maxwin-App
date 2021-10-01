@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   MaterialCommunityIcons,
@@ -13,9 +13,30 @@ import ProfileStack from "../../StackNavigation/ProfileStack";
 import AddProductStack from "../../StackNavigation/AddProductStack";
 
 import { COLORS } from "../../../GlobalStyle";
+import { auth, db } from "../../../API/Firebase";
 
 export default function MainBottomNavigation() {
   const Tab = createBottomTabNavigator();
+  const [favBadge, setFavBadge] = useState();
+  const [msgBadge, setmsgBadge] = useState();
+  var _unsub;
+  useEffect(() => {
+    var unsub = auth.onAuthStateChanged((user) => {
+      unsub();
+      if (user) {
+        _unsub = db
+          .collection("users")
+          .doc(user.uid)
+          .collection("favorite")
+          .onSnapshot((snapShot) => {
+            setFavBadge(snapShot.docs.length);
+          });
+      } else setFavBadge(0);
+    });
+    return () => {
+      _unsub()
+    };
+  }, []);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -58,6 +79,7 @@ export default function MainBottomNavigation() {
         name="Favorite"
         component={FavoriteStack}
         options={{
+          tabBarBadge: favBadge === 0 ? null : favBadge,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Ionicons name="heart" color={COLORS.primary} size={50} />
