@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { FlatList, Text } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { get_random,getItemsByCategory } from "../../../API/APIFunctions";
+import { getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import {shuffle} from 'underscore'
 export default function Vehicule({ navigation }) {
@@ -14,7 +14,6 @@ export default function Vehicule({ navigation }) {
       setProducts(shuffle(res))
     })
     return () => {
-
     };
   }, []);
 

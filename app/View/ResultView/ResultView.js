@@ -8,6 +8,7 @@ import { COLORS, windowWidth } from "../../GlobalStyle";
 import EmptyProducts from "../../SVG/EmptyProducts";
 import { FAB } from "react-native-elements";
 import { AntDesign } from "react-native-vector-icons";
+import {shuffle} from 'underscore'
 
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
@@ -46,7 +47,7 @@ export default function ResultView({ route, navigation }) {
         filter(filterOpt, limit)
           .then((data) => {
             setReady(true);
-            setProducts(data);
+            setProducts(shuffle(data))
             setIsRefreshing(false)
           })
           .catch(({ message }) => console.warn(message));
@@ -57,7 +58,7 @@ export default function ResultView({ route, navigation }) {
         getItemsByCategory(collection, limit)
           .then((items) => {
             setReady(true);
-            setProducts(items);
+            setProducts(shuffle(items))
           })
           .catch(({ message }) => console.warn(message));
         break;

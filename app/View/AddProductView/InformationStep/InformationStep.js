@@ -400,11 +400,11 @@ export default function InformationStep({ navigation, route }) {
           </View>
         )}
 
-        <View style={{ flexDirection: "row" }}>
           <CheckBox
-            containerStyle={{ width: "50%" }}
+            containerStyle={{ width: "100%" }}
             title="En bonne état    "
             iconRight
+            wrapperStyle={{justifyContent: 'space-between'}}
             checkedColor={COLORS.secondary}
             checked={product.goodState}
             onPress={() =>
@@ -413,21 +413,21 @@ export default function InformationStep({ navigation, route }) {
           />
 
           <CheckBox
-            containerStyle={{ width: "50%" }}
-            title="Negociable"
+            containerStyle={{ width: "100%" }}
+            title="Prix negociable"
             iconRight
             checkedColor={COLORS.secondary}
+            wrapperStyle={{justifyContent: 'space-between'}}
             checked={product.negotiable}
             onPress={() =>
               setProduct({ ...product, negotiable: !product.negotiable })
             }
           />
-        </View>
 
-        <View style={{ flexDirection: "row" }}>
           <CheckBox
-            containerStyle={{ width: "50%" }}
-            title="Cash on delevry"
+            containerStyle={{ width: "100%" }}
+            title="Paiement à la livraison"
+            wrapperStyle={{justifyContent: 'space-between'}}
             iconRight
             checkedColor={COLORS.secondary}
             checked={product.cashOnDelivery}
@@ -440,8 +440,9 @@ export default function InformationStep({ navigation, route }) {
           />
 
           <CheckBox
-            containerStyle={{ width: "50%" }}
-            title="Laivraison  "
+            containerStyle={{ width: "100%" }}
+            title="Laivraison possible"
+            wrapperStyle={{justifyContent: 'space-between'}}
             iconRight
             checkedColor={COLORS.secondary}
             checked={product.delivery}
@@ -449,7 +450,6 @@ export default function InformationStep({ navigation, route }) {
               setProduct({ ...product, delivery: !product.delivery })
             }
           />
-        </View>
 
         <Input
           containerStyle={{ marginTop: 20 }}

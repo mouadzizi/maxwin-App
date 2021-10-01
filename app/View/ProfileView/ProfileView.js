@@ -104,6 +104,21 @@ export default function ProfileView({ navigation }) {
             iconName="FAQ"
           />
 
+          {!isSignIn && (
+            <>
+              <Devider
+                width="100%"
+                style={{ marginVertical: 20, backgroundColor: COLORS.primary }}
+              />
+              <ProfileSection
+                title="Connecter"
+                subTitle="Connecter au maxwin"
+                onClick={() => navigation.navigate("SignIn")}
+                iconName="LogIn"
+              />
+            </>
+          )}
+
           {isSignIn && (
             <>
               <Devider
