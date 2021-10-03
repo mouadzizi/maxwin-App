@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   MaterialCommunityIcons,
@@ -15,10 +15,14 @@ import AddProductStack from "../../StackNavigation/AddProductStack";
 import { COLORS } from "../../../GlobalStyle";
 import { auth, db } from "../../../API/Firebase";
 
+import * as Notifications from "expo-notifications";
+import { useFocusEffect } from "@react-navigation/native";
+
 export default function MainBottomNavigation() {
   const Tab = createBottomTabNavigator();
   const [favBadge, setFavBadge] = useState();
-  const [msgBadge, setmsgBadge] = useState();
+  const [msgBadge, setmsgBadge] = useState(null);
+  const notificationListener = useRef();
   var _unsub;
   useEffect(() => {
     var unsub = auth.onAuthStateChanged((user) => {
@@ -33,8 +37,9 @@ export default function MainBottomNavigation() {
           });
       } else setFavBadge(0);
     });
+
     return () => {
-      _unsub()
+      _unsub();
     };
   }, []);
   return (
@@ -104,8 +109,8 @@ export default function MainBottomNavigation() {
       />
       <Tab.Screen
         name="Messages"
-        component={MessagesStack}
         options={{
+          tabBarBadge: msgBadge == 0 ? null : msgBadge,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Ionicons name="chatbubbles" color={COLORS.primary} size={50} />
@@ -113,7 +118,17 @@ export default function MainBottomNavigation() {
               <Ionicons name="chatbubbles" color={COLORS.primary} size={30} />
             ),
         }}
-      />
+      >
+        {(props) => (
+          <MessagesStack
+            {...props}
+            remove_Badge={() => {
+              setmsgBadge(null);
+            }}
+            onFocus2={(badge) => setmsgBadge(badge)}
+          />
+        )}
+      </Tab.Screen>
       <Tab.Screen
         name="Profile"
         component={ProfileStack}

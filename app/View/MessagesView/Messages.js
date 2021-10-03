@@ -8,7 +8,7 @@ import Conversation from "../../Components/Conversation/Conversation";
 import { db, auth } from "../../API/Firebase";
 import { useFocusEffect } from "@react-navigation/native";
 
-export default function MessagesView({ navigation }) {
+export default function MessagesView({ navigation,onFocus,removeBadge }) {
   const [conversation, setConversation] = useState([]);
   const [user, setUser] = useState({});
   const chatRef = db.collection("chats");
@@ -54,9 +54,18 @@ export default function MessagesView({ navigation }) {
       setConversation([]);
     };
   }, [user]);
+  useEffect(() => {
+    if(!navigation.isFocused()){
+      const badge = conversation.filter(({seen})=> seen===false).length
+      onFocus(badge)
+    }
 
+    return () => {
+    }
+  }, [conversation])
   useFocusEffect(
     useCallback(() => {
+      removeBadge()
       let cleanUp = auth.onAuthStateChanged((user) => {
         if (user) {
           setUser(user);
