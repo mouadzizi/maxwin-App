@@ -27,6 +27,8 @@ export default StyleSheet.create({
     borderRadius: 7,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: COLORS.Grey[200],
+    borderRadius: 25,
   },
   nameContainer: {
     flex: 2,

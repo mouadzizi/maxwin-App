@@ -13,6 +13,7 @@ export default function SellerInformations({ product }) {
   const owner = {
     firstName: product.owner?.firstName,
     lastName: product.owner?.lastName,
+    username: product.owner?.username,
     city: product.owner?.city,
     type: product.owner?.type,
     gender: product.owner?.gender,
@@ -35,17 +36,25 @@ export default function SellerInformations({ product }) {
         <View style={styles.firstRow}>
          
             <View style={styles.avatarContainer}>
-            <Avatar 
+            {owner.picUrl ? 
+              <Avatar 
                 source={{ uri: owner.picUrl}}
                 rounded
                 containerStyle={{height: '100%', width: '100%'}}
               />
+              : 
+              <Entypo
+                name="user"
+                size={45}
+              />
+            }
+            
             </View>
 
 
           <View style={styles.nameContainer}>
             <Text style={styles.name}>
-              {owner.lastName} {owner.firstName}
+              { owner.username || (owner.lastName + owner.firstName)}
             </Text>
 
             <Text style={styles.product}>{owner.type ? owner.type : "Particullier"}</Text>

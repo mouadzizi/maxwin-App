@@ -18,13 +18,13 @@ export default function CompleteProfile({ navigation }) {
 
   var today = new Date();
   var date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear(); 
 
   useEffect(() => {
     registerForPushNotification().then((token) => {
       setAdditionalInfo({
         expoPushNotif: token,
-        username: "",
+        username: user.displayName?.split(' ')[0] ||  "",
         firstName: user.displayName?.split(' ')[0] ||  "",
         lastName: user.displayName?.split(' ')[1] || "",
         gender: "Homme",
@@ -68,34 +68,6 @@ export default function CompleteProfile({ navigation }) {
             }
             value={additionalInfo.username}
           />
-          <Input
-            placeholder="Nom"
-            label="Nom"
-            renderErrorMessage={false}
-            labelStyle={{ color: COLORS.primary }}
-            containerStyle={{ marginTop: 20 }}
-            rightIcon={
-              <Entypo name="v-card" size={24} color={COLORS.primary} />
-            }
-            onChangeText={(e) =>
-              setAdditionalInfo({ ...additionalInfo, firstName: e })
-            }
-            value={additionalInfo.firstName}
-          />
-          <Input
-            placeholder="Prénom"
-            label="Prénom"
-            renderErrorMessage={false}
-            labelStyle={{ color: COLORS.primary }}
-            containerStyle={{ marginTop: 10 }}
-            rightIcon={
-              <Entypo name="v-card" size={24} color={COLORS.primary} />
-            }
-            onChangeText={(e) =>
-              setAdditionalInfo({ ...additionalInfo,lastName: e })
-            }
-            value={additionalInfo.lastName }
-          />
         </View>
 
         <View style={styles.container}>
@@ -120,6 +92,7 @@ export default function CompleteProfile({ navigation }) {
             </Picker>
           </View>
         </View>
+        
         <View style={styles.container}>
           {/* Picker for city */}
           <View style={styles.pickerView}>
