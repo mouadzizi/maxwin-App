@@ -9,7 +9,12 @@ import {
   Dimensions,
 } from "react-native";
 import { Input, SocialIcon } from "react-native-elements";
-import { signIn, hasAllInfo, getUser, updateUser } from "../../API/APIFunctions";
+import {
+  signIn,
+  hasAllInfo,
+  getUser,
+  updateUser,
+} from "../../API/APIFunctions";
 import ButtonFill from "../../Components/Button/ButtonFill";
 import ButtonOutlined from "../../Components/Button/ButtonOutlined";
 import Devider from "../../Components/Divider";
@@ -48,8 +53,8 @@ export default function SignIn({ navigation }) {
     setIsError();
     setLoading({ ...loading, email: true });
     signIn(user.email, user.password)
-      .then(()=>navigation.goBack())
-      .catch(({ code,message }) => {
+      .then(() => navigation.goBack())
+      .catch(({ code, message }) => {
         setLoading({ ...loading, email: false });
         switch (code) {
           case "auth/invalid-email":
@@ -72,7 +77,7 @@ export default function SignIn({ navigation }) {
       await GoogleSignIn.askForPlayServicesAsync();
       const { type, user } = await GoogleSignIn.signInAsync();
       if (type === "success") {
-        setLoading({...loading,google:true})
+        setLoading({ ...loading, google: true });
         onSignIn(user);
       } else {
         Alert.alert("Login with google ", type);
@@ -122,12 +127,47 @@ export default function SignIn({ navigation }) {
         })
         .catch((error) => {
           // Handle Errors here.
-          setLoading({...loading,google:false})
+          setLoading({ ...loading, google: false });
           Alert.alert("BACK_END_ERROR", JSON.stringify(error.message));
-
         });
     });
   };
+  async function signInWithFacebook() {
+    setLoading({ ...loading, facebook: true });
+    try {
+      await Facebook.initializeAsync("424654075104803", "v9.0");
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ["public_profile", "email"],
+      });
+      if (type === "success") {
+        await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+        await auth
+          .signInWithCredential(credential)
+          .then((userCredential) => {
+            const fbID = userCredential.user.providerData[0].uid;
+            setLoading({ ...loading, facebook: false });
+            fetch(
+              `https://graph.facebook.com/${fbID}/picture?type=normal`
+            ).then(async (response) => {
+              await userCredential.user.updateProfile({
+                photoURL: response.url,
+              });
+              const dbUser = await getUser();
+              if (hasAllInfo(dbUser)) navigation.goBack();
+              else Modal.openModal();
+            });
+          })
+          .catch((e) => Alert.alert("Firebase err", JSON.stringify(e)));
+      }
+      if (type === "cancel") {
+        setLoading({ ...loading, facebook: false });
+      }
+    } catch (e) {
+      Alert.alert("Facebook Login Error:", JSON.stringify(e));
+      setLoading({ ...loading, facebook: false });
+    }
+  }
   const renderContent = () => {
     return (
       <View style={{ padding: 20 }}>
@@ -172,7 +212,7 @@ export default function SignIn({ navigation }) {
           <ButtonOutlined
             style={{ width: width * 0.4 }}
             title="Passer"
-            onClick={()=>navigation.navigate("CompleteProfile")}
+            onClick={() => navigation.navigate("CompleteProfile")}
           />
         </View>
       </View>
@@ -189,28 +229,28 @@ export default function SignIn({ navigation }) {
       </View>
 
       <ScrollView style={styles.container}>
-
-      <SocialIcon
-          title='Se connecter avec Facebook'
+        <SocialIcon
+          loading={loading.facebook}
+          title="Se connecter avec Facebook"
           button
-          type='facebook'
-          onPress={()=> alert('facebook auth')}
-          style={{borderRadius: 10}}
+          type="facebook"
+          onPress={signInWithFacebook}
+          style={{ borderRadius: 10 }}
         />
 
         <SocialIcon
-          title='Se connecter avec Google'
+          title="Se connecter avec Google"
           button
-          type='google'
+          type="google"
           onPress={loginWithGoogle}
-          style={{borderRadius: 10}}
+          style={{ borderRadius: 10 }}
         />
-        
+
         <Devider
           width="100%"
           style={{ backgroundColor: COLORS.primary, marginVertical: 15 }}
         />
-        
+
         <Input
           autoCapitalize="none"
           rightIcon={<Fontisto name="email" size={24} color={COLORS.primary} />}
@@ -247,8 +287,7 @@ export default function SignIn({ navigation }) {
           onClick={logIn}
         />
 
-        
-        <TextView style={styles.welcomeText} fontFamily="Source-Regular" >
+        <TextView style={styles.welcomeText} fontFamily="Source-Regular">
           Si vous n'êtes pas encore utilisateur, veuillez vous inscrire avec
         </TextView>
 

@@ -24,9 +24,7 @@ export default function CompleteProfile({ navigation }) {
     registerForPushNotification().then((token) => {
       setAdditionalInfo({
         expoPushNotif: token,
-        username: user.displayName?.split(' ')[0] ||  "",
-        firstName: user.displayName?.split(' ')[0] ||  "",
-        lastName: user.displayName?.split(' ')[1] || "",
+        username: user.displayName || "",
         gender: "Homme",
         type: "Particullier",
         email: user.email,
