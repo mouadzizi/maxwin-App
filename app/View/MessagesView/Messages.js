@@ -11,6 +11,7 @@ import { useFocusEffect } from "@react-navigation/native";
 export default function MessagesView({ navigation,onFocus,removeBadge }) {
   const [conversation, setConversation] = useState([]);
   const [user, setUser] = useState({});
+  const [ready, setReady] = useState(false)
   const chatRef = db.collection("chats");
 
   const fetchConversations = useCallback((snapShot) => {
@@ -35,18 +36,13 @@ export default function MessagesView({ navigation,onFocus,removeBadge }) {
         .orderBy("createdAt", "desc")
         .onSnapshot((snapShot) => {
           const conversations = snapShot.docs
-            .filter(
-              (doc) =>
-                doc.data().contact1._id.search(user.uid) >= 0 ||
-                doc.data().contact2._id.search(user.uid) >= 0
-            )
             .map((d) => {
               return {
                 key: d.id,
                 ...d.data(),
               };
             });
-          setConversation(conversations);
+          setConversation(conversations.filter(obj=>obj.key.search(user.uid)>0));
         });
     }
     return () => {
@@ -54,15 +50,17 @@ export default function MessagesView({ navigation,onFocus,removeBadge }) {
       setConversation([]);
     };
   }, [user]);
+
   useEffect(() => {
+    setReady(true)
     if(!navigation.isFocused()){
       const badge = conversation.filter(({seen})=> seen===false).length
       onFocus(badge)
     }
-
     return () => {
     }
-  }, [conversation])
+  }, [conversation]);
+  
   useFocusEffect(
     useCallback(() => {
       removeBadge()

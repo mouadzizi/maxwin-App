@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {useEffect,useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   MaterialCommunityIcons,
@@ -22,7 +22,6 @@ export default function MainBottomNavigation() {
   const Tab = createBottomTabNavigator();
   const [favBadge, setFavBadge] = useState();
   const [msgBadge, setmsgBadge] = useState(null);
-  const notificationListener = useRef();
   var _unsub;
   useEffect(() => {
     var unsub = auth.onAuthStateChanged((user) => {
