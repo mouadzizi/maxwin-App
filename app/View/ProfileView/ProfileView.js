@@ -63,7 +63,7 @@ export default function ProfileView({ navigation }) {
               <Text style={GlobalStyle.H1}>Profil</Text>
               <ProfileSection
                 subTitle="Informations personnelles"
-                title={user.firstName || "No name" + " " + user.lastName || "No name"}
+                title={user.username || "utilisateur"}
                 onClick={() =>
                   navigation.navigate("ProfileInformationView", {
                     profile: user,
