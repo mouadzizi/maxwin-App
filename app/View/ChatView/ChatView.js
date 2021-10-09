@@ -2,9 +2,10 @@ import React, { useEffect, useState, useCallback } from "react";
 import { View, Dimensions } from "react-native";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { db } from "../../API/Firebase";
-import { getUser, timestamp,sendNotification } from "../../API/APIFunctions";
+import { getUser, timestamp,sendNotification, getProductById } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
 import { COLORS } from "../../GlobalStyle";
+import { Avatar } from "react-native-elements/dist/avatar/Avatar";
 const { width } = Dimensions.get("screen");
 
 export default function ChatView({ route, navigation }) {
@@ -18,7 +19,10 @@ export default function ChatView({ route, navigation }) {
 
   useEffect(() => {
     getUser().then((fb_user) => setUser(fb_user));
-    
+    navigation.setOptions({
+      title:postTitle,
+      headerRight:()=><Avatar size='small' containerStyle={{marginRight:10}} rounded source={{uri:pic}} onPress={goToProduct} />
+    })
   }, []);
 
   const fetchMessages = useCallback((snapShot) => {
@@ -90,7 +94,14 @@ export default function ChatView({ route, navigation }) {
       return (seller._id || seller.uid) + "-" + user.uid + "-" + postId;
     else return user.uid + "-" + (seller._id || seller.uid) + "-" + postId;
   };
-
+ const goToProduct= ()=>{
+   setLoading(true)
+  getProductById(postId).then(res=>{
+    setLoading(false)
+    navigation.navigate("ProductDetails", { product: res })
+    
+  })
+ }
   return (
     <View style={{ flex: 1 }}>
       {loading ? (

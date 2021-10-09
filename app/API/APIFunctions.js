@@ -80,7 +80,10 @@ export const getItemsByCategory = async (category, limit) => {
   });
   return items;
 };
-
+export const getProductById = async (postID)=>{
+  const product = await db.collection('products').doc(postID).get()
+  return product.data()
+}
 export const addToFavorite = async (userId, post) => {
   await db
     .collection("users")
