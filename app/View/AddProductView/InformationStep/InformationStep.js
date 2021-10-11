@@ -68,6 +68,7 @@ export default function InformationStep({ navigation, route }) {
     });
     return arrTerms;
   };
+  console.log(product.category[1]);
   return (
     <View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -306,17 +307,18 @@ export default function InformationStep({ navigation, route }) {
           </View>
         )}
 
-        {product.category[1] !==
-        ("Appartements" ||
-          "Maisons & Villas" ||
-          "Terrains" ||
-          "Commerces & Bureaux" ||
-          "Location courte durée (vacances)" ||
-          "Location long durée" ||
-          "Maquillage et produits de bien être" ||
-          "Matériels professionnels" ||
-          "Services et travaux professionnels" ||
-          "Formations & autres") ? (
+        {
+          (product.category[1] === "Appartements" ||
+          product.category[1] === "Maisons & Villas" ||
+          product.category[1] === "Terrains"||
+          product.category[1] === "Commerces & Bureaux"||
+          product.category[1] === "Location courte durée (vacances"||
+          product.category[1] === "Location long durée"||
+          product.category[1] === "Maquillage et produits de bien être"||
+          product.category[1] === "Matériels professionnels"||
+          product.category[1] === "Formations & autres"
+          )
+          ? null : (
           <View style={{ marginTop: 10 }}>
             <View style={styles.pickerView}>
               <Text style={styles.label}>État</Text>
@@ -339,7 +341,7 @@ export default function InformationStep({ navigation, route }) {
               </Picker>
             </View>
           </View>
-        ) : null}
+        )}
 
         <Input
           label="Description"
@@ -399,7 +401,8 @@ export default function InformationStep({ navigation, route }) {
             </View>
           </View>
         )}
-
+        
+        
           <CheckBox
             containerStyle={{ width: "100%" }}
             title="En bonne état    "
