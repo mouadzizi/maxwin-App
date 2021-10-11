@@ -138,7 +138,6 @@ export default function MainStack({ navigation }) {
           name="ResultView"
           component={ResultView}
           options={{
-            headerRight: () => <HeaderRight />,
             title: "Resultat",
             headerStyle: {
               backgroundColor: COLORS.primary,

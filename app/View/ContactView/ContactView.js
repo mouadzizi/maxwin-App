@@ -17,7 +17,7 @@ export default function ContactView({ navigation }) {
   const [message, setMessage] = useState("");
 
   const showToast =  () => {
-     ToastAndroid.show("YVotre message a été envoyé. Merci !", ToastAndroid.SHORT);
+     ToastAndroid.show("Votre message a été envoyé. Merci !", ToastAndroid.SHORT);
      setTimeout(()=> navigation.goBack(), 1700)
   };
 

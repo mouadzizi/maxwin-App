@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, FlatList, Share } from "react-native";
+import { View, FlatList, Share, Text } from "react-native";
 import Product from "../../Components/Product/Product";
 import { getItemsByCategory, filter } from "../../API/APIFunctions";
 import styles from "./ResultView.style";
@@ -9,6 +9,8 @@ import EmptyProducts from "../../SVG/EmptyProducts";
 import { FAB } from "react-native-elements";
 import { AntDesign } from "react-native-vector-icons";
 import {shuffle} from 'underscore'
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
@@ -16,7 +18,24 @@ export default function ResultView({ route, navigation }) {
   const [limit, setLimit] = useState(8);
   const [isRefreshing, setIsRefreshing] = useState(false)
   const parent = route.params?.parent;
-  let listRef;
+
+  const HeaderRight = () => {
+    return (
+      <View style={{ flexDirection: "row" }}>
+
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate("FilterView")}
+        >
+          <Ionicons
+            name="options"
+            size={36}
+            color="#fff"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  };
 
   const shareTheApp = async () => {
     try {
@@ -83,6 +102,16 @@ export default function ResultView({ route, navigation }) {
     []
   );
   const keyExtractor = useCallback((item) => item.id, []);
+    
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight:()=> <HeaderRight/>
+    })
+    return () => {
+      
+    }
+  }, [])
+  
 
   return (
     <View

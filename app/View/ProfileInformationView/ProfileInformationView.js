@@ -73,23 +73,13 @@ export default function ProfileInformation({ route, navigation }) {
             </TouchableOpacity>
           </View>
           <Input
-            onChangeText={(e) => setUser({ ...user, firstName: e })}
-            value={user.firstName}
-            placeholder="Nom"
-            label="Nom"
+            onChangeText={(e) => setUser({ ...user, username: e })}
+            value={user?.username}
+            placeholder="Nom d'utilisateur"
+            label="Nom d'utilisateur"
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}
-            rightIcon={<Entypo name="user" size={24} color={COLORS.primary} />}
-          />
-          <Input
-            onChangeText={(e) => setUser({ ...user, lastName: e })}
-            value={user.lastName}
-            placeholder="Prénom"
-            label="Prénom"
-            renderErrorMessage={false}
-            labelStyle={{ color: COLORS.primary }}
-            containerStyle={{ marginTop: 10 }}
             rightIcon={<Entypo name="user" size={24} color={COLORS.primary} />}
           />
           <Input
