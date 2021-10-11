@@ -19,6 +19,8 @@ import ProfileInformationView from "../../../View/ProfileInformationView";
 import ContactView from "../../../View/ContactView";
 import NotificationView from "../../../View/NotificationView";
 import FAQView from "../../../View/FAQView";
+import ConditionsView from "../../../View/ConditionsView";
+
 import EditProduct from "../../../View/EditProduct";
 
 import HomeSectionProductView from "../../../View/HomeSectionProductView";
@@ -240,6 +242,19 @@ export default function MainStack({ navigation }) {
           component={FAQView}
           options={{
             title: "FAQ",
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
+
+        <Stack.Screen
+          name="ConditionsView"
+          component={ConditionsView}
+          options={{
+            title: "Conditions",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },
