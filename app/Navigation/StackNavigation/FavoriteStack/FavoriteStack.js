@@ -14,7 +14,7 @@ export default function FavoriteStack() {
         height: 55,
       },
       headerTitleAlign: "center",
-      headerTitle: 'Favoris',
+      headerTitle: 'Mes Favoris',
       headerTitleStyle:{
         fontSize: 20,
       }

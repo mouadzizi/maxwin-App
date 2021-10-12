@@ -83,6 +83,7 @@ export default function MainBottomNavigation() {
         name="Favorite"
         component={FavoriteStack}
         options={{
+          title: "Mes favoris",
           tabBarBadge: favBadge === 0 ? null : favBadge,
           tabBarIcon: ({ focused }) =>
             focused ? (
