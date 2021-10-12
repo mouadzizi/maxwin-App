@@ -24,7 +24,7 @@ export default function ResultView({ route, navigation }) {
       <View style={{ flexDirection: "row" }}>
 
         <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("FilterView")}
+          onPress={() => navigation.replace("FilterView")}
         >
           <Ionicons
             name="options"

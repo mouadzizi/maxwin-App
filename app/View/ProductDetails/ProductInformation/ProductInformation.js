@@ -128,6 +128,9 @@ export default function ProductInformation({ product }) {
         {product.marqueVoiture && (
           <Row detail="Marque de Voiture" value={product.marqueVoiture} />
         )}
+        {product.marqueVoiture && (
+          <Row detail="Carburant de Voiture" value={product.carburant} />
+        )}
         {product.anneeFabrication && (
           <Row detail="Année de Fabrication" value={product.anneeFabrication} />
         )}
