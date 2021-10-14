@@ -160,31 +160,26 @@ export const getUser = async () => {
 export const filter = async (data, limit) => {
   var itemsRef = db.collection("products");
   if (data.city != "*") {
-    console.log("filter by city");
     itemsRef = db.collection("products").where("city", "==", data.city);
   }
 
   // filter by category
   if (data.category != "Toutes les catégories") {
-    console.log("filter by category");
     itemsRef = itemsRef.where("category", "array-contains", data.category);
   }
 
   // filter by category brand
   if (data.brand != "*") {
-    console.log("filter by brand");
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
   // filter by fuel
   if (data.fuel != "*") {
-    console.log("filter by fuel");
     itemsRef = itemsRef.where("carburant", "==", data.fuel);
   }
 
   // filter by etat
   if (data.state != "*") {
-    console.log("filter by state");
     itemsRef = itemsRef.where("state", "==", data.state);
   }
   //filter by kilometre
@@ -195,7 +190,6 @@ export const filter = async (data, limit) => {
   const querySnap = await itemsRef
     .limit(limit)
     .get();
-  console.log(querySnap.size);
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)
