@@ -62,6 +62,7 @@ export default function ResultView({ route, navigation }) {
     switch (parent) {
       case "FilterView":
         const filterOpt = route.params?.filterOpt;
+        console.log(filterOpt);
         setIsRefreshing(true)
         filter(filterOpt, limit)
           .then((data) => {
@@ -128,7 +129,6 @@ export default function ResultView({ route, navigation }) {
       {products.length < 1 && <EmptyProducts />}
       {ready ? (
         <FlatList
-        ref={(ref)=>(listRef=ref)}
           data={products}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
