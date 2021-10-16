@@ -81,10 +81,10 @@ export const getItemsByCategory = async (category, limit) => {
   });
   return items;
 };
-export const getProductById = async (postID)=>{
-  const product = await db.collection('products').doc(postID).get()
-  return product.data()
-}
+export const getProductById = async (postID) => {
+  const product = await db.collection("products").doc(postID).get();
+  return product.data();
+};
 export const addToFavorite = async (userId, post) => {
   await db
     .collection("users")
@@ -176,25 +176,43 @@ export const filter = async (data, limit) => {
     itemsRef = itemsRef.where("marqueVoiture", "==", data.brand);
   }
 
-  // filter by fuel
-  if (data.fuel != "*") {
-    console.log("filter by fuel");
-    itemsRef = itemsRef.where("carburant", "==", data.fuel);
-  }
-
   // filter by etat
   if (data.state != "*") {
     console.log("filter by state");
     itemsRef = itemsRef.where("state", "==", data.state);
   }
-  //filter by kilometre
-  if('Voitures'.match(data.category[1])){
-    itemsRef = itemsRef.where("kilometrage", ">=", data.minKM).where('kilometrage','<=',data.maxKM);
+
+  switch (data.category) {
+    case "Voitures":
+      itemsRef = itemsRef
+        .where("kilometrage", ">=", data.minKM)
+        .where("kilometrage", "<=", data.maxKM);
+      // filter by fuel
+      if (data.fuel != "*") {
+        itemsRef = itemsRef.where("carburant", "==", data.fuel);
+      }
+      if (data.transaction != "*") {
+        itemsRef = itemsRef.where("transaction", "==", data.transaction);
+      }
+      break;
+    case "Appartements":
+    case "Maisons & Villas":
+    case "Commerces & Bureaux":
+    case "Location courte durée (vacances)":
+    case "Location long durée":
+      console.log("immo");
+      itemsRef = itemsRef
+        .where("superficie", ">=", data.superficieMin)
+        .where("superficie", "<=", data.superficieMax);
+      break;
+    case "Téléphones":
+    case "Tablettes":
+    case "Ordinateurs":
+       itemsRef = itemsRef.where('RAM','>=',data.RamMin).where('RAM','<=',data.RamMax)
+      // itemsRef = itemsRef.where('ROM','>=',data.RomMin).where('ROM','<=',data.RomMax)
   }
 
-  const querySnap = await itemsRef
-    .limit(limit)
-    .get();
+  const querySnap = await itemsRef.limit(20).get();
   console.log(querySnap.size);
   const results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
@@ -217,7 +235,7 @@ export const updateUser = async (data) => {
       lastName: data.lastName,
       phone: data.phone || "",
       type: data.type || "",
-      picUrl:data.picUrl
+      picUrl: data.picUrl,
     });
 };
 
@@ -336,26 +354,22 @@ export const searchByTitle = async (title) => {
 
   return Promise.all(results);
 };
-export const getAllProducts = async()=>{
-  const snapShot  = await db.collection('products').get()
-  const results = snapShot.docs.map(d=>{
+export const getAllProducts = async () => {
+  const snapShot = await db.collection("products").get();
+  const results = snapShot.docs.map((d) => {
     return {
-      id:d.id,
-      ...d.data()
-    }
-  })
-  return Promise.all(results)
-}
+      id: d.id,
+      ...d.data(),
+    };
+  });
+  return Promise.all(results);
+};
 
 export const uploadProfileImage = async (uri, userID) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    var ref = st
-      .ref()
-      .child("images")
-      .child(userID)
-      .child("profile")
-    const snapShot = await ref.put(blob);
-    const link = await snapShot.ref.getDownloadURL();
+  const response = await fetch(uri);
+  const blob = await response.blob();
+  var ref = st.ref().child("images").child(userID).child("profile");
+  const snapShot = await ref.put(blob);
+  const link = await snapShot.ref.getDownloadURL();
   return link;
 };

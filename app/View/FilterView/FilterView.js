@@ -20,6 +20,14 @@ export default function FilterView({ navigation, route }) {
     brand: "*",
     city: "*",
     category: "Toutes les catégories",
+    transaction:"*",
+    RamMin:0,
+    RamMax:Number.POSITIVE_INFINITY,
+    RomMax:Number.POSITIVE_INFINITY,
+    RomMin:0,
+    superficieMax:Number.POSITIVE_INFINITY,
+    superficieMin:0
+
   });
   let modals = [];
 
