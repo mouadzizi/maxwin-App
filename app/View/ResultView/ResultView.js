@@ -62,7 +62,6 @@ export default function ResultView({ route, navigation }) {
     switch (parent) {
       case "FilterView":
         const filterOpt = route.params?.filterOpt;
-        console.log(filterOpt);
         setIsRefreshing(true)
         filter(filterOpt, limit)
           .then((data) => {

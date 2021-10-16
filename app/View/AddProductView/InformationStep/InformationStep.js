@@ -68,7 +68,6 @@ export default function InformationStep({ navigation, route }) {
     });
     return arrTerms;
   };
-  console.log(product.category[1]);
   return (
     <View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
