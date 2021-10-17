@@ -42,7 +42,7 @@ export default function MessagesView({ navigation,onFocus,removeBadge }) {
                 ...d.data(),
               };
             });
-          setConversation(conversations.filter(obj=>obj.key.search(user.uid)>0));
+          setConversation(conversations.filter(obj=>obj.key.search(user.uid) >= 0));
         });
     }
     return () => {
