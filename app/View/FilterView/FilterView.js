@@ -180,7 +180,6 @@ export default function FilterView({ navigation, route }) {
                 }
               />
             </View>
-
             <View style={styles.pickerView}>
               <Text style={styles.label}>Carburant</Text>
               <Picker
@@ -330,15 +329,22 @@ export default function FilterView({ navigation, route }) {
         loading={false}
         onClick={() =>
           setData({
-            minPrice: 0,
-            maxPrice: Number.POSITIVE_INFINITY,
-            minKM: 0,
-            maxKM: Number.POSITIVE_INFINITY,
-            fuel: "*",
-            state: "*",
-            brand: "*",
-            category: "Toutes les catégories",
-            city: "*",
+          minPrice: 0,
+          maxPrice: Number.POSITIVE_INFINITY,
+          minKM: 0,
+          maxKM: Number.POSITIVE_INFINITY,
+          fuel: "*",
+          state: "*",
+          brand: "*",
+          city: "*",
+          category: "Toutes les catégories",
+          transaction:"*",
+          RamMin:0,
+          RamMax:Number.POSITIVE_INFINITY,
+          RomMax:Number.POSITIVE_INFINITY,
+          RomMin:0,
+          superficieMax:Number.POSITIVE_INFINITY,
+          superficieMin:0
           })
         }
       />

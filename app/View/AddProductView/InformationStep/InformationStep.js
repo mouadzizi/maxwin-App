@@ -220,7 +220,7 @@ export default function InformationStep({ navigation, route }) {
                   : null
               }
               onChangeText={(input) =>
-                setProduct({ ...product, puissanceFiscale: input })
+                setProduct({ ...product, puissanceFiscale: parseFloat(input) })
               }
               maxLength={8}
             />
@@ -292,7 +292,7 @@ export default function InformationStep({ navigation, route }) {
               keyboardType="numeric"
               numberOfLines={2}
               labelStyle={{ color: COLORS.primary }}
-              onChangeText={(input) => setProduct({ ...product, RAM: input })}
+              onChangeText={(input) => setProduct({ ...product, RAM: parseInt(input) })}
             />
 
             <Input
@@ -301,7 +301,7 @@ export default function InformationStep({ navigation, route }) {
               keyboardType="numeric"
               style={{ fontSize: 15 }}
               labelStyle={{ color: COLORS.primary }}
-              onChangeText={(input) => setProduct({ ...product, ROM: input })}
+              onChangeText={(input) => setProduct({ ...product, ROM: parseInt(input) })}
             />
           </View>
         )}
