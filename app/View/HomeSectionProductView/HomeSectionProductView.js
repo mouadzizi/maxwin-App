@@ -82,7 +82,7 @@ export default function HomeSectionProductView({ navigation, route }) {
     try {
       const result = await Share.share({
         message:
-          "Salut, Je partage avec vous Maxwin,la nouvelle application d'achat et de vente au Maroc, N'hésitez pas à utiliser l'application, elle est simple et gratuite, pour télécharger Maxwin cliquez sur le lien suivant : سلام،أشارك معك التطبيق الجديد Maxwin, هذا التطبيق يمكنك من البيع و الشراء في المغرب ،لا تتردد في إستعمال التطبيق Maxwin لأنه سهل و مجاني، لتحميل التطبيق المرجوا الضغط على الرابط:",
+        "Salut, Je partage avec vous Maxwin,la nouvelle application d'achat et de vente au Maroc, N'hésitez pas à utiliser l'application, elle est simple et gratuite, pour télécharger Maxwin cliquez sur le lien suivant : سلام،أشارك معك التطبيق الجديد Maxwin, هذا التطبيق يمكنك من البيع و الشراء في المغرب ،لا تتردد في إستعمال التطبيق Maxwin لأنه سهل و مجاني، لتحميل التطبيق المرجوا الضغط على الرابط: https://play.google.com/store/apps/details?id=com.us.maxwin "
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
