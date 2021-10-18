@@ -34,7 +34,7 @@ export default function InformationStep({ navigation, route }) {
       chips: selectedChips,
       owner: user,
       likes: 0,
-      keywords: generateKeywords(product.title),
+      keywords: generateKeywords(product.title.toLowerCase()),
     })
       .then((docRef) => {
         uploadImages(product.images, docRef.id, user.uid).then((links) => {
