@@ -114,7 +114,7 @@ export default function MessagesView({ navigation,onFocus,removeBadge }) {
       title={item.title}
       onClick={() => goToChat(item)}
       // time={item.createdAt.toDate().toLocaleTimeString()}
-      contact={user.uid == item.contact1._id ? "Vous" : item.contact1.name}
+      contact={user.uid == item.contact1._id ? "Vous" : item.contact1.username}
     />
   );
 

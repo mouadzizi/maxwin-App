@@ -56,13 +56,13 @@ export default function ChatView({ route, navigation }) {
       .set({
         contact1: {
           _id: user.uid,
-          name: user.firstName,
+          username: user.username,
           expoPushNotif:user.expoPushNotif,
           avatar:user.picUrl
         },
         contact2: {
           _id: seller._id || seller.uid ,
-          name: seller.firstName || seller.name,
+          username: seller.username,
           expoPushNotif:seller.expoPushNotif,
           avatar:user.picUrl
         },
@@ -149,7 +149,7 @@ export default function ChatView({ route, navigation }) {
         onSend={sendMessage}
         user={{
           _id: user.uid,
-          name: user.firstName,
+          name: user.username,
           avatar:user.picUrl
         }}
       />
