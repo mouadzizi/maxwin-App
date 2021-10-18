@@ -31,7 +31,7 @@ export default function MessagesView({ navigation,onFocus,removeBadge }) {
   }, []);
 
   useEffect(() => {
-    if (user) {
+    if (user.uid) {
       var cleanup = chatRef
         .orderBy("createdAt", "desc")
         .onSnapshot((snapShot) => {
@@ -41,8 +41,8 @@ export default function MessagesView({ navigation,onFocus,removeBadge }) {
                 key: d.id,
                 ...d.data(),
               };
-            });
-          setConversation(conversations.filter(obj=>obj.key.search(user.uid) >= 0));
+            }).filter(obj=>obj.key.search(user.uid) >= 0);
+          setConversation(conversations);
         });
     }
     return () => {
