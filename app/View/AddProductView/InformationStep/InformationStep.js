@@ -315,7 +315,8 @@ export default function InformationStep({ navigation, route }) {
           product.category[1] === "Location long durée"||
           product.category[1] === "Maquillage et produits de bien être"||
           product.category[1] === "Matériels professionnels"||
-          product.category[1] === "Formations & autres"
+          product.category[1] === "Formations & autres"||
+          product.category[1] === "Services et travaux professionnels"
           )
           ? null : (
           <View style={{ marginTop: 10 }}>

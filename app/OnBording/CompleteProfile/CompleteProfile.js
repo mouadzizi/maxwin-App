@@ -130,7 +130,7 @@ export default function CompleteProfile({ navigation }) {
           <Input
             keyboardType="phone-pad"
             placeholder="Numéro du téléphone"
-            label="Numéro du téléphone"
+            label="Numéro du téléphone (facultatif)"
             renderErrorMessage={false}
             labelStyle={{ color: COLORS.primary }}
             containerStyle={{ marginTop: 20 }}

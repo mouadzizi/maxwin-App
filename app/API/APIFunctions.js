@@ -158,6 +158,7 @@ export const getUser = async () => {
 };
 
 export const filter = async (data, limit) => {
+  //.orderBy(data.likes);
   var itemsRef = db.collection("products");
   if (data.city != "*") {
     itemsRef = db.collection("products").where("city", "==", data.city);
@@ -196,7 +197,6 @@ export const filter = async (data, limit) => {
     case "Commerces & Bureaux":
     case "Location courte durée (vacances)":
     case "Location long durée":
-      console.log("immo");
       itemsRef = itemsRef
         .where("superficie", ">=", data.superficieMin)
         .where("superficie", "<=", data.superficieMax);

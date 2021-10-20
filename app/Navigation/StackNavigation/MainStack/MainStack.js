@@ -254,7 +254,7 @@ export default function MainStack({ navigation }) {
           name="ConditionsView"
           component={ConditionsView}
           options={{
-            title: "Conditions",
+            title: "conditions d'utilisation",
             headerStyle: {
               backgroundColor: COLORS.primary,
             },

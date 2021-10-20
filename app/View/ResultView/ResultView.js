@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, FlatList, Share, Text } from "react-native";
+import { View, FlatList, Share } from "react-native";
 import Product from "../../Components/Product/Product";
 import { getItemsByCategory, filter } from "../../API/APIFunctions";
 import styles from "./ResultView.style";
@@ -8,7 +8,6 @@ import { COLORS, windowWidth } from "../../GlobalStyle";
 import EmptyProducts from "../../SVG/EmptyProducts";
 import { FAB } from "react-native-elements";
 import { AntDesign } from "react-native-vector-icons";
-import {shuffle} from 'underscore'
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
@@ -41,7 +40,7 @@ export default function ResultView({ route, navigation }) {
     try {
       const result = await Share.share({
         message:
-        "Salut, Je partage avec vous Maxwin,la nouvelle application d'achat et de vente au Maroc, N'hésitez pas à utiliser l'application, elle est simple et gratuite, pour télécharger Maxwin cliquez sur le lien suivant : سلام،أشارك معك التطبيق الجديد Maxwin, هذا التطبيق يمكنك من البيع و الشراء في المغرب ،لا تتردد في إستعمال التطبيق Maxwin لأنه سهل و مجاني، لتحميل التطبيق المرجوا الضغط على الرابط: https://play.google.com/store/apps/details?id=com.us.maxwin "
+        "Salut, Je partage avec vous Maxwin,la nouvelle application d'achat et de vente au Maroc, N'hésitez pas à utiliser l'application, elle est simple et gratuite, pour télécharger Maxwin cliquez sur le lien suivant : https://play.google.com/store/apps/details?id=com.us.maxwin"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -66,7 +65,7 @@ export default function ResultView({ route, navigation }) {
         filter(filterOpt, limit)
           .then((data) => {
             setReady(true);
-            setProducts(shuffle(data))
+            setProducts(data)
             setIsRefreshing(false)
           })
           .catch(({ message }) => console.warn(message));
@@ -77,7 +76,7 @@ export default function ResultView({ route, navigation }) {
         getItemsByCategory(collection, limit)
           .then((items) => {
             setReady(true);
-            setProducts(shuffle(items))
+            setProducts(items)
           })
           .catch(({ message }) => console.warn(message));
         break;
