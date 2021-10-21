@@ -1,7 +1,7 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
 import * as Notifications from "expo-notifications";
-import { invoke } from "underscore";
+import { invoke,sortBy } from "underscore";
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -65,7 +65,7 @@ export const getItemsByCollection = async (collection, limit) => {
   snap.forEach((doc) => {
     items.push({ ...doc.data(), id: doc.id });
   });
-  return items;
+  return sortBy(items,'likes').reverse();
 };
 
 export const getItemsByCategory = async (category, limit) => {
@@ -220,7 +220,8 @@ export const filter = async (data, limit) => {
         ...doc.data(),
       };
     });
-  return await Promise.all(results);
+
+  return await Promise.all(sortBy(results,'likes').reverse());
 };
 export const updateUser = async (data) => {
   const { uid } = auth.currentUser;

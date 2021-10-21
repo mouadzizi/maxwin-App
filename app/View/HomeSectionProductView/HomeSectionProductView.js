@@ -9,7 +9,6 @@ import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
 import { AntDesign,Ionicons } from "react-native-vector-icons";
 import { TouchableWithoutFeedback } from "react-native";
-import {shuffle} from 'underscore'
 
 
 export default function HomeSectionProductView({ navigation, route }) {
@@ -28,7 +27,7 @@ export default function HomeSectionProductView({ navigation, route }) {
       getItemsByCollection(collection, limit)
         .then((items) => {
           setnoMoreItems(items.length == products.length)
-          setProducts(shuffle(items))
+          setProducts(items)
           setIsRefreshing(false)
         })
         .catch(({ message }) => console.warn(message));
