@@ -79,7 +79,7 @@ export const getItemsByCategory = async (category, limit) => {
   snap.forEach((doc) => {
     items.push({ ...doc.data(), id: doc.id });
   });
-  return items;
+  return await Promise.all(sortBy(items,'likes').reverse());
 };
 export const getProductById = async (postID) => {
   const product = await db.collection("products").doc(postID).get();
