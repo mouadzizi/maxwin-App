@@ -103,8 +103,8 @@ export default function ProductDetails({ route, navigation }) {
     let Message =
       "Salam " +
       ownerName +
-      " est ce que votre article " +
-      ProductName + ", " + ProductPrice + "dhs sur : " + ProductCity +
+      " est ce que votre article (" +
+      ProductName + ", prix :" + ProductPrice + "dhs sur " + ProductCity + " )"
       " publié sur l'application Maxwin est toujours disponible ?";
     let CountryCode = "212";
     let phoneOwner = product.owner?.phone;
