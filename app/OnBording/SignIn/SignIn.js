@@ -26,7 +26,6 @@ import { COLORS } from "../../GlobalStyle";
 
 import * as GoogleSignIn from "expo-google-sign-in";
 import * as Facebook from "expo-facebook";
-import * as Updates from "expo-updates";
 import { auth } from "../../API/Firebase";
 import firebase from "firebase";
 import AuthModal from "../../Components/AuthModal/AuthModal";
@@ -44,10 +43,6 @@ export default function SignIn({ navigation }) {
     google: false,
     facebook: false,
   });
-
-  useEffect(() => {
-    update();
-  }, []);
 
   const logIn = () => {
     setIsError();
@@ -87,26 +82,6 @@ export default function SignIn({ navigation }) {
     }
   };
 
-  const update = async () => {
-    try {
-      const update = await Updates.checkForUpdateAsync();
-      if (update.isAvailable) {
-        Alert.alert("INFO", "New updates Available", [
-          {
-            text: "Update",
-            style: "default",
-            onPress: async () => {
-              await Updates.fetchUpdateAsync();
-              // ... notify user of update ...
-              await Updates.reloadAsync();
-            },
-          },
-        ]);
-      }
-    } catch (e) {
-      alert("Update Error " + e.message);
-    }
-  };
   const onSignIn = (googleUser) => {
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
     var unsubscribe = auth.onAuthStateChanged(function () {

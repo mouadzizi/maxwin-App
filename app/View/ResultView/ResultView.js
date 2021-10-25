@@ -14,7 +14,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
   const [ready, setReady] = useState(false);
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(2);
   const [isRefreshing, setIsRefreshing] = useState(false)
   const parent = route.params?.parent;
 
@@ -130,9 +130,10 @@ export default function ResultView({ route, navigation }) {
           data={products}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
-          onEndReached={() => setLimit((prevLimit) => prevLimit + 10)}
+          onEndReached={() => setLimit((prevLimit) => prevLimit + 2)}
           onEndReachedThreshold={0.3}
           refreshing={isRefreshing}
+          onRefresh={()=>{}}
         />
       ) : (
         <Progress.Bar

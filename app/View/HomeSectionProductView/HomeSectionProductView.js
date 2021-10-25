@@ -14,7 +14,7 @@ import { TouchableWithoutFeedback } from "react-native";
 export default function HomeSectionProductView({ navigation, route }) {
   const [products, setProducts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [limit, setLimit] = useState(10)
+  const [limit, setLimit] = useState(2)
   const [noMoreItems, setnoMoreItems] = useState(false)
   const collection = route.params?.collection;
 
@@ -102,7 +102,7 @@ export default function HomeSectionProductView({ navigation, route }) {
     getItemsByCollection(collection,limit).then(res=>setProducts(res)).then(()=>setIsRefreshing(false))
   }
   const loadMore = ()=>{
-    setLimit((prevLimit)=>prevLimit+10)
+    setLimit((prevLimit)=>prevLimit+2)
   }
   const keyExtractor = useCallback((item) => item.id, []);
   return (

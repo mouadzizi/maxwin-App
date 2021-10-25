@@ -13,8 +13,39 @@ import Mens from "./Mens";
 import Female from "./Female";
 import Babe from "./Babe";
 import ServicesMaterial from "./ServicesMaterial";
+import * as Updates from "expo-updates";
+import { InteractionManager } from "react-native";
 
 export default function HomeView({ navigation }) {
+  useEffect(() => {
+    InteractionManager.runAfterInteractions(()=>{
+      setTimeout(() => {
+        update();
+      }, 2500);
+    })
+    return () => {
+    }
+  }, [])
+  const update = async () => {
+    try {
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        Alert.alert("INFO", "New updates Available", [
+          {
+            text: "Update",
+            style: "default",
+            onPress: async () => {
+              await Updates.fetchUpdateAsync();
+              // ... notify user of update ...
+              await Updates.reloadAsync();
+            },
+          },
+        ]);
+      }
+    } catch (e) {
+      alert("Update Error " + e.message);
+    }
+  };
   return (
     <View style={styles.container}>
       <ScrollView style={styles.ScrollContainer}>

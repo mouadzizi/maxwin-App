@@ -1,7 +1,7 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
 import * as Notifications from "expo-notifications";
-import { invoke,sortBy } from "underscore";
+import { invoke, sortBy } from "underscore";
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -59,13 +59,13 @@ export const getItemsByCollection = async (collection, limit) => {
   const snap = await db
     .collection("products")
     .where("category", "array-contains", collection)
-    .orderBy("createdDate", "desc")
+    .orderBy("likes", "desc")
     .limit(limit)
     .get();
   snap.forEach((doc) => {
     items.push({ ...doc.data(), id: doc.id });
   });
-  return sortBy(items,'likes').reverse();
+  return items;
 };
 
 export const getItemsByCategory = async (category, limit) => {
@@ -79,7 +79,7 @@ export const getItemsByCategory = async (category, limit) => {
   snap.forEach((doc) => {
     items.push({ ...doc.data(), id: doc.id });
   });
-  return await Promise.all(sortBy(items,'likes').reverse());
+  return await Promise.all(sortBy(items, "likes").reverse());
 };
 export const getProductById = async (postID) => {
   const product = await db.collection("products").doc(postID).get();
@@ -181,9 +181,7 @@ export const filter = async (data, limit) => {
 
   switch (data.category) {
     case "Voitures":
-      itemsRef = itemsRef
-        .where("kilometrage", ">=", data.minKM)
-        .where("kilometrage", "<=", data.maxKM);
+    case "Location de Voiture":
       // filter by fuel
       if (data.fuel != "*") {
         itemsRef = itemsRef.where("carburant", "==", data.fuel);
@@ -192,26 +190,11 @@ export const filter = async (data, limit) => {
         itemsRef = itemsRef.where("transaction", "==", data.transaction);
       }
       break;
-    case "Appartements":
-    case "Maisons & Villas":
-    case "Commerces & Bureaux":
-    case "Location courte durée (vacances)":
-    case "Location long durée":
-      itemsRef = itemsRef
-        .where("superficie", ">=", data.superficieMin)
-        .where("superficie", "<=", data.superficieMax);
-      break;
-    case "Téléphones":
-    case "Tablettes":
-    case "Ordinateurs":
-       itemsRef = itemsRef.where('RAM','>=',data.RamMin).where('RAM','<=',data.RamMax)
-      // itemsRef = itemsRef.where('ROM','>=',data.RomMin).where('ROM','<=',data.RomMax)
+    // itemsRef = itemsRef.where('ROM','>=',data.RomMin).where('ROM','<=',data.RomMax)
   }
 
-  const querySnap = await itemsRef
-    .limit(limit)
-    .get();
-  const results = querySnap.docs
+  const querySnap = await itemsRef.orderBy("likes", "desc").limit(limit).get();
+  let results = querySnap.docs
     .filter((doc) => doc.data().price >= data.minPrice)
     .filter((doc) => doc.data().price <= data.maxPrice)
     .map((doc) => {
@@ -221,7 +204,35 @@ export const filter = async (data, limit) => {
       };
     });
 
-  return await Promise.all(sortBy(results,'likes').reverse());
+  switch (data.category) {
+    case "Voitures":
+    case "Location de Voiture":
+      results = results
+        .filter((obj) => obj.kilometrage >= data.minKM)
+        .filter((obj) => obj.kilometrage <= data.maxKM);
+      break;
+    case "Appartements":
+    case "Maisons & Villas":
+    case "Commerces & Bureaux":
+    case "Location courte durée (vacances)":
+    case "Location long durée":
+      results = results
+        .filter((obj) => obj.superficie >= data.superficieMin)
+        .filter((obj) => obj.superficie <= data.superficieMax);
+      break;
+    case "Téléphones":
+    case "Tablettes":
+    case "Ordinateurs":
+      itemsRef = itemsRef
+        .where("RAM", ">=", data.RamMin)
+        .where("RAM", "<=", data.RamMax);
+      results = results
+        .filter((obj) => obj.RAM >= data.RamMin)
+        .filter((obj) => obj.RAM <= data.RamMax);
+    // itemsRef = itemsRef.where('ROM','>=',data.RomMin).where('ROM','<=',data.RomMax)
+  }
+
+  return await Promise.all(results);
 };
 export const updateUser = async (data) => {
   const { uid } = auth.currentUser;
