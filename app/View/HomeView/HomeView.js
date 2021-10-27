@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StatusBar, View } from "react-native";
+import { StatusBar, View,Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./HomeView.style";

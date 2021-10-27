@@ -1,34 +1,70 @@
 {
   "project_info": {
-    "project_number": "296245537422",
-    "firebase_url": "https://maxwin-35d61.firebaseio.com",
-    "project_id": "maxwin-35d61",
-    "storage_bucket": "maxwin-35d61.appspot.com"
+    "project_number": "819451904643",
+    "project_id": "maxwin-prod",
+    "storage_bucket": "maxwin-prod.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:296245537422:android:edc622b4c18ca3d66677df",
+        "mobilesdk_app_id": "1:819451904643:android:4bfbe6e0d512a2436051b6",
         "android_client_info": {
           "package_name": "org.maxwin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "296245537422-blq2ki7tsompefj2tljp33f187ni7dgt.apps.googleusercontent.com",
+          "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBJ1Wtx0Zi1oz2HVFsYgsDxbDuwlTdHavs"
+          "current_key": "AIzaSyCZLCeDncICNRFra_4TouRX-YENyhaCqzI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "296245537422-blq2ki7tsompefj2tljp33f187ni7dgt.apps.googleusercontent.com",
+              "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819451904643:android:54e9ff12aee63dcb6051b6",
+        "android_client_info": {
+          "package_name": "org.prod.maxwin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819451904643-7bbtqpb4lv63ponohbfq9q7jd37tl0mj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.prod.maxwin",
+            "certificate_hash": "3c361a786b47c6212b1118a4c4e28016057bd70d"
+          }
+        },
+        {
+          "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZLCeDncICNRFra_4TouRX-YENyhaCqzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
