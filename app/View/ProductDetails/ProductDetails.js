@@ -104,7 +104,7 @@ export default function ProductDetails({ route, navigation }) {
       "Salam " +
       ownerName +
       " est ce que votre article (" +
-      ProductName + ", prix :" + ProductPrice + "dhs sur " + ProductCity + " )"
+      ProductName + ", prix :" + ProductPrice + "dhs sur " + ProductCity + " )" +
       " publié sur l'application Maxwin est toujours disponible ?";
     let CountryCode = "212";
     let phoneOwner = product.owner?.phone;
