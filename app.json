@@ -21,7 +21,6 @@
     },
     "android": {
       "package": "org.prod.maxwin",
-      "versionCode": 1,
       "googleServicesFile": "./google-services.json"
     },
     "web": {
