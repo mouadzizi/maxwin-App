@@ -240,8 +240,7 @@ export const updateUser = async (data) => {
     .collection("users")
     .doc(uid)
     .update({
-      firstName: data.firstName,
-      lastName: data.lastName,
+      username: data.username ,
       phone: data.phone || "",
       type: data.type || "",
       picUrl: data.picUrl,
@@ -337,10 +336,8 @@ export const sendNotification = async (expoPushNotif, message) => {
 
 export const hasAllInfo = (user) => {
   return (
-    typeof user.firstName != "undefined" &&
-    user.firstName.length > 0 &&
-    typeof user.lastName != "undefined" &&
-    user.lastName.length > 0 &&
+    typeof user.username != "undefined" &&
+    user.username.length > 0 &&
     typeof user.expoPushNotif != "undefined" &&
     user.expoPushNotif.length > 0 &&
     typeof user.phone != "undefined" &&
