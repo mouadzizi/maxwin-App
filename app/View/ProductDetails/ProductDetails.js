@@ -267,7 +267,7 @@ export default function ProductDetails({ route, navigation }) {
         <View style={styles.container}>
           {product.owner.phone !== "" && (
             <ButtonFill
-              title="Apple vendeur "
+              title="Appeler vendeur "
               loading={false}
               style={{ marginVertical: 10 }}
               onClick={CallOwner}
