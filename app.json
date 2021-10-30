@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "org.prod.maxwin",
+      "package": "com.us.maxwin",
       "versionCode": 4,
       "googleServicesFile": "./google-services.json"
     },

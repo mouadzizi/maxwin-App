@@ -14,7 +14,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 export default function ResultView({ route, navigation }) {
   const [products, setProducts] = useState([]);
   const [ready, setReady] = useState(false);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(10);
   const [isRefreshing, setIsRefreshing] = useState(false)
   const parent = route.params?.parent;
 

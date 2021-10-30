@@ -90,11 +90,12 @@ export default function FilterView({ navigation, route }) {
 
             <View style={styles.row}>
               <Input
-                keyboardType="numeric"
+                keyboardType="numeric" 
                 placeholder="Prix MIN"
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
-                onChangeText={setPriceMin}
+                 onChangeText={setPriceMin}
+                value={data.minPrice == 0 ? "" :data.minPrice.toString() }
               />
               <Input
                 keyboardType="numeric"
@@ -102,6 +103,7 @@ export default function FilterView({ navigation, route }) {
                 containerStyle={{ width: "50%" }}
                 labelStyle={{ color: COLORS.primary }}
                 onChangeText={setPriceMax}
+                value={data.maxPrice == Infinity ? "":data.maxPrice.toString()}
               />
             </View>
           </>
@@ -212,7 +214,7 @@ export default function FilterView({ navigation, route }) {
               >
                 <Picker.Item
                   label="Choisissez la Transaction"
-                  value=""
+                  value="*"
                   color={COLORS.Grey[400]}
                 />
                 <Picker.Item label="Manuelle" value="Manuelle" />
