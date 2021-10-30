@@ -7,49 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819451904643:android:4bfbe6e0d512a2436051b6",
+        "mobilesdk_app_id": "1:819451904643:android:f6504f40ae861bc66051b6",
         "android_client_info": {
-          "package_name": "org.maxwin"
+          "package_name": "com.us.maxwin"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCZLCeDncICNRFra_4TouRX-YENyhaCqzI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:819451904643:android:54e9ff12aee63dcb6051b6",
-        "android_client_info": {
-          "package_name": "org.prod.maxwin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "819451904643-7bbtqpb4lv63ponohbfq9q7jd37tl0mj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.prod.maxwin",
-            "certificate_hash": "3c361a786b47c6212b1118a4c4e28016057bd70d"
-          }
-        },
         {
           "client_id": "819451904643-tgu9hmcth7diuvs3l4evdidkq0a429l8.apps.googleusercontent.com",
           "client_type": 3
