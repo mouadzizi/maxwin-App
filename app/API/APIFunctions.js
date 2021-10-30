@@ -240,7 +240,7 @@ export const updateUser = async (data) => {
     .collection("users")
     .doc(uid)
     .update({
-      username: data.username ,
+      username: data.username,
       phone: data.phone || "",
       type: data.type || "",
       picUrl: data.picUrl,

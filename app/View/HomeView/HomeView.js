@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StatusBar, View,Alert } from "react-native";
+import { StatusBar, View, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLORS } from "../../GlobalStyle";
 import styles from "./HomeView.style";
@@ -15,17 +15,17 @@ import Babe from "./Babe";
 import ServicesMaterial from "./ServicesMaterial";
 import * as Updates from "expo-updates";
 import { InteractionManager } from "react-native";
+import { openURL } from "expo-linking";
 
 export default function HomeView({ navigation }) {
   useEffect(() => {
-    InteractionManager.runAfterInteractions(()=>{
+    InteractionManager.runAfterInteractions(() => {
       setTimeout(() => {
         update();
       }, 2500);
-    })
-    return () => {
-    }
-  }, [])
+    });
+    return () => {};
+  }, []);
   const update = async () => {
     try {
       const update = await Updates.checkForUpdateAsync();
@@ -34,11 +34,10 @@ export default function HomeView({ navigation }) {
           {
             text: "Update",
             style: "default",
-            onPress: async () => {
-              await Updates.fetchUpdateAsync();
-              // ... notify user of update ...
-              await Updates.reloadAsync();
-            },
+            onPress: () =>
+              openURL(
+                "https://play.google.com/store/apps/details?id=com.us.maxwin"
+              ),
           },
         ]);
       }
@@ -57,8 +56,8 @@ export default function HomeView({ navigation }) {
         <Electronics navigation={navigation} />
         <Female navigation={navigation} />
         <Mens navigation={navigation} />
-        <Babe navigation={navigation}/>
-        <ServicesMaterial navigation={navigation}/>
+        <Babe navigation={navigation} />
+        <ServicesMaterial navigation={navigation} />
       </ScrollView>
     </View>
   );
