@@ -52,7 +52,7 @@ export default function ProductInformation({ product }) {
             </View>
           )}
 
-          {product.goodState && (
+          {product?.goodState && (
             <View style={styles.row}>
               <AntDesign name="like2" color={COLORS.primary} size={30} />
               <TextView
@@ -85,7 +85,7 @@ export default function ProductInformation({ product }) {
                 fontSize={20}
                 style={[styles.textSt, { marginLeft: 10 }]}
               >
-                Paiement en livraison
+                Paiement à la livraison
               </TextView>
             </View>
           )}
@@ -124,7 +124,7 @@ export default function ProductInformation({ product }) {
          <Row detail="Section" value={product.category[0]} />
        <Row detail="Catégorie" value={product.category[1]} />
          <Row detail="Ville" value={product.city} />
-        {product.etat && <Row detail="Etat de produit" value={product.etat} />}
+        {product.etat.length !== 0  && <Row detail="Etat de produit" value={product.etat} />}
         {product.marqueVoiture && (
           <Row detail="Marque de Voiture" value={product.marqueVoiture} />
         )}
