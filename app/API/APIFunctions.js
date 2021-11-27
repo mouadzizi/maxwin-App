@@ -1,7 +1,7 @@
 import { auth, db, st } from "./Firebase";
 import firebase from "firebase";
 import * as Notifications from "expo-notifications";
-import { invoke, sortBy } from "underscore";
+import { sortBy } from "underscore";
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -59,7 +59,7 @@ export const getItemsByCollection = async (collection, limit) => {
   const snap = await db
     .collection("products")
     .where("category", "array-contains", collection)
-    .orderBy("likes", "desc")
+    .orderBy("createdDate", "desc")
     .limit(limit)
     .get();
   snap.forEach((doc) => {
