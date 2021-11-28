@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, ToastAndroid, Alert } from "react-native";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { db } from "../../API/Firebase";
 import { getUser, timestamp,sendNotification, getProductById } from "../../API/APIFunctions";
@@ -98,17 +98,18 @@ export default function ChatView({ route, navigation }) {
     else return user.uid + "-" + (seller._id || seller.uid) + "-" + postId;
   };
  const goToProduct= ()=>{
-   setLoading(true)
+  setLoading(true)
   getProductById(postId).then(res=>{
     setLoading(false)
-    if(res){
+    if(res)
+    {
       navigation.navigate("ProductDetails", { product: res })
     }
-    else {
-      ToastAndroid.show("ce produit n'existe plus",ToastAndroid.SHORT);
-      setLoading(false)
+    else
+    {
+      ToastAndroid.show("Ce produit a été supprimé par son propriétaire !", ToastAndroid.SHORT);
     }
-
+    
   })
  }
   return (
