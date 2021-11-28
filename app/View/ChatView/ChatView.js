@@ -6,7 +6,10 @@ import { getUser, timestamp,sendNotification, getProductById } from "../../API/A
 import * as Progress from "react-native-progress";
 import { COLORS } from "../../GlobalStyle";
 import { Avatar } from "react-native-elements/dist/avatar/Avatar";
+import { ToastAndroid } from "react-native";
+
 const { width } = Dimensions.get("screen");
+
 
 export default function ChatView({ route, navigation }) {
 
@@ -98,8 +101,14 @@ export default function ChatView({ route, navigation }) {
    setLoading(true)
   getProductById(postId).then(res=>{
     setLoading(false)
-    navigation.navigate("ProductDetails", { product: res })
-    
+    if(res){
+      navigation.navigate("ProductDetails", { product: res })
+    }
+    else {
+      ToastAndroid.show("ce produit n'existe plus",ToastAndroid.SHORT);
+      setLoading(false)
+    }
+
   })
  }
   return (

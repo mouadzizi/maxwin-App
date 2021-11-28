@@ -124,7 +124,7 @@ export default function ProductInformation({ product }) {
          <Row detail="Section" value={product.category[0]} />
        <Row detail="Catégorie" value={product.category[1]} />
          <Row detail="Ville" value={product.city} />
-        {product.etat && <Row detail="Etat de produit" value={product.etat} />}
+        {product.etat && <Row detail="Etat de produit" value={product.etat ? product.etat : "*"} />}
         {product.marqueVoiture && (
           <Row detail="Marque de Voiture" value={product.marqueVoiture} />
         )}
