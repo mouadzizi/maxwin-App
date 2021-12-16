@@ -14,10 +14,11 @@ import { useFocusEffect } from "@react-navigation/core";
 
 export default function InformationStep({ navigation, route }) {
   const prevProduct = route.params?.product;
-  const [product, setProduct] = useState(prevProduct);
+  const [product, setProduct] = useState(prevProduct, );
   const [selectedChips, setSelectedChips] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
+  const [state, setState] = useState("Neuf");
 
   let modalRef;
 
@@ -31,6 +32,7 @@ export default function InformationStep({ navigation, route }) {
     setLoading(true);
     addProduct({
       ...product,
+      etat: state,
       chips: selectedChips,
       owner: user,
       likes: 0,
@@ -326,14 +328,14 @@ export default function InformationStep({ navigation, route }) {
                 style={styles.pickerInput}
                 mode="dropdown"
                 dropdownIconColor={COLORS.primary}
-                selectedValue={product.etat}
+                selectedValue={state}
                 onValueChange={(itemValue) =>
-                  setProduct({ ...product, etat: itemValue })
+                  setState(itemValue)
                 }
               >
                 <Picker.Item
                   label="Choisissez l'état de produit"
-                  value=""
+                  value="Neuf"
                   color={COLORS.Grey[400]}
                 />
                 <Picker.Item label="Neuf" value="Neuf" />
