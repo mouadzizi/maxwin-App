@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, Dimensions, ToastAndroid, Alert } from "react-native";
+import { View, Dimensions, ToastAndroid } from "react-native";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { db } from "../../API/Firebase";
 import { getUser, timestamp,sendNotification, getProductById } from "../../API/APIFunctions";
 import * as Progress from "react-native-progress";
 import { COLORS } from "../../GlobalStyle";
 import { Avatar } from "react-native-elements/dist/avatar/Avatar";
-import { ToastAndroid } from "react-native";
 
 const { width } = Dimensions.get("screen");
 
