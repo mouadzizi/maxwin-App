@@ -5,6 +5,7 @@ import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import {shuffle} from 'underscore'
+import SeeAllList from "../../../Components/SeeAllList";
 
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = React.useState([]);
@@ -44,6 +45,12 @@ export default function Vehicule({ navigation }) {
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ListFooterComponent={
+          <SeeAllList 
+          title="Voir tout"  
+          navigation={navigation}
+          collection={collection}
+          />}
         />
       )}
     </>
