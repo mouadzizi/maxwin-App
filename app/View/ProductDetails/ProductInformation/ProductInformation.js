@@ -52,7 +52,7 @@ export default function ProductInformation({ product }) {
             </View>
           )}
 
-          {product.goodState && (
+          {product?.goodState && (
             <View style={styles.row}>
               <AntDesign name="like2" color={COLORS.primary} size={30} />
               <TextView
@@ -85,7 +85,7 @@ export default function ProductInformation({ product }) {
                 fontSize={20}
                 style={[styles.textSt, { marginLeft: 10 }]}
               >
-                Paiement en livraison
+                Paiement à la livraison
               </TextView>
             </View>
           )}
