@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "react-native";
 import { COLORS } from "../../../GlobalStyle";
 import { AntDesign, Feather } from "react-native-vector-icons";
-
 import TextView from "../../../Components/TextView";
 import Divider from "../../../Components/Divider";
 import CashOnDelivery from "../../../icons/CashOnDelivery";
@@ -124,7 +123,10 @@ export default function ProductInformation({ product }) {
          <Row detail="Section" value={product.category[0]} />
        <Row detail="Catégorie" value={product.category[1]} />
          <Row detail="Ville" value={product.city} />
-        {product.etat && <Row detail="Etat de produit" value={product.etat ? product.etat : "*"} />}
+
+        {product.etat && 
+        (<Row detail="Etat de produit" value={product.etat}/>)}
+        
         {product.marqueVoiture && (
           <Row detail="Marque de Voiture" value={product.marqueVoiture} />
         )}

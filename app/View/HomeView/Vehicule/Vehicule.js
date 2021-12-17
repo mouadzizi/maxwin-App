@@ -1,10 +1,13 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Text } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import { getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import {shuffle} from 'underscore'
+import SeeAllList from "../../../Components/SeeAllList";
+
+
 export default function Vehicule({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "VEHICULES";
@@ -42,6 +45,12 @@ export default function Vehicule({ navigation }) {
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ListFooterComponent={
+          <SeeAllList 
+          title="Voir tout"  
+          navigation={navigation}
+          collection={collection}
+          />}
         />
       )}
     </>

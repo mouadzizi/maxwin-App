@@ -5,6 +5,7 @@ import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import { shuffle } from "underscore";
+import SeeAllList from "../../../Components/SeeAllList";
 
 export default function Immobilier({ navigation }) {
   const [products, setProducts] = useState([]);
@@ -46,6 +47,12 @@ export default function Immobilier({ navigation }) {
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ListFooterComponent={
+          <SeeAllList 
+          title="Voir tout"  
+          navigation={navigation}
+          collection={collection}
+          />}
         />
       )}
     </>

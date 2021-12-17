@@ -6,6 +6,8 @@ import Skeleton from "../Skeletone";
 import {useFocusEffect} from '@react-navigation/native'
 import {getItemsByCollection } from "../../../API/APIFunctions";
 import {shuffle} from 'underscore'
+import SeeAllList from "../../../Components/SeeAllList";
+
 export default function Babe({ navigation }) {
   const [products, setProducts] = useState([]);
   const collection = "ESPACE BEBES ET ENFANTS";
@@ -50,6 +52,12 @@ export default function Babe({ navigation }) {
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ListFooterComponent={
+          <SeeAllList 
+          title="Voir tout"  
+          navigation={navigation}
+          collection={collection}
+          />}
         />
       )}
     </>

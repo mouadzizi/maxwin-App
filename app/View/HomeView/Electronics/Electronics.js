@@ -5,6 +5,7 @@ import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import {shuffle} from 'underscore'
+import SeeAllList from "../../../Components/SeeAllList";
 
 export default function Electronics({ navigation }) {
   const collection = "INFORMATIQUE ET ELECTRONIQUE";
@@ -44,6 +45,12 @@ export default function Electronics({ navigation }) {
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ListFooterComponent={
+          <SeeAllList 
+          title="Voir tout"  
+          navigation={navigation}
+          collection={collection}
+          />}
         />
       )}
     </>

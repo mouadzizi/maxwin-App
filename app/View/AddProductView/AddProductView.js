@@ -147,7 +147,7 @@ export default function AddProductView({ navigation }) {
             mode="dialog"
             dropdownIconColor={COLORS.primary}
             selectedValue={product.city}
-            onValueChange={(value) => setProduct({ ...product, city: value })}
+            onValueChange={(value) => setProduct({ ...product, city: value})}
           >
             <Picker.Item
               label="Choisissez une Ville"

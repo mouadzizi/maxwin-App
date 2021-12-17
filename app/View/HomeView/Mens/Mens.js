@@ -5,7 +5,8 @@ import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import {shuffle} from 'underscore'
- 
+import SeeAllList from "../../../Components/SeeAllList";
+
 export default function Mens({ navigation }) {
   const collection = "ESPACE HOMMES";
 
@@ -45,6 +46,12 @@ export default function Mens({ navigation }) {
           renderItem={ItemRender}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          ListFooterComponent={
+          <SeeAllList 
+          title="Voir tout"  
+          navigation={navigation}
+          collection={collection}
+          />}
         />
       )}
     </>

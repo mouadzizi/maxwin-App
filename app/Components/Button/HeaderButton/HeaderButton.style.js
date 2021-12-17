@@ -3,8 +3,8 @@ import { COLORS } from '../../../GlobalStyle';
 
 export default StyleSheet.create({
     container: {
-        borderBottomWidth: 1,
-        borderColor: COLORS.primary ,
+        backgroundColor: COLORS.primary ,
+        borderRadius: 20,
         width: 100,
         height: 35,
         alignItems: 'center',
@@ -12,6 +12,6 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     title:{
-        color: COLORS.primary,
+        color: "white",
     }
 });
