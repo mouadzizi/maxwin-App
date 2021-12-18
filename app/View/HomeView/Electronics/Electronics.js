@@ -13,7 +13,7 @@ export default function Electronics({ navigation }) {
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(shuffle(items))
+      setProducts(items)
     });
     return () => {
     };

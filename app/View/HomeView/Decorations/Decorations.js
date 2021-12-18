@@ -12,7 +12,7 @@ export default function Decorations({ navigation }) {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(shuffle(items))
+      setProducts(items)
     });
   }, []);
 

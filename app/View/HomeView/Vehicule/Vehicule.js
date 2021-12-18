@@ -14,7 +14,7 @@ export default function Vehicule({ navigation }) {
 
   useEffect(() => {
     getItemsByCategory(collection,10).then(res=>{
-      setProducts(shuffle(res))
+      setProducts(res)
     })
     return () => {
     };

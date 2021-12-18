@@ -14,7 +14,7 @@ export default function Mens({ navigation }) {
 
   useEffect(() => {
     getItemsByCollection(collection, 10).then((items) => {
-      setProducts(shuffle(items))});
+      setProducts(items)});
     return () => {
     };
   }, []);
