@@ -36,6 +36,7 @@ export default function InformationStep({ navigation, route }) {
       chips: selectedChips,
       owner: user,
       likes: 0,
+      images: ["https://firebasestorage.googleapis.com/v0/b/maxwin-prod.appspot.com/o/images%2Fplaceholder%2Fplaceholder.jpg?alt=media&token=265b4305-2d02-4b23-9dcd-79a4969aa8f1"],
       keywords: generateKeywords(product.title.toLowerCase()),
     })
       .then((docRef) => {
