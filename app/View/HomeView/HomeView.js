@@ -45,18 +45,19 @@ export default function HomeView({ navigation }) {
       alert("Update Error " + e.message);
     }
   };
+  
   return (
     <View style={styles.container}>
       <ScrollView style={styles.ScrollContainer}>
         <StatusBar backgroundColor={COLORS.primary} />
         <HeaderCategories navigation={navigation} />
-        <Vehicule navigation={navigation} />
-        <Immobilier navigation={navigation} />
-        <Decorations navigation={navigation} />
-        <Electronics navigation={navigation} />
         <Female navigation={navigation} />
         <Mens navigation={navigation} />
         <Babe navigation={navigation} />
+        <Electronics navigation={navigation} />
+        <Decorations navigation={navigation} />
+        <Vehicule navigation={navigation} />
+        <Immobilier navigation={navigation} />
         <ServicesMaterial navigation={navigation} />
       </ScrollView>
     </View>
