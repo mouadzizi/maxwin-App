@@ -1,42 +1,41 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { FlatList, Alert } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
+import { getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
-import { getItemsByCollection } from "../../../API/APIFunctions";
-import {shuffle} from 'underscore'
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function Electronics({ navigation }) {
-  const collection = "INFORMATIQUE ET ELECTRONIQUE";
-  const [products, setProducts] = useState([]);
+export default function FemaleShoes({ navigation }) {
+  const [products, setProducts] = React.useState([]);
+  const collection = "Chaussures Femmes";
+
 
   useEffect(() => {
-    getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items)
-    });
+    getItemsByCategory(collection, 10).then((items) => {
+      setProducts(items)    });
     return () => {
+    
     };
   }, []);
 
-  const ItemRender = useCallback(
-    ({ item }) => (
-      <ProductSection
-        onClick={() => navigation.navigate("ProductDetails", { product: item })}
-        title={item.title}
-        price={item.price}
-        uri={item.images[0]}
-      />
-    ),
-    []
+  const ItemRender = ({ item }) => (
+    <ProductSection
+      onClick={() => navigation.navigate("ProductDetails", { product: item })}
+      title={item.title}
+      price={item.price}
+      uri={item.images[0]}
+    />
   );
+
   return (
     <>
       <HeaderSection
-        title="ELECTRONIQUE"
-        collection={collection}
+        title={"Chaussures Femmes"}
         navigation={navigation}
+        collection={collection}
       />
+
       {products.length < 1 ? (
         <Skeleton />
       ) : (

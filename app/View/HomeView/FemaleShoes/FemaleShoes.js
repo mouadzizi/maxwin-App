@@ -1,19 +1,18 @@
-import React, { useEffect, useCallback } from "react";
-import { FlatList, Alert } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { getItemsByCollection } from "../../../API/APIFunctions";
+import { getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
-import {shuffle} from 'underscore'
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function Vehicule({ navigation }) {
+export default function FemaleShoes({ navigation }) {
   const [products, setProducts] = React.useState([]);
-  const collection = "ESPACE FEMMES";
+  const collection = "Chaussures Femmes";
 
 
   useEffect(() => {
-    getItemsByCollection(collection, 10).then((items) => {
+    getItemsByCategory(collection, 10).then((items) => {
       setProducts(items)    });
     return () => {
     
@@ -32,7 +31,7 @@ export default function Vehicule({ navigation }) {
   return (
     <>
       <HeaderSection
-        title={"ESPACE FEMMES"}
+        title={"Chaussures Femmes"}
         navigation={navigation}
         collection={collection}
       />

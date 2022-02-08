@@ -72,7 +72,7 @@ export default function ProductInformation({ product }) {
                 fontSize={20}
                 style={[styles.textSt, { marginLeft: 10 }]}
               >
-                Livraison
+                Livraison possible
               </TextView>
             </View>
           )}
