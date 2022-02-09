@@ -37,6 +37,7 @@ export default function ServicesMaterial({ navigation }) {
         title={collection}
         navigation={navigation}
         collection={collection}
+        type="collection"
       />
 
       {products.length < 1 ? (

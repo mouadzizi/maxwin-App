@@ -6,14 +6,15 @@ import { getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function FemaleShoes({ navigation }) {
+export default function FemaleMakeUp({ navigation }) {
   const [products, setProducts] = React.useState([]);
-  const collection = "Montres, Bijoux et accessoires";
+  const collection = "Maquillage et produits de bien être";
 
 
   useEffect(() => {
     getItemsByCategory(collection, 10).then((items) => {
-      setProducts(items)    });
+      setProducts(items)    
+    });
     return () => {
     
     };
@@ -31,10 +32,11 @@ export default function FemaleShoes({ navigation }) {
   return (
     <>
       <HeaderSection
-        title={"Montres Femmes"}
+        title={"Produits de bien être"}
         navigation={navigation}
         collection={collection}
         type="category"
+
       />
 
       {products.length < 1 ? (

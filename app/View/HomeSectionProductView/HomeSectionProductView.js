@@ -1,9 +1,9 @@
- import React, { useState, useEffect, useCallback,useLayoutEffect } from "react";
+ import React, { useState, useEffect, useCallback } from "react";
 import { View, FlatList, Share,ToastAndroid } from "react-native";
 import Product from "../../Components/Product/Product";
 import styles from "./HomeSectionProductView.style";
 import HeaderCategories from "../../Components/HeaderCategories";
-import { getItemsByCollection } from "../../API/APIFunctions";
+import { getItemsByCollection, getItemsByCategory } from "../../API/APIFunctions";
 import Skeleton from "./Skeleton";
 import { FAB } from "react-native-elements";
 import { COLORS } from "../../GlobalStyle";
@@ -17,6 +17,7 @@ export default function HomeSectionProductView({ navigation, route }) {
   const [limit, setLimit] = useState(2)
   const [noMoreItems, setnoMoreItems] = useState(false)
   const collection = route.params?.collection;
+  const type = route.params?.type;
 
   useEffect(() => {
     navigation.setOptions({
@@ -24,7 +25,10 @@ export default function HomeSectionProductView({ navigation, route }) {
     })
     if (!noMoreItems) {
       setIsRefreshing(true)
+      if(type == "collection")
       getItemsByCollection(collection, limit)
+      else       getItemsByCategory(collection, limit)
+
         .then((items) => {
           setnoMoreItems(items.length == products.length)
           setProducts(items)

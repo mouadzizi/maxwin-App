@@ -5,7 +5,6 @@ import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
 import {useFocusEffect} from '@react-navigation/native'
 import {getItemsByCollection } from "../../../API/APIFunctions";
-import {shuffle} from 'underscore'
 import SeeAllList from "../../../Components/SeeAllList";
 
 export default function Babe({ navigation }) {
@@ -43,6 +42,7 @@ export default function Babe({ navigation }) {
         title={"ESPACE ENFANTS"}
         navigation={navigation}
         collection={collection}
+        type="collection"
       />
       {products.length < 1 ? (
         <Skeleton />

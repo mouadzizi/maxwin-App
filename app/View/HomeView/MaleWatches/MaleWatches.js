@@ -35,6 +35,7 @@ export default function MaleWatches({ navigation }) {
         title={"Montres Hommes"}
         navigation={navigation}
         collection={collection}
+        type="category"
       />
 
       {products.length < 1 ? (

@@ -35,6 +35,7 @@ export default function MaleShoes({ navigation }) {
         title={"Chaussures Hommes"}
         navigation={navigation}
         collection={collection}
+        type="category"
       />
 
       {products.length < 1 ? (

@@ -5,17 +5,22 @@ import { COLORS } from "../../GlobalStyle";
 import styles from "./HomeView.style";
 
 import HeaderCategories from "../../Components/HeaderCategories";
-import Immobilier from "./Immobilier";
-import Vehicule from "./Vehicule";
+import ApartmentRent from "./ApartmentRent";
+import Apartment from "./Apartment";
+
 import Phones from "./Phones"
 import Decorations from "./Decorations";
 
+import Laptops from "./Laptops";
 import MaleShoes from "./MaleShoes";
 import MaleWatches from "./MaleWatches";
 import MaleClothes from "./MaleClothes";
 import FemaleShoes from "./FemaleShoes";
 import FemaleClothes from "./FemaleClothes";
 import FemaleWatches from "./FemaleWatches";
+import HomeAppliance from "./HomeAppliance";
+import VehiculeRent from "./VehiculeRent";
+import VehiculeSell from "./VehiculeSell";
 
 import Babe from "./Babe";
 import ServicesMaterial from "./ServicesMaterial";
@@ -24,13 +29,14 @@ import { InteractionManager } from "react-native";
 import { openURL } from "expo-linking";
 
 export default function HomeView({ navigation }) {
-  useEffect(() => {
-    InteractionManager.runAfterInteractions(() => {
-      setTimeout(() => {
-      }, 2500);
-    });
-    return () => {};
-  }, []);
+  // useEffect(() => {
+  //   InteractionManager.runAfterInteractions(() => {
+  //     setTimeout(() => {
+  //       update();
+  //     }, 2500);
+  //   });
+  //   return () => {};
+  // }, []);
   const update = async () => {
     try {
       const update = await Updates.checkForUpdateAsync();
@@ -51,26 +57,6 @@ export default function HomeView({ navigation }) {
     }
   };
   
-  /** 
-   * 1)Vêtements femmes 
-   * 2)Chaussures femmes 
-   * 3)Montres & Acc femmes 
-   * 4)Vêtements hommes 
-   * 5)Chaussures hommes 
-   * 6)Montres & Acc hommes 
-   * 7)Téléphones 
-8)Ordinateurs & Tablettes 
-9)Accessoires lnformatiques 
-10)Électroménagers 
-11)Meuble & Déco 
-12)Appartements à vendre 
-13)Appartements à louer 
-14)Voitures à vendre 
-15)Location de voitures 
-16)Motos & Vélos 
-17)Matériels professionnels 
-18)Services professionnels
-     */
 
   return (
     <View style={styles.container}>
@@ -86,12 +72,20 @@ export default function HomeView({ navigation }) {
         <MaleWatches navigation={navigation} />
         <MaleShoes navigation={navigation} />
 
-        <Phones navigation={navigation} />
-
         <Babe navigation={navigation} />
+
+        <Phones navigation={navigation} />
+        <Laptops navigation={navigation} />
+
+        <HomeAppliance navigation={navigation} />
         <Decorations navigation={navigation} />
-        <Vehicule navigation={navigation} />
-        <Immobilier navigation={navigation} />
+
+        <Apartment navigation={navigation} />
+        <ApartmentRent navigation={navigation} />
+
+        <VehiculeSell navigation={navigation} />
+        <VehiculeRent navigation={navigation} />
+
         <ServicesMaterial navigation={navigation} />
       </ScrollView>
     </View>

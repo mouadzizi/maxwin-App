@@ -3,7 +3,7 @@ import { View } from "react-native";
 import styles from "./HeaderSection.style";
 import HeaderButton from "../Button/HeaderButton";
 import TextView from "../../Components/TextView/TextView";
-export default function headerSection({ title, navigation, collection }) {
+export default function headerSection({ title, navigation, collection, type }) {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
@@ -18,7 +18,7 @@ export default function headerSection({ title, navigation, collection }) {
       <View style={styles.container2}>
         <HeaderButton
           titleButton="Voir tout"
-          onClick={() => navigation.navigate("HomeSectionProductView",{collection: collection})}
+          onClick={() => navigation.navigate("HomeSectionProductView",{collection: collection, type : type})}
         />
       </View>
     </View>

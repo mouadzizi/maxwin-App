@@ -35,6 +35,7 @@ export default function MaleClothes({ navigation }) {
         title={"Vêtements Hommes"}
         navigation={navigation}
         collection={collection}
+        type="category"
       />
 
       {products.length < 1 ? (

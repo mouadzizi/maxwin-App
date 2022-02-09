@@ -1,42 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { getItemsByCategory } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
+import { getItemsByCategory } from "../../../API/APIFunctions";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function FemaleClotes({ navigation }) {
-  const [products, setProducts] = React.useState([]);
-  const collection = "Vêtements Femmes";
-
+export default function Apartment({ navigation }) {
+  const collection = "Appartements";
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     getItemsByCategory(collection, 10).then((items) => {
-      setProducts(items)    
+      setProducts(items)
     });
     return () => {
-    
     };
   }, []);
 
-  const ItemRender = ({ item }) => (
-    <ProductSection
-      onClick={() => navigation.navigate("ProductDetails", { product: item })}
-      title={item.title}
-      price={item.price}
-      uri={item.images[0]}
-    />
+  const ItemRender = useCallback(
+    ({ item }) => (
+      <ProductSection
+        onClick={() => navigation.navigate("ProductDetails", { product: item })}
+        title={item.title}
+        price={item.price}
+        uri={item.images[0]}
+      />
+    ),
+    []
   );
-
   return (
     <>
       <HeaderSection
-        title={"Vêtements Femmes"}
-        navigation={navigation}
+        title="Appartements à vendre"
         collection={collection}
-      />
+        navigation={navigation}
+        type="category"
 
+      />
       {products.length < 1 ? (
         <Skeleton />
       ) : (

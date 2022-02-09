@@ -34,6 +34,7 @@ export default function FemaleShoes({ navigation }) {
         title={"Chaussures Femmes"}
         navigation={navigation}
         collection={collection}
+        type="category"
       />
 
       {products.length < 1 ? (

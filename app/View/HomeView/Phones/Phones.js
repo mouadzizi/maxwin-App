@@ -35,6 +35,7 @@ export default function Phones({ navigation }) {
         title="Téléphones"
         collection={collection}
         navigation={navigation}
+        type="category"
       />
       {products.length < 1 ? (
         <Skeleton />

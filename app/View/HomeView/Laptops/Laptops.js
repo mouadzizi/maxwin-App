@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
-import { getItemsByCollection } from "../../../API/APIFunctions";
-import { shuffle } from "underscore";
+import { getItemsByCategory } from "../../../API/APIFunctions";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function Immobilier({ navigation }) {
+export default function Laptops({ navigation }) {
+  const collection = "Ordinateurs";
   const [products, setProducts] = useState([]);
-  const collection = "IMMOBILIER";
 
   useEffect(() => {
-    getItemsByCollection(collection, 10).then((items) => {
-      setProducts(items);
+    getItemsByCategory(collection, 10).then((items) => {
+      setProducts(items)
     });
-    return () => {};
+    return () => {
+    };
   }, []);
 
   const ItemRender = useCallback(
@@ -29,15 +29,13 @@ export default function Immobilier({ navigation }) {
     ),
     []
   );
-
-  const keyExtractor = useCallback((item) => item.id, []);
-
   return (
     <>
       <HeaderSection
-        title={collection}
-        navigation={navigation}
+        title="Ordinateurs"
         collection={collection}
+        navigation={navigation}
+        type="category"
       />
       {products.length < 1 ? (
         <Skeleton />
