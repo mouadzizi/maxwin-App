@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ToastAndroid } from "react-native";
 import { Input, CheckBox } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
 import TextView from "../../../Components/TextView";
@@ -28,6 +28,10 @@ export default function InformationStep({ navigation, route }) {
     }, [])
   );
 
+  const toastShow = () => {
+    ToastAndroid.show("votre produit a été ajouté avec succès, Merci!", ToastAndroid.LONG);
+  };
+
   const submit = () => {
     setLoading(true);
     addProduct({
@@ -43,7 +47,9 @@ export default function InformationStep({ navigation, route }) {
         uploadImages(product.images, docRef.id, user.uid).then((links) => {
           docRef.update({ images: links }).then(() => {
             setLoading(false);
+            toastShow();
             navigation.navigate("Home");
+
           });
         });
       })
