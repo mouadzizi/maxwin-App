@@ -2,23 +2,34 @@ import React, { useEffect } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { getItemsByCategory } from "../../../API/APIFunctions";
+import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import SeeAllList from "../../../Components/SeeAllList";
+import { useFocusEffect } from "@react-navigation/native";
 
-export default function FemaleClotes({ navigation }) {
+
+export default function FemaleClotes({ navigation,load}) {
   const [products, setProducts] = React.useState([]);
   const collection = "Vêtements Femmes";
 
 
   useEffect(() => {
-    getItemsByCategory(collection, 10).then((items) => {
-      setProducts(items)    
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items)
     });
     return () => {
-    
     };
   }, []);
+
+  useEffect(() => {
+    if (load) {
+      getItemsByCollection(collection, 10).then((items) => {
+        setProducts(items)
+      });
+    }
+    return () => {
+    };
+  }, [load]);
 
   const ItemRender = ({ item }) => (
     <ProductSection
@@ -46,8 +57,8 @@ export default function FemaleClotes({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}

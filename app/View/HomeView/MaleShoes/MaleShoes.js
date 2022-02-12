@@ -2,24 +2,33 @@ import React, { useEffect } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { getItemsByCategory } from "../../../API/APIFunctions";
+import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function MaleShoes({ navigation }) {
+export default function MaleShoes({ navigation,load }) {
   const [products, setProducts] = React.useState([]);
   const collection = "Chaussures Hommes";
 
 
   useEffect(() => {
-    getItemsByCategory(collection, 10).then((items) => {
+    getItemsByCollection(collection, 10).then((items) => {
       setProducts(items)
     });
     return () => {
-    
+
     };
   }, []);
 
+  useEffect(() => {
+    if (load) {
+      getItemsByCollection(collection, 10).then((items) => {
+        setProducts(items)
+      });
+    }
+    return () => {
+    };
+  }, [load]);
   const ItemRender = ({ item }) => (
     <ProductSection
       onClick={() => navigation.navigate("ProductDetails", { product: item })}
@@ -47,8 +56,8 @@ export default function MaleShoes({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}

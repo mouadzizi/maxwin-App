@@ -3,21 +3,30 @@ import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
 import Skeleton from "../Skeletone";
-import { getItemsByCategory } from "../../../API/APIFunctions";
+import { getItemsByCollection } from "../../../API/APIFunctions";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function HomeAppliance({ navigation }) {
+export default function HomeAppliance({ navigation, load }) {
   const collection = "Electroménagers";
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getItemsByCategory(collection, 10).then((items) => {
+    getItemsByCollection(collection, 10).then((items) => {
       setProducts(items)
     });
     return () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (load) {
+      getItemsByCollection(collection, 10).then((items) => {
+        setProducts(items)
+      });
+    }
+    return () => {
+    };
+  }, [load]);
   const ItemRender = useCallback(
     ({ item }) => (
       <ProductSection
@@ -47,8 +56,8 @@ export default function HomeAppliance({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}

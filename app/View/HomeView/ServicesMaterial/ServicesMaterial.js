@@ -6,7 +6,7 @@ import Skeleton from "../Skeletone";
 import { getItemsByCollection } from "../../../API/APIFunctions";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function ServicesMaterial({ navigation }) {
+export default function ServicesMaterial({ navigation, load }) {
 
   const collection = "MATERIELS ET SERVICES";
 
@@ -20,6 +20,15 @@ export default function ServicesMaterial({ navigation }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (load) {
+      getItemsByCollection(collection, 10).then((items) => {
+        setProducts(items)
+      });
+    }
+    return () => {
+    };
+  }, [load]);
   const ItemRender = useCallback(
     ({ item }) => (
       <ProductSection
@@ -49,8 +58,8 @@ export default function ServicesMaterial({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}

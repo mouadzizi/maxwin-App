@@ -17,18 +17,15 @@ export default function HomeSectionProductView({ navigation, route }) {
   const [limit, setLimit] = useState(2)
   const [noMoreItems, setnoMoreItems] = useState(false)
   const collection = route.params?.collection;
-  const type = route.params?.type;
 
   useEffect(() => {
+    console.log(collection);
     navigation.setOptions({
       headerRight:()=><HeaderRight navigation={navigation} />,
     })
     if (!noMoreItems) {
       setIsRefreshing(true)
-      if(type == "collection")
       getItemsByCollection(collection, limit)
-      else       getItemsByCategory(collection, limit)
-
         .then((items) => {
           setnoMoreItems(items.length == products.length)
           setProducts(items)

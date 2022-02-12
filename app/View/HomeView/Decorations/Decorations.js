@@ -7,7 +7,7 @@ import { getItemsByCollection } from "../../../API/APIFunctions";
 import {shuffle} from 'underscore'
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function Decorations({ navigation }) {
+export default function Decorations({ navigation, load }) {
   const collection = "MAISON & DECO";
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -16,6 +16,15 @@ export default function Decorations({ navigation }) {
     });
   }, []);
 
+  useEffect(() => {
+    if (load) {
+      getItemsByCollection(collection, 10).then((items) => {
+        setProducts(items)
+      });
+    }
+    return () => {
+    };
+  }, [load]);
   const ItemRender = useCallback(
     ({ item }) => (
       <ProductSection
@@ -45,8 +54,8 @@ export default function Decorations({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}

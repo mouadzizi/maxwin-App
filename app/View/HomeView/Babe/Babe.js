@@ -7,7 +7,7 @@ import {useFocusEffect} from '@react-navigation/native'
 import {getItemsByCollection } from "../../../API/APIFunctions";
 import SeeAllList from "../../../Components/SeeAllList";
 
-export default function Babe({ navigation }) {
+export default function Babe({ navigation,load }) {
   const [products, setProducts] = useState([]);
   const collection = "ESPACE BEBES ET ENFANTS";
 
@@ -21,11 +21,15 @@ export default function Babe({ navigation }) {
     };
   }, []);
 
-  useFocusEffect(useCallback(
-    () => {
-    },
-    [],
-  ))
+  useEffect(() => {
+    if (load) {
+      getItemsByCollection(collection, 10).then((items) => {
+        setProducts(items)
+      });
+    }
+    return () => {
+    };
+  }, [load]);
   const ItemRender = ({ item }) => (
     <ProductSection
       onClick={() => navigation.navigate("ProductDetails", { product: item })}
@@ -53,8 +57,8 @@ export default function Babe({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}

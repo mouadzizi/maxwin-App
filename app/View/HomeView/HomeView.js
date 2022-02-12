@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { StatusBar, View, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLORS } from "../../GlobalStyle";
@@ -27,8 +27,11 @@ import ServicesMaterial from "./ServicesMaterial";
 import * as Updates from "expo-updates";
 import { InteractionManager } from "react-native";
 import { openURL } from "expo-linking";
+import { useFocusEffect } from "@react-navigation/native";
+
 
 export default function HomeView({ navigation }) {
+  const [isload, setLoad] = useState(false)
   // useEffect(() => {
   //   InteractionManager.runAfterInteractions(() => {
   //     setTimeout(() => {
@@ -37,6 +40,11 @@ export default function HomeView({ navigation }) {
   //   });
   //   return () => {};
   // }, []);
+  useFocusEffect(React.useCallback(()=>{
+    console.log('home focused');
+    setLoad(true)
+    return ()=>setLoad(false)
+  },[]))
   const update = async () => {
     try {
       const update = await Updates.checkForUpdateAsync();
@@ -64,29 +72,29 @@ export default function HomeView({ navigation }) {
         <StatusBar backgroundColor={COLORS.primary} />
         <HeaderCategories navigation={navigation} />
 
-        <FemaleClothes navigation={navigation} />
-        <FemaleShoes navigation={navigation} />
-        <FemaleWatches navigation={navigation} />
+        <FemaleClothes navigation={navigation} load={isload} />
+        <FemaleShoes navigation={navigation} load={isload} />
+        <FemaleWatches navigation={navigation} load={isload} />
 
-        <MaleClothes navigation={navigation} />
-        <MaleWatches navigation={navigation} />
-        <MaleShoes navigation={navigation} />
+        <MaleClothes navigation={navigation} load={isload} />
+        <MaleWatches navigation={navigation} load={isload} />
+        <MaleShoes navigation={navigation} load={isload} />
 
-        <Babe navigation={navigation} />
+        <Babe navigation={navigation} load={isload} />
 
-        <Phones navigation={navigation} />
-        <Laptops navigation={navigation} />
+        <Phones navigation={navigation} load={isload} />
+        <Laptops navigation={navigation} load={isload} />
 
-        <HomeAppliance navigation={navigation} />
-        <Decorations navigation={navigation} />
+        <HomeAppliance navigation={navigation} load={isload} />
+        <Decorations navigation={navigation} load={isload} />
 
-        <Apartment navigation={navigation} />
-        <ApartmentRent navigation={navigation} />
+        <Apartment navigation={navigation} load={isload} />
+        <ApartmentRent navigation={navigation} load={isload} />
 
-        <VehiculeSell navigation={navigation} />
-        <VehiculeRent navigation={navigation} />
+        <VehiculeSell navigation={navigation} load={isload} />
+        <VehiculeRent navigation={navigation} load={isload} />
 
-        <ServicesMaterial navigation={navigation} />
+        <ServicesMaterial navigation={navigation} load={isload} />
       </ScrollView>
     </View>
   );

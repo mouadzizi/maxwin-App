@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { FlatList } from "react-native";
 import ProductSection from "../../../Components/Product/ProductSection";
 import HeaderSection from "../../../Components/HeaderSection";
-import { getItemsByCategory } from "../../../API/APIFunctions";
+import { getItemsByCollection } from "../../../API/APIFunctions";
 import Skeleton from "../Skeletone";
 import SeeAllList from "../../../Components/SeeAllList";
 
@@ -12,11 +12,11 @@ export default function FemaleMakeUp({ navigation }) {
 
 
   useEffect(() => {
-    getItemsByCategory(collection, 10).then((items) => {
-      setProducts(items)    
+    getItemsByCollection(collection, 10).then((items) => {
+      setProducts(items)
     });
     return () => {
-    
+
     };
   }, []);
 
@@ -48,8 +48,8 @@ export default function FemaleMakeUp({ navigation }) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ListFooterComponent={
-          <SeeAllList 
-          title="Voir tout"  
+          <SeeAllList
+          title="Voir tout"
           navigation={navigation}
           collection={collection}
           />}
